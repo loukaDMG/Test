@@ -764,6 +764,24 @@ footer .bot{align-items:center}
 .h6-ph div{background-position:50% 50%}
 .h6-ph figcaption{padding:6px 12px;border-radius:980px;background:rgba(8,25,15,.55);color:#fff;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
 @media (max-width:900px){.h6 .h6-grid{grid-template-columns:minmax(0,1fr)}.h6-ph{aspect-ratio:1000/688}}
+/* v6.2 : gamme en trois cartes calmes */
+.range4 .pin{min-height:0;padding:clamp(80px,10vw,140px) 0}
+.range4 .prog{display:none}
+.track{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;max-width:1200px;margin:0 auto;padding:0 24px;transform:none!important}
+.panel{flex:none;height:auto;min-height:0;grid-template-columns:minmax(0,1fr);border-radius:20px;background:#0f2a1e;border:1px solid var(--wl);transform:none!important}
+.panel .txt{padding:24px 28px 28px;gap:18px;justify-content:flex-start}
+.panel .vis{order:-1;padding:28px 28px 0;background:linear-gradient(180deg,#14382a,#0f2a1e);aspect-ratio:4/3;align-items:center}
+.panel .vis svg{width:var(--sw,80%)}
+.panel h3{font-size:clamp(28px,2.4vw,36px);line-height:1.05;letter-spacing:-.03em}
+.panel h3 em{font-size:.5em;margin-top:6px}
+.panel .idx{font-size:11px}
+.panel .go{font-size:15px;margin-top:auto}
+.panel .go i{width:36px;height:36px}
+.panel:hover .vis svg{transform:translateY(-6px)}
+@media (max-width:900px){.track{grid-template-columns:minmax(0,1fr);padding:0 16px}}
+.range4 .pin>.wrap{width:100%}.track{max-width:1248px;width:100%;box-sizing:border-box}
+.panel .vis{aspect-ratio:auto;height:260px;align-items:center}.panel .vis svg{max-height:200px}
+.panel .txt{justify-content:flex-start!important}.panel h3 em{min-height:2.5em}
 
 </style>
 </head>
@@ -6251,15 +6269,8 @@ function motion(page) {
       .from(hf, { opacity: 0, y: 24, duration: 1, ease: E, stagger: .12 }, .4)
       .fromTo("[data-hero-media]", { clipPath: "inset(12% 12% 12% 12% round 24px)" }, { clipPath: "inset(0% 0% 0% 0% round 24px)", duration: 1.6, ease: E }, .3)
       .from("[data-hero-media] div", { scale: 1.2, duration: 2.2, ease: "expo.out" }, .3);
-    // Gamme : défilement horizontal épinglé (grand écran)
-    const mm = gsap.matchMedia();
-    mm.add("(min-width: 1061px)", () => {
-      const track = app.querySelector(".range4 .track"), bar = app.querySelector(".range4 .prog i");
-      const dist = () => track.scrollWidth - window.innerWidth;
-      gsap.to(track, { x: () => -dist(), ease: "none", scrollTrigger: { trigger: ".range4", pin: ".range4 .pin", start: "top top", end: () => "+=" + dist(), scrub: 1, invalidateOnRefresh: true, onUpdate: s => gsap.set(bar, { scaleX: s.progress }) } });
-      app.querySelectorAll(".panel .vis svg").forEach(s => gsap.fromTo(s, { xPercent: 12 }, { xPercent: -12, ease: "none", scrollTrigger: { trigger: ".range4", start: "top top", end: () => "+=" + dist(), scrub: true } }));
-    });
-    cleanups.push(() => mm.revert());
+    // Gamme : apparition douce des trois cartes
+    gsap.from(app.querySelectorAll(".range4 .panel"), { y: 40, opacity: 0, duration: 1, ease: E, stagger: .12, scrollTrigger: { trigger: ".range4 .track", start: "top 85%", once: true } });
   } else {
     gsap.from(app.querySelectorAll(".h-name .ch"), { yPercent: 105, opacity: 0, duration: 1.1, ease: E, stagger: .045, delay: .25 });
     gsap.from(app.querySelectorAll("[data-mh]"), { y: 30, opacity: 0, duration: 1, ease: E, stagger: .1, delay: .45 });

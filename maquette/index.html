@@ -914,6 +914,10 @@ body:not(.is-home) #app .head .intro{font-size:17px}body:not(.is-home) #app .hea
 @media (max-width:480px){.kit-hl{grid-template-columns:minmax(0,1fr)}}
 .eqc{box-shadow:none;border:1px solid var(--line)}.eqc:hover{border-color:var(--v400);box-shadow:0 16px 34px -22px rgba(14,42,31,.35)}.eqc .ph{aspect-ratio:auto;height:190px}
 .nextm .wrap{padding-block:48px}.nextm .vis svg{max-height:220px}
+.bandeau{position:relative;margin:0 0 48px;border-radius:22px;overflow:hidden;height:clamp(200px,24vw,320px);max-width:100%}
+.bandeau div{position:absolute;inset:0;background-size:cover;background-position:50% 62%}
+.bandeau figcaption{position:absolute;left:16px;bottom:16px;padding:6px 12px;border-radius:980px;background:rgba(8,25,15,.6);color:#fff;font-size:12px}
+.qui-txt{max-width:820px}
 
 </style>
 </head>
@@ -5940,9 +5944,9 @@ function home() {
   </div>
 </div></section>
 
-<section class="sec story4" id="qui"><div class="wrap split">
-  <figure class="ph" data-a="up"><div style="background-image:url(${IMG.detail})"></div><figcaption>Plancha, friteuse et évier encastrés</figcaption></figure>
-  <div class="txt">
+<section class="sec story4" id="qui"><div class="wrap">
+  <figure class="bandeau" data-a="up"><div style="background-image:url(${IMG.detail})"></div><figcaption>Plancha, friteuse et évier encastrés</figcaption></figure>
+  <div class="txt qui-txt">
     <p class="kicker" data-a="up">Qui sommes-nous</p>
     <h2 class="h-title">${ln("Bien construire,\npour bien <em>recevoir.</em>")}</h2>
     <p class="intro" data-a="up">DMG Concept conçoit à Évires, en Haute-Savoie, des cuisines extérieures couvertes. Des lignes sobres, des matériaux choisis pour durer, des équipements pensés pour cuisiner vraiment : tout est fait pour que vous profitiez du dehors, en famille ou entre amis.</p>

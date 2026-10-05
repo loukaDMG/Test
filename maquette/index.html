@@ -759,6 +759,11 @@ footer .bot{align-items:center}
 .h6-ph div{position:absolute;inset:0;background-size:cover;background-position:60% 50%}
 .h6-ph figcaption{position:absolute;left:16px;bottom:16px;font-size:12px;color:var(--w2)}
 @media (max-width:900px){.h6 .h6-grid{grid-template-columns:minmax(0,1fr);padding-top:calc(var(--nav) + 40px)}.h6-ph{aspect-ratio:4/3;justify-self:stretch}}
+.h6 .h6-grid{grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(40px,5vw,80px)}
+.h6-ph{aspect-ratio:1000/688;max-height:none}
+.h6-ph div{background-position:50% 50%}
+.h6-ph figcaption{padding:6px 12px;border-radius:980px;background:rgba(8,25,15,.55);color:#fff;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+@media (max-width:900px){.h6 .h6-grid{grid-template-columns:minmax(0,1fr)}.h6-ph{aspect-ratio:1000/688}}
 
 </style>
 </head>
@@ -5691,7 +5696,7 @@ function home() {
       <dl class="h6-facts" data-hero-f>${[["Siège", "Évires, Haute-Savoie"], ["Gamme", "3 modèles · 2, 3 et 4\u00a0m"], ["Fabrication", "En atelier"], ["Livraison", "En un seul bloc"]].map(f => `<div><dt>${f[0]}</dt><dd>${f[1]}</dd></div>`).join("")}</dl>
       <div class="actions" data-hero-f><a class="pill light mag" href="#gamme">Découvrir la gamme</a><a class="h6-link" href="#devis">Nous contacter</a></div>
     </div>
-    <figure class="h6-ph" data-hero-media><div style="background-image:url(${IMG.nuit})"></div><figcaption>Réalisation DMG Concept</figcaption></figure>
+    <figure class="h6-ph" data-hero-media><div style="background-image:url(${IMG.bois})"></div><figcaption>Réalisation DMG Concept</figcaption></figure>
   </div>
 </section>
 

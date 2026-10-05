@@ -6212,7 +6212,7 @@ function globals() {
   const onScroll2 = () => {
     const vis = el => { if (!el) return false; const r = el.getBoundingClientRect(); return r.top < window.innerHeight && r.bottom > 0; };
     const blocked = vis(document.getElementById("devis")) || vis(document.querySelector(".st3")) || vis(document.getElementById("stage")) || vis(document.querySelector(".summary"));
-    mc.classList.toggle("show", window.scrollY > 600 && !blocked && !document.body.classList.contains("menu-open"));
+    mc.classList.toggle("show", document.body.classList.contains("is-home") && window.scrollY > 600 && !blocked && !document.body.classList.contains("menu-open"));
   };
   window.addEventListener("scroll", onScroll2, { passive: true });
   window.addEventListener("scroll", onScroll, { passive: true }); onScroll();

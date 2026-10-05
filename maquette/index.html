@@ -696,6 +696,15 @@ body.nav-up .snav{top:env(safe-area-inset-top,0px)}
 .mh-bg::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.07;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 .mh-bg>*{position:relative}
 .mm-contact{margin-top:auto;font-size:14px;line-height:1.6;color:var(--w3)}
+/* v4.10 : séparateur « ou » et étiquettes du nuancier sur mobile */
+.slats div span{white-space:nowrap}
+@media (max-width:1060px){
+  .choice .or{justify-content:center;gap:12px;padding:2px 0;font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-size:17px;color:var(--v500,#2e6b50)}
+  .choice .or::before,.choice .or::after{content:"";flex:1;height:1px;background:currentColor;opacity:.25}
+}
+@media (max-width:760px){
+  .slats div span{left:8px;bottom:10px;padding:5px 8px;font-size:11px}
+}
 
 </style>
 </head>
@@ -5544,9 +5553,9 @@ const OPT = {
 };
 const PAIRS = [["Froid", "frigo", "cave"], ["Cuisson", "plancha", "bbq"], ["Abri ou îlot", "store", "ilot"]];
 const MODELS = {
-  "evidence": { name: "Évidence", n: 1, m: 2, size: "2 m", tag: "L’essentiel pour cuisiner dehors, même sur une petite terrasse.", long: "Le modèle compact de la gamme. Trois équipements au choix, tous compatibles entre eux.", choix: [], options: ["plancha1", "evier1", "frigo1"], photo: "petite", cap: "Réalisation DMG Concept", sw: .5, real: true },
-  "harmonie": { name: "Harmonie", n: 2, m: 3, size: "3 m", tag: "Plus de plan de travail pour cuisiner à plusieurs.", long: "Le format intermédiaire, avec les équipements d’une vraie cuisine.", choix: PAIRS, options: ["evier", "gaz", "friteuse", "robinet", "son", "dekton"], photo: "detail", cap: "Exemple d’équipements encastrés", sw: .66 },
-  "la-festive": { name: "La Festive", n: 3, m: 4, size: "4 m", tag: "Le grand format, pensé pour recevoir nombreux.", long: "Le plus grand modèle : toutes les options de la gamme, et le téléviseur en plus.", choix: PAIRS, options: ["evier", "gaz", "friteuse", "robinet", "son", "dekton", "tv"], photo: "detail", cap: "Exemple d’équipements encastrés", sw: .84 },
+  "evidence": { name: "Évidence", n: 1, m: 2, size: "2 m", tag: "L’essentiel pour cuisiner dehors, même sur une petite terrasse.", long: "Le modèle compact de la gamme. Trois équipements au choix, tous compatibles entre eux.", choix: [], options: ["plancha1", "evier1", "frigo1"], photo: "petite", cap: "Réalisation DMG Concept", sw: .5, real: true },
+  "harmonie": { name: "Harmonie", n: 2, m: 3, size: "3 m", tag: "Plus de plan de travail pour cuisiner à plusieurs.", long: "Le format intermédiaire, avec les équipements d’une vraie cuisine.", choix: PAIRS, options: ["evier", "gaz", "friteuse", "robinet", "son", "dekton"], photo: "detail", cap: "Exemple d’équipements encastrés", sw: .66 },
+  "la-festive": { name: "La Festive", n: 3, m: 4, size: "4 m", tag: "Le grand format, pensé pour recevoir nombreux.", long: "Le plus grand modèle : toutes les options de la gamme, et le téléviseur en plus.", choix: PAIRS, options: ["evier", "gaz", "friteuse", "robinet", "son", "dekton", "tv"], photo: "detail", cap: "Exemple d’équipements encastrés", sw: .84 },
 };
 const SLUGS = Object.keys(MODELS);
 const de = n => /^[AEIOUÉÈHaeiouéèh]/.test(n) ? "d’" + n : "de " + n;
@@ -5559,7 +5568,7 @@ const CMP = [
   ["Façade avant", "", ["t:Fundermax", "t:Fundermax", "t:Fundermax"]], ["Côtés et arrière", "", ["t:5 finitions", "t:5 finitions", "t:5 finitions"]],
 ];
 
-/* Illustration de face (façade avant Fundermax), 100 unités = 1 m */
+/* Illustration de face (façade avant Fundermax), 100 unités = 1 m */
 let uid = 0;
 function svgKitchen(m, night) {
   const W = m * 100, H = 250, x0 = 40, y0 = 20, yb = y0 + H, ph = 15, id = "k" + (++uid), fc = "#2E3133";
@@ -5634,7 +5643,7 @@ function home() {
 <section class="intro4"><div class="wrap">
   <p class="kicker" data-a="up">DMG Concept</p>
   <p class="big scrub">Une cuisine dehors, c’est d’abord un lieu pour se retrouver. Nous la construisons avec la rigueur d’un bâtiment : ossature bois, toiture étanche, bardage fait pour durer.</p>
-  <div class="figs4">${[["3", "modèles", "2, 3 et 4 m de façade"], ["5", "finitions", "pour les côtés et l’arrière"], ["4", "plots béton", "sans fixation au bâtiment"], ["1", "interlocuteur", "du rendez-vous à la livraison"]].map(f => `<div data-a="up"><b data-count="${f[0]}">${f[0]}</b><span>${f[1]}</span><small>${f[2]}</small></div>`).join("")}</div>
+  <div class="figs4">${[["3", "modèles", "2, 3 et 4 m de façade"], ["5", "finitions", "pour les côtés et l’arrière"], ["4", "plots béton", "sans fixation au bâtiment"], ["1", "interlocuteur", "du rendez-vous à la livraison"]].map(f => `<div data-a="up"><b data-count="${f[0]}">${f[0]}</b><span>${f[1]}</span><small>${f[2]}</small></div>`).join("")}</div>
 </div></section>
 
 <section class="range4 dark" id="gamme"><div class="pin">
@@ -5675,7 +5684,7 @@ function home() {
   <div class="head" data-a="up"><p class="kicker">Matériaux</p><h2 class="h-title">${ln("Des matériaux\nfaits pour le <em>dehors.</em>")}</h2><p class="intro">Une façade avant toujours identique, et un bardage au choix pour les côtés et l’arrière.</p></div>
   <div class="mat4">
     <article class="mcard4" data-a="up"><div class="img"><div style="background-image:url(${IMG.fundermax})" data-par="-6"></div></div><div class="tx"><div class="row"><h3>Fundermax</h3><span class="tag">Façade avant · gris anthracite</span></div><p class="muted">Panneau compact stratifié haute pression (HPL), conçu pour les façades. Sa surface est protégée des UV et des intempéries.</p></div></article>
-    <article class="mcard4" data-a="up"><div class="slats">${["teak", "cedar", "ipe", "darkgrey"].map(k => `<div style="background-image:url(${FIN[k].tex})"><span>${FIN[k].s}</span></div>`).join("")}</div><div class="tx"><div class="row"><h3>Lames WEO®60</h3><span class="tag">Côtés et arrière · 4 teintes</span></div><p class="muted">Bardage composite à effet claire-voie : lames de 60 mm, joints de 10 mm. Fabriqué à 95 % à partir de matières recyclées, recyclable à 100 %. Le Fundermax anthracite reste aussi possible sur les côtés.</p></div></article>
+    <article class="mcard4" data-a="up"><div class="slats">${["teak", "cedar", "ipe", "darkgrey"].map(k => `<div style="background-image:url(${FIN[k].tex})"><span>${FIN[k].s}</span></div>`).join("")}</div><div class="tx"><div class="row"><h3>Lames WEO®60</h3><span class="tag">Côtés et arrière · 4 teintes</span></div><p class="muted">Bardage composite à effet claire-voie : lames de 60 mm, joints de 10 mm. Fabriqué à 95 % à partir de matières recyclées, recyclable à 100 %. Le Fundermax anthracite reste aussi possible sur les côtés.</p></div></article>
   </div>
   <div class="inside" style="margin-top:24px">${[[T3.struct, "Structure", "Ossature bois"], [T3.toit, "Toiture", "Toiture plate, membrane EPDM"], [T3.bois, "Intérieur", "Bois trois plis, crédence noire"], [T3.plots, "Pose", "Sur 4 plots béton, sans fixation au bâtiment"]].map(x => `<div data-a="up">${x[0]}<b>${x[1]}</b><span>${x[2]}</span></div>`).join("")}</div>
 </div></section>
@@ -5683,9 +5692,9 @@ function home() {
 <section class="sec" id="comparer"><div class="wrap">
   <div class="head" data-a="up"><p class="kicker">Comparer</p><h2 class="h-title">${ln("Quel modèle\npour <em>vous ?</em>")}</h2><p class="intro">Chaque cuisine a des dimensions fixes. Vous choisissez ensuite vos équipements, un par un.</p></div>
   <div class="fit" data-a="up">
-    <div class="fit-top"><label for="fit-w">Largeur disponible sur votre terrasse</label><output id="fit-o" for="fit-w">3,5 m</output></div>
+    <div class="fit-top"><label for="fit-w">Largeur disponible sur votre terrasse</label><output id="fit-o" for="fit-w">3,5 m</output></div>
     <input type="range" id="fit-w" min="1.5" max="6" step="0.1" value="3.5" aria-describedby="fit-note">
-    <div class="fit-scale" aria-hidden="true"><span>1,5 m</span><span>3 m</span><span>4,5 m</span><span>6 m</span></div>
+    <div class="fit-scale" aria-hidden="true"><span>1,5 m</span><span>3 m</span><span>4,5 m</span><span>6 m</span></div>
     <div class="fit-row">${SLUGS.map(s => `<a class="fit-m" href="#${s}" data-w="${MODELS[s].m}"><div class="v">${svgKitchen(MODELS[s].m, false)}</div><div><b>${MODELS[s].name}</b><br><span>${MODELS[s].size} de façade</span></div><em>Tient</em></a>`).join("")}</div>
     <p class="small muted" id="fit-note">Indication basée sur la largeur de façade de chaque modèle. L’implantation exacte est vérifiée avec vous lors du rendez-vous.</p>
   </div>
@@ -5722,7 +5731,7 @@ function home() {
 <section class="sec bg-v50" id="faq"><div class="wrap">
   <div class="head" data-a="up"><p class="kicker">Questions fréquentes</p><h2 class="h-title">${ln("Avant de vous <em>lancer.</em>")}</h2></div>
   <div class="faq" data-a="up">${[
-      ["Faut-il une autorisation d’urbanisme ?", "Cela dépend de l’emprise au sol et du règlement de votre commune. En règle générale, aucune formalité n’est requise sous 5 m², et une déclaration préalable suffit entre 5 et 20 m². Votre mairie vous confirmera les règles applicables."],
+      ["Faut-il une autorisation d’urbanisme ?", "Cela dépend de l’emprise au sol et du règlement de votre commune. En règle générale, aucune formalité n’est requise sous 5 m², et une déclaration préalable suffit entre 5 et 20 m². Votre mairie vous confirmera les règles applicables."],
       ["Comment se passe la livraison ?", "La cuisine est livrée assemblée, puis mise en place sur 4 plots béton. Les conditions d’accès et de livraison sont précisées avec vous lors du devis."],
       ["Quels raccordements faut-il prévoir ?", "Une alimentation électrique et, selon les équipements, une arrivée d’eau et une évacuation. Les raccordements sont à prévoir séparément."],
       ["Peut-on fermer la cuisine ?", "Oui : chaque cuisine se referme, pour protéger les équipements entre deux utilisations."],
@@ -5789,7 +5798,7 @@ function modelPage(s) {
   <div class="head" data-a="up"><p class="kicker">Matériaux</p><h2 class="h-title">${ln("Des matériaux faits\npour le <em>dehors.</em>")}</h2><p class="intro">La façade avant est toujours en Fundermax gris anthracite. Les côtés et l’arrière se choisissent parmi cinq finitions.</p></div>
   <div class="mat4">
     <article class="mcard4" data-a="up"><div class="img"><div style="background-image:url(${IMG.fundermax})"></div></div><div class="tx"><div class="row"><h3>Fundermax</h3><span class="tag">Façade avant · gris anthracite</span></div><p class="muted">Panneau compact stratifié haute pression (HPL), conçu pour les façades. Sa surface est protégée des UV et des intempéries.</p></div></article>
-    <article class="mcard4" data-a="up"><div class="slats">${["teak", "cedar", "ipe", "darkgrey"].map(k => `<div style="background-image:url(${FIN[k].tex})"><span>${FIN[k].s}</span></div>`).join("")}</div><div class="tx"><div class="row"><h3>Lames WEO®60</h3><span class="tag">Côtés et arrière · 4 teintes</span></div><p class="muted">Bardage composite à effet claire-voie : lames de 60 mm, joints de 10 mm. Fabriqué à 95 % à partir de matières recyclées, recyclable à 100 %.</p>${cladButtons()}</div></article>
+    <article class="mcard4" data-a="up"><div class="slats">${["teak", "cedar", "ipe", "darkgrey"].map(k => `<div style="background-image:url(${FIN[k].tex})"><span>${FIN[k].s}</span></div>`).join("")}</div><div class="tx"><div class="row"><h3>Lames WEO®60</h3><span class="tag">Côtés et arrière · 4 teintes</span></div><p class="muted">Bardage composite à effet claire-voie : lames de 60 mm, joints de 10 mm. Fabriqué à 95 % à partir de matières recyclées, recyclable à 100 %.</p>${cladButtons()}</div></article>
   </div>
   <div class="inside">${[[T3.struct, "Structure", "Ossature bois"], [T3.toit, "Toiture", "Toiture plate, membrane EPDM"], [T3.bois, "Intérieur", "Bois trois plis, crédence noire"], [T3.plots, "Pose", "Sur 4 plots béton, sans fixation au bâtiment"]].map(x => `<div data-a="up">${x[0]}<b>${x[1]}</b><span>${x[2]}</span></div>`).join("")}</div>
 </div></section>

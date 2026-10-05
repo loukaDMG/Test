@@ -5742,7 +5742,7 @@ function devisSection() {
     <div class="two"><label class="field" for="f-nom">Nom<input id="f-nom" placeholder="Prénom et nom" autocomplete="name"></label><label class="field" for="f-tel">Téléphone<input id="f-tel" type="tel" placeholder="06 00 00 00 00" autocomplete="tel"></label></div>
     <div class="two"><label class="field" for="f-mail">E-mail<input id="f-mail" type="email" placeholder="vous@exemple.fr" autocomplete="email"></label><label class="field" for="f-cp">Code postal<input id="f-cp" placeholder="74000" inputmode="numeric" autocomplete="postal-code"></label></div>
     <div class="field">Modèle envisagé<div class="chips">${[...SLUGS, "na"].map(s => `<button type="button" class="chip" data-m="${s}">${s === "na" ? "À définir" : MODELS[s].name}</button>`).join("")}</div></div>
-    <div class="field">Rendez-vous souhaité<div class="chips rdv">${["Chez moi", "À Évires", "Par téléphone"].map(t => `<button type="button" class="chip" data-r="${t}">${t}</button>`).join("")}</div></div>
+    <div class="field">Rendez-vous souhaité<div class="chips rdv">${["Chez moi", "À Évires", "Par téléphone"].map(t => `<button type="button" class="chip" data-rdv="${t}">${t}</button>`).join("")}</div></div>
     <label class="field" for="msg">Votre projet<textarea id="msg" placeholder="Terrasse, accès, équipements souhaités…"></textarea></label>
     <label class="consent" for="f-ok"><input id="f-ok" type="checkbox"> J’accepte que DMG Concept me recontacte au sujet de ma demande.</label>
     <button class="pill mag" type="submit">Envoyer la demande</button>

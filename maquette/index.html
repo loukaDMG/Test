@@ -5649,7 +5649,7 @@ const PAIRS = [["Froid", "frigo", "cave"], ["Cuisson", "plancha", "bbq"], ["Abri
 const MODELS = {
   "evidence": { name: "Évidence", n: 1, m: 2, size: "2 m", tag: "L’essentiel pour cuisiner dehors, même sur une petite terrasse.", long: "Le modèle compact de la gamme. Trois équipements au choix, tous compatibles entre eux.", choix: [], options: ["plancha1", "evier1", "frigo1"], photo: "petite", cap: "Réalisation DMG Concept", sw: .5, real: true },
   "harmonie": { name: "Harmonie", n: 2, m: 3, size: "3 m", tag: "Plus de plan de travail pour cuisiner à plusieurs.", long: "Le format intermédiaire, avec les équipements d’une vraie cuisine.", choix: PAIRS, options: ["evier", "gaz", "friteuse", "robinet", "son", "dekton"], photo: "detail", cap: "Exemple d’équipements encastrés", sw: .66 },
-  "la-festive": { name: "La Festive", n: 3, m: 4, size: "4 m", tag: "Le grand format, pensé pour recevoir nombreux.", long: "Le plus grand modèle : toutes les options de la gamme, et le téléviseur en plus.", choix: PAIRS, options: ["evier", "gaz", "friteuse", "robinet", "son", "dekton", "tv"], photo: "detail", cap: "Exemple d’équipements encastrés", sw: .84 },
+  "la-festive": { name: "La Festive", n: 3, m: 4, size: "4 m", tag: "Le grand format, pensé pour recevoir nombreux.", long: "Le plus grand modèle : toutes les options de la gamme, et le téléviseur en plus.", choix: PAIRS.slice(0, 2), options: ["store", "ilot", "evier", "gaz", "friteuse", "robinet", "son", "dekton", "tv"], photo: "detail", cap: "Exemple d’équipements encastrés", sw: .84 },
 };
 const SLUGS = Object.keys(MODELS);
 const de = n => /^[AEIOUÉÈHaeiouéèh]/.test(n) ? "d’" + n : "de " + n;
@@ -5657,7 +5657,7 @@ const CMP = [
   ["#", "Au choix", "Un seul équipement par ligne : l’un ou l’autre (ou aucun)."],
   ["Froid", "Réfrigérateur ou cave à vin", ["t:Réfrigérateur<small>en option, sans cave à vin</small>", "t:Réfrigérateur <i>ou</i> cave à vin", "t:Réfrigérateur <i>ou</i> cave à vin"]],
   ["Cuisson", "Plancha Planet ou barbecue Napoléon", ["t:Plancha<small>en option, sans barbecue</small>", "t:Plancha <i>ou</i> barbecue", "t:Plancha <i>ou</i> barbecue"]],
-  ["Abri ou îlot", "Store banne ou meuble îlot", ["n", "t:Store <i>ou</i> îlot", "t:Store <i>ou</i> îlot"]],
+  ["Abri ou îlot", "Store banne et meuble îlot", ["n", "t:Store <i>ou</i> îlot", "t:Store <i>et</i> îlot<small>cumulables, en option</small>"]],
   ["#", "Options", "À ajouter librement, elles se cumulent."],
   ["Évier", "", ["o", "o", "o"]], ["Plaque à gaz", "", ["n", "o", "o"]], ["Friteuse encastrable", "Planet", ["n", "o", "o"]],
   ["Robinet", "Quooker", ["n", "o", "o"]], ["Sonorisation", "Elipson", ["n", "o", "o"]],
@@ -5700,7 +5700,7 @@ const ln = t => t.split("\n").map(l => `<span class="ln"><span>${l}</span></span
 /* ---------- Gabarits partagés ---------- */
 function cmpTable(cur) {
   const lab = { o: '<span class="chipc o">Option</span>', c: '<span class="chipc c">Au choix</span>', n: '<span class="chipc n">—</span>' };
-  return `<p class="cmp-hint">Faites glisser le tableau pour voir les trois modèles.</p><div class="cmp-wrap" data-a="up"><table class="cmp"><thead><tr><th scope="col"><span>Équipements et finitions</span></th>${SLUGS.map(s => `<th scope="col" class="${s === cur ? "cur" : ""}"><b>${MODELS[s].name}</b><span>${MODELS[s].size} de façade</span></th>`).join("")}</tr></thead><tbody>${CMP.map(([a, b, v]) => a === "#" ? `<tr class="grp"><th colspan="4">${b}<small>${v}</small></th></tr>` : `<tr><th scope="row">${a}${b ? `<small>${b}</small>` : ""}</th>${v.map((x, i) => `<td class="${SLUGS[i] === cur ? "cur" : ""}">${x.startsWith("t:") ? x.slice(2) : lab[x]}</td>`).join("")}</tr>`).join("")}</tbody></table></div><p class="cmp-note">Exemple : sur Harmonie, vous prenez le réfrigérateur <b>ou</b> la cave à vin, la plancha <b>ou</b> le barbecue, puis autant d’options que vous voulez.</p>`;
+  return `<p class="cmp-hint">Faites glisser le tableau pour voir les trois modèles.</p><div class="cmp-wrap" data-a="up"><table class="cmp"><thead><tr><th scope="col"><span>Équipements et finitions</span></th>${SLUGS.map(s => `<th scope="col" class="${s === cur ? "cur" : ""}"><b>${MODELS[s].name}</b><span>${MODELS[s].size} de façade</span></th>`).join("")}</tr></thead><tbody>${CMP.map(([a, b, v]) => a === "#" ? `<tr class="grp"><th colspan="4">${b}<small>${v}</small></th></tr>` : `<tr><th scope="row">${a}${b ? `<small>${b}</small>` : ""}</th>${v.map((x, i) => `<td class="${SLUGS[i] === cur ? "cur" : ""}">${x.startsWith("t:") ? x.slice(2) : lab[x]}</td>`).join("")}</tr>`).join("")}</tbody></table></div><p class="cmp-note">Exemple : sur Harmonie, vous prenez le réfrigérateur <b>ou</b> la cave à vin, la plancha <b>ou</b> le barbecue, puis autant d’options que vous voulez. Sur La Festive, le store banne et le meuble îlot se cumulent.</p>`;
 }
 function real3dBlock(id, compact) {
   return `<div class="st3" id="${id}" data-cursor="Tourner">

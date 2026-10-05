@@ -644,6 +644,29 @@ body.nav-up .snav{top:env(safe-area-inset-top,0px)}
 .closes{background:#fff}
 .mmenu a.pill{font-size:17px;font-weight:500;letter-spacing:-.01em;height:48px;padding:0 26px;border-bottom:0;margin-top:28px}
 @media (max-width:640px){.summary{position:static}}
+/* Finitions v4.2 */
+.h4::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.09;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.readbar{position:fixed;left:0;top:0;height:2px;width:100%;z-index:90;background:var(--v300);transform-origin:left;transform:scaleX(0);pointer-events:none}
+.h-name{font-weight:500;letter-spacing:-.05em}
+.crumbs{display:flex;justify-content:center;gap:8px;font-size:13px;color:var(--w3);margin-bottom:18px}
+.crumbs a{color:var(--w2);transition:color .2s}.crumbs a:hover{color:#fff}
+.tl .st::before{transition:background .4s var(--ease),transform .5s var(--ease)}
+.tl .st.on::before{background:var(--v500);transform:scale(1.25)}
+.totop{display:inline-flex;align-items:center;gap:10px;font-size:13px;color:var(--w2);transition:color .2s}
+.totop:hover{color:#fff}
+.totop i{width:36px;height:36px;border-radius:50%;box-shadow:inset 0 0 0 1px var(--w3);display:flex;align-items:center;justify-content:center;transition:transform .4s var(--ease)}
+.totop:hover i{transform:translateY(-3px)}
+.totop svg{width:14px;height:14px;transform:rotate(-90deg)}
+/* Aperçu 3D provisoire sur fond clair (cohérent avec la vraie 3D) */
+.v3d .stage{background:radial-gradient(80% 70% at 50% 45%,#FFFFFF 0%,#F3F6F3 70%,#E7EDE8 100%);box-shadow:0 30px 80px -50px rgba(0,0,0,.6)}
+.v3d .stage .badge,.v3d .stage .seg,.v3d .stage .sw,.v3d .stage .icons button{background:rgba(255,255,255,.92);box-shadow:inset 0 0 0 1px var(--line);color:var(--txt)}
+.v3d .stage .badge i{background:var(--v500);box-shadow:0 0 0 4px rgba(45,106,79,.18)}
+.v3d .stage .seg button{color:var(--txt2)}
+.v3d .stage .seg button.on{background:var(--v500);color:#fff}
+.v3d .stage .icons svg{color:var(--txt)}
+.v3d .stage .icons button:hover{background:var(--v50)}
+.v3d .stage .hint{color:var(--txt2)}
+.v3d .stage .sw button.on::after{box-shadow:0 0 0 2px var(--v500)}
 
 </style>
 </head>
@@ -670,7 +693,7 @@ body.nav-up .snav{top:env(safe-area-inset-top,0px)}
       <div><h4>Suivre</h4><a href="https://www.instagram.com/" rel="noopener">Instagram</a><a href="https://www.facebook.com/" rel="noopener">Facebook</a></div>
     </div>
   </div>
-  <div class="bot"><span>© 2026 DMG Concept SASU</span><span>Mentions légales · Confidentialité · Cookies</span></div>
+  <div class="bot"><span>© 2026 DMG Concept SASU · Mentions légales · Confidentialité · Cookies</span><a class="totop" href="#haut"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i>Haut de page</a></div>
 </div></footer>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -5705,6 +5728,7 @@ function modelPage(s) {
 <div class="snav"><div class="wrap"><span class="name">${M.name}</span><div class="right"><a class="sl" href="#${s}--vue-3d" data-sec="vue-3d">Vue 3D</a><a class="sl" href="#${s}--options" data-sec="options">Options</a><a class="sl" href="#${s}--materiaux" data-sec="materiaux">Matériaux</a><a class="sl" href="#${s}--caracteristiques" data-sec="caracteristiques">Caractéristiques</a><a class="pill sm" href="#devis-${s}">Demander un devis</a></div></div></div>
 <section class="bg-v900 dark">
   <div class="m-hero wrap">
+    <nav class="crumbs" aria-label="Fil d’Ariane" data-mh><a href="#">Accueil</a><span>/</span><a href="#gamme">La gamme</a><span>/</span><span aria-current="page">${M.name}</span></nav>
     <p class="kicker" data-mh>Cuisine extérieure couverte · ${M.size}</p>
     <h1 class="h-name" aria-label="${M.name}">${[...M.name].map(c => c === " " ? " " : `<span class="ch">${c}</span>`).join("")}</h1>
     <p class="intro" data-mh>${M.tag} ${M.long}</p>
@@ -5784,7 +5808,7 @@ function route() {
     current = r.page;
     document.title = r.page === "home" ? "DMG Concept" : MODELS[r.page].name + " · DMG Concept";
     after(r.page);
-    setTimeout(() => jump(r), r.anchor ? 400 : 0);
+    setTimeout(() => jump(r), r.anchor ? (first ? 150 : 400) : 0);
   };
   const cur = document.querySelector(".curtain");
   if (first || !HAS_G || REDUCED) { swap(); return; }
@@ -5796,14 +5820,15 @@ function route() {
     .add(swap)
     .to(cur, { yPercent: -100, duration: .7, ease: "power3.inOut", delay: .1 });
 }
-function scrollToEl(el) {
+function scrollToEl(el, now) {
   const off = -(document.querySelector(".snav") ? 112 : 56);
+  if (now) { const y = el.getBoundingClientRect().top + window.scrollY + off; if (lenis) lenis.scrollTo(y, { immediate: true, force: true }); window.scrollTo(0, y); if (HAS_G) ScrollTrigger.update(); return; }
   if (lenis) lenis.scrollTo(el, { offset: off, duration: 1.3 });
   else window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY + off, behavior: REDUCED ? "auto" : "smooth" });
 }
 function jump(r) {
   if (r.pre !== undefined) preselect(r.pre);
-  if (r.anchor) { const el = document.getElementById(r.anchor); if (el) scrollToEl(el); }
+  if (r.anchor) { const el = document.getElementById(r.anchor); if (el) scrollToEl(el, !window.__loaded); }
 }
 window.addEventListener("hashchange", route);
 document.addEventListener("click", e => {
@@ -5977,7 +6002,8 @@ function viewer3D(stage, M) {
   const loader = new T.TextureLoader(), cladMats = [];
   function cladMap(len) { const f = FIN[state.clad]; if (!f.tex) return null; const t = loader.load(f.tex); t.encoding = T.sRGBEncoding; t.wrapS = t.wrapT = T.RepeatWrapping; t.repeat.set(Math.max(1, len / .14), 1); return t; }
   function clad(len) { const m = mat(FIN[state.clad].c, .7); m.userData.len = len; m.map = cladMap(len); if (m.map) m.color = new T.Color(1, 1, 1); cladMats.push(m); return m; }
-  const front = mat("#2E3133", .55), wood = mat("#DCC7A6", .85), deckM = mat("#A8784A", .8), cabM = mat("#2F3133", .6), black = mat("#151616", .35), concrete = mat("#A6A8A5", .95), steel = mat("#C9CCCB", .3);
+  const pineT = loader.load(TX.pine); pineT.encoding = T.sRGBEncoding; pineT.wrapS = pineT.wrapT = T.RepeatWrapping; pineT.repeat.set(W / 1.2, 1.6);
+  const front = mat("#2E3133", .55), wood = new T.MeshStandardMaterial({ map: pineT, roughness: .8 }), deckM = mat("#2A2B2C", .8), cabM = mat("#2F3133", .6), black = mat("#151616", .35), concrete = mat("#A6A8A5", .95), steel = mat("#C9CCCB", .3);
   const spotM = new T.MeshStandardMaterial({ color: col("#FFE9C4"), emissive: col("#FFE2B0"), emissiveIntensity: .6 });
   const box = (w, h, d, x, y, z, m, sh) => { const me = new T.Mesh(new T.BoxGeometry(w, h, d), m); me.position.set(x, y, z); me.castShadow = sh !== false; me.receiveShadow = true; grp.add(me); return me; };
   for (const sx of [-1, 1]) for (const sz of [-1, 1]) box(.3, base, .3, sx * (W / 2 - .3), base / 2, sz * (D / 2 - .25), concrete);
@@ -6001,7 +6027,7 @@ function viewer3D(stage, M) {
     const pl = new T.PointLight(0xffd9a0, 0, 3.4, 2); pl.position.set(x, top - .36, -D / 2 + .5); grp.add(pl); lights.push(pl);
   }
   const ground = new T.Mesh(new T.PlaneGeometry(40, 40), new T.ShadowMaterial({ opacity: .28 })); ground.rotation.x = -Math.PI / 2; ground.receiveShadow = true; scene.add(ground);
-  const hemi = new T.HemisphereLight(0xffffff, 0x2d6a4f, .65); scene.add(hemi);
+  const hemi = new T.HemisphereLight(0xffffff, 0x8a8f8b, .7); scene.add(hemi);
   const sun = new T.DirectionalLight(0xffffff, 1.15); sun.position.set(-4, 7, 6); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048);
   const sc = sun.shadow.camera; sc.left = -6; sc.right = 6; sc.top = 6; sc.bottom = -6; sun.shadow.bias = -.0004; scene.add(sun);
   const amb = new T.AmbientLight(0xffffff, .18); scene.add(amb);
@@ -6065,6 +6091,7 @@ function motion(page) {
   }
   // Frise
   const rail = app.querySelector(".tl .rail i");
+  app.querySelectorAll(".tl .st").forEach(st => ScrollTrigger.create({ trigger: st, start: "top 70%", toggleClass: { targets: st, className: "on" } }));
   if (rail) gsap.fromTo(rail, { scaleX: 0 }, { scaleX: 1, ease: "none", scrollTrigger: { trigger: ".tl", start: "top 80%", end: "top 35%", scrub: true } });
   // Livraison : l'image s'ouvre
   const fr = app.querySelector("[data-clip]");
@@ -6107,6 +6134,9 @@ function globals() {
     if (HAS_G) { lenis.on("scroll", ScrollTrigger.update); gsap.ticker.add(t => lenis.raf(t * 1000)); gsap.ticker.lagSmoothing(0); }
     else { const f = t => { lenis.raf(t); requestAnimationFrame(f); }; requestAnimationFrame(f); }
   }
+  const rb = document.createElement("div"); rb.className = "readbar"; rb.setAttribute("aria-hidden", "true"); document.body.appendChild(rb);
+  window.addEventListener("scroll", () => { const m = document.documentElement.scrollHeight - innerHeight; rb.style.transform = `scaleX(${m > 0 ? scrollY / m : 0})`; }, { passive: true });
+  const tt = document.querySelector(".totop"); if (tt) tt.addEventListener("click", e => { e.preventDefault(); if (lenis) lenis.scrollTo(0, { duration: 1.6 }); else window.scrollTo({ top: 0, behavior: "smooth" }); });
   const nav = document.querySelector(".gnav");
   let lastY = 0;
   const onScroll = () => {

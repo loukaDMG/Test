@@ -667,6 +667,8 @@ body.nav-up .snav{top:env(safe-area-inset-top,0px)}
 .v3d .stage .icons button:hover{background:var(--v50)}
 .v3d .stage .hint{color:var(--txt2)}
 .v3d .stage .sw button.on::after{box-shadow:0 0 0 2px var(--v500)}
+.cmp-hint{display:none;font-size:13px;color:var(--txt2);margin-bottom:10px}
+@media (max-width:760px){.cmp-hint{display:block}}
 
 </style>
 </head>
@@ -690,7 +692,7 @@ body.nav-up .snav{top:env(safe-area-inset-top,0px)}
       <div><h4>Modèles</h4><a href="#evidence">Évidence — 2 m</a><a href="#harmonie">Harmonie — 3 m</a><a href="#la-festive">La Festive — 4 m</a><a href="#comparer">Comparer</a></div>
       <div><h4>DMG Concept</h4><a href="#qui">Qui sommes-nous</a><a href="#materiaux">Matériaux</a><a href="#realisations">Réalisations</a><a href="#faq">Questions fréquentes</a></div>
       <div><h4>Contact</h4><span>07 49 66 12 56</span><span>04 50 68 49 15</span><span>contact@dmg-concept.com</span><span>58 impasse des Roseaux</span><span>74570 Évires</span></div>
-      <div><h4>Suivre</h4><a href="https://www.instagram.com/" rel="noopener">Instagram</a><a href="https://www.facebook.com/" rel="noopener">Facebook</a></div>
+      <div><h4>Suivre</h4><span>Instagram</span><span>Facebook</span></div>
     </div>
   </div>
   <div class="bot"><span>© 2026 DMG Concept SASU · Mentions légales · Confidentialité · Cookies</span><a class="totop" href="#haut"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i>Haut de page</a></div>
@@ -5564,7 +5566,7 @@ const ln = t => t.split("\n").map(l => `<span class="ln"><span>${l}</span></span
 /* ---------- Gabarits partagés ---------- */
 function cmpTable(cur) {
   const lab = { o: '<span class="chipc o">Option</span>', c: '<span class="chipc c">Au choix</span>', n: '<span class="chipc n">—</span>' };
-  return `<div class="cmp-wrap" data-a="up"><table class="cmp"><thead><tr><th scope="col"><span>Équipements et finitions</span></th>${SLUGS.map(s => `<th scope="col" class="${s === cur ? "cur" : ""}"><b>${MODELS[s].name}</b><span>${MODELS[s].size} de façade</span></th>`).join("")}</tr></thead><tbody>${CMP.map(([a, b, v]) => `<tr><th scope="row">${a}${b ? `<small>${b}</small>` : ""}</th>${v.map((x, i) => `<td class="${SLUGS[i] === cur ? "cur" : ""}">${x.startsWith("t:") ? x.slice(2) : lab[x]}</td>`).join("")}</tr>`).join("")}</tbody></table></div><p class="cmp-note">« Au choix » : dans chaque paire, l’un, l’autre ou aucun. Toutes les options se choisissent avec ou sans.</p>`;
+  return `<p class="cmp-hint">Faites glisser le tableau pour voir les trois modèles.</p><div class="cmp-wrap" data-a="up"><table class="cmp"><thead><tr><th scope="col"><span>Équipements et finitions</span></th>${SLUGS.map(s => `<th scope="col" class="${s === cur ? "cur" : ""}"><b>${MODELS[s].name}</b><span>${MODELS[s].size} de façade</span></th>`).join("")}</tr></thead><tbody>${CMP.map(([a, b, v]) => `<tr><th scope="row">${a}${b ? `<small>${b}</small>` : ""}</th>${v.map((x, i) => `<td class="${SLUGS[i] === cur ? "cur" : ""}">${x.startsWith("t:") ? x.slice(2) : lab[x]}</td>`).join("")}</tr>`).join("")}</tbody></table></div><p class="cmp-note">« Au choix » : dans chaque paire, l’un, l’autre ou aucun. Toutes les options se choisissent avec ou sans.</p>`;
 }
 function real3dBlock(id, compact) {
   return `<div class="st3" id="${id}" data-cursor="Tourner">
@@ -5726,7 +5728,7 @@ function modelPage(s) {
       <div class="ctrl"><div class="sw">${FORDER.map(k => `<button type="button" data-clad="${k}" title="${FIN[k].s}" aria-label="Bardage ${FIN[k].s}" style="${swStyle(k)}"></button>`).join("")}</div><span class="hint">Glissez pour faire pivoter · pincez pour zoomer</span><div class="icons"><button type="button" data-act="reset" aria-label="Recentrer">${T3.reset}</button><button type="button" data-act="full" aria-label="Plein écran">${T3.full}</button></div></div>
     </div>`;
   return `
-<div class="snav"><div class="wrap"><span class="name">${M.name}</span><div class="right"><a class="sl" href="#${s}--vue-3d" data-sec="vue-3d">Vue 3D</a><a class="sl" href="#${s}--options" data-sec="options">Options</a><a class="sl" href="#${s}--materiaux" data-sec="materiaux">Matériaux</a><a class="sl" href="#${s}--caracteristiques" data-sec="caracteristiques">Caractéristiques</a><a class="pill sm" href="#devis-${s}">Demander un devis</a></div></div></div>
+<div class="snav"><div class="wrap"><span class="name">${M.name}</span><div class="right"><a class="sl" href="#${s}--vue-3d" data-sec="vue-3d">Vue 3D</a><a class="sl" href="#${s}--options" data-sec="options">Options</a><a class="sl" href="#${s}--materiaux" data-sec="materiaux">Matériaux</a><a class="sl" href="#${s}--caracteristiques" data-sec="caracteristiques">Caractéristiques</a><a class="sl" href="#${s}--comparer" data-sec="comparer">Comparer</a><a class="pill sm" href="#devis-${s}">Demander un devis</a></div></div></div>
 <section class="bg-v900 dark">
   <div class="m-hero wrap">
     <nav class="crumbs" aria-label="Fil d’Ariane" data-mh><a href="#">Accueil</a><span>/</span><a href="#gamme">La gamme</a><span>/</span><span aria-current="page">${M.name}</span></nav>
@@ -5979,7 +5981,7 @@ function modelInit(s) {
   updSel(s);
   const links = app.querySelectorAll(".snav a.sl");
   const spy = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) links.forEach(l => l.classList.toggle("on", l.dataset.sec === e.target.id)); }), { rootMargin: "-45% 0px -50% 0px" });
-  ["vue-3d", "options", "materiaux", "caracteristiques"].forEach(id => { const el = document.getElementById(id); if (el) spy.observe(el); });
+  ["vue-3d", "options", "materiaux", "caracteristiques", "comparer"].forEach(id => { const el = document.getElementById(id); if (el) spy.observe(el); });
   cleanups.push(() => spy.disconnect());
   const stage = document.getElementById("stage");
   if (!stage) return;
@@ -6091,6 +6093,8 @@ function motion(page) {
   });
   // Parallaxe des images
   app.querySelectorAll("[data-par]").forEach(el => gsap.fromTo(el, { yPercent: -(+el.dataset.par) }, { yPercent: +el.dataset.par, ease: "none", scrollTrigger: { trigger: el.parentElement, start: "top bottom", end: "bottom top", scrub: true } }));
+  // Photos : ouverture en volet au défilement
+  app.querySelectorAll(".story4 .ph, .band, .mcard4 .img, .slats").forEach(el => gsap.fromTo(el, { clipPath: "inset(14% 0% 0% 0% round 20px)" }, { clipPath: "inset(0% 0% 0% 0% round 20px)", ease: "none", scrollTrigger: { trigger: el, start: "top 95%", end: "top 45%", scrub: true } }));
   // Compteurs
   app.querySelectorAll("[data-count]").forEach(el => { const n = +el.dataset.count, o = { v: 0 }; gsap.to(o, { v: n, duration: 1.6, ease: "power2.out", scrollTrigger: { trigger: el, start: "top 90%", once: true }, onUpdate: () => { el.textContent = Math.round(o.v); } }); });
   // Manifeste : mots qui s'allument au défilement
@@ -6158,7 +6162,11 @@ function globals() {
     lastY = y;
   };
   const mc = document.createElement("div"); mc.className = "mcta"; mc.innerHTML = `<span>Votre projet de cuisine extérieure</span><a class="pill sm" href="#devis">Demander un devis</a>`; document.body.appendChild(mc);
-  const onScroll2 = () => { const d = document.getElementById("devis"), r = d ? d.getBoundingClientRect() : null; mc.classList.toggle("show", window.scrollY > 600 && !(r && r.top < window.innerHeight && r.bottom > 0) && !document.body.classList.contains("menu-open")); };
+  const onScroll2 = () => {
+    const vis = el => { if (!el) return false; const r = el.getBoundingClientRect(); return r.top < window.innerHeight && r.bottom > 0; };
+    const blocked = vis(document.getElementById("devis")) || vis(document.querySelector(".st3")) || vis(document.getElementById("stage")) || vis(document.querySelector(".summary"));
+    mc.classList.toggle("show", window.scrollY > 600 && !blocked && !document.body.classList.contains("menu-open"));
+  };
   window.addEventListener("scroll", onScroll2, { passive: true });
   window.addEventListener("scroll", onScroll, { passive: true }); onScroll();
   if (window.matchMedia("(hover: hover) and (pointer: fine)").matches && !REDUCED) {

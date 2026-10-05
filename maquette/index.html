@@ -794,6 +794,11 @@ footer .bot{align-items:center}
 .panel .idx{font-size:10px}
 .panel .go{font-size:14px;gap:10px}.panel .go i{width:30px;height:30px}
 .range4 .pin>.wrap{max-width:1000px}
+/* v6.4 : comparatif groupé */
+.cmp tr.grp th{padding:28px 20px 10px;background:transparent;font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--v500);text-align:left;border-bottom:1px solid var(--line)}
+.cmp tr.grp th small{display:inline;margin-left:12px;letter-spacing:0;text-transform:none;font-weight:400;font-size:13px;color:var(--txt2)}
+.cmp td i{font-style:italic;font-family:"Instrument Serif",Georgia,serif;color:var(--v500);font-size:1.1em;padding:0 2px}
+.cmp td small{display:block;font-size:12px;color:var(--txt2);margin-top:2px}
 
 </style>
 </head>
@@ -5649,11 +5654,15 @@ const MODELS = {
 const SLUGS = Object.keys(MODELS);
 const de = n => /^[AEIOUÉÈHaeiouéèh]/.test(n) ? "d’" + n : "de " + n;
 const CMP = [
-  ["Réfrigérateur", "", ["o", "c", "c"]], ["Cave à vin", "Au choix avec le réfrigérateur", ["n", "c", "c"]],
-  ["Plancha encastrable", "Planet", ["o", "c", "c"]], ["Barbecue", "Napoléon · au choix avec la plancha", ["n", "c", "c"]],
+  ["#", "Au choix", "Un seul équipement par ligne : l’un ou l’autre (ou aucun)."],
+  ["Froid", "Réfrigérateur ou cave à vin", ["t:Réfrigérateur<small>en option, sans cave à vin</small>", "t:Réfrigérateur <i>ou</i> cave à vin", "t:Réfrigérateur <i>ou</i> cave à vin"]],
+  ["Cuisson", "Plancha Planet ou barbecue Napoléon", ["t:Plancha<small>en option, sans barbecue</small>", "t:Plancha <i>ou</i> barbecue", "t:Plancha <i>ou</i> barbecue"]],
+  ["Abri ou îlot", "Store banne ou meuble îlot", ["n", "t:Store <i>ou</i> îlot", "t:Store <i>ou</i> îlot"]],
+  ["#", "Options", "À ajouter librement, elles se cumulent."],
   ["Évier", "", ["o", "o", "o"]], ["Plaque à gaz", "", ["n", "o", "o"]], ["Friteuse encastrable", "Planet", ["n", "o", "o"]],
-  ["Robinet", "Quooker", ["n", "o", "o"]], ["Sonorisation", "Elipson", ["n", "o", "o"]], ["Store banne ou meuble îlot", "L’un, l’autre ou aucun", ["n", "c", "c"]],
+  ["Robinet", "Quooker", ["n", "o", "o"]], ["Sonorisation", "Elipson", ["n", "o", "o"]],
   ["Plan de travail en pierre", "Dekton", ["n", "o", "o"]], ["Téléviseur", "", ["n", "n", "o"]],
+  ["#", "Finitions", "Identiques sur les trois modèles."],
   ["Façade avant", "", ["t:Fundermax", "t:Fundermax", "t:Fundermax"]], ["Côtés et arrière", "", ["t:5 finitions", "t:5 finitions", "t:5 finitions"]],
 ];
 
@@ -5691,7 +5700,7 @@ const ln = t => t.split("\n").map(l => `<span class="ln"><span>${l}</span></span
 /* ---------- Gabarits partagés ---------- */
 function cmpTable(cur) {
   const lab = { o: '<span class="chipc o">Option</span>', c: '<span class="chipc c">Au choix</span>', n: '<span class="chipc n">—</span>' };
-  return `<p class="cmp-hint">Faites glisser le tableau pour voir les trois modèles.</p><div class="cmp-wrap" data-a="up"><table class="cmp"><thead><tr><th scope="col"><span>Équipements et finitions</span></th>${SLUGS.map(s => `<th scope="col" class="${s === cur ? "cur" : ""}"><b>${MODELS[s].name}</b><span>${MODELS[s].size} de façade</span></th>`).join("")}</tr></thead><tbody>${CMP.map(([a, b, v]) => `<tr><th scope="row">${a}${b ? `<small>${b}</small>` : ""}</th>${v.map((x, i) => `<td class="${SLUGS[i] === cur ? "cur" : ""}">${x.startsWith("t:") ? x.slice(2) : lab[x]}</td>`).join("")}</tr>`).join("")}</tbody></table></div><p class="cmp-note">« Au choix » : dans chaque paire, l’un, l’autre ou aucun. Toutes les options se choisissent avec ou sans.</p>`;
+  return `<p class="cmp-hint">Faites glisser le tableau pour voir les trois modèles.</p><div class="cmp-wrap" data-a="up"><table class="cmp"><thead><tr><th scope="col"><span>Équipements et finitions</span></th>${SLUGS.map(s => `<th scope="col" class="${s === cur ? "cur" : ""}"><b>${MODELS[s].name}</b><span>${MODELS[s].size} de façade</span></th>`).join("")}</tr></thead><tbody>${CMP.map(([a, b, v]) => a === "#" ? `<tr class="grp"><th colspan="4">${b}<small>${v}</small></th></tr>` : `<tr><th scope="row">${a}${b ? `<small>${b}</small>` : ""}</th>${v.map((x, i) => `<td class="${SLUGS[i] === cur ? "cur" : ""}">${x.startsWith("t:") ? x.slice(2) : lab[x]}</td>`).join("")}</tr>`).join("")}</tbody></table></div><p class="cmp-note">Exemple : sur Harmonie, vous prenez le réfrigérateur <b>ou</b> la cave à vin, la plancha <b>ou</b> le barbecue, puis autant d’options que vous voulez.</p>`;
 }
 function real3dBlock(id, compact) {
   return `<div class="st3" id="${id}" data-cursor="Tourner">

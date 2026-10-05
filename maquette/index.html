@@ -849,6 +849,34 @@ footer .bot{align-items:center}
 .clad.clad2{flex-direction:column;gap:14px}.clad2 .cg+.cg{padding-left:0;border-left:0}
 .cladrow{margin-top:24px;padding:24px 28px;border-radius:22px;background:#fff;display:flex;flex-direction:column;gap:16px}.cladrow .clad2{flex-direction:row;gap:16px 40px}@media (max-width:560px){.cladrow .clad2{flex-direction:column}}
 .cladrow .h-sub{font-size:20px;margin:0}
+/* v8 : pages modèles plus compactes */
+.h-name{font-size:clamp(48px,6.4vw,88px)}
+.m-hero{padding-top:clamp(48px,6vw,80px)}
+.m-hero .intro{font-size:18px;margin-top:18px}
+.m-hero .actions{margin-top:24px}
+.facts{margin-top:40px}.facts b{font-size:clamp(20px,1.9vw,26px)}.facts span{font-size:13px}
+.kit{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,6vw,80px);align-items:start}
+.kit-txt{display:flex;flex-direction:column;gap:16px}.kit-txt p:not(.kicker){margin:0;font-size:17px;line-height:1.65;color:var(--txt2);max-width:560px}
+.kit-txt .h-title{font-size:clamp(28px,3vw,40px)}
+.kit-inc dl{display:grid;grid-template-columns:minmax(0,150px) minmax(0,1fr);margin:14px 0 0;border-top:1px solid var(--line);font-size:15px}
+.kit-inc dt,.kit-inc dd{margin:0;padding:10px 0;border-bottom:1px solid var(--line)}.kit-inc dt{color:var(--txt2)}
+.opt-top{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:28px}
+.opt-top .h-title{font-size:clamp(28px,3vw,40px);margin-top:10px}
+.opt-top .pill{display:inline-flex;align-items:center;gap:8px}.opt-top .pill svg{width:15px;height:15px}
+.opt-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:24px 56px}
+.opt-cols .h-sub{font-size:19px}.opt-cols .muted{margin:4px 0 12px;font-size:14px}
+ul.dash{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+ul.dash li{position:relative;padding:10px 0 10px 22px;border-bottom:1px solid var(--line);font-size:15px}
+ul.dash li::before{content:"–";position:absolute;left:2px;color:var(--v500)}
+ul.dash li b{font-weight:600;margin-right:6px}ul.dash li i{font-style:italic;font-family:"Instrument Serif",Georgia,serif;color:var(--v500);font-size:1.1em}
+ul.dash li span{color:var(--txt2);font-size:13px;margin-left:6px}
+#materiaux .h-title,#comparer .h-title{font-size:clamp(28px,3vw,40px)}
+#materiaux .mcard4 .img,#materiaux .slats{height:220px}
+.nextm h2{font-size:clamp(36px,5vw,64px)}
+@media (max-width:900px){.kit{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:560px){.kit-inc dl{grid-template-columns:minmax(0,1fr)}.kit-inc dt{padding-bottom:0;border-bottom:0}}
+body:not(.is-home) #app .sec{padding-block:clamp(56px,6vw,88px)}#cuisine{background:var(--v50)}
+body:not(.is-home) #app .head .intro{font-size:17px}body:not(.is-home) #app .head{margin-bottom:32px}#materiaux .mcard4 .tx{padding:22px 26px 24px}#materiaux .mcard4 h3{font-size:24px}
 
 </style>
 </head>
@@ -5698,9 +5726,9 @@ const OPT = {
 };
 const PAIRS = [["Froid", "frigo", "cave"], ["Cuisson", "plancha", "bbq"], ["Abri ou îlot", "store", "ilot"]];
 const MODELS = {
-  "evidence": { name: "Évidence", n: 1, m: 2, size: "2 m", tag: "L’essentiel pour cuisiner dehors, même sur une petite terrasse.", long: "Le modèle compact de la gamme. Trois équipements au choix, tous compatibles entre eux.", choix: [], options: ["plancha1", "evier1", "frigo1"], photo: "petite", cap: "Réalisation DMG Concept", sw: .5, real: true },
-  "harmonie": { name: "Harmonie", n: 2, m: 3, size: "3 m", tag: "Plus de plan de travail pour cuisiner à plusieurs.", long: "Le format intermédiaire, avec les équipements d’une vraie cuisine.", choix: PAIRS, options: ["evier", "gaz", "friteuse", "robinet", "son", "dekton"], photo: "detail", cap: "Exemple d’équipements encastrés", sw: .66 },
-  "la-festive": { name: "La Festive", n: 3, m: 4, size: "4 m", tag: "Le grand format, pensé pour recevoir nombreux.", long: "Le plus grand modèle : un îlot bar fixe et plus profond inclus, toutes les options de la gamme, et le téléviseur en plus.", choix: PAIRS.slice(0, 2), options: ["store", "evier", "gaz", "friteuse", "robinet", "son", "dekton", "tv"], photo: "detail", cap: "Exemple d’équipements encastrés", sw: .84 },
+  "evidence": { desc: ["Évidence est la plus compacte des trois cuisines : 2\u00a0m de façade, pensée pour les terrasses où chaque mètre compte.", "Elle réunit l’essentiel sous sa propre toiture : plancha, évier et réfrigérateur, avec des rangements en portes et tiroirs. Le soir, l’éclairage intégré au plafond prend le relais ; après le repas, la cuisine se referme et les équipements restent à l’abri."], name: "Évidence", n: 1, m: 2, size: "2 m", tag: "L’essentiel pour cuisiner dehors, même sur une petite terrasse.", long: "Le modèle compact de la gamme. Trois équipements au choix, tous compatibles entre eux.", choix: [], options: ["plancha1", "evier1", "frigo1"], photo: "petite", cap: "Réalisation DMG Concept", sw: .5, real: true },
+  "harmonie": { desc: ["Harmonie offre 3\u00a0m de façade : assez de plan de travail pour cuisiner à plusieurs, et la place pour les équipements d’une vraie cuisine.", "Froid, cuisson, évier, friteuse, eau bouillante : on compose l’équipement selon sa façon de recevoir. Côté terrasse, on choisit entre un store banne intégré à la toiture et un îlot bar sur roulettes."], name: "Harmonie", n: 2, m: 3, size: "3 m", tag: "Plus de plan de travail pour cuisiner à plusieurs.", long: "Le format intermédiaire, avec les équipements d’une vraie cuisine.", choix: PAIRS, options: ["evier", "gaz", "friteuse", "robinet", "son", "dekton"], photo: "detail", cap: "Exemple d’équipements encastrés", sw: .66 },
+  "la-festive": { desc: ["La Festive est la plus grande de la gamme : 4\u00a0m de façade et un îlot bar fixe inclus, plus profond, pour recevoir nombreux.", "Toutes les options de la gamme y sont possibles, téléviseur compris, et le store banne intégré à la toiture peut ombrager le coin repas."], name: "La Festive", n: 3, m: 4, size: "4 m", tag: "Le grand format, pensé pour recevoir nombreux.", long: "Le plus grand modèle : un îlot bar fixe et plus profond inclus, toutes les options de la gamme, et le téléviseur en plus.", choix: PAIRS.slice(0, 2), options: ["store", "evier", "gaz", "friteuse", "robinet", "son", "dekton", "tv"], photo: "detail", cap: "Exemple d’équipements encastrés", sw: .84 },
 };
 const SLUGS = Object.keys(MODELS);
 const de = n => /^[AEIOUÉÈHaeiouéèh]/.test(n) ? "d’" + n : "de " + n;
@@ -5931,6 +5959,7 @@ const ocard = (k, status, group) => { const o = OPT[k]; return `<button type="bu
 function modelPage(s) {
   const M = MODELS[s], next = SLUGS[(SLUGS.indexOf(s) + 1) % SLUGS.length], N = MODELS[next];
   const specs = [["Façade", M.size], ["Profondeur", null], ["Hauteur", null], ["Structure", "Ossature bois"], ["Toiture", "Toiture plate, membrane EPDM"], ["Façade avant", "Panneaux Fundermax gris anthracite"], ["Côtés et arrière", "Fundermax gris anthracite, ou lames WEO®60 Teak, Cedar, Ipé, Dark grey"], ["Intérieur", "Bois trois plis, crédence noire"], ["Fermeture", "La cuisine se referme"], ...(s === "la-festive" ? [["Îlot bar", "Inclus : fixe, plus profond que l’îlot sur roulettes"]] : []), ["Pose", "Sur 4 plots béton, sans fixation au bâtiment"], ["Livraison", "Livrée assemblée. Raccordements à prévoir séparément."]];
+  const inc = [["Structure", "Ossature bois"], ["Toiture", "Plate, membrane EPDM"], ["Façade avant", "Panneaux Fundermax gris anthracite"], ["Côtés et arrière", "Fundermax ou lames WEO®60, 5 finitions"], ["Intérieur", "Bois trois plis, crédence noire"], ["Éclairage", "Spots intégrés au plafond"], ["Rangements", "Portes et tiroirs sous le plan de travail"], ...(s === "la-festive" ? [["Îlot bar", "Fixe, plus profond, inclus"]] : []), ["Fermeture", "La cuisine se referme après le repas"], ["Pose", "Sur 4 plots béton, sans fixation au bâtiment"], ["Livraison", "En un seul bloc, assemblée. Raccordements à prévoir séparément."], ["Dimensions", `${M.size} de façade · profondeur et hauteur à préciser`]];
   const stage = M.real ? real3dBlock("st-model", true) : `<div class="stage" id="stage" data-cursor="Tourner" style="--sw:${Math.round(M.sw * 80)}%">
       <span class="badge"><i></i>Vue 3D · aperçu provisoire</span>
       <div class="seg"><button class="on" data-amb="jour" type="button">Jour</button><button data-amb="nuit" type="button">Nuit</button></div>
@@ -5938,7 +5967,7 @@ function modelPage(s) {
       <div class="ctrl"><div class="sw">${FORDER.map(k => `<button type="button" data-clad="${k}" title="${FIN[k].s}" aria-label="Bardage ${FIN[k].s}" style="${swStyle(k)}"></button>`).join("")}</div><span class="hint">Glissez pour faire pivoter · pincez pour zoomer</span><div class="icons"><button type="button" data-act="reset" aria-label="Recentrer">${T3.reset}</button><button type="button" data-act="full" aria-label="Plein écran">${T3.full}</button></div></div>
     </div>`;
   return `
-<div class="snav"><div class="wrap"><span class="name">${M.name}</span><div class="right"><a class="sl" href="#${s}--vue-3d" data-sec="vue-3d">Vue 3D</a><a class="sl" href="#${s}--options" data-sec="options">Options</a><a class="sl" href="#${s}--materiaux" data-sec="materiaux">Matériaux</a><a class="sl" href="#${s}--caracteristiques" data-sec="caracteristiques">Caractéristiques</a><a class="sl" href="#${s}--comparer" data-sec="comparer">Comparer</a><a class="pill sm" href="#devis-${s}">Demander un devis</a></div></div></div>
+<div class="snav"><div class="wrap"><span class="name">${M.name}</span><div class="right"><a class="sl" href="#${s}--vue-3d" data-sec="vue-3d">Vue 3D</a><a class="sl" href="#${s}--cuisine" data-sec="cuisine">La cuisine</a><a class="sl" href="#${s}--options" data-sec="options">Options</a><a class="sl" href="#${s}--materiaux" data-sec="materiaux">Matériaux</a><a class="sl" href="#${s}--comparer" data-sec="comparer">Comparer</a><a class="pill sm" href="#devis-${s}">Demander un devis</a></div></div></div>
 <section class="bg-v900 dark mh-bg">
   <div class="m-hero wrap">
     <nav class="crumbs" aria-label="Fil d’Ariane" data-mh><a href="#">Accueil</a><span>/</span><a href="#gamme">La gamme</a><span>/</span><span aria-current="page">${M.name}</span></nav>
@@ -5953,12 +5982,17 @@ function modelPage(s) {
   </div>
 </section>
 
+<section class="sec" id="cuisine"><div class="wrap kit">
+  <div class="kit-txt" data-a="up"><p class="kicker">La cuisine</p><h2 class="h-title">${M.name}</h2>${M.desc.map(p => `<p>${p}</p>`).join("")}</div>
+  <div class="kit-inc" data-a="up"><h3 class="h-sub">Ce qui est inclus</h3><dl>${inc.map(([a, b]) => `<dt>${a}</dt><dd>${b}</dd>`).join("")}</dl></div>
+</div></section>
+
 <section class="sec" id="options"><div class="wrap">
-  <div class="head" data-a="up"><p class="kicker">Options</p><h2 class="h-title">${ln("Équipez-la à votre <em>façon.</em>")}</h2><p class="intro">${M.choix.length ? "Chaque équipement se choisit avec ou sans. Dans chaque paire, l’un, l’autre ou aucun." : "Trois équipements, tous compatibles entre eux, à prendre avec ou sans."}</p></div>
-  <figure class="band" data-a="up"><div class="ph" style="background-image:url(${IMG[M.photo]})" data-par="-6"></div><figcaption>${M.cap}</figcaption></figure>
-  ${M.choix.length ? `<div class="blk"><div class="blk-head" data-a="up"><h3 class="h-sub">Au choix</h3><p class="muted">Ces équipements ne se cumulent pas : l’un, l’autre ou aucun.</p></div>${M.choix.map(([lbl, a, b]) => `<div class="choice"><span class="lbl">${lbl}</span>${ocard(a, "Au choix", lbl)}<span class="or">ou</span>${ocard(b, "Au choix", lbl)}</div>`).join("")}</div>` : ""}
-  <div class="blk"><div class="blk-head" data-a="up"><h3 class="h-sub">${M.choix.length ? "En option" : "Équipements"}</h3><p class="muted">Touchez un équipement pour l’ajouter à votre sélection. <a class="lnk" href="#equipements">Fiches détaillées ›</a></p></div><div class="ocards">${M.options.map(k => ocard(k, "En option")).join("")}</div></div>
-  <div class="summary" data-a="up"><p id="sel"></p><a class="pill light" href="#devis-${s}">Demander un devis avec cette sélection</a></div>
+  <div class="opt-top" data-a="up"><div><p class="kicker">Options</p><h2 class="h-title">Les équipements</h2></div><a class="pill" href="#equipements">Découvrir les éléments ${ARR}</a></div>
+  <div class="opt-cols" data-a="up">
+    ${M.choix.length ? `<div><h3 class="h-sub">Au choix</h3><p class="muted">L’un ou l’autre, ou aucun.</p><ul class="dash">${M.choix.map(([lbl, a, b]) => `<li><b>${lbl}</b> ${OPT[a].n.toLowerCase()}${OPT[a].b && !/^(Dans|Même|Derrière)/.test(OPT[a].b) ? ` (${OPT[a].b.split(" · ")[0]})` : ""} <i>ou</i> ${OPT[b].n.toLowerCase()}${OPT[b].b && !/^(Dans|Même|Derrière)/.test(OPT[b].b) ? ` (${OPT[b].b.split(" · ")[0]})` : ""}</li>`).join("")}</ul></div>` : ""}
+    <div><h3 class="h-sub">${M.choix.length ? "En option" : "Équipements"}</h3><p class="muted">${M.choix.length ? "À ajouter librement, elles se cumulent." : "Tous compatibles entre eux, avec ou sans."}</p><ul class="dash">${M.options.map(k => `<li>${OPT[k].n}${OPT[k].b && !/^(Dans|Même|Derrière)/.test(OPT[k].b) ? ` <span>${OPT[k].b}</span>` : ""}</li>`).join("")}</ul></div>
+  </div>
 </div></section>
 
 <section class="sec bg-v50" id="materiaux"><div class="wrap">
@@ -5968,13 +6002,8 @@ function modelPage(s) {
     <article class="mcard4" data-a="up"><div class="slats">${["teak", "cedar", "ipe", "darkgrey"].map(k => `<div style="background-image:url(${FIN[k].tex})"><span>${FIN[k].s}</span></div>`).join("")}</div><div class="tx"><div class="row"><h3>Lames WEO®60</h3><span class="tag">Côtés et arrière · 4 teintes</span></div><p class="muted">Bardage composite à effet claire-voie : lames de 60 mm, joints de 10 mm. Fabriqué à 95 % à partir de matières recyclées, recyclable à 100 %.</p></div></article>
   </div>
   <div class="cladrow" data-a="up"><p class="h-sub">Finition des côtés et de l’arrière</p>${cladButtons()}</div>
-  <div class="inside">${[[T3.struct, "Structure", "Ossature bois"], [T3.toit, "Toiture", "Toiture plate, membrane EPDM"], [T3.bois, "Intérieur", "Bois trois plis, crédence noire"], [T3.plots, "Pose", "Sur 4 plots béton, sans fixation au bâtiment"]].map(x => `<div data-a="up">${x[0]}<b>${x[1]}</b><span>${x[2]}</span></div>`).join("")}</div>
-</div></section>
+  </div></section>
 
-<section class="sec" id="caracteristiques"><div class="wrap specs">
-  <div data-a="up"><p class="kicker">Caractéristiques</p><h2 class="h-title" style="margin-top:14px">${M.name}</h2></div>
-  <dl data-a="up">${specs.map(([a, b]) => `<dt>${a}</dt><dd${b ? "" : ' class="tbd"'}>${b || "À préciser"}</dd>`).join("")}</dl>
-</div></section>
 
 <section class="sec bg-v50" id="comparer"><div class="wrap">
   <div class="head" data-a="up"><p class="kicker">Comparer</p><h2 class="h-title">${ln("Toute la <em>gamme.</em>")}</h2></div>
@@ -6261,6 +6290,7 @@ function setClad(k) {
 /* ---------- Page modèle : options, aperçu 3D provisoire ---------- */
 let proc = null;
 function updSel(s) {
+  if (!document.getElementById("sel")) return;
   app.querySelectorAll(".ocard").forEach(c => { c.classList.toggle("on", !!state.sel[c.dataset.opt]); c.setAttribute("aria-pressed", String(!!state.sel[c.dataset.opt])); });
   const items = Object.keys(state.sel).filter(k => state.sel[k]).map(k => OPT[k].n + (/^(Planet|Napoléon|Quooker|Elipson|Dekton)/.test(OPT[k].b) ? " " + OPT[k].b.split(" · ")[0] : ""));
   document.getElementById("sel").innerHTML = `<b>Votre sélection</b> · ${MODELS[s].name}, bardage ${FIN[state.clad].s}` + (items.length ? `, ${items.join(", ")}.` : `. Touchez les équipements qui vous intéressent.`);
@@ -6282,7 +6312,7 @@ function modelInit(s) {
   updSel(s);
   const links = app.querySelectorAll(".snav a.sl");
   const spy = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) links.forEach(l => l.classList.toggle("on", l.dataset.sec === e.target.id)); }), { rootMargin: "-45% 0px -50% 0px" });
-  ["vue-3d", "options", "materiaux", "caracteristiques", "comparer"].forEach(id => { const el = document.getElementById(id); if (el) spy.observe(el); });
+  ["vue-3d", "cuisine", "options", "materiaux", "comparer"].forEach(id => { const el = document.getElementById(id); if (el) spy.observe(el); });
   cleanups.push(() => spy.disconnect());
   const stage = document.getElementById("stage");
   if (!stage) return;

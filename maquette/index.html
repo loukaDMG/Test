@@ -695,6 +695,7 @@ body.nav-up .snav{top:env(safe-area-inset-top,0px)}
 .mh-bg{position:relative;overflow:hidden;background:radial-gradient(70% 55% at 50% 18%,#1D4A36 0%,rgba(14,42,31,0) 70%),var(--v900)}
 .mh-bg::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.07;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 .mh-bg>*{position:relative}
+.mm-contact{margin-top:auto;font-size:14px;line-height:1.6;color:var(--w3)}
 
 </style>
 </head>
@@ -708,7 +709,7 @@ body.nav-up .snav{top:env(safe-area-inset-top,0px)}
   <a class="pill sm mag" href="#devis">Demander un devis</a>
   <button class="burger" type="button" aria-label="Ouvrir le menu"><span></span></button>
 </div></header>
-<div class="mmenu"><a href="#">Accueil</a><a href="#evidence">Évidence</a><a href="#harmonie">Harmonie</a><a href="#la-festive">La Festive</a><a href="#realisations">Réalisations</a><a href="#qui">Qui sommes-nous</a><a class="pill" href="#devis">Demander un devis</a></div>
+<div class="mmenu"><a href="#">Accueil</a><a href="#evidence">Évidence</a><a href="#harmonie">Harmonie</a><a href="#la-festive">La Festive</a><a href="#realisations">Réalisations</a><a href="#qui">Qui sommes-nous</a><a class="pill" href="#devis">Demander un devis</a><p class="mm-contact">07 49 66 12 56 · contact@dmg-concept.com<br>58 impasse des Roseaux, 74570 Évires</p></div>
 <main id="app"></main>
 <footer><div class="wrap">
   <div class="fbig"><h2>Recevoir dehors,<br><em>à l’abri.</em></h2><a class="pill light mag" href="#devis">Demander un devis</a></div>
@@ -5772,7 +5773,7 @@ function modelPage(s) {
     <div class="facts" data-mh><div><b>${M.size}</b><span>de façade</span></div><div><b>${M.options.length + M.choix.length * 2}</b><span>équipements au choix</span></div><div><b>5</b><span>finitions de bardage</span></div><div><b>Assemblée</b><span>à la livraison</span></div></div>
   </div>
   <div class="v3d wrap" id="vue-3d">${stage}
-    <p class="cap">${M.real ? "Visuel 3D non contractuel : teintes et détails peuvent différer légèrement de la cuisine livrée." : `Aperçu provisoire aux proportions indicatives : le modèle 3D ${de(M.name)} sera intégré ici.`}</p>
+    <p class="cap">${M.real ? "Visuel 3D non contractuel : teintes et détails peuvent différer légèrement de la cuisine livrée." : `Aperçu provisoire aux proportions indicatives : le modèle 3D ${de(M.name)} sera intégré ici. <a href="#evidence--vue-3d" style="color:var(--v300)">Voir la vue 3D d’Évidence</a>`}</p>
   </div>
 </section>
 
@@ -5826,7 +5827,7 @@ function parse() {
   if (HOME_ANCHORS.includes(h)) return { page: "home", anchor: h };
   return { page: "home", anchor: "" };
 }
-function navState(page) { document.querySelectorAll("[data-p]").forEach(a => a.classList.toggle("on", a.dataset.p === page)); }
+function navState(page) { document.querySelectorAll("[data-p]").forEach(a => { const on = a.dataset.p === page; a.classList.toggle("on", on); if (on) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); }); }
 function route() {
   const r = parse();
   document.body.classList.remove("menu-open");

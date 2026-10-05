@@ -363,6 +363,52 @@ footer .bot{margin-top:56px;padding-top:24px;border-top:1px solid var(--wl);disp
 }
 @media (max-width:640px){.summary .pill{width:100%;white-space:normal;height:auto;min-height:48px;padding:12px 20px;text-align:center}}
 
+/* Accueil v4 */
+.kicker{font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--v300)}
+.h-display{font-weight:600;font-size:clamp(52px,8.4vw,128px);line-height:.98;letter-spacing:-.045em}
+.hx{position:relative;height:calc(100vh - var(--nav));min-height:640px;max-height:980px;overflow:hidden;background:var(--v950)}
+.hx .bg{position:absolute;inset:0;background-size:cover;background-position:65% 50%;animation:zoom 3s var(--ease) both}
+.hx .veil{position:absolute;inset:0;background:linear-gradient(0deg,rgba(8,25,15,.96) 0%,rgba(8,25,15,.55) 38%,rgba(8,25,15,.1) 70%),linear-gradient(90deg,rgba(8,25,15,.5),rgba(8,25,15,0) 60%)}
+.hx .wrap{position:relative;height:100%;display:flex;flex-direction:column;justify-content:flex-end;gap:22px;padding-bottom:64px}
+.hx-foot{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap;border-top:1px solid var(--wl);padding-top:28px;margin-top:12px}
+.hx-foot p{max-width:440px;color:var(--w2);font-size:18px}
+.manifesto .big{font-weight:500;font-size:clamp(28px,3.4vw,48px);line-height:1.18;letter-spacing:-.022em;max-width:1080px;margin-top:22px}
+.manifesto .big span{color:var(--txt2)}
+.figs{display:grid;grid-template-columns:repeat(4,1fr);margin-top:88px;border-top:1px solid var(--line)}
+.figs div{padding:28px 24px 0 0}
+.figs b{display:block;font-weight:600;font-size:clamp(48px,5vw,72px);line-height:1;letter-spacing:-.04em;color:var(--v500)}
+.figs span{display:block;font-weight:600;margin-top:10px}.figs small{color:var(--txt2);font-size:15px}
+.range{background:var(--v950);color:#fff}
+.range .eyebrow{color:var(--v300)}.range .intro{color:var(--w2);max-width:420px}
+.range-head{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap;margin-bottom:56px}
+.mrow{display:grid;grid-template-columns:60px 1fr 120px 360px 40px;align-items:center;gap:24px;padding:36px 0;border-top:1px solid var(--wl);transition:background .5s var(--ease)}
+.mrow:last-child{border-bottom:1px solid var(--wl)}
+.mrow .idx{color:var(--w3);font-size:14px}
+.mrow h3{font-weight:600;font-size:clamp(34px,4vw,56px);letter-spacing:-.03em;line-height:1;transition:transform .6s var(--ease),color .3s}
+.mrow p{color:var(--w2);margin-top:10px;max-width:420px}
+.mrow .msz{font-size:24px;font-weight:500;color:var(--v300)}
+.mrow .mvis{display:flex;justify-content:center;align-items:flex-end;height:180px}
+.mrow .mvis svg{width:var(--sw);height:auto;transition:transform .7s var(--ease)}
+.mrow .arrow{width:40px;height:40px;border-radius:50%;box-shadow:inset 0 0 0 1px var(--w3);display:flex;align-items:center;justify-content:center;transition:background .3s,transform .5s var(--ease)}
+.mrow .arrow svg{width:16px;height:16px}
+.mrow:hover h3{transform:translateX(10px);color:var(--v300)}
+.mrow:hover .mvis svg{transform:translateY(-8px) scale(1.04)}
+.mrow:hover .arrow{background:var(--v500);box-shadow:none;transform:rotate(-45deg)}
+.band-full{position:relative;min-height:640px;display:flex;align-items:flex-end;overflow:hidden;color:#fff;padding:80px 0}
+.band-full .ph{position:absolute;inset:0;background-size:cover;background-position:30% 40%}
+.band-full::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(0deg,rgba(8,25,15,.92),rgba(8,25,15,.2) 60%)}
+.band-full .wrap{position:relative;z-index:2;width:100%;display:flex;flex-direction:column;gap:14px}
+.band-full .intro{color:var(--w2);max-width:560px}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.split .ph{aspect-ratio:4/5;border-radius:4px;background-size:cover;background-position:center}
+.split .txt{display:flex;flex-direction:column;gap:20px}
+.pts{list-style:none;border-top:1px solid var(--line);margin-top:8px}
+.pts li{padding:16px 0;border-bottom:1px solid var(--line);color:var(--txt2)}
+.pts b{display:block;color:var(--txt);font-weight:600}
+.sign2 b{font-weight:600}.sign2 span{color:var(--txt2);margin-left:8px}
+@media (max-width:1060px){.mrow{grid-template-columns:40px 1fr 40px}.mrow .msz,.mrow .mvis{display:none}.split{grid-template-columns:1fr;gap:40px}.figs{grid-template-columns:1fr 1fr;row-gap:32px}}
+@media (max-width:640px){.hx .wrap{padding-bottom:40px}.hx-foot .actions{width:100%}.figs b{font-size:44px}}
+
 </style>
 </head>
 <body>
@@ -477,53 +523,31 @@ const mcard = (s, i) => { const M = MODELS[s]; return `<article class="mcard" da
 
 function home() {
   return `
-<section class="hero dark"><div class="bg" style="background-image:url(${IMG.nuit})"></div><div class="veil"></div>
+<section class="hx dark"><div class="bg" style="background-image:url(${IMG.nuit})"></div><div class="veil"></div>
   <div class="wrap enter">
-    <p class="eyebrow" style="--i:0">DMG Concept · Haute-Savoie</p>
-    <h1 class="h-hero" style="--i:1">Recevoir dehors,<br>à l’abri.</h1>
-    <p class="intro" style="--i:2">Des cuisines extérieures couvertes, construites pour durer et dessinées pour se retrouver.</p>
-    <div class="actions" style="--i:3"><a class="pill" href="#/gamme">Découvrir les modèles</a><a class="link" href="#/devis">Demander un devis ${CHEV}</a></div>
-  </div><span class="scroll-cue" aria-hidden="true"></span></section>
+    <p class="kicker" style="--i:0">Cuisines extérieures couvertes</p>
+    <h1 class="h-display" style="--i:1">Recevoir dehors,<br>à l’abri.</h1>
+    <div class="hx-foot" style="--i:2"><p>Trois modèles conçus à Évires, en Haute-Savoie. Construits comme un bâtiment, livrés assemblés.</p><div class="actions"><a class="pill light" href="#/gamme">Découvrir les modèles</a><a class="pill ghost" href="#/devis">Demander un devis</a></div></div>
+  </div></section>
 
-<section class="sec" id="gamme"><div class="wrap">
-  <div class="head" data-r><p class="eyebrow">La gamme</p><h2 class="h-title">Trois tailles.<br>Une même exigence.</h2><p class="intro">Choisissez la taille qui correspond à votre terrasse : la construction et les matériaux restent les mêmes.</p></div>
-  <div class="lineup">${SLUGS.map(mcard).join("")}</div>
+<section class="sec manifesto"><div class="wrap">
+  <p class="eyebrow" data-r>DMG Concept</p>
+  <p class="big" data-r style="--d:.08s">Une cuisine dehors, c’est d’abord un lieu pour se retrouver. <span>Nous la construisons avec la rigueur d’un bâtiment : ossature bois, toiture étanche, façades faites pour durer.</span></p>
+  <div class="figs">${[["3", "modèles", "2, 3 et 4 m de façade"], ["5", "teintes", "de façade au choix"], ["4", "plots béton", "sans fixation au bâtiment"], ["1", "interlocuteur", "du rendez-vous à la livraison"]].map((f, i) => `<div data-r style="--d:${i * .08}s"><b>${f[0]}</b><span>${f[1]}</span><small>${f[2]}</small></div>`).join("")}</div>
 </div></section>
 
-<section class="sec bg-v900 dark story center" id="qui"><div class="wrap">
-  <p class="eyebrow" data-r>Qui sommes-nous</p>
-  <h2 class="h-hero" data-r style="--d:.06s;margin-top:18px">Bien construire,<br>pour bien recevoir.</h2>
-  <p class="intro" data-r style="--d:.12s">DMG Concept conçoit à Évires, en Haute-Savoie, des cuisines extérieures couvertes. Une structure construite comme un petit bâtiment, des matériaux choisis pour durer, des lignes sobres : tout est pensé pour que vous profitiez du dehors, en famille ou entre amis.</p>
-  <div class="sign" data-r style="--d:.18s"><b>Adrien Métral</b><span>Fondateur de DMG Concept</span></div>
-  <div class="vals">${[["Bien construire", "Ossature bois, toiture étanche, matériaux d’extérieur : chaque cuisine suit les règles du bâtiment."], ["Dessiner juste", "Des lignes sobres et des façades au choix, pour une cuisine qui trouve naturellement sa place."], ["Avancer en confiance", "Un seul interlocuteur, à l’écoute, et un devis clair, du premier échange à la livraison."]].map((v, i) => `<div class="val" data-r style="--d:${i * .1}s"><i></i><h3 class="h-tile">${v[0]}</h3><p>${v[1]}</p></div>`).join("")}</div>
+<section class="sec range" id="gamme"><div class="wrap">
+  <div class="range-head" data-r><div><p class="eyebrow">La gamme</p><h2 class="h-title">Trois tailles.<br>Une même exigence.</h2></div><p class="intro">Choisissez la taille qui correspond à votre terrasse. La construction et les matériaux restent les mêmes.</p></div>
+  ${SLUGS.map((s, i) => { const M = MODELS[s]; return `<a class="mrow" href="#/${s}" data-r><span class="idx">0${i + 1}</span><div class="mtx"><h3>${M.name}</h3><p>${M.tag}</p></div><span class="msz">${M.size}</span><div class="mvis" style="--sw:${Math.round(M.sw * 100)}%">${svgKitchen(M.m, "anthracite", false)}</div><span class="arrow">${CHEV}</span></a>`; }).join("")}
 </div></section>
 
-<section class="sec bg-v50" id="atouts"><div class="wrap">
-  <div class="head" data-r><p class="eyebrow">Pourquoi DMG Concept</p><h2 class="h-title">Pensée pour durer.<br>Faite pour en profiter.</h2></div>
-  <div class="bento">
-    <a class="tile photo" href="#/harmonie/options" data-r><div class="ph" style="background-image:url(${IMG.detail})"></div><h3 class="h-sub">Équipée pour<br>cuisiner vraiment.</h3><p>Plancha, évier, réfrigérateur, friteuse… les équipements varient selon le modèle.</p><span class="link">Voir les options ${CHEV}</span></a>
-    <div class="tile photo" data-r style="--d:.1s"><div class="ph" style="background-image:url(${IMG.grue});background-position:32% 50%"></div><h3 class="h-sub">Livrée<br>assemblée.</h3><p>Elle arrive prête, puis se pose sur 4 plots béton, sans fixation au bâtiment.</p></div>
-    <div class="row2">
-      <a class="tile white" href="#/harmonie/materiaux" data-r><h3 class="h-sub">Cinq teintes<br>de façade.</h3><p class="muted">Panneau compact Fundermax gris anthracite, ou bardage composite WEO®60 en quatre coloris.</p><div class="dots">${FORDER.map(k => `<span class="dot"><i style="${swStyle(k, true)}"></i>${FIN[k].n}</span>`).join("")}</div><span class="link">Découvrir les matériaux ${CHEV}</span></a>
-      <a class="tile deep" href="#/harmonie/vue-3d" data-r style="--d:.1s"><h3 class="h-sub">Faites-en le tour<br>en 3D.</h3><p>Chaque modèle se découvre sous tous les angles, avant même votre rendez-vous.</p><span class="link">Voir Harmonie en 3D ${CHEV}</span>${CUBE}</a>
-    </div>
-  </div>
-</div></section>
+<section class="band-full dark"><div class="ph" style="background-image:url(${IMG.grue})"></div><div class="wrap" data-r><p class="kicker">Livraison</p><h2 class="h-title">Elle arrive assemblée.</h2><p class="intro">Mise en place sur 4 plots béton, sans fixation au bâtiment. Raccordements à prévoir séparément.</p></div></section>
 
-<section class="sec" id="projet"><div class="wrap">
-  <div class="head" data-r><p class="eyebrow">Votre projet</p><h2 class="h-title">Simple, du premier échange<br>à la livraison.</h2></div>
-  <div class="steps">${[["Rendez-vous", "Chez vous ou à Évires, pour parler de votre projet et de vos envies."], ["Devis détaillé", "Modèle, façade et options chiffrés poste par poste."], ["Assemblage", "La cuisine est construite et assemblée avant de partir."], ["Livraison et mise en place", "Mise en place sur 4 plots béton. Raccordements à prévoir séparément."]].map((s, i) => `<div class="step" data-r style="--d:${i * .08}s"><div class="num">${i + 1}</div><h3>${s[0]}</h3><p class="muted">${s[1]}</p></div>`).join("")}</div>
-</div></section>
-
-<section class="sec bg-v50" id="faq"><div class="wrap">
-  <div class="head" data-r><p class="eyebrow">Questions fréquentes</p><h2 class="h-title">Avant de vous lancer.</h2></div>
-  <div class="faq" data-r>${[
-      ["Faut-il une autorisation d’urbanisme ?", "Cela dépend de l’emprise au sol et du règlement de votre commune. En règle générale, aucune formalité n’est requise sous 5 m², et une déclaration préalable suffit entre 5 et 20 m². Votre mairie vous confirmera les règles applicables."],
-      ["Comment se passe la livraison ?", "La cuisine est livrée assemblée, puis mise en place sur 4 plots béton. Les conditions d’accès et de livraison sont précisées avec vous lors du devis."],
-      ["Quels raccordements faut-il prévoir ?", "Une alimentation électrique et, selon les équipements, une arrivée d’eau et une évacuation. Les raccordements sont à prévoir séparément."],
-      ["La cuisine peut-elle rester dehors l’hiver ?", "Oui, elle est conçue pour rester dehors. Pensez simplement à purger l’arrivée d’eau avant le gel."],
-      ["Quels sont les délais ?", "Le délai figure sur le devis ; il dépend du modèle, des options et de la saison."]
-    ].map((q, i) => `<div class="qa${i === 0 ? " open" : ""}"><button aria-expanded="${i === 0}">${q[0]}<span class="pm"></span></button><div class="a"><div><p>${q[1]}</p></div></div></div>`).join("")}</div>
+<section class="sec story2" id="qui"><div class="wrap split">
+  <div class="ph" data-r style="background-image:url(${IMG.detail})"></div>
+  <div class="txt" data-r style="--d:.1s"><p class="eyebrow">Qui sommes-nous</p><h2 class="h-title">Bien construire,<br>pour bien recevoir.</h2><p class="intro">DMG Concept conçoit à Évires des cuisines extérieures couvertes. Des lignes sobres, des matériaux choisis pour durer, des équipements pensés pour cuisiner vraiment : tout est fait pour que vous profitiez du dehors, en famille ou entre amis.</p>
+    <ul class="pts"><li><b>Bien construire</b>Ossature bois, toiture EPDM, façades Fundermax ou WEO®60.</li><li><b>Dessiner juste</b>Une gamme courte, des proportions équilibrées.</li><li><b>Avancer en confiance</b>Un seul interlocuteur et un devis clair.</li></ul>
+    <div class="sign2"><b>Adrien Métral</b><span>Fondateur</span></div></div>
 </div></section>
 
 <section class="sec bg-v500 dark devis" id="devis"><div class="wrap grid">

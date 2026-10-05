@@ -927,6 +927,12 @@ body:not(.is-home) #app .head .intro{font-size:17px}body:not(.is-home) #app .hea
 .sig5 span{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--v300)}
 @media (max-width:900px){.sig5 .wrap{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:28px}.sig5 .wrap>div:nth-child(3){border-left:0;padding-left:0}}
 @media (max-width:480px){.sig5 .wrap{grid-template-columns:minmax(0,1fr)}.sig5 .wrap>div{border-left:0;padding-left:0}}
+/* v8.7 : bandeau esthétique claire-voie */
+.slat5{position:relative;height:clamp(140px,14vw,200px);overflow:hidden;background:#0b1510;display:flex;align-items:center;justify-content:center}
+.slat5 .tx{position:absolute;inset:-20% 0;background-size:auto 100%;background-repeat:repeat-x;filter:saturate(.85) brightness(.75)}
+.slat5::before{content:"";position:absolute;inset:0;z-index:1;background:repeating-linear-gradient(90deg,transparent 0 60px,#0b1510 60px 70px)}
+.slat5::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(11,21,16,.85),rgba(11,21,16,.35) 30%,rgba(11,21,16,.35) 70%,rgba(11,21,16,.85))}
+.slat5 img{position:relative;z-index:2;height:clamp(40px,4.4vw,60px);width:auto;opacity:.95;filter:drop-shadow(0 4px 18px rgba(0,0,0,.5))}
 
 </style>
 </head>
@@ -5924,7 +5930,7 @@ function home() {
   <figure class="ph" data-a="up"><div style="background-image:url(${IMG.ferme})" data-par="-6"></div><figcaption>Store descendu</figcaption></figure>
 </div></section>
 
-<section class="sig5" aria-label="Nos engagements"><div class="wrap">${[["Conçue à Évires", "Haute-Savoie"], ["Livrée en un bloc", "Assemblée en atelier"], ["Matériaux de façade", "Fundermax · WEO®60"], ["Elle se referme", "À l’abri toute l’année"]].map(([a, b]) => `<div data-a="up"><b>${a}</b><span>${b}</span></div>`).join("")}</div></section>
+<div class="slat5" aria-hidden="true"><div class="tx" style="background-image:url(${FIN.teak.tex})" data-par="-4"></div><img src="${(document.querySelector(".gnav .logo img") || {}).src || ""}" alt=""></div>
 
 <section class="sec bg-v50" id="materiaux"><div class="wrap">
   <div class="head" data-a="up"><p class="kicker">Matériaux</p><h2 class="h-title">${ln("Des matériaux\nfaits pour le <em>dehors.</em>")}</h2><p class="intro">Une façade avant toujours identique, et un bardage au choix pour les côtés et l’arrière.</p></div>

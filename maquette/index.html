@@ -728,6 +728,19 @@ footer .bot{align-items:center}
 .h4-side span:first-child{color:#fff;letter-spacing:.24em}
 @media (max-width:760px){.h5-day{grid-template-columns:minmax(0,1fr);gap:18px}.h5-note{margin-left:0;flex-basis:100%}.h4 .wrap{padding-top:calc(var(--nav) + 120px)}}
 @media (max-width:760px){.k-x{display:none}}
+/* v5.1 : section Construction */
+.b5-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(32px,6vw,96px);align-items:start;margin-top:56px}
+.b5-ph{position:sticky;top:calc(var(--nav) + 32px);margin:0;border-radius:24px;overflow:hidden;aspect-ratio:4/5;max-width:100%}
+.b5-ph div{position:absolute;inset:0;background-size:cover;background-position:50% 50%}
+.b5-ph figcaption{position:absolute;left:16px;bottom:16px;padding:6px 12px;border-radius:980px;background:rgba(8,25,15,.6);color:#fff;font-size:12px;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.b5-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.b5-list li{display:grid;grid-template-columns:56px minmax(0,1fr);gap:16px;padding:26px 0;border-top:1px solid var(--line)}
+.b5-list li:last-child{border-bottom:1px solid var(--line)}
+.b5-list i{font-style:italic;font-family:"Instrument Serif",Georgia,serif;font-size:28px;color:var(--v500);line-height:1}
+.b5-list span{display:block;font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--v500)}
+.b5-list b{display:block;font-size:clamp(20px,1.8vw,26px);font-weight:500;letter-spacing:-.02em;margin:6px 0 6px}
+.b5-list p{margin:0;color:var(--txt2);font-size:16px;line-height:1.55;max-width:520px}
+@media (max-width:900px){.b5-grid{grid-template-columns:minmax(0,1fr)}.b5-ph{position:relative;top:0;aspect-ratio:4/3}}
 
 </style>
 </head>
@@ -5670,8 +5683,24 @@ function home() {
 
 <section class="intro4"><div class="wrap">
   <p class="kicker" data-a="up">DMG Concept</p>
-  <p class="big scrub">Une cuisine dehors, c’est d’abord un lieu pour se retrouver. Nous la construisons avec la rigueur d’un bâtiment : ossature bois, toiture étanche, bardage fait pour durer.</p>
-  <div class="figs4">${[["3", "modèles", "2, 3 et 4 m de façade"], ["5", "finitions", "pour les côtés et l’arrière"], ["4", "plots béton", "sans fixation au bâtiment"], ["1", "interlocuteur", "du rendez-vous à la livraison"]].map(f => `<div data-a="up"><b data-count="${f[0]}">${f[0]}</b><span>${f[1]}</span><small>${f[2]}</small></div>`).join("")}</div>
+  <p class="big scrub">Une cuisine DMG Concept ne se monte pas dans votre jardin. Elle se construit à l’atelier, comme un petit bâtiment, puis arrive en un seul bloc, prête à recevoir.</p>
+  <div class="figs4">${[["1", "seul bloc", "livré assemblé et équipé"], ["3", "modèles", "2, 3 et 4 m de façade"], ["5", "finitions", "pour les côtés et l’arrière"], ["4", "plots béton", "sans fixation au bâtiment"]].map(f => `<div data-a="up"><b data-count="${f[0]}">${f[0]}</b><span>${f[1]}</span><small>${f[2]}</small></div>`).join("")}</div>
+</div></section>
+
+<section class="sec build5" id="construction"><div class="wrap">
+  <div class="head" data-a="up"><p class="kicker">Construction</p><h2 class="h-title">${ln("Construite comme une maison.\nPas comme un <em>meuble de jardin.</em>")}</h2><p class="intro">Chaque couche a un rôle : porter, protéger, durer. Ce sont des matériaux de bâtiment, choisis pour passer les saisons dehors.</p></div>
+  <div class="b5-grid">
+    <figure class="b5-ph"><div style="background-image:url(${IMG.fundermax})"></div><figcaption>Façade Fundermax, intérieur bois</figcaption></figure>
+    <ol class="b5-list">${[
+      ["Pose", "Sur 4 plots béton", "Posée sans fixation au bâtiment, sans travaux de maçonnerie."],
+      ["Structure", "Ossature bois", "Une charpente de construction, pas un assemblage de meubles."],
+      ["Toiture", "Plate, membrane EPDM", "Une étanchéité de toiture-terrasse, au-dessus du plan de travail."],
+      ["Façade", "Panneau Fundermax", "Compact stratifié haute pression, conçu pour les façades, protégé des UV et des intempéries."],
+      ["Bardage", "Lames WEO®60", "Composite à 95\u00a0% recyclé, en quatre teintes, ou Fundermax anthracite."],
+      ["Intérieur", "Bois trois plis, crédence noire", "Éclairage intégré au plafond, pour cuisiner aussi le soir."],
+      ["Équipements", "Des marques spécialisées", "Planet, Napoléon, Elipson, Quooker : encastrés, choisis pour l’extérieur."]
+    ].map((x, i) => `<li data-a="up"><i>${String(i + 1).padStart(2, "0")}</i><div><span>${x[0]}</span><b>${x[1]}</b><p>${x[2]}</p></div></li>`).join("")}</ol>
+  </div>
 </div></section>
 
 <section class="range4 dark" id="gamme"><div class="pin">
@@ -5731,7 +5760,7 @@ function home() {
 
 <section class="deliv dark" id="livraison"><div class="wrap">
   <div class="frame" data-clip><div class="ph" style="background-image:url(${IMG.grue})" data-par="10"></div>
-    <div class="cap4"><div><p class="kicker">Livraison</p><h2 class="h-title" style="margin-top:14px">${ln("Elle arrive\n<em>assemblée.</em>")}</h2></div><p>La cuisine quitte l’atelier assemblée, puis elle est mise en place sur 4 plots béton, sans fixation au bâtiment. Les raccordements sont à prévoir séparément.</p></div>
+    <div class="cap4"><div><p class="kicker">Livraison</p><h2 class="h-title" style="margin-top:14px">${ln("9\u00a0h, livrée.\nMidi, <em>à table.</em>")}</h2></div><p>La cuisine quitte l’atelier assemblée et équipée. Elle est déchargée en un seul bloc puis mise en place sur 4 plots béton, sans fixation au bâtiment. Les raccordements sont à prévoir séparément.</p></div>
   </div>
 </div></section>
 
@@ -5741,7 +5770,7 @@ function home() {
     <p class="kicker" data-a="up">Qui sommes-nous</p>
     <h2 class="h-title">${ln("Bien construire,\npour bien <em>recevoir.</em>")}</h2>
     <p class="intro" data-a="up">DMG Concept conçoit à Évires, en Haute-Savoie, des cuisines extérieures couvertes. Des lignes sobres, des matériaux choisis pour durer, des équipements pensés pour cuisiner vraiment : tout est fait pour que vous profitiez du dehors, en famille ou entre amis.</p>
-    <ul class="pts4" data-a="up"><li><b>Bien construire</b><span>Ossature bois, toiture EPDM, façade Fundermax.</span></li><li><b>Dessiner juste</b><span>Une gamme courte, des proportions équilibrées.</span></li><li><b>Avancer en confiance</b><span>Un seul interlocuteur et un devis clair.</span></li></ul>
+    <ul class="pts4" data-a="up"><li><b>Bien construire</b><span>Ossature bois, toiture EPDM, façade Fundermax.</span></li><li><b>Dessiner juste</b><span>Une gamme courte, des proportions équilibrées.</span></li><li><b>Suivre chaque client</b><span>Un seul interlocuteur, du devis au suivi après livraison.</span></li></ul>
     <div class="sig4" data-a="up"><i>A</i><div><b>Adrien Métral</b><span>Fondateur de DMG Concept</span></div></div>
   </div>
 </div></section>
@@ -5852,7 +5881,7 @@ const HAS_G = !!(window.gsap && window.ScrollTrigger);
 const REDUCED = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 if (HAS_G) gsap.registerPlugin(ScrollTrigger);
 let current = null, cleanups = [], lenis = null, busy = false;
-const HOME_ANCHORS = ["gamme", "configurer", "fermeture", "materiaux", "comparer", "livraison", "qui", "realisations", "projet", "faq", "devis"];
+const HOME_ANCHORS = ["gamme", "configurer", "fermeture", "materiaux", "comparer", "livraison", "qui", "realisations", "projet", "faq", "devis", "construction"];
 
 function parse() {
   const h = decodeURIComponent(location.hash.replace(/^#/, ""));

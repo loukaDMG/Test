@@ -5706,6 +5706,7 @@ function devisSection() {
     <div class="two"><label class="field" for="f-nom">Nom<input id="f-nom" placeholder="Prénom et nom" autocomplete="name"></label><label class="field" for="f-tel">Téléphone<input id="f-tel" type="tel" placeholder="06 00 00 00 00" autocomplete="tel"></label></div>
     <div class="two"><label class="field" for="f-mail">E-mail<input id="f-mail" type="email" placeholder="vous@exemple.fr" autocomplete="email"></label><label class="field" for="f-cp">Code postal<input id="f-cp" placeholder="74000" inputmode="numeric" autocomplete="postal-code"></label></div>
     <div class="field">Modèle envisagé<div class="chips">${[...SLUGS, "na"].map(s => `<button type="button" class="chip" data-m="${s}">${s === "na" ? "À définir" : MODELS[s].name}</button>`).join("")}</div></div>
+    <div class="field">Rendez-vous souhaité<div class="chips rdv">${["Chez moi", "À Évires", "Par téléphone"].map(t => `<button type="button" class="chip" data-r="${t}">${t}</button>`).join("")}</div></div>
     <label class="field" for="msg">Votre projet<textarea id="msg" placeholder="Terrasse, accès, équipements souhaités…"></textarea></label>
     <label class="consent" for="f-ok"><input id="f-ok" type="checkbox"> J’accepte que DMG Concept me recontacte au sujet de ma demande.</label>
     <button class="pill mag" type="submit">Envoyer la demande</button>
@@ -5801,7 +5802,7 @@ function route() {
   const swap = () => {
     cleanups.forEach(f => { try { f(); } catch (e) { } }); cleanups = [];
     if (HAS_G) ScrollTrigger.getAll().forEach(t => t.kill());
-    if (MODELS[r.page] && state.model !== r.page) { state.model = r.page; state.sel = {}; }
+    if (MODELS[r.page] && state.model !== r.page) { state.model = r.page; state.sel = MODELS[r.page].real ? { plancha1: true, evier1: true, frigo1: true } : {}; }
     app.innerHTML = r.page === "home" ? home() : modelPage(r.page);
     document.body.classList.toggle("is-home", r.page === "home");
     if (lenis) lenis.scrollTo(0, { immediate: true }); window.scrollTo(0, 0);
@@ -5844,7 +5845,7 @@ function after(page) {
   app.querySelectorAll(".qa button").forEach(b => b.addEventListener("click", () => { const q = b.parentElement, o = q.classList.toggle("open"); b.setAttribute("aria-expanded", o); if (HAS_G) setTimeout(() => ScrollTrigger.refresh(), 520); }));
   const form = document.getElementById("form");
   if (form) {
-    form.querySelectorAll(".chip").forEach(c => c.addEventListener("click", () => form.querySelectorAll(".chip").forEach(x => x.classList.toggle("on", x === c))));
+    form.querySelectorAll(".chips").forEach(g => g.querySelectorAll(".chip").forEach(c => c.addEventListener("click", () => g.querySelectorAll(".chip").forEach(x => { x.classList.toggle("on", x === c); x.setAttribute("aria-pressed", String(x === c)); }))));
     form.addEventListener("submit", e => { e.preventDefault(); toast("Merci ! Votre demande est prête à partir (maquette : aucun envoi réel)."); form.reset(); form.querySelectorAll(".chip").forEach(x => x.classList.remove("on")); });
   }
   app.querySelectorAll("[data-try]").forEach(b => b.addEventListener("click", () => {
@@ -5860,7 +5861,7 @@ function after(page) {
 }
 function preselect(s) {
   const form = document.getElementById("form"); if (!form) return;
-  form.querySelectorAll(".chip").forEach(x => x.classList.toggle("on", x.dataset.m === (s || "")));
+  form.querySelectorAll(".chip[data-m]").forEach(x => x.classList.toggle("on", x.dataset.m === (s || "")));
   if (s && MODELS[s] && state.model === s) {
     const M = MODELS[s], items = Object.keys(state.sel).filter(k => state.sel[k]).map(k => OPT[k].n + (OPT[k].b ? " (" + OPT[k].b + ")" : ""));
     document.getElementById("msg").value = `Modèle : ${M.name} (${M.size}). Bardage côtés et arrière : ${FIN[state.clad].n}.` + (items.length ? `\nÉquipements souhaités : ${items.join(", ")}.` : "");
@@ -5915,6 +5916,8 @@ function realInit(box) {
     setTimeout(() => ld.classList.add("done"), 6000);
     api.setCladding(state.clad);
     api.onInteract = () => { if (st.auto) { st.auto = false; api.setAuto(false); sync(); } };
+    api.stopAutoUI = () => { st.auto = false; api.setAuto(false); sync(); };
+    api.doorsUI = v => { st.doors = v; api.setDoors(v); sync(); };
   };
   const sync = () => box.querySelectorAll("[data-t]").forEach(b => { if (b.dataset.t in st) b.setAttribute("aria-pressed", String(b.dataset.t === "lid" ? st.lid : st[b.dataset.t])); });
   const fn = { auto: "setAuto", doors: "setDoors", drawers: "setDrawers", lid: "setLid", blind: "setBlind" };
@@ -5947,7 +5950,7 @@ function realInit(box) {
 function setClad(k) {
   state.clad = k;
   app.querySelectorAll("[data-clad]").forEach(b => { b.setAttribute("aria-pressed", String(b.dataset.clad === k)); b.classList.toggle("on", b.dataset.clad === k); });
-  if (real) { real.setCladding(k); real.setAuto(false); real.view("trois"); }
+  if (real) { real.setCladding(k); if (real.stopAutoUI) real.stopAutoUI(); else real.setAuto(false); real.view("trois"); }
   if (proc) proc.setFin(k);
   const sel = document.getElementById("sel"); if (sel && state.model) updSel(state.model);
 }
@@ -5955,8 +5958,8 @@ function setClad(k) {
 /* ---------- Page modèle : options, aperçu 3D provisoire ---------- */
 let proc = null;
 function updSel(s) {
-  app.querySelectorAll(".ocard").forEach(c => c.classList.toggle("on", !!state.sel[c.dataset.opt]));
-  const items = Object.keys(state.sel).filter(k => state.sel[k]).map(k => OPT[k].n + (OPT[k].b ? " " + OPT[k].b.split(" · ")[0] : ""));
+  app.querySelectorAll(".ocard").forEach(c => { c.classList.toggle("on", !!state.sel[c.dataset.opt]); c.setAttribute("aria-pressed", String(!!state.sel[c.dataset.opt])); });
+  const items = Object.keys(state.sel).filter(k => state.sel[k]).map(k => OPT[k].n + (/^(Planet|Napoléon|Quooker|Elipson|Dekton)/.test(OPT[k].b) ? " " + OPT[k].b.split(" · ")[0] : ""));
   document.getElementById("sel").innerHTML = `<b>Votre sélection</b> · ${MODELS[s].name}, bardage ${FIN[state.clad].s}` + (items.length ? `, ${items.join(", ")}.` : `. Touchez les équipements qui vous intéressent.`);
 }
 function modelInit(s) {
@@ -5964,6 +5967,13 @@ function modelInit(s) {
     const k = c.dataset.opt, g = c.dataset.group, on = !state.sel[k];
     if (g) app.querySelectorAll(`.ocard[data-group="${g}"]`).forEach(x => { state.sel[x.dataset.opt] = false; });
     state.sel[k] = on; updSel(s);
+    const map = { plancha1: "plancha", evier1: "evier", frigo1: "frigo" };
+    if (real && map[k]) {
+      real.setOption(map[k], on); if (real.stopAutoUI) real.stopAutoUI(); else real.setAuto(false);
+      if (on) { if (k === "frigo1") { if (real.doorsUI) real.doorsUI(true); else real.setDoors(true); } real.view(k === "plancha1" ? "detail" : map[k]); setTimeout(() => real && real.view("trois"), 3300); }
+      const sw = document.querySelector(`[data-eq="${map[k]}"]`); if (sw) sw.setAttribute("aria-checked", String(on));
+      if (window.innerWidth > 640) toast(on ? `${OPT[k].n} ajouté à la vue 3D` : `${OPT[k].n} retiré de la vue 3D`);
+    }
   }));
   app.querySelectorAll("[data-clad]").forEach(b => { b.classList.toggle("on", b.dataset.clad === state.clad); if (!document.getElementById("st-model")) b.addEventListener("click", () => setClad(b.dataset.clad)); });
   updSel(s);
@@ -6072,6 +6082,8 @@ function motion(page) {
   const ups = gsap.utils.toArray(app.querySelectorAll("[data-a='up']"));
   gsap.set(ups, { y: 46, opacity: 0 });
   ScrollTrigger.batch(ups, { start: "top 90%", once: true, onEnter: b => gsap.to(b, { y: 0, opacity: 1, duration: 1.1, ease: E, stagger: .08, overwrite: true }) });
+  const sweep = () => ups.forEach(el => { if (el.isConnected && el.getBoundingClientRect().top < innerHeight && +getComputedStyle(el).opacity < .99 && !gsap.isTweening(el)) gsap.to(el, { y: 0, opacity: 1, duration: .8, ease: E }); });
+  ScrollTrigger.addEventListener("scrollEnd", sweep); cleanups.push(() => ScrollTrigger.removeEventListener("scrollEnd", sweep));
   // Titres ligne à ligne (hors hero)
   app.querySelectorAll(".h-title, .h-display").forEach(h => {
     const spans = h.querySelectorAll(".ln>span"); if (!spans.length || h.closest("[data-hero-in]")) return;

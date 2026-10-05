@@ -692,6 +692,9 @@ body.nav-up .snav{top:env(safe-area-inset-top,0px)}
 .fit-m.best em{background:var(--v500);color:#fff}
 .fit .small{margin-top:16px}
 @media (max-width:760px){.fit-row{grid-template-columns:minmax(0,1fr)}.fit-m{flex-direction:row;align-items:center;gap:14px}.fit-m .v{height:64px;width:90px;margin:0}}
+.mh-bg{position:relative;overflow:hidden;background:radial-gradient(70% 55% at 50% 18%,#1D4A36 0%,rgba(14,42,31,0) 70%),var(--v900)}
+.mh-bg::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.07;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.mh-bg>*{position:relative}
 
 </style>
 </head>
@@ -5759,7 +5762,7 @@ function modelPage(s) {
     </div>`;
   return `
 <div class="snav"><div class="wrap"><span class="name">${M.name}</span><div class="right"><a class="sl" href="#${s}--vue-3d" data-sec="vue-3d">Vue 3D</a><a class="sl" href="#${s}--options" data-sec="options">Options</a><a class="sl" href="#${s}--materiaux" data-sec="materiaux">Matériaux</a><a class="sl" href="#${s}--caracteristiques" data-sec="caracteristiques">Caractéristiques</a><a class="sl" href="#${s}--comparer" data-sec="comparer">Comparer</a><a class="pill sm" href="#devis-${s}">Demander un devis</a></div></div></div>
-<section class="bg-v900 dark">
+<section class="bg-v900 dark mh-bg">
   <div class="m-hero wrap">
     <nav class="crumbs" aria-label="Fil d’Ariane" data-mh><a href="#">Accueil</a><span>/</span><a href="#gamme">La gamme</a><span>/</span><span aria-current="page">${M.name}</span></nav>
     <p class="kicker" data-mh>Cuisine extérieure couverte · ${M.size}</p>

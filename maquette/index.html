@@ -1221,6 +1221,40 @@ body:not(.is-home) #comparer .head{margin-bottom:20px}
 .h6-link{border-bottom:1px solid var(--wl)}
 footer .cols a{width:fit-content;background-image:linear-gradient(#fff,#fff);background-repeat:no-repeat;background-position:100% 100%;background-size:0% 1px;transition:background-size .45s var(--ease),color .3s}
 footer .cols a:hover{background-size:100% 1px;background-position:0 100%}
+/* Mode modification (propriétaire uniquement) */
+.ed-fab{position:fixed;left:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:120;display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 18px 0 14px;border-radius:980px;background:#fff;color:var(--v700,#1b4332);box-shadow:0 14px 34px -14px rgba(8,25,15,.55),inset 0 0 0 1px rgba(45,106,79,.25);font-size:14px;font-weight:500;cursor:pointer;transition:transform .4s var(--ease),box-shadow .3s}
+.ed-fab:hover{transform:translateY(-2px)}
+.ed-fab svg{width:18px;height:18px}
+.ed-fab[hidden]{display:none}
+.ed-bar{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:130;width:min(720px,calc(100% - 32px));transform:translate(-50%,calc(100% + 40px));opacity:0;pointer-events:none;background:rgba(10,30,20,.94);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);color:#fff;border-radius:20px;padding:14px 16px;box-shadow:0 30px 70px -30px rgba(0,0,0,.7),inset 0 0 0 1px rgba(255,255,255,.08);transition:transform .6s var(--ease),opacity .4s}
+.ed-bar.open{transform:translate(-50%,0);opacity:1;pointer-events:auto}
+.ed-idle{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.ed-idle b{font-weight:600;font-size:15px}.ed-idle span{font-size:13px;color:rgba(255,255,255,.7);flex:1;min-width:200px}
+.ed-idle em{font-style:normal;font-size:12px;color:var(--v300)}
+.ed-text,.ed-photo{display:flex;flex-direction:column;gap:8px}
+.ed-text[hidden],.ed-photo[hidden],.ed-idle[hidden]{display:none}
+.ed-text label,.ed-photo b{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--v300);font-weight:600}
+.ed-text textarea{width:100%;min-height:72px;max-height:38vh;resize:vertical;border:0;border-radius:12px;padding:12px 14px;font:inherit;font-size:16px;line-height:1.5;color:#10241a;background:#fff;outline:none;box-shadow:0 0 0 2px transparent;transition:box-shadow .3s}
+.ed-text textarea:focus{box-shadow:0 0 0 3px rgba(149,213,178,.6)}
+.ed-hint,.ed-ps{margin:0;font-size:12px;color:rgba(255,255,255,.6)}
+.ed-act{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.ed-act>span{flex:1}
+.ed-l{background:none;border:0;color:rgba(255,255,255,.75);font:inherit;font-size:13px;text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:0}
+.ed-l[hidden]{display:none}
+.ed-bar .pill.ghost{color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.35)}
+body.editing .mcta{display:none!important}
+body.editing [data-a="up"]{opacity:1!important;transform:none!important}
+body.editing .ln>span{transform:none!important}
+body.editing [data-ek]{outline:1px dashed rgba(82,183,136,.55);outline-offset:3px;cursor:text;border-radius:2px;transition:outline-color .2s,background .2s}
+body.editing [data-ek]:hover{outline:1.5px solid #52b788;background:rgba(82,183,136,.08)}
+body.editing [data-pk]{cursor:copy}
+body.editing [data-pk]:hover{box-shadow:inset 0 0 0 3px #52b788}
+body.editing .ed-sel{outline:2px solid #52b788!important;outline-offset:3px;background:rgba(82,183,136,.12)}
+body.editing [data-pk].ed-sel{box-shadow:inset 0 0 0 4px #52b788;outline:none!important}
+body.editing{padding-bottom:180px}
+@media (max-width:640px){.ed-fab span{display:none}.ed-fab{padding:0 13px}.ed-bar{bottom:calc(8px + env(safe-area-inset-bottom,0px));width:calc(100% - 16px);padding:12px}}
+@media (max-width:900px){.qui-g{grid-template-columns:minmax(0,1fr)}.qui-l .h-title{font-size:clamp(30px,8vw,40px)}}
+.ed-idle em{font-family:inherit}
 
 </style>
 </head>
@@ -6568,6 +6602,7 @@ function toast(msg) { const t = document.getElementById("toast"); t.textContent 
 
 /* ---------- Après rendu ---------- */
 function after(page) {
+  frTypo(app); edPrep(app);
   app.querySelectorAll(".cmp-tg").forEach(b => b.addEventListener("click", () => { const box = b.nextElementSibling, open = box.hidden; box.hidden = !open; b.setAttribute("aria-expanded", String(open)); b.classList.toggle("on", open); if (HAS_G) ScrollTrigger.refresh(); }));
   app.querySelectorAll(".qa button").forEach(b => b.addEventListener("click", () => { const q = b.parentElement, o = q.classList.toggle("open"); b.setAttribute("aria-expanded", o); if (HAS_G) setTimeout(() => ScrollTrigger.refresh(), 520); }));
   const form = document.getElementById("form");
@@ -6589,7 +6624,6 @@ function after(page) {
   if (st) realInit(st);
   if (page === "home") { galleryInit(); fitInit(); sceneInit(); }
   if (MODELS[page]) modelInit(page);
-  frTypo(app);
   motion(page);
   pageMotion(page);
   // Les sections épinglées créées en dernier décalent celles d'après : on recalcule dans l'ordre de la page
@@ -6655,8 +6689,8 @@ function lightbox(list, start, els) {
 function galleryInit() {
   const strip = app.querySelector(".strip"); if (!strip) return;
   const shots = [...strip.querySelectorAll(".shot")];
-  const list = shots.map(f => ({ src: f.querySelector("div").style.backgroundImage.slice(5, -2), t: f.querySelector("b").textContent }));
-  strip.querySelectorAll(".shot").forEach((f, i) => { f.tabIndex = 0; f.setAttribute("role", "button"); f.addEventListener("click", () => { if (moved < 6) lightbox(list, i, shots); }); f.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); lightbox(list, i, shots); } }); });
+  const list = []; const fill = () => { list.length = 0; shots.forEach(f => list.push({ src: f.querySelector("div").style.backgroundImage.slice(5, -2), t: f.querySelector("b").textContent })); }; fill();
+  strip.querySelectorAll(".shot").forEach((f, i) => { f.tabIndex = 0; f.setAttribute("role", "button"); f.addEventListener("click", () => { if (moved < 6) lightbox(list, i, shots); }); f.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); fill(); lightbox(list, i, shots); } }); });
   app.querySelectorAll("[data-gal]").forEach(b => b.addEventListener("click", () => strip.scrollBy({ left: +b.dataset.gal * Math.min(760, strip.clientWidth * .8), behavior: "smooth" })));
   const gb = [...app.querySelectorAll("[data-gal]")], ends = () => { const m = strip.scrollWidth - strip.clientWidth - 4; gb.forEach(b => { const off = +b.dataset.gal < 0 ? strip.scrollLeft <= 4 : strip.scrollLeft >= m; b.classList.toggle("off", off); b.setAttribute("aria-disabled", String(off)); }); };
   strip.addEventListener("scroll", ends, { passive: true }); ends();
@@ -7225,8 +7259,121 @@ function globals() {
 }
 
 /* ---------- Démarrage ---------- */
+/* ---------- Mode modification : textes et photos (réservé au propriétaire) ---------- */
+const ED = { on: false, db: null, assets: null, map: {}, orig: new WeakMap(), bg: new WeakMap(), sel: null, ready: false };
+const ED_INL = new Set(["EM", "I", "B", "STRONG", "BR", "SMALL", "U", "SUP", "SUB"]);
+const ED_SKIP = "svg,canvas,input,textarea,select,script,style,[data-count],.cnt,.clock,.sc-wood,#fit-o,#sel,.cl-st,.tools3,.ed-ui,.cmp-hint,.crumbs,.snav,.sc-rail,.st3 .tag,.stage .badge,.seg,.ctrl,.fit-scale,.fit-m em,.b5-count,.sn-ind,.gal-nav,.totop";
+const ED_PSKIP = ".clad button i,.slats div,.slat5 .tx,.sw button,.ld,.ocard .im";
+const edHash = s => { let h = 5381; for (let i = 0; i < s.length; i++) h = (h * 33 + s.charCodeAt(i)) >>> 0; return h.toString(36); };
+const edNorm = s => s.replace(/[  ]/g, " ").replace(/\s+/g, " ").trim();
+const edInl = n => n.nodeType === 1 && ED_INL.has(n.tagName) && !n.querySelector("svg,img,span,div,p");
+function edPrep(root) {
+  const tag = el => { const t = edNorm(el.textContent); if (!t) return; el.dataset.ek = "t" + edHash(t); ED.orig.set(el, el.innerHTML); };
+  const walk = el => {
+    if (el.nodeType !== 1 || el.matches(ED_SKIP) || el.hasAttribute("data-ek")) return;
+    const kids = [...el.childNodes], hasTxt = kids.some(n => n.nodeType === 3 && n.nodeValue.trim()), blocks = kids.filter(n => n.nodeType === 1 && !edInl(n));
+    if (hasTxt && !blocks.length) { tag(el); return; }
+    if (hasTxt) {
+      let run = [];
+      const flush = () => { if (run.some(n => n.textContent.trim())) { const w = document.createElement("span"); w.className = "ekw"; el.insertBefore(w, run[0]); run.forEach(n => w.appendChild(n)); tag(w); } run = []; };
+      kids.forEach(n => { if (n.nodeType === 3 || edInl(n)) run.push(n); else flush(); }); flush();
+    }
+    blocks.forEach(walk);
+  };
+  walk(root);
+  root.querySelectorAll('[style*="background-image"]').forEach(el => { if (el.matches(ED_PSKIP) || el.closest(".stage")) return; const b = el.style.backgroundImage; if (!/url\(/.test(b)) return; el.dataset.pk = "p" + edHash(b.length + b.slice(0, 4000)); ED.bg.set(el, b); });
+  edApply(root);
+}
+function edApply(root) {
+  if (!root) return;
+  root.querySelectorAll("[data-ek]").forEach(el => {
+    if (el === ED.sel) return;
+    const d = ED.map[el.dataset.ek], o = ED.orig.get(el);
+    if (d && typeof d.html === "string") { if (el.innerHTML !== d.html) el.innerHTML = d.html; el.classList.add("ed-mod"); }
+    else if (el.classList.contains("ed-mod") && o != null) { el.innerHTML = o; el.classList.remove("ed-mod"); }
+  });
+  root.querySelectorAll("[data-pk]").forEach(el => {
+    const d = ED.map[el.dataset.pk];
+    if (d && d.asset) { const u = `url("/_blob/${d.asset}")`; if (el.style.backgroundImage !== u) el.style.backgroundImage = u; el.classList.add("ed-mod"); }
+    else if (el.classList.contains("ed-mod")) { el.style.backgroundImage = ED.bg.get(el) || ""; el.classList.remove("ed-mod"); }
+  });
+}
+const edToSrc = html => { const d = document.createElement("div"); d.innerHTML = html; let out = ""; const w = n => n.childNodes.forEach(c => { if (c.nodeType === 3) out += c.nodeValue; else if (c.tagName === "BR") out += "\n"; else if (c.tagName === "EM" || c.tagName === "I") { out += "*"; w(c); out += "*"; } else w(c); }); w(d); return out.replace(/[  ]/g, " ").replace(/[ \t]+/g, " ").trim(); };
+const edFromSrc = src => src.trim().replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\*([^*\n]+)\*/g, "<em>$1</em>").replace(/\n/g, "<br>");
+function edUI() {
+  if (document.querySelector(".ed-fab")) return;
+  const fab = document.createElement("button"); fab.type = "button"; fab.className = "ed-fab ed-ui";
+  fab.innerHTML = `${svgI('<path d="M4 20h4L19 9l-4-4L4 16v4z"/><path d="M13.5 6.5l4 4"/>', 1.6)}<span>Modifier le site</span>`;
+  const bar = document.createElement("div"); bar.className = "ed-bar ed-ui"; bar.setAttribute("role", "region"); bar.setAttribute("aria-label", "Mode modification");
+  bar.innerHTML = `<div class="ed-idle"><b>Mode modification</b><span>Touchez un texte ou une photo pour le modifier.</span><em class="ed-n"></em><button type="button" class="pill sm light" data-ed="done">Terminer</button></div>
+    <div class="ed-text" hidden><label for="ed-ta">Texte</label><textarea id="ed-ta" rows="3"></textarea><p class="ed-hint">Mettez un mot entre *étoiles* pour l’italique. Retour à la ligne : Entrée.</p><div class="ed-act"><button type="button" class="ed-l" data-ed="orig">Texte d’origine</button><span></span><button type="button" class="pill sm ghost" data-ed="cancel">Annuler</button><button type="button" class="pill sm light" data-ed="save">Enregistrer</button></div></div>
+    <div class="ed-photo" hidden><b>Photo</b><span class="ed-ps">Remplacez-la par une photo de votre ordinateur ou de votre téléphone.</span><div class="ed-act"><button type="button" class="ed-l" data-ed="porig">Photo d’origine</button><span></span><button type="button" class="pill sm ghost" data-ed="cancel">Fermer</button><button type="button" class="pill sm light" data-ed="pick">Choisir une photo</button></div><input type="file" accept="image/jpeg,image/png,image/webp" hidden></div>`;
+  document.body.append(fab, bar);
+  const ta = bar.querySelector("textarea"), file = bar.querySelector("input[type=file]");
+  const show = w => { bar.querySelector(".ed-idle").hidden = w !== "idle"; bar.querySelector(".ed-text").hidden = w !== "text"; bar.querySelector(".ed-photo").hidden = w !== "photo"; };
+  const count = () => { const n = Object.keys(ED.map).length; bar.querySelector(".ed-n").textContent = n ? n + (n > 1 ? " modifications" : " modification") : ""; };
+  ED.count = count;
+  const unsel = () => { if (ED.sel) ED.sel.classList.remove("ed-sel"); ED.sel = null; ED.kind = null; show("idle"); };
+  const toggle = on => { ED.on = on; document.body.classList.toggle("editing", on); fab.hidden = on; bar.classList.toggle("open", on); if (!on) { if (ED.sel && ED.kind === "text") edRestore(); unsel(); } count(); if (HAS_G) ScrollTrigger.refresh(); };
+  const edRestore = () => { const el = ED.sel; if (!el) return; const d = ED.map[el.dataset.ek]; el.innerHTML = d && typeof d.html === "string" ? d.html : ED.orig.get(el); };
+  fab.addEventListener("click", () => toggle(true));
+  const pickText = el => { if (ED.sel && ED.kind === "text") edRestore(); unsel(); ED.sel = el; ED.kind = "text"; el.classList.add("ed-sel"); ta.value = edToSrc(el.innerHTML); show("text"); setTimeout(() => { ta.focus(); ta.setSelectionRange(ta.value.length, ta.value.length); }, 30); };
+  const pickPhoto = el => { if (ED.sel && ED.kind === "text") edRestore(); unsel(); ED.sel = el; ED.kind = "photo"; el.classList.add("ed-sel"); bar.querySelector('[data-ed="porig"]').hidden = !ED.map[el.dataset.pk]; bar.querySelector('[data-ed="pick"]').hidden = !ED.assets; bar.querySelector(".ed-ps").textContent = ED.assets ? "Remplacez-la par une photo de votre ordinateur ou de votre téléphone." : "Le remplacement de photo n’est pas disponible sur cet appareil."; show("photo"); };
+  ta.addEventListener("input", () => { if (ED.sel) ED.sel.innerHTML = edFromSrc(ta.value) || "&nbsp;"; });
+  ta.addEventListener("keydown", e => { if (e.key === "Escape") { e.preventDefault(); bar.querySelector('[data-ed="cancel"]').click(); } if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) { e.preventDefault(); bar.querySelector('[data-ed="save"]').click(); } });
+  const col = () => ED.db.collection("edits");
+  const saveText = async () => {
+    const el = ED.sel; if (!el) return; const k = el.dataset.ek, html = edFromSrc(ta.value), o = ED.orig.get(el);
+    const same = edNorm(edToSrc(html)) === edNorm(edToSrc(o));
+    try { if (same) await col().doc(k).delete(); else await col().doc(k).set({ kind: "text", html, orig: edNorm(edToSrc(o)).slice(0, 400), page: current || "home", at: new Date().toISOString() }); toast(same ? "Texte d’origine rétabli." : "Texte enregistré."); }
+    catch (e) { toast("L’enregistrement n’a pas abouti. Réessayez dans un instant."); edRestore(); }
+    unsel();
+  };
+  const shrink = f => new Promise(res => { if (!window.createImageBitmap) return res(f); createImageBitmap(f).then(bm => { const m = 2400, r = Math.min(1, m / Math.max(bm.width, bm.height)); if (r === 1 && f.size < 3e6) return res(f); const c = document.createElement("canvas"); c.width = Math.round(bm.width * r); c.height = Math.round(bm.height * r); c.getContext("2d").drawImage(bm, 0, 0, c.width, c.height); c.toBlob(b => res(b || f), "image/jpeg", .86); }).catch(() => res(f)); });
+  file.addEventListener("change", async () => {
+    const f = file.files && file.files[0], el = ED.sel; file.value = ""; if (!f || !el) return;
+    const btn = bar.querySelector('[data-ed="pick"]'); btn.disabled = true; btn.textContent = "Envoi…";
+    try { const blob = await shrink(f); const up = await ED.assets.upload(blob, { type: blob.type || "image/jpeg" }); await col().doc(el.dataset.pk).set({ kind: "photo", asset: up.id, page: current || "home", at: new Date().toISOString() }); toast("Photo remplacée."); unsel(); }
+    catch (e) { toast(e && e.code === "too_large" ? "Photo trop lourde (20 Mo maximum)." : e && e.code === "unsupported_type" ? "Format non pris en charge : choisissez une photo JPEG, PNG ou WebP." : "L’envoi n’a pas abouti. Réessayez dans un instant."); }
+    btn.disabled = false; btn.textContent = "Choisir une photo";
+  });
+  bar.addEventListener("click", async e => {
+    const a = e.target.closest("[data-ed]"); if (!a) return;
+    const k = a.dataset.ed;
+    if (k === "done") toggle(false);
+    else if (k === "cancel") { if (ED.kind === "text") edRestore(); unsel(); }
+    else if (k === "save") saveText();
+    else if (k === "orig") { ta.value = edToSrc(ED.orig.get(ED.sel)); ta.dispatchEvent(new Event("input")); }
+    else if (k === "pick") file.click();
+    else if (k === "porig") { try { await col().doc(ED.sel.dataset.pk).delete(); toast("Photo d’origine rétablie."); } catch (err) { toast("L’opération n’a pas abouti."); } unsel(); }
+  });
+  document.addEventListener("click", e => {
+    if (!ED.on || e.target.closest(".ed-ui, .gnav, .mmenu, .snav")) return;
+    const inSite = e.target.closest("#app, footer"); if (!inSite) return;
+    const t = e.target.closest("[data-ek]");
+    if (t) { e.preventDefault(); e.stopPropagation(); pickText(t); return; }
+    const p = document.elementsFromPoint(e.clientX, e.clientY).find(x => x.matches && x.matches("[data-pk]"));
+    if (p) { e.preventDefault(); e.stopPropagation(); pickPhoto(p); }
+  }, true);
+  count();
+}
+async function edInit() {
+  if (!window.claude || typeof window.claude.use !== "function") return;
+  try {
+    const [db, user] = await Promise.all([claude.use("db"), claude.use("user")]);
+    if (!db) return;
+    let can = false; try { can = user ? await user.canEdit() : false; } catch (e) { can = false; }
+    ED.db = db; edPrep(document.querySelector("footer"));
+    db.collection("edits").onSnapshot(snap => { const m = {}; snap.docs.forEach(d => { m[d.id] = d.data(); }); ED.map = m; edApply(app); edApply(document.querySelector("footer")); if (ED.count) ED.count(); }, () => { });
+    if (!can) return;
+    ED.assets = await claude.use("assets").catch(() => null);
+    edUI();
+  } catch (e) { }
+}
+
 function boot() {
   globals();
+  edInit();
   const ld = document.querySelector(".loader");
   if (!HAS_G || REDUCED) { if (ld) ld.remove(); window.__loaded = true; route(); return; }
   route();

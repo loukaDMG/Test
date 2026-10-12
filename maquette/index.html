@@ -1295,6 +1295,8 @@ body.editing .ed-empty::after{content:"vide";font-style:italic;opacity:.5}
   .st3 .fin-sw i{width:25px;height:25px}
   .st3 .fin-sw button:first-child{margin-right:7px}
 }
+.st3 .fin-p{font-weight:500;color:var(--txt2)}
+@media (max-width:640px){.st3 .fin-p{display:none}}
 
 </style>
 </head>
@@ -6113,10 +6115,10 @@ const T3 = {
 /* Bardage : façade avant toujours Fundermax gris anthracite ; côtés et arrière au choix */
 const FIN = {
   fundermax: { n: "Fundermax gris anthracite", s: "Fundermax anthracite", m: "Panneau compact Fundermax", c: "#33353a", l: null, tex: null },
-  teak: { n: "Teak", s: "Teak", m: "Lames composite WEO®60", c: "#9C6C41", l: "#5C3B1F", tex: TX.weo.teak.d },
-  cedar: { n: "Cedar", s: "Cedar", m: "Lames composite WEO®60", c: "#C79A66", l: "#8E6639", tex: TX.weo.cedar.d },
-  ipe: { n: "Ipé", s: "Ipé", m: "Lames composite WEO®60", c: "#5F4231", l: "#36251A", tex: TX.weo.ipe.d },
-  darkgrey: { n: "Dark grey", s: "Dark grey", m: "Lames composite WEO®60", c: "#5E5B59", l: "#3A3837", tex: TX.weo.darkgrey.d },
+  teak: { n: "Teak", s: "Teak", m: "Lames composite WEO®35", c: "#9C6C41", l: "#5C3B1F", tex: TX.weo.teak.d },
+  cedar: { n: "Cedar", s: "Cedar", m: "Lames composite WEO®35", c: "#C79A66", l: "#8E6639", tex: TX.weo.cedar.d },
+  ipe: { n: "Ipé", s: "Ipé", m: "Lames composite WEO®35", c: "#5F4231", l: "#36251A", tex: TX.weo.ipe.d },
+  darkgrey: { n: "Dark grey", s: "Dark grey", m: "Lames composite WEO®35", c: "#5E5B59", l: "#3A3837", tex: TX.weo.darkgrey.d },
 };
 const FORDER = ["fundermax", "teak", "cedar", "ipe", "darkgrey"];
 const swStyle = k => FIN[k].tex ? `background-image:url(${FIN[k].tex});background-size:cover;background-position:center` : `background:${FIN[k].c}`;
@@ -6169,7 +6171,7 @@ const SCENE = [
   { k: "Ouverte", t: "Le store remonte.", d: "La cuisine s’ouvre sur la terrasse, sous sa propre toiture, avec son éclairage intégré au plafond.", v: "face", blind: 0, lid: 0, doors: 0, drawers: 0 },
   { k: "Plancha", t: "La plancha, encastrée.", d: "Plancha Planet Oasi 55 affleurante, couvercle en inox marine. Évier inox à côté, dans le même plan de travail.", v: "detail", blind: 0, lid: 1, doors: 0, drawers: 0 },
   { k: "Rangements", t: "Tout trouve sa place.", d: "Portes et tiroirs sous le plan de travail. Le réfrigérateur se cache derrière la porte de droite.", v: "rangement", blind: 0, lid: 1, doors: 1, drawers: 1 },
-  { k: "Bardage", t: "Votre bardage.", d: "Côtés et arrière en Fundermax anthracite ou en lames WEO®60 : Teak, Cedar, Ipé, Dark grey.", v: "cote", blind: 0, lid: 1, doors: 0, drawers: 0, wood: ["teak", "cedar", "ipe", "darkgrey", "fundermax"] },
+  { k: "Bardage", t: "Votre bardage.", d: "Côtés et arrière en Fundermax anthracite ou en lames WEO®35 : Teak, Cedar, Ipé, Dark grey.", v: "cote", blind: 0, lid: 1, doors: 0, drawers: 0, wood: ["teak", "cedar", "ipe", "darkgrey", "fundermax"] },
   { k: "Prête", t: "Prête à recevoir.", d: "Livrée assemblée en un seul bloc, posée sur 4 plots béton, sans fixation au bâtiment.", v: "trois", blind: 0, lid: 1, doors: 0, drawers: 0 }
 ];
 
@@ -6215,7 +6217,7 @@ function real3dBlock(id, compact) {
     <span class="tag"><i></i>Vue 3D · Évidence</span>
     <div class="ld" style="background-image:url(${IMG.poster})"><span>Chargement de la vue 3D</span><i><b></b></i></div>
     <canvas aria-label="Cuisine Évidence en 3D : faites glisser pour la faire pivoter"></canvas>
-    <div class="fin3" role="group" aria-label="Finition des côtés et de l’arrière"><span class="fin-t"><span class="fin-l">Côtés et arrière</span><b class="fin-n">${FIN[state.clad].s}</b></span><div class="fin-sw">${FORDER.map(k => `<button type="button" data-clad="${k}" aria-pressed="${k === state.clad}" aria-label="${FIN[k].s}" title="${FIN[k].s}"><i style="${swStyle(k)}"></i></button>`).join("")}</div></div>
+    <div class="fin3" role="group" aria-label="Finition des côtés et de l’arrière"><span class="fin-t"><span class="fin-l">Côtés et arrière</span><b class="fin-n">${finName(state.clad)}</b></span><div class="fin-sw">${FORDER.map(k => `<button type="button" data-clad="${k}" aria-pressed="${k === state.clad}" aria-label="${FIN[k].s}" title="${FIN[k].s}"><i style="${swStyle(k)}"></i></button>`).join("")}</div></div>
     <div class="tools3" role="toolbar" aria-label="Animer la cuisine">
       <button type="button" data-t="auto" aria-pressed="true">${T3.rot}<span>Rotation</span></button>
       <button type="button" data-t="doors" aria-pressed="false">${T3.door}<span>Portes</span></button>
@@ -6225,8 +6227,9 @@ function real3dBlock(id, compact) {
       ${compact ? "" : `<button type="button" data-t="full" aria-pressed="false">${T3.full}<span>Plein écran</span></button>`}
     </div></div>`;
 }
+const finName = k => k === "fundermax" ? FIN[k].s : `<span class="fin-p">WEO®35 · </span>${FIN[k].s}`;
 const cladBtn = k => `<button type="button" data-clad="${k}" aria-pressed="${k === state.clad}"><i style="${swStyle(k)}"></i>${FIN[k].s}</button>`;
-const cladButtons = () => `<div class="clad clad2" role="group" aria-label="Bardage des côtés et de l’arrière"><div class="cg"><span class="cl">Panneau Fundermax</span><div>${cladBtn("fundermax")}</div></div><div class="cg"><span class="cl">Lames WEO®60</span><div>${["teak", "cedar", "ipe", "darkgrey"].map(cladBtn).join("")}</div></div></div>`;
+const cladButtons = () => `<div class="clad clad2" role="group" aria-label="Bardage des côtés et de l’arrière"><div class="cg"><span class="cl">Panneau Fundermax</span><div>${cladBtn("fundermax")}</div></div><div class="cg"><span class="cl">Lames WEO®35</span><div>${["teak", "cedar", "ipe", "darkgrey"].map(cladBtn).join("")}</div></div></div>`;
 
 function panel(s, i) {
   const M = MODELS[s];
@@ -6264,7 +6267,7 @@ function home() {
       ["Structure", "Ossature bois", "Une charpente de construction, pas un assemblage de meubles."],
       ["Toiture", "Plate, membrane EPDM", "Une étanchéité de toiture-terrasse, au-dessus du plan de travail."],
       ["Façade", "Panneau Fundermax", "Compact stratifié haute pression, conçu pour les façades, protégé des UV et des intempéries."],
-      ["Bardage", "Lames WEO®60", "Composite à 95\u00a0% recyclé, en quatre teintes, ou Fundermax anthracite."],
+      ["Bardage", "Lames WEO®35", "Composite à 95\u00a0% recyclé, en quatre teintes, ou Fundermax anthracite."],
       ["Intérieur", "Bois trois plis, crédence noire", "Éclairage intégré au plafond, pour cuisiner aussi le soir."],
       ["Équipements", "Des marques spécialisées", "Planet, Napoléon, Elipson, Quooker : encastrés, choisis pour l’extérieur."]
     ].map((x, i) => `<li data-a="up"><i>${String(i + 1).padStart(2, "0")}</i><div><span>${x[0]}</span><b>${x[1]}</b><p>${x[2]}</p></div></li>`).join("")}</ol>
@@ -6272,7 +6275,7 @@ function home() {
   <div class="b5-mat" id="materiaux"><h3 class="h-sub" data-a="up">Les matériaux de façade</h3><p class="muted" data-a="up">Une façade avant toujours en Fundermax anthracite, et un bardage au choix pour les côtés et l’arrière.</p>
   <div class="mat4">
     <article class="mcard4" data-a="up"><div class="img"><div style="background-image:url(${IMG.fundermax})" data-par="-6"></div></div><div class="tx"><div class="row"><h3>Fundermax</h3><span class="tag">Façade avant · gris anthracite</span></div><p class="muted">Panneau compact stratifié haute pression (HPL), conçu pour les façades. Sa surface est protégée des UV et des intempéries.</p></div></article>
-    <article class="mcard4" data-a="up"><div class="slats">${["teak", "cedar", "ipe", "darkgrey"].map(k => `<div style="background-image:url(${FIN[k].tex})"><span>${FIN[k].s}</span></div>`).join("")}</div><div class="tx"><div class="row"><h3>Lames WEO®60</h3><span class="tag">Côtés et arrière · 4 teintes</span></div><p class="muted">Bardage composite à effet claire-voie : lames de 60 mm, joints de 10 mm. Fabriqué à 95 % à partir de matières recyclées, recyclable à 100 %. Le Fundermax anthracite reste aussi possible sur les côtés.</p></div></article>
+    <article class="mcard4" data-a="up"><div class="slats">${["teak", "cedar", "ipe", "darkgrey"].map(k => `<div style="background-image:url(${FIN[k].tex})"><span>${FIN[k].s}</span></div>`).join("")}</div><div class="tx"><div class="row"><h3>Lames WEO®35</h3><span class="tag">Côtés et arrière · 4 teintes</span></div><p class="muted">Bardage composite à effet claire-voie : lames de 35 mm, joints de 10 mm. Fabriqué à 95 % à partir de matières recyclées, recyclable à 100 %. Le Fundermax anthracite reste aussi possible sur les côtés.</p></div></article>
   </div>
   </div>
 </div></section>
@@ -6392,8 +6395,8 @@ function devisSection() {
 const ocard = (k, status, group) => { const o = OPT[k]; return `<button type="button" class="ocard" data-opt="${k}"${group ? ` data-group="${group}"` : ""} data-a="up"><span class="tick">${CHECK}</span>${o.im ? `<span class="im" style="background-image:url(${o.im})"></span>` : ""}<span class="st">${status}</span><span class="nm">${o.n}</span>${o.b ? `<span class="br">${o.b}</span>` : ""}<span class="ds">${o.d}</span>${o.sp ? `<span class="sp">${o.sp.map(x => `<i>${x}</i>`).join("")}</span>` : ""}</button>`; };
 function modelPage(s) {
   const M = MODELS[s], next = SLUGS[(SLUGS.indexOf(s) + 1) % SLUGS.length], N = MODELS[next];
-  const specs = [["Façade", M.size], ["Profondeur", null], ["Hauteur", null], ["Structure", "Ossature bois"], ["Toiture", "Toiture plate, membrane EPDM"], ["Façade avant", "Panneaux Fundermax gris anthracite"], ["Côtés et arrière", "Fundermax gris anthracite, ou lames WEO®60 Teak, Cedar, Ipé, Dark grey"], ["Intérieur", "Bois trois plis, crédence noire"], ["Fermeture", "La cuisine se referme"], ...(s === "la-festive" ? [["Îlot bar", "Inclus : fixe, plus profond que l’îlot sur roulettes"]] : []), ["Pose", "Sur 4 plots béton, sans fixation au bâtiment"], ["Livraison", "Livrée assemblée. Raccordements à prévoir séparément."]];
-  const inc = [["Structure", "Ossature bois"], ["Toiture", "Plate, membrane EPDM"], ["Façade avant", "Panneaux Fundermax gris anthracite"], ["Côtés et arrière", "Fundermax ou lames WEO®60, 5 finitions"], ["Intérieur", "Bois trois plis, crédence noire"], ["Éclairage", "Spots intégrés au plafond"], ["Rangements", "Portes et tiroirs sous le plan de travail"], ...(s === "la-festive" ? [["Îlot bar", "Fixe, plus profond, inclus"]] : []), ["Fermeture", "La cuisine se referme après le repas"], ["Pose", "Sur 4 plots béton, sans fixation au bâtiment"], ["Livraison", "En un seul bloc, assemblée. Raccordements à prévoir séparément."], ["Dimensions", `${M.size} de façade · profondeur et hauteur à préciser`]];
+  const specs = [["Façade", M.size], ["Profondeur", null], ["Hauteur", null], ["Structure", "Ossature bois"], ["Toiture", "Toiture plate, membrane EPDM"], ["Façade avant", "Panneaux Fundermax gris anthracite"], ["Côtés et arrière", "Fundermax gris anthracite, ou lames WEO®35 Teak, Cedar, Ipé, Dark grey"], ["Intérieur", "Bois trois plis, crédence noire"], ["Fermeture", "La cuisine se referme"], ...(s === "la-festive" ? [["Îlot bar", "Inclus : fixe, plus profond que l’îlot sur roulettes"]] : []), ["Pose", "Sur 4 plots béton, sans fixation au bâtiment"], ["Livraison", "Livrée assemblée. Raccordements à prévoir séparément."]];
+  const inc = [["Structure", "Ossature bois"], ["Toiture", "Plate, membrane EPDM"], ["Façade avant", "Panneaux Fundermax gris anthracite"], ["Côtés et arrière", "Fundermax ou lames WEO®35, 5 finitions"], ["Intérieur", "Bois trois plis, crédence noire"], ["Éclairage", "Spots intégrés au plafond"], ["Rangements", "Portes et tiroirs sous le plan de travail"], ...(s === "la-festive" ? [["Îlot bar", "Fixe, plus profond, inclus"]] : []), ["Fermeture", "La cuisine se referme après le repas"], ["Pose", "Sur 4 plots béton, sans fixation au bâtiment"], ["Livraison", "En un seul bloc, assemblée. Raccordements à prévoir séparément."], ["Dimensions", `${M.size} de façade · profondeur et hauteur à préciser`]];
   const stage = M.real ? real3dBlock("st-model", true) : `<div class="stage" id="stage" data-cursor="Tourner" style="--sw:${Math.round(M.sw * 80)}%">
       <span class="badge"><i></i>Vue 3D · aperçu provisoire</span>
       <div class="seg"><button class="on" data-amb="jour" type="button">Jour</button><button data-amb="nuit" type="button">Nuit</button></div>
@@ -6438,7 +6441,7 @@ function modelPage(s) {
   <div class="head" data-a="up"><p class="kicker">Matériaux</p><h2 class="h-title">${ln("Des matériaux faits\npour le <em>dehors.</em>")}</h2><p class="intro">La façade avant est toujours en Fundermax gris anthracite. Les côtés et l’arrière se choisissent parmi cinq finitions.</p></div>
   <div class="mat4">
     <article class="mcard4" data-a="up"><div class="img"><div style="background-image:url(${IMG.fundermax})"></div></div><div class="tx"><div class="row"><h3>Fundermax</h3><span class="tag">Façade avant · gris anthracite</span></div><p class="muted">Panneau compact stratifié haute pression (HPL), conçu pour les façades. Sa surface est protégée des UV et des intempéries.</p></div></article>
-    <article class="mcard4" data-a="up"><div class="slats">${["teak", "cedar", "ipe", "darkgrey"].map(k => `<div style="background-image:url(${FIN[k].tex})"><span>${FIN[k].s}</span></div>`).join("")}</div><div class="tx"><div class="row"><h3>Lames WEO®60</h3><span class="tag">Côtés et arrière · 4 teintes</span></div><p class="muted">Bardage composite à effet claire-voie : lames de 60 mm, joints de 10 mm. Fabriqué à 95 % à partir de matières recyclées, recyclable à 100 %.</p></div></article>
+    <article class="mcard4" data-a="up"><div class="slats">${["teak", "cedar", "ipe", "darkgrey"].map(k => `<div style="background-image:url(${FIN[k].tex})"><span>${FIN[k].s}</span></div>`).join("")}</div><div class="tx"><div class="row"><h3>Lames WEO®35</h3><span class="tag">Côtés et arrière · 4 teintes</span></div><p class="muted">Bardage composite à effet claire-voie : lames de 35 mm, joints de 10 mm. Fabriqué à 95 % à partir de matières recyclées, recyclable à 100 %.</p></div></article>
   </div>
   </div></section>
 
@@ -6813,7 +6816,7 @@ function sceneInit() {
   const sec = box.closest(".scene"), canvas = box.querySelector("canvas"), ld = box.querySelector(".ld"), bar = ld.querySelector("b"), woodEl = box.querySelector(".sc-wood");
   const steps = [...sec.querySelectorAll(".sc-step")], dots = [...sec.querySelectorAll("[data-go]")], N = SCENE.length;
   let api = null, cur = -1, wood = "teak", started = false;
-  const woodName = k => k === "fundermax" ? "Fundermax anthracite" : "Lames WEO®60 · " + FIN[k].s;
+  const woodName = k => k === "fundermax" ? "Fundermax anthracite" : "Lames WEO®35 · " + FIN[k].s;
   const setWood = k => {
     if (k === wood) return; wood = k;
     if (api) api.setCladding(k);
@@ -6874,7 +6877,7 @@ function sceneInit() {
 function setClad(k) {
   state.clad = k;
   app.querySelectorAll("[data-clad]").forEach(b => { b.setAttribute("aria-pressed", String(b.dataset.clad === k)); b.classList.toggle("on", b.dataset.clad === k); });
-  app.querySelectorAll(".fin3 .fin-n").forEach(n => { n.textContent = FIN[k].s; });
+  app.querySelectorAll(".fin3 .fin-n").forEach(n => { n.innerHTML = finName(k); });
   if (real) { real.setCladding(k); if (real.stopAutoUI) real.stopAutoUI(); else real.setAuto(false); real.view("trois"); }
   if (proc) proc.setFin(k);
   const sel = document.getElementById("sel"); if (sel && state.model) updSel(state.model);

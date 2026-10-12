@@ -31,6 +31,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  /* ---------- Hide event sections once the event is over ---------- */
+  document.querySelectorAll("[data-event-end]").forEach((el) => {
+    const end = new Date(el.dataset.eventEnd + "T23:59:59");
+    if (new Date() > end) el.remove();
+  });
+
   /* ---------- Scroll reveal ---------- */
   const revealEls = document.querySelectorAll(".reveal");
   if (revealEls.length) {

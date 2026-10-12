@@ -1,11 +1,15 @@
 ---
 name: find-skills
-description: Helps users discover and install agent skills when they ask questions like "how do I do X", "find a skill for X", "is there a skill that can...", or express interest in extending capabilities. This skill should be used when the user is looking for functionality that might exist as an installable skill.
+description: Use proactively at the start of ANY task (design, website, quotes, documents, social media, code, marketing, admin) to check whether an installable skill would do it better, and suggest it to the user in one line before starting. Also use when users ask "how do I do X", "find a skill for X", "is there a skill that can...". Never install a skill without the user's explicit approval.
 ---
 
 # Find Skills
 
 This skill helps you discover and install skills from the open agent skills ecosystem.
+
+## Proactive Rule
+
+At the start of every task, quickly check whether a skill could do it better. If yes, suggest it in ONE short line (name + what it brings) before starting, then continue the task. Never install without explicit approval. Do not suggest the same skill twice in a conversation.
 
 ## When to Use This Skill
 

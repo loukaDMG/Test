@@ -1204,6 +1204,17 @@ body:not(.is-home) #app .head .intro{font-size:17px}body:not(.is-home) #app .hea
 .cladrow.cb-anim button{opacity:0;transform:translateY(14px) scale(.94);transition:opacity .7s var(--ease) var(--d,0s),transform .9s var(--ease) var(--d,0s),box-shadow .25s}
 .cladrow.cb-anim.cb-in button{opacity:1;transform:none}
 .cladrow.cb-anim.cb-in button:hover{transform:translateY(-1px);transition-delay:0s}
+/* v15.2 : rythme et typographie */
+p,li,dd{text-wrap:pretty}
+h1,h2,h3,.h-title,.h-sub{text-wrap:balance}
+dd,.cmp td,.facts b,.figs4 b{font-variant-numeric:tabular-nums}
+.gal-nav button{transition:opacity .4s,background .3s,color .3s,transform .3s var(--ease)}
+.gal-nav button.off{opacity:.3;pointer-events:none}
+body:not(.is-home) #comparer{padding-block:clamp(40px,4vw,64px)}
+body:not(.is-home) #comparer .head{margin-bottom:20px}
+.kit-hl{margin-bottom:48px}
+.chipc.o{background:transparent;color:var(--v500);padding:0;height:auto;font-weight:500}
+.chipc.o svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none;padding:3px;box-sizing:content-box;border-radius:50%;background:var(--v50)}
 
 </style>
 </head>
@@ -6063,11 +6074,11 @@ const CMP = [
   ["#", "Au choix", "Un seul équipement par ligne : l’un ou l’autre (ou aucun)."],
   ["Froid", "Réfrigérateur ou cave à vin", ["t:Réfrigérateur<small>en option, sans cave à vin</small>", "t:Réfrigérateur <i>ou</i> cave à vin", "t:Réfrigérateur <i>ou</i> cave à vin"]],
   ["Cuisson", "Plancha Planet ou barbecue Napoléon", ["t:Plancha<small>en option, sans barbecue</small>", "t:Plancha <i>ou</i> barbecue", "t:Plancha <i>ou</i> barbecue"]],
-  ["Abri ou îlot", "Store banne et meuble îlot", ["n", "t:Store <i>ou</i> îlot bar sur roulettes", "t:Îlot bar fixe inclus<small>+ store banne en option</small>"]],
+  ["Store ou îlot bar", "Store banne intégré, îlot bar", ["n", "t:Store <i>ou</i> îlot bar sur roulettes", "t:Îlot bar fixe inclus<small>+ store banne en option</small>"]],
   ["#", "Options", "À ajouter librement, elles se cumulent."],
-  ["Évier", "", ["o", "o", "o"]], ["Plaque à gaz", "", ["n", "o", "o"]], ["Friteuse encastrable", "Planet", ["n", "o", "o"]],
-  ["Robinet", "Quooker", ["n", "o", "o"]], ["Sonorisation", "Elipson", ["n", "o", "o"]],
-  ["Plan de travail en pierre", "Dekton", ["n", "o", "o"]], ["Téléviseur", "", ["n", "n", "o"]],
+  ["Évier inox encastrable", "Planet · INLAV40", ["o", "o", "o"]], ["Plaque à gaz", "", ["n", "o", "o"]], ["Friteuse encastrable", "Planet", ["n", "o", "o"]],
+  ["Robinet Quooker", "Eau bouillante et pétillante", ["n", "o", "o"]], ["Sonorisation intégrée", "Elipson · au plafond", ["n", "o", "o"]],
+  ["Plan de travail Dekton", "Cosentino", ["n", "o", "o"]], ["Téléviseur", "", ["n", "n", "o"]],
   ["#", "Finitions", "Identiques sur les trois modèles."],
   ["Façade avant", "", ["t:Fundermax", "t:Fundermax", "t:Fundermax"]], ["Côtés et arrière", "", ["t:5 finitions", "t:5 finitions", "t:5 finitions"]],
 ];
@@ -6116,7 +6127,7 @@ const ln = t => t.split("\n").map(l => `<span class="ln"><span>${l}</span></span
 /* ---------- Gabarits partagés ---------- */
 function cmpBox(cur) { return `<div class="cmpbox"><button type="button" class="pill cmp-tg" aria-expanded="false">Comparer les 3 modèles ${CHEV}</button><div class="cmp-in" hidden>${cmpTable(cur)}</div></div>`; }
 function cmpTable(cur) {
-  const lab = { o: '<span class="chipc o">Option</span>', c: '<span class="chipc c">Au choix</span>', n: '<span class="chipc n">—</span>' };
+  const lab = { o: '<span class="chipc o"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg>En option</span>', c: '<span class="chipc c">Au choix</span>', n: '<span class="chipc n">—</span>' };
   return `<p class="cmp-hint">Faites glisser le tableau pour voir les trois modèles.</p><div class="cmp-wrap" data-a="up"><table class="cmp"><thead><tr><th scope="col"><span>Équipements et finitions</span></th>${SLUGS.map(s => `<th scope="col" class="${s === cur ? "cur" : ""}"><b>${MODELS[s].name}</b><span>${MODELS[s].size} de façade</span></th>`).join("")}</tr></thead><tbody>${CMP.map(([a, b, v]) => a === "#" ? `<tr class="grp"><th colspan="4">${b}<small>${v}</small></th></tr>` : `<tr><th scope="row">${a}${b ? `<small>${b}</small>` : ""}</th>${v.map((x, i) => `<td class="${SLUGS[i] === cur ? "cur" : ""}">${x.startsWith("t:") ? x.slice(2) : lab[x]}</td>`).join("")}</tr>`).join("")}</tbody></table></div><p class="cmp-note">Exemple : sur Harmonie, vous prenez le réfrigérateur <b>ou</b> la cave à vin, la plancha <b>ou</b> le barbecue, puis autant d’options que vous voulez. Sur La Festive, l’îlot est inclus : il est fixe et plus profond, et le store banne reste en option.</p>`;
 }
 function real3dBlock(id, compact) {
@@ -6513,7 +6524,7 @@ function route() {
     document.body.classList.toggle("is-home", r.page === "home");
     if (lenis) lenis.scrollTo(0, { immediate: true }); window.scrollTo(0, 0);
     current = r.page;
-    document.title = r.page === "home" ? "DMG Concept" : PAGE_NAME(r.page) + " · DMG Concept";
+    document.title = r.page === "home" ? "DMG Concept · Cuisines extérieures couvertes" : PAGE_NAME(r.page) + " · DMG Concept";
     after(r.page);
     setTimeout(() => jump(r), r.anchor ? (first ? 150 : 400) : 0);
   };
@@ -6641,6 +6652,8 @@ function galleryInit() {
   const list = shots.map(f => ({ src: f.querySelector("div").style.backgroundImage.slice(5, -2), t: f.querySelector("b").textContent }));
   strip.querySelectorAll(".shot").forEach((f, i) => { f.tabIndex = 0; f.setAttribute("role", "button"); f.addEventListener("click", () => { if (moved < 6) lightbox(list, i, shots); }); f.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); lightbox(list, i, shots); } }); });
   app.querySelectorAll("[data-gal]").forEach(b => b.addEventListener("click", () => strip.scrollBy({ left: +b.dataset.gal * Math.min(760, strip.clientWidth * .8), behavior: "smooth" })));
+  const gb = [...app.querySelectorAll("[data-gal]")], ends = () => { const m = strip.scrollWidth - strip.clientWidth - 4; gb.forEach(b => { const off = +b.dataset.gal < 0 ? strip.scrollLeft <= 4 : strip.scrollLeft >= m; b.classList.toggle("off", off); b.setAttribute("aria-disabled", String(off)); }); };
+  strip.addEventListener("scroll", ends, { passive: true }); ends();
   let down = false, sx = 0, sl = 0, moved = 0;
   strip.addEventListener("pointerdown", e => { if (e.pointerType !== "mouse") return; down = true; moved = 0; sx = e.clientX; sl = strip.scrollLeft; strip.classList.add("drag"); });
   window.addEventListener("pointermove", e => { if (!down) return; moved = Math.abs(e.clientX - sx); strip.scrollLeft = sl - (e.clientX - sx); });

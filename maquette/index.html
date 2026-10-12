@@ -1108,6 +1108,19 @@ body:not(.is-home) #app .head .intro{font-size:17px}body:not(.is-home) #app .hea
 .nextm h2{transition:letter-spacing .8s var(--ease)}
 .nextm:hover h2{letter-spacing:.01em}
 @media (prefers-reduced-motion:reduce){.pill::after{display:none}.kicker.kd{clip-path:none}}
+/* v12.1 : accents et lettres qui se chevauchent */
+.ln{padding:.16em 0 .12em;margin:-.16em 0 -.12em}
+.h-display{line-height:1.02}
+.h-name{line-height:1.08;padding-top:.06em}
+.nextm small{display:block;margin-bottom:.9em}
+.nextm h2{line-height:1.08;padding-top:.04em}
+.kit-hero h2{line-height:1.1}
+.panel h3{line-height:1.12}
+.sc-step h2{line-height:1.12}
+.n-txt h2,.fbig h2{line-height:1.08}
+.eqd-txt .h-title,.eqh .h-title{line-height:1.1}
+.qa button{line-height:1.3}
+.m-hero .h-name{margin-top:.22em}.nextm small{margin-bottom:1.6em}
 
 </style>
 </head>
@@ -6762,7 +6775,8 @@ function motion(page) {
   // Révélations au défilement
   const ups = gsap.utils.toArray(app.querySelectorAll("[data-a='up']"));
   gsap.set(ups, { y: 46, opacity: 0 });
-  ScrollTrigger.batch(ups, { start: "top 90%", once: true, onEnter: b => gsap.to(b, { y: 0, opacity: 1, duration: 1.1, ease: E, stagger: .08, overwrite: true }) });
+  const rev = b => gsap.to(b, { y: 0, opacity: 1, duration: 1.1, ease: E, stagger: .08, overwrite: true });
+  ScrollTrigger.batch(ups, { start: "top 90%", once: true, onEnter: rev, onEnterBack: rev });
   const sweep = () => ups.forEach(el => { if (el.isConnected && el.getBoundingClientRect().top < innerHeight && +getComputedStyle(el).opacity < .99 && !gsap.isTweening(el)) gsap.to(el, { y: 0, opacity: 1, duration: .8, ease: E }); });
   ScrollTrigger.addEventListener("scrollEnd", sweep); cleanups.push(() => ScrollTrigger.removeEventListener("scrollEnd", sweep));
   // Titres ligne à ligne (hors hero)
@@ -6773,7 +6787,6 @@ function motion(page) {
   // Parallaxe des images
   app.querySelectorAll("[data-par]").forEach(el => gsap.fromTo(el, { yPercent: -(+el.dataset.par) }, { yPercent: +el.dataset.par, ease: "none", scrollTrigger: { trigger: el.parentElement, start: "top bottom", end: "bottom top", scrub: true } }));
   // Photos : ouverture en volet au défilement
-  app.querySelectorAll(".story4:not(#fermeture) .ph, .band, .slats").forEach(el => gsap.fromTo(el, { clipPath: "inset(14% 0% 0% 0% round 20px)" }, { clipPath: "inset(0% 0% 0% 0% round 20px)", ease: "none", scrollTrigger: { trigger: el, start: "top 95%", end: "top 45%", scrub: true } }));
   // Compteurs
   app.querySelectorAll("[data-count]").forEach(el => { const n = +el.dataset.count, o = { v: 0 }; gsap.to(o, { v: n, duration: 1.6, ease: "power2.out", scrollTrigger: { trigger: el, start: "top 90%", once: true }, onUpdate: () => { el.textContent = Math.round(o.v); } }); });
   // Manifeste : mots qui s'allument au défilement
@@ -6791,12 +6804,12 @@ function motion(page) {
   // Livraison : l'image s'ouvre
   const fr = app.querySelector("[data-clip]");
   if (fr) gsap.fromTo(fr, { clipPath: "inset(9% 16% 9% 16% round 28px)" }, { clipPath: "inset(0% 0% 0% 0% round 28px)", ease: "none", scrollTrigger: { trigger: fr, start: "top 90%", end: "top 20%", scrub: true } });
-  // Photos : la fenêtre s'ouvre au défilement, l'image se pose
+  // Photos : l'image se pose dans son cadre ; les textes posés dessus ne sont jamais rognés
   app.querySelectorAll(".b5-ph, .kit-hero, .visit-ph, .bandeau, #fermeture .ph, .eqd-ph:not(.prod), .mcard4 .img").forEach(el => {
-    const r = getComputedStyle(el).borderTopLeftRadius || "22px", img = el.querySelector(":scope > div, :scope > .ph");
-    const tl = gsap.timeline({ scrollTrigger: { trigger: el, start: "top 95%", end: "top 35%", scrub: .8 } });
-    tl.fromTo(el, { clipPath: `inset(7% 7% 7% 7% round ${r})` }, { clipPath: `inset(0% 0% 0% 0% round ${r})`, ease: "power2.out" }, 0);
-    if (img && !img.hasAttribute("data-par")) tl.fromTo(img, { scale: 1.14 }, { scale: 1, ease: "power2.out" }, 0);
+    const img = el.querySelector(":scope > div, :scope > .ph"), txt = el.querySelectorAll(":scope > figcaption, :scope > .b5-count, :scope > .tagr");
+    const tl = gsap.timeline({ scrollTrigger: { trigger: el, start: "top 88%", once: true } });
+    if (img) tl.fromTo(img, { scale: 1.16, filter: "brightness(.75)" }, { scale: 1, filter: "brightness(1)", duration: 1.9, ease: "expo.out", clearProps: "filter" }, 0);
+    if (txt.length) tl.from(txt, { y: 18, opacity: 0, duration: 1, ease: E, stagger: .08 }, .35);
   });
   // Construction : les couches s'allument une à une
   const b5 = app.querySelector(".b5-list");
@@ -6853,6 +6866,7 @@ function motion(page) {
     tl.from(hk, { opacity: 0, y: 16, duration: 1, ease: E }, .2)
       .from(hf, { opacity: 0, y: 24, duration: 1, ease: E, stagger: .12 }, .4)
       .fromTo("[data-hero-media]", { clipPath: "inset(10% 10% 10% 10% round 24px)" }, { clipPath: "inset(0% 0% 0% 0% round 24px)", duration: 1.8, ease: "expo.inOut" }, .25)
+      .from("[data-hero-media] figcaption", { opacity: 0, y: 10, duration: .8, ease: E }, 1.7)
       .from("[data-hero-media]>div", { scale: 1.18, duration: 2.6, ease: "expo.out" }, .3);
     // Bandeau claire-voie : les lames s'ouvrent comme des persiennes
     const lv = app.querySelectorAll(".slat5 .lv i");
@@ -6878,8 +6892,9 @@ function motion(page) {
       gsap.timeline({ scrollTrigger: { trigger: dv, start: "top top", end: "+=150%", pin: true, scrub: .6 } })
         .fromTo(fr, { clipPath: "inset(10% 18% 10% 18% round 28px)" }, { clipPath: "inset(0% 0% 0% 0% round 28px)", ease: "power2.out", duration: .3 }, 0)
         .fromTo(ph, { scale: 1.18 }, { scale: 1, ease: "none", duration: 1 }, 0)
-        .fromTo(clk, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .12 }, .12)
-        .to(t, { v: 1, ease: "none", duration: .78, onUpdate: upd }, .2);
+        .fromTo(clk, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .1 }, .3)
+        .from(fr.querySelector(".cap4"), { opacity: 0, y: 24, duration: .1 }, .3)
+        .to(t, { v: 1, ease: "none", duration: .66, onUpdate: upd }, .32);
     }
     // Ouverture : le logo se dessine de gauche à droite, la photo suit la souris
     const lg = app.querySelector(".h6-logo");

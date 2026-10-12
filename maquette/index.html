@@ -1021,6 +1021,20 @@ body:not(.is-home) #app .head .intro{font-size:17px}body:not(.is-home) #app .hea
 .deliv.timed .frame::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(8,25,15,.55) 0%,rgba(8,25,15,0) 40%);pointer-events:none}
 @media (max-width:640px){.deliv .clock{min-width:0}.deliv .clock b{font-size:64px}}
 .deliv .clock span{font-size:13px;color:#fff;letter-spacing:.16em;text-shadow:0 2px 14px rgba(0,0,0,.7)}.deliv .clock{padding:18px 22px 20px;margin:-18px -22px;border-radius:18px;background:radial-gradient(120% 120% at 0 0,rgba(8,25,15,.45),rgba(8,25,15,0) 70%)}
+/* v10.1 : horloge de livraison plus lisible */
+.deliv .clock{gap:14px;padding:26px 30px 28px;margin:0;min-width:0;width:min(420px,calc(100% - 2 * clamp(24px,4vw,56px)));border-radius:22px;background:rgba(8,25,15,.62);-webkit-backdrop-filter:blur(14px) saturate(1.2);backdrop-filter:blur(14px) saturate(1.2);box-shadow:0 24px 60px -30px rgba(0,0,0,.6),inset 0 0 0 1px rgba(255,255,255,.08)}
+.deliv .clock b{font-size:clamp(64px,7vw,104px);text-shadow:none}
+.deliv .clock i{max-width:none;height:3px;border-radius:3px}
+.deliv .clock .cl-now{font-size:clamp(22px,2vw,28px);font-weight:500;letter-spacing:-.015em;text-transform:none;color:#fff;text-shadow:none;line-height:1.2}
+.deliv .cl-steps{list-style:none;margin:4px 0 0;padding:14px 0 0;border-top:1px solid rgba(255,255,255,.14);display:flex;flex-direction:column;gap:9px}
+.deliv .cl-steps li{position:relative;padding-left:24px;font-size:15px;color:rgba(255,255,255,.5);transition:color .4s}
+.deliv .cl-steps li::before{content:"";position:absolute;left:2px;top:50%;width:9px;height:9px;margin-top:-4.5px;border-radius:50%;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.45);transition:all .4s}
+.deliv .cl-steps li.done{color:rgba(255,255,255,.82)}
+.deliv .cl-steps li.done::before{background:var(--v300);box-shadow:none}
+.deliv .cl-steps li.on{color:#fff;font-weight:600}
+.deliv .cl-steps li.on::before{background:#fff;box-shadow:0 0 0 4px rgba(149,213,178,.35)}
+@media (max-width:640px){.deliv .clock{padding:18px 20px 20px;gap:10px}.deliv .clock b{font-size:56px}.deliv .clock .cl-now{font-size:20px}.deliv .cl-steps{display:none}}
+@media (min-width:641px){.deliv .clock{left:auto;right:clamp(24px,4vw,56px)}}
 
 </style>
 </head>
@@ -6044,7 +6058,7 @@ function home() {
 </div></section>
 
 <section class="deliv dark" id="livraison"><div class="wrap">
-  <div class="frame"><div class="ph" style="background-image:url(${IMG.grue})"></div><div class="clock" aria-hidden="true"><b>09:00</b><span>Livraison</span><i><u></u></i></div>
+  <div class="frame"><div class="ph" style="background-image:url(${IMG.grue})"></div><div class="clock" aria-hidden="true"><b>09:00</b><i><u></u></i><span class="cl-now">Livraison</span><ol class="cl-steps"><li>Livraison</li><li>Déchargée en un seul bloc</li><li>Mise en place sur 4 plots béton</li><li>À table</li></ol></div>
     <div class="cap4"><div><p class="kicker">Livraison</p><h2 class="h-title" style="margin-top:14px">${ln("9\u00a0h, livrée.\nMidi, <em>à table.</em>")}</h2></div><p>Livraison partout en France. La cuisine quitte l’atelier assemblée et équipée. Elle est déchargée en un seul bloc puis mise en place sur 4 plots béton, sans fixation au bâtiment. Les raccordements sont à prévoir séparément.</p></div>
   </div>
 </div></section>
@@ -6715,14 +6729,15 @@ function motion(page) {
     const dv = app.querySelector(".deliv"), clk = dv && dv.querySelector(".clock");
     if (clk) {
       dv.classList.add("timed");
-      const fr = dv.querySelector(".frame"), ph = fr.querySelector(".ph"), hb = clk.querySelector("b"), hl = clk.querySelector("span"), hu = clk.querySelector("u"), t = { v: 0 };
+      const fr = dv.querySelector(".frame"), ph = fr.querySelector(".ph"), hb = clk.querySelector("b"), hl = clk.querySelector(".cl-now"), hu = clk.querySelector("u"), lis = [...clk.querySelectorAll(".cl-steps li")], t = { v: 0 };
       const labs = [[0, "Livraison"], [.3, "Déchargée en un seul bloc"], [.55, "Mise en place sur 4 plots béton"], [.9, "À table"]];
       const upd = () => {
         const m = Math.round(t.v * 36) * 5, txt = String(9 + Math.floor(m / 60)).padStart(2, "0") + ":" + String(m % 60).padStart(2, "0");
         if (hb.textContent !== txt) hb.textContent = txt;
         hu.style.transform = "scaleX(" + t.v.toFixed(3) + ")";
-        let L = labs[0][1]; labs.forEach(([p, l]) => { if (t.v >= p) L = l; });
-        if (hl.textContent !== L) { hl.textContent = L; gsap.fromTo(hl, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: .5, ease: "power2.out" }); }
+        let j = 0; labs.forEach(([p], k) => { if (t.v >= p) j = k; });
+        if (hl.textContent !== labs[j][1]) { hl.textContent = labs[j][1]; gsap.fromTo(hl, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: .6, ease: "power3.out" }); }
+        lis.forEach((li, k) => { li.classList.toggle("on", k === j); li.classList.toggle("done", k < j); });
       };
       gsap.timeline({ scrollTrigger: { trigger: dv, start: "top top", end: "+=150%", pin: true, scrub: .6 } })
         .fromTo(fr, { clipPath: "inset(10% 18% 10% 18% round 28px)" }, { clipPath: "inset(0% 0% 0% 0% round 28px)", ease: "power2.out", duration: .3 }, 0)
@@ -6765,7 +6780,7 @@ function globals() {
   const mc = document.createElement("div"); mc.className = "mcta"; mc.innerHTML = `<span>Votre projet de cuisine extérieure</span><a class="pill sm" href="#devis">Demander un devis</a>`; document.body.appendChild(mc);
   const onScroll2 = () => {
     const vis = el => { if (!el) return false; const r = el.getBoundingClientRect(); return r.top < window.innerHeight && r.bottom > 0; };
-    const blocked = vis(document.getElementById("devis")) || vis(document.querySelector(".st3")) || vis(document.getElementById("stage")) || vis(document.querySelector(".summary")) || vis(document.querySelector(".scene .sc-pin"));
+    const blocked = vis(document.getElementById("devis")) || vis(document.querySelector(".st3")) || vis(document.getElementById("stage")) || vis(document.querySelector(".summary")) || vis(document.querySelector(".scene .sc-pin")) || vis(document.querySelector(".deliv.timed .frame"));
     mc.classList.toggle("show", document.body.classList.contains("is-home") && window.scrollY > 600 && !blocked && !document.body.classList.contains("menu-open"));
   };
   window.addEventListener("scroll", onScroll2, { passive: true });

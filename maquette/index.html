@@ -1262,6 +1262,13 @@ body.editing .ed-empty::after{content:"vide";font-style:italic;opacity:.5}
 
 /* v16.2 : photo de livraison (grue), cadrée sur le module suspendu */
 .deliv .frame .ph{background-position:56% 40%}
+/* v16.3 : livraison plus lumineuse (voile limité au bas de l'image, sous le texte) et horaire à gauche, hors de la cuisine */
+.deliv .frame::after{background:linear-gradient(0deg,rgba(8,25,15,.84) 0%,rgba(8,25,15,.5) 22%,rgba(8,25,15,0) 48%)}
+.deliv.timed .frame::before{display:none}
+.deliv .cap4 p{text-shadow:0 1px 14px rgba(0,0,0,.45)}
+@media (min-width:641px){.deliv .clock{left:clamp(24px,4vw,56px);right:auto;width:min(380px,34%)}}
+@media (min-width:641px) and (max-height:780px){.deliv .cl-steps{display:none}}
+@media (max-width:640px){.deliv .clock{padding:14px 18px 16px;gap:8px}.deliv .clock b{font-size:48px}.deliv .clock .cl-now{font-size:17px}}
 
 </style>
 </head>

@@ -1273,6 +1273,28 @@ body.editing .ed-empty::after{content:"vide";font-style:italic;opacity:.5}
 .deliv .frame .ph{inset:-14% 0 -2% 0;background-position:66% 40%}
 /* v16.5 : retour à la photo de la grue avec la cuisine au centre (choix du propriétaire), cadrage d'origine */
 .deliv .frame .ph{inset:-8% 0;background-position:56% 40%}
+/* v16.6 : choix de la finition des côtés et de l'arrière intégré à la vue 3D */
+.st3 .fin3{position:absolute;top:18px;right:18px;z-index:3;display:flex;align-items:center;gap:14px;padding:6px 6px 6px 16px;border-radius:980px;background:rgba(255,255,255,.94);box-shadow:inset 0 0 0 1px var(--line),0 10px 30px -12px rgba(14,42,31,.3);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.st3 .fin-t{display:flex;flex-direction:column;line-height:1.15;min-width:0}
+.st3 .fin-l{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--txt2);font-weight:600}
+.st3 .fin-n{font-size:14px;font-weight:600;color:var(--txt);white-space:nowrap}
+.st3 .fin-sw{display:flex;align-items:center;gap:4px}
+.st3 .fin-sw button{position:relative;width:36px;height:36px;padding:0;border:0;border-radius:50%;background:none;cursor:pointer;display:grid;place-items:center}
+.st3 .fin-sw button:first-child{margin-right:9px}
+.st3 .fin-sw button:first-child::before{content:"";position:absolute;right:-7px;top:9px;bottom:9px;width:1px;background:var(--line)}
+.st3 .fin-sw i{width:28px;height:28px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.12);transition:transform .25s cubic-bezier(.2,.8,.2,1)}
+.st3 .fin-sw button:hover i{transform:scale(1.08)}
+.st3 .fin-sw button[aria-pressed="true"]{box-shadow:0 0 0 2px var(--v500)}
+.st3 .fin-sw button:focus-visible{outline:2px solid var(--v500);outline-offset:2px}
+@media (max-width:640px){
+  .st3 .fin3{top:auto;right:auto;left:50%;transform:translateX(-50%);bottom:76px;gap:10px;padding:5px 5px 5px 14px;max-width:calc(100% - 24px)}
+  .st3 .fin-l{display:none}
+  .st3 .fin-n{font-size:13px}
+  .st3 .fin-sw{gap:2px}
+  .st3 .fin-sw button{width:32px;height:32px}
+  .st3 .fin-sw i{width:25px;height:25px}
+  .st3 .fin-sw button:first-child{margin-right:7px}
+}
 
 </style>
 </head>
@@ -6193,6 +6215,7 @@ function real3dBlock(id, compact) {
     <span class="tag"><i></i>Vue 3D · Évidence</span>
     <div class="ld" style="background-image:url(${IMG.poster})"><span>Chargement de la vue 3D</span><i><b></b></i></div>
     <canvas aria-label="Cuisine Évidence en 3D : faites glisser pour la faire pivoter"></canvas>
+    <div class="fin3" role="group" aria-label="Finition des côtés et de l’arrière"><span class="fin-t"><span class="fin-l">Côtés et arrière</span><b class="fin-n">${FIN[state.clad].s}</b></span><div class="fin-sw">${FORDER.map(k => `<button type="button" data-clad="${k}" aria-pressed="${k === state.clad}" aria-label="${FIN[k].s}" title="${FIN[k].s}"><i style="${swStyle(k)}"></i></button>`).join("")}</div></div>
     <div class="tools3" role="toolbar" aria-label="Animer la cuisine">
       <button type="button" data-t="auto" aria-pressed="true">${T3.rot}<span>Rotation</span></button>
       <button type="button" data-t="doors" aria-pressed="false">${T3.door}<span>Portes</span></button>
@@ -6417,7 +6440,6 @@ function modelPage(s) {
     <article class="mcard4" data-a="up"><div class="img"><div style="background-image:url(${IMG.fundermax})"></div></div><div class="tx"><div class="row"><h3>Fundermax</h3><span class="tag">Façade avant · gris anthracite</span></div><p class="muted">Panneau compact stratifié haute pression (HPL), conçu pour les façades. Sa surface est protégée des UV et des intempéries.</p></div></article>
     <article class="mcard4" data-a="up"><div class="slats">${["teak", "cedar", "ipe", "darkgrey"].map(k => `<div style="background-image:url(${FIN[k].tex})"><span>${FIN[k].s}</span></div>`).join("")}</div><div class="tx"><div class="row"><h3>Lames WEO®60</h3><span class="tag">Côtés et arrière · 4 teintes</span></div><p class="muted">Bardage composite à effet claire-voie : lames de 60 mm, joints de 10 mm. Fabriqué à 95 % à partir de matières recyclées, recyclable à 100 %.</p></div></article>
   </div>
-  <div class="cladrow" data-a="up"><p class="h-sub">Finition des côtés et de l’arrière</p>${cladButtons()}</div>
   </div></section>
 
 
@@ -6852,6 +6874,7 @@ function sceneInit() {
 function setClad(k) {
   state.clad = k;
   app.querySelectorAll("[data-clad]").forEach(b => { b.setAttribute("aria-pressed", String(b.dataset.clad === k)); b.classList.toggle("on", b.dataset.clad === k); });
+  app.querySelectorAll(".fin3 .fin-n").forEach(n => { n.textContent = FIN[k].s; });
   if (real) { real.setCladding(k); if (real.stopAutoUI) real.stopAutoUI(); else real.setAuto(false); real.view("trois"); }
   if (proc) proc.setFin(k);
   const sel = document.getElementById("sel"); if (sel && state.model) updSel(state.model);
@@ -7280,7 +7303,7 @@ function globals() {
 /* ---------- Mode modification : textes et photos (réservé au propriétaire) ---------- */
 const ED = { on: false, db: null, assets: null, map: {}, orig: new WeakMap(), bg: new WeakMap(), sel: null, ready: false };
 const ED_INL = new Set(["EM", "I", "B", "STRONG", "BR", "SMALL", "U", "SUP", "SUB"]);
-const ED_SKIP = "svg,canvas,input,textarea,select,script,style,[data-count],.cnt,.clock,.sc-wood,#fit-o,#sel,.cl-st,.tools3,.ed-ui,.cmp-hint,.crumbs,.snav,.sc-rail,.st3 .tag,.stage .badge,.seg,.ctrl,.fit-scale,.fit-m em,.b5-count,.sn-ind,.gal-nav,.totop";
+const ED_SKIP = ".fin3,svg,canvas,input,textarea,select,script,style,[data-count],.cnt,.clock,.sc-wood,#fit-o,#sel,.cl-st,.tools3,.ed-ui,.cmp-hint,.crumbs,.snav,.sc-rail,.st3 .tag,.stage .badge,.seg,.ctrl,.fit-scale,.fit-m em,.b5-count,.sn-ind,.gal-nav,.totop";
 const ED_PSKIP = ".clad button i,.slats div,.slat5 .tx,.sw button,.ld,.ocard .im";
 const edHash = s => { let h = 5381; for (let i = 0; i < s.length; i++) h = (h * 33 + s.charCodeAt(i)) >>> 0; return h.toString(36); };
 const edNorm = s => s.replace(/[  ]/g, " ").replace(/\s+/g, " ").trim();

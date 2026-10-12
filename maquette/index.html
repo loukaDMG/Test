@@ -1035,6 +1035,42 @@ body:not(.is-home) #app .head .intro{font-size:17px}body:not(.is-home) #app .hea
 .deliv .cl-steps li.on::before{background:#fff;box-shadow:0 0 0 4px rgba(149,213,178,.35)}
 @media (max-width:640px){.deliv .clock{padding:18px 20px 20px;gap:10px}.deliv .clock b{font-size:56px}.deliv .clock .cl-now{font-size:20px}.deliv .cl-steps{display:none}}
 @media (min-width:641px){.deliv .clock{left:auto;right:clamp(24px,4vw,56px)}}
+/* v11 : motion design étendu */
+.cv2{position:absolute;inset:0;z-index:4;display:flex;pointer-events:none}
+.cv2 i{flex:1 0 0;height:100%;margin-right:-1px;background:var(--bg,#fff);transform:scaleX(0)}
+.mcard4 .img{position:relative}
+/* Cotes de plan sous les modèles */
+.panel .cote{position:relative;display:flex;align-items:center;gap:10px;width:calc(var(--w) * 100%);min-width:0;height:16px;margin-bottom:2px}
+.panel .cote i{flex:1;height:1px;background:var(--v300);position:relative;transform-origin:left}
+.panel .cote i::before,.panel .cote i::after{content:"";position:absolute;top:-5px;width:1px;height:11px;background:var(--v300)}
+.panel .cote i::before{left:0}.panel .cote i::after{right:0}
+.panel .cote em{font-style:normal;font-size:12px;letter-spacing:.06em;color:var(--v300);white-space:nowrap;font-variant-numeric:tabular-nums}
+/* Construction : couches qui s'allument */
+.b5-list{position:relative}
+.b5-list.anim::before{content:"";position:absolute;left:13px;top:26px;bottom:26px;width:1px;background:var(--v500);transform-origin:top;transform:scaleY(var(--rail,0));opacity:.5}
+.b5-list.anim li i,.b5-list.anim li b,.b5-list.anim li p,.b5-list.anim li span{transition:opacity .6s,color .6s,transform .8s var(--ease)}
+.b5-list.anim li:not(.on):not(.past) i,.b5-list.anim li:not(.on):not(.past) b{opacity:.35}
+.b5-list.anim li:not(.on):not(.past) p{opacity:.45}
+.b5-list.anim li.past b,.b5-list.anim li.past i{opacity:.75}
+.b5-list.anim li.on i{transform:scale(1.15);transform-origin:left center}
+.b5-list.anim li.on b{color:var(--v500)}
+.b5-count{position:absolute;right:16px;top:16px;z-index:3;display:flex;align-items:baseline;gap:6px;padding:8px 14px;border-radius:980px;background:rgba(8,25,15,.6);color:#fff;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.b5-count b{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-weight:400;font-size:22px;font-variant-numeric:tabular-nums;line-height:1}
+.b5-count span{font-size:12px;color:rgba(255,255,255,.7)}
+/* Formulaire : micro-interactions */
+.chip.on{animation:chipPop .45s var(--ease)}
+@keyframes chipPop{0%{transform:scale(.92)}60%{transform:scale(1.06)}100%{transform:scale(1)}}
+.form .pill{transition:width .5s var(--ease),padding .5s var(--ease),background .3s}
+.form .pill.sent{width:52px;padding:0;justify-content:center;background:var(--v900);pointer-events:none}
+.form .pill.sent svg{width:22px;height:22px;fill:none;stroke:#fff;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:24;stroke-dashoffset:24;animation:drawCheck .6s .25s var(--ease) forwards}
+@keyframes drawCheck{to{stroke-dashoffset:0}}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+/* Visite : repère pulsant sur l'adresse */
+.visit-dl dd:first-of-type{position:relative;padding-left:20px}
+.visit-dl dd:first-of-type::before{content:"";position:absolute;left:2px;top:50%;width:8px;height:8px;margin-top:-4px;border-radius:50%;background:var(--v500);box-shadow:0 0 0 0 rgba(45,106,79,.45);animation:pin 2.2s ease-out infinite}
+@keyframes pin{0%{box-shadow:0 0 0 0 rgba(45,106,79,.45)}100%{box-shadow:0 0 0 12px rgba(45,106,79,0)}}
+@media (prefers-reduced-motion:reduce){.chip.on,.visit-dl dd:first-of-type::before{animation:none}.form .pill.sent svg{animation:none;stroke-dashoffset:0}}
+.b5-list.anim::before{left:-22px;top:30px;bottom:30px}@media (max-width:900px){.b5-list.anim::before{display:none}}
 
 </style>
 </head>
@@ -5969,7 +6005,7 @@ const cladButtons = () => `<div class="clad clad2" role="group" aria-label="Bard
 
 function panel(s, i) {
   const M = MODELS[s];
-  return `<a class="panel" href="#${s}" data-cursor="Découvrir"><div class="txt"><span class="idx">0${i + 1} · ${M.size} de façade</span><div><h3>${M.name}<em>${M.tag}</em></h3></div><span class="go"><i>${ARR}</i>Découvrir ${M.name}</span></div><div class="vis vph" style="background-image:url(${IMG[M.ph]})"></div><div hidden style="--sw:${Math.min(96, Math.round(M.sw * 118))}%">${svgKitchen(M.m, true)}</div></a>`;
+  return `<a class="panel" href="#${s}" data-cursor="Découvrir"><div class="txt"><span class="cote" style="--w:${M.m / 4}"><i></i><em>${M.size}</em></span><span class="idx">0${i + 1} · ${M.size} de façade</span><div><h3>${M.name}<em>${M.tag}</em></h3></div><span class="go"><i>${ARR}</i>Découvrir ${M.name}</span></div><div class="vis vph" style="background-image:url(${IMG[M.ph]})"></div><div hidden style="--sw:${Math.min(96, Math.round(M.sw * 118))}%">${svgKitchen(M.m, true)}</div></a>`;
 }
 
 /* ---------- Accueil ---------- */
@@ -5997,7 +6033,7 @@ function home() {
 <section class="sec build5" id="construction"><div class="wrap">
   <div class="head" data-a="up"><p class="kicker">Construction</p><h2 class="h-title">${ln("Construite comme une maison.\nPas comme un <em>meuble de jardin.</em>")}</h2><p class="intro">Chaque couche a un rôle : porter, protéger, durer. Ce sont des matériaux de bâtiment, choisis pour passer les saisons dehors.</p></div>
   <div class="b5-grid">
-    <figure class="b5-ph"><div style="background-image:url(${IMG.piscine})"></div><figcaption>Façade Fundermax, intérieur bois</figcaption></figure>
+    <figure class="b5-ph"><div style="background-image:url(${IMG.piscine})"></div><figcaption>Façade Fundermax, intérieur bois</figcaption><span class="b5-count" aria-hidden="true"><b>01</b><span>/ 07</span></span></figure>
     <ol class="b5-list">${[
       ["Pose", "Sur 4 plots béton", "Posée sans fixation au bâtiment, sans travaux de maçonnerie."],
       ["Structure", "Ossature bois", "Une charpente de construction, pas un assemblage de meubles."],
@@ -6369,7 +6405,12 @@ function after(page) {
   const form = document.getElementById("form");
   if (form) {
     form.querySelectorAll(".chips").forEach(g => g.querySelectorAll(".chip").forEach(c => c.addEventListener("click", () => g.querySelectorAll(".chip").forEach(x => { x.classList.toggle("on", x === c); x.setAttribute("aria-pressed", String(x === c)); }))));
-    form.addEventListener("submit", e => { e.preventDefault(); toast("Merci ! Votre demande est prête à partir (maquette : aucun envoi réel)."); form.reset(); form.querySelectorAll(".chip").forEach(x => x.classList.remove("on")); });
+    form.addEventListener("submit", e => {
+      e.preventDefault(); toast("Merci ! Votre demande est prête à partir (maquette : aucun envoi réel).");
+      const btn = form.querySelector("button[type=submit]");
+      if (btn && !btn.classList.contains("sent")) { btn.classList.add("sent"); btn.dataset.l = btn.innerHTML; btn.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span class="sr">Demande prête</span>'; setTimeout(() => { btn.classList.remove("sent"); btn.innerHTML = btn.dataset.l; }, 2600); }
+      form.reset(); form.querySelectorAll(".chip").forEach(x => x.classList.remove("on"));
+    });
   }
   app.querySelectorAll("[data-try]").forEach(b => b.addEventListener("click", () => {
     const box = document.getElementById("st-home"); if (!box) return;
@@ -6693,7 +6734,7 @@ function motion(page) {
   // Parallaxe des images
   app.querySelectorAll("[data-par]").forEach(el => gsap.fromTo(el, { yPercent: -(+el.dataset.par) }, { yPercent: +el.dataset.par, ease: "none", scrollTrigger: { trigger: el.parentElement, start: "top bottom", end: "bottom top", scrub: true } }));
   // Photos : ouverture en volet au défilement
-  app.querySelectorAll(".story4 .ph, .band, .mcard4 .img, .slats").forEach(el => gsap.fromTo(el, { clipPath: "inset(14% 0% 0% 0% round 20px)" }, { clipPath: "inset(0% 0% 0% 0% round 20px)", ease: "none", scrollTrigger: { trigger: el, start: "top 95%", end: "top 45%", scrub: true } }));
+  app.querySelectorAll(".story4:not(#fermeture) .ph, .band, .slats").forEach(el => gsap.fromTo(el, { clipPath: "inset(14% 0% 0% 0% round 20px)" }, { clipPath: "inset(0% 0% 0% 0% round 20px)", ease: "none", scrollTrigger: { trigger: el, start: "top 95%", end: "top 45%", scrub: true } }));
   // Compteurs
   app.querySelectorAll("[data-count]").forEach(el => { const n = +el.dataset.count, o = { v: 0 }; gsap.to(o, { v: n, duration: 1.6, ease: "power2.out", scrollTrigger: { trigger: el, start: "top 90%", once: true }, onUpdate: () => { el.textContent = Math.round(o.v); } }); });
   // Manifeste : mots qui s'allument au défilement
@@ -6711,6 +6752,47 @@ function motion(page) {
   // Livraison : l'image s'ouvre
   const fr = app.querySelector("[data-clip]");
   if (fr) gsap.fromTo(fr, { clipPath: "inset(9% 16% 9% 16% round 28px)" }, { clipPath: "inset(0% 0% 0% 0% round 28px)", ease: "none", scrollTrigger: { trigger: fr, start: "top 90%", end: "top 20%", scrub: true } });
+  // Photos : ouverture en claire-voie (lames qui s'écartent)
+  const bgOf = el => { for (let a = el.parentElement; a; a = a.parentElement) { const c = getComputedStyle(a).backgroundColor; if (c && c !== "rgba(0, 0, 0, 0)" && c !== "transparent") return c; } return "#fff"; };
+  app.querySelectorAll(".b5-ph, .kit-hero, .visit-ph, .bandeau, #fermeture .ph, .eqd-ph:not(.prod), .mcard4 .img").forEach(el => {
+    const cv = document.createElement("span"), n = el.offsetWidth > 700 ? 9 : 6;
+    cv.className = "cv2"; cv.setAttribute("aria-hidden", "true"); cv.style.setProperty("--bg", bgOf(el)); cv.innerHTML = "<i></i>".repeat(n); el.appendChild(cv);
+    const img = el.querySelector(":scope > div, :scope > .ph");
+    const tl = gsap.timeline({ scrollTrigger: { trigger: el, start: "top 82%", once: true }, onComplete: () => cv.remove() });
+    tl.fromTo(cv.children, { scaleX: 1.04 }, { scaleX: 0, duration: 1.35, ease: "expo.inOut", stagger: { each: .06, from: "center" } }, 0);
+    if (img) tl.fromTo(img, { scale: 1.16 }, { scale: 1, duration: 2, ease: "expo.out" }, .1);
+  });
+  // Construction : les couches s'allument une à une
+  const b5 = app.querySelector(".b5-list");
+  if (b5) {
+    b5.classList.add("anim");
+    const lis = [...b5.children], cnt = app.querySelector(".b5-count b");
+    lis.forEach((li, k) => ScrollTrigger.create({ trigger: li, start: "top 62%", end: "bottom 62%", onToggle: s => { if (s.isActive) { lis.forEach((x, j) => { x.classList.toggle("on", j === k); x.classList.toggle("past", j < k); }); if (cnt) cnt.textContent = String(k + 1).padStart(2, "0"); } } }));
+    gsap.fromTo(b5, { "--rail": 0 }, { "--rail": 1, ease: "none", scrollTrigger: { trigger: b5, start: "top 62%", end: "bottom 62%", scrub: true } });
+  }
+  // Listes à tirets (pages modèles) : le tiret se trace puis le texte glisse
+  app.querySelectorAll("ul.dash").forEach(ul => gsap.from(ul.children, { x: -18, opacity: 0, duration: .8, ease: E, stagger: .06, scrollTrigger: { trigger: ul, start: "top 85%", once: true } }));
+  // Réalisations : la galerie entre par la droite et s'incline avec la vitesse
+  const strip = app.querySelector(".strip");
+  if (strip) {
+    const shots = strip.querySelectorAll(".shot");
+    gsap.from(shots, { x: 140, opacity: 0, duration: 1.4, ease: E, stagger: .1, scrollTrigger: { trigger: strip, start: "top 85%", once: true } });
+    let last = strip.scrollLeft, lt = performance.now();
+    const imgs = strip.querySelectorAll(".shot div"), skew = gsap.quickTo(imgs, "skewX", { duration: .5, ease: "power3.out" });
+    const onS = () => { const now = performance.now(), v = (strip.scrollLeft - last) / Math.max(16, now - lt); last = strip.scrollLeft; lt = now; skew(gsap.utils.clamp(-6, 6, -v * 3.5)); clearTimeout(onS.t); onS.t = setTimeout(() => skew(0), 120); };
+    strip.addEventListener("scroll", onS, { passive: true }); cleanups.push(() => strip.removeEventListener("scroll", onS));
+  }
+  // Formulaire : les champs arrivent l'un après l'autre
+  const form = app.querySelector("#form");
+  if (form) gsap.from(form.querySelectorAll(".two, .field:not(.two .field), .consent, .pill"), { y: 22, opacity: 0, duration: .9, ease: E, stagger: .07, scrollTrigger: { trigger: form, start: "top 80%", once: true } });
+  // Comparatif : ouverture en douceur
+  app.querySelectorAll(".cmp-tg").forEach(b => b.addEventListener("click", () => { const box = b.nextElementSibling; if (!box.hidden) { gsap.fromTo(box, { height: 0, opacity: 0 }, { height: "auto", opacity: 1, duration: .8, ease: E, clearProps: "height", onComplete: () => ScrollTrigger.refresh() }); gsap.from(box.querySelectorAll("tbody tr"), { y: 14, opacity: 0, duration: .6, ease: E, stagger: .025, delay: .1 }); } }));
+  // Pied de page : la phrase se révèle
+  const fb = document.querySelector(".fbig .fb-t");
+  if (fb) gsap.fromTo(fb, { clipPath: "inset(0 0 100% 0)", y: 30 }, { clipPath: "inset(0 0 0% 0)", y: 0, duration: 1.3, ease: E, scrollTrigger: { trigger: fb, start: "top 92%", once: true } });
+  // Points forts des pages modèles
+  const hl = app.querySelectorAll(".kit-hl i");
+  if (hl.length) gsap.from(hl, { yPercent: 80, opacity: 0, duration: 1, ease: E, stagger: .1, scrollTrigger: { trigger: ".kit-hl", start: "top 85%", once: true } });
   if (page === "home") {
     const hk = app.querySelector("[data-hero-k]"), hf = app.querySelectorAll("[data-hero-f]"), hs = app.querySelectorAll("[data-hero-in] .ln>span");
     const tl = gsap.timeline({ delay: window.__loaded ? .1 : 1.5 });
@@ -6745,6 +6827,9 @@ function motion(page) {
         .fromTo(clk, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .12 }, .12)
         .to(t, { v: 1, ease: "none", duration: .78, onUpdate: upd }, .2);
     }
+    // Gamme : les cotes se tracent comme sur un plan
+    gsap.fromTo(app.querySelectorAll(".panel .cote i"), { scaleX: 0 }, { scaleX: 1, duration: 1.4, ease: "expo.inOut", stagger: .18, delay: .3, scrollTrigger: { trigger: ".range4 .track", start: "top 80%", once: true } });
+    gsap.from(app.querySelectorAll(".panel .cote em"), { opacity: 0, y: 6, duration: .6, ease: E, stagger: .18, delay: 1.1, scrollTrigger: { trigger: ".range4 .track", start: "top 80%", once: true } });
     // Gamme : apparition douce des trois cartes
     gsap.from(app.querySelectorAll(".range4 .panel"), { y: 40, opacity: 0, duration: 1, ease: E, stagger: .12, scrollTrigger: { trigger: ".range4 .track", start: "top 85%", once: true } });
   } else {

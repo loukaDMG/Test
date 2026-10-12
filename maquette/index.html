@@ -1071,6 +1071,43 @@ body:not(.is-home) #app .head .intro{font-size:17px}body:not(.is-home) #app .hea
 @keyframes pin{0%{box-shadow:0 0 0 0 rgba(45,106,79,.45)}100%{box-shadow:0 0 0 12px rgba(45,106,79,0)}}
 @media (prefers-reduced-motion:reduce){.chip.on,.visit-dl dd:first-of-type::before{animation:none}.form .pill.sent svg{animation:none;stroke-dashoffset:0}}
 .b5-list.anim::before{left:-22px;top:30px;bottom:30px}@media (max-width:900px){.b5-list.anim::before{display:none}}
+/* v12 : mouvement sur l'existant */
+.h6-ph>div{inset:-16px}
+.kicker.kd::before{transform:scaleX(0);transform-origin:left;transition:transform .9s var(--ease)}
+.kicker.kd{clip-path:inset(0 100% 0 0);transition:clip-path 1.1s var(--ease)}
+.kicker.kd.in{clip-path:inset(0 -2% 0 0)}
+.kicker.kd.in::before{transform:scaleX(1)}
+/* Boutons : reflet au survol, flèches qui avancent */
+.pill{position:relative;overflow:hidden;isolation:isolate}
+.pill::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.28) 50%,transparent 70%);transform:translateX(-130%);transition:transform .9s var(--ease);pointer-events:none}
+.pill:hover::after{transform:translateX(130%)}
+.pill svg,.link svg,.eqc .more svg,.eqnav svg{transition:transform .45s var(--ease)}
+.pill:hover svg,.link:hover svg,.eqc:hover .more svg,.eqnav a:hover svg{transform:translateX(4px)}
+/* Navigation : soulignement qui glisse */
+.gnav nav a::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:1px;background:var(--v300);transform:scaleX(0);transform-origin:right;transition:transform .45s var(--ease)}
+.gnav nav a:hover::after,.gnav nav a.on::after{transform:scaleX(1);transform-origin:left}
+/* Gamme : la photo respire au survol */
+.panel .vis.vph{transition:transform 1.2s var(--ease)}
+.panel:hover .vis.vph{transform:scale(1.06)}
+/* Bardage WEO : la teinte survolée s'élargit */
+.slats{display:flex}
+.slats>div{flex:1 1 0;min-width:0;transition:flex-grow .8s var(--ease)}
+.slats>div:hover{flex-grow:2.2}
+/* Frise : chaque étape s'allume */
+.tl.anim .st b,.tl.anim .st h3,.tl.anim .st p{transition:opacity .7s,transform .9s var(--ease)}
+.tl.anim .st:not(.on) b{opacity:.25;transform:translateY(12px)}
+.tl.anim .st:not(.on) h3,.tl.anim .st:not(.on) p{opacity:.35}
+/* FAQ : la réponse glisse en s'ouvrant */
+.qa .a p{transform:translateY(-10px);opacity:0;transition:transform .6s var(--ease),opacity .5s}
+.qa.open .a p{transform:none;opacity:1}
+.qa button{transition:color .3s}.qa button:hover{color:var(--v500)}
+/* Équipements : photo au survol */
+.eqc .ph{transition:transform 1s var(--ease)}
+.eqc:hover .ph{transform:scale(1.05)}
+/* Modèle suivant : le nom s'ouvre au survol */
+.nextm h2{transition:letter-spacing .8s var(--ease)}
+.nextm:hover h2{letter-spacing:.01em}
+@media (prefers-reduced-motion:reduce){.pill::after{display:none}.kicker.kd{clip-path:none}}
 
 </style>
 </head>
@@ -6020,7 +6057,7 @@ function home() {
       <dl class="h6-facts" data-hero-f>${[["Siège", "Évires, Haute-Savoie"], ["Gamme", "3 modèles · 2, 3 et 4\u00a0m"], ["Fabrication", "En atelier"], ["Livraison", "Partout en France"]].map(f => `<div><dt>${f[0]}</dt><dd>${f[1]}</dd></div>`).join("")}</dl>
       <div class="actions" data-hero-f><a class="pill light mag" href="#gamme">Découvrir la gamme</a><a class="h6-link" href="#devis">Nous contacter</a></div>
     </div>
-    <figure class="h6-ph" data-hero-media><div style="background-image:url(${IMG.bois})"></div><span class="cv" aria-hidden="true">${"<i></i>".repeat(9)}</span><figcaption>Réalisation DMG Concept</figcaption></figure>
+    <figure class="h6-ph" data-hero-media><div style="background-image:url(${IMG.bois})"></div><figcaption>Réalisation DMG Concept</figcaption></figure>
   </div>
 </section>
 
@@ -6422,6 +6459,8 @@ function after(page) {
   if (page === "home") { galleryInit(); fitInit(); sceneInit(); }
   if (MODELS[page]) modelInit(page);
   motion(page);
+  // Les sections épinglées créées en dernier décalent celles d'après : on recalcule dans l'ordre de la page
+  if (HAS_G) { ScrollTrigger.sort(); ScrollTrigger.refresh(); }
 }
 function preselect(s) {
   const form = document.getElementById("form"); if (!form) return;
@@ -6729,7 +6768,7 @@ function motion(page) {
   // Titres ligne à ligne (hors hero)
   app.querySelectorAll(".h-title, .h-display").forEach(h => {
     const spans = h.querySelectorAll(".ln>span"); if (!spans.length || h.closest("[data-hero-in]")) return;
-    gsap.from(spans, { yPercent: 115, duration: 1.2, ease: E, stagger: .09, scrollTrigger: { trigger: h, start: "top 88%", once: true } });
+    gsap.from(spans, { yPercent: 115, rotate: 3.5, transformOrigin: "0% 100%", duration: 1.3, ease: E, stagger: .09, scrollTrigger: { trigger: h, start: "top 88%", once: true } });
   });
   // Parallaxe des images
   app.querySelectorAll("[data-par]").forEach(el => gsap.fromTo(el, { yPercent: -(+el.dataset.par) }, { yPercent: +el.dataset.par, ease: "none", scrollTrigger: { trigger: el.parentElement, start: "top bottom", end: "bottom top", scrub: true } }));
@@ -6752,15 +6791,12 @@ function motion(page) {
   // Livraison : l'image s'ouvre
   const fr = app.querySelector("[data-clip]");
   if (fr) gsap.fromTo(fr, { clipPath: "inset(9% 16% 9% 16% round 28px)" }, { clipPath: "inset(0% 0% 0% 0% round 28px)", ease: "none", scrollTrigger: { trigger: fr, start: "top 90%", end: "top 20%", scrub: true } });
-  // Photos : ouverture en claire-voie (lames qui s'écartent)
-  const bgOf = el => { for (let a = el.parentElement; a; a = a.parentElement) { const c = getComputedStyle(a).backgroundColor; if (c && c !== "rgba(0, 0, 0, 0)" && c !== "transparent") return c; } return "#fff"; };
+  // Photos : la fenêtre s'ouvre au défilement, l'image se pose
   app.querySelectorAll(".b5-ph, .kit-hero, .visit-ph, .bandeau, #fermeture .ph, .eqd-ph:not(.prod), .mcard4 .img").forEach(el => {
-    const cv = document.createElement("span"), n = el.offsetWidth > 700 ? 9 : 6;
-    cv.className = "cv2"; cv.setAttribute("aria-hidden", "true"); cv.style.setProperty("--bg", bgOf(el)); cv.innerHTML = "<i></i>".repeat(n); el.appendChild(cv);
-    const img = el.querySelector(":scope > div, :scope > .ph");
-    const tl = gsap.timeline({ scrollTrigger: { trigger: el, start: "top 82%", once: true }, onComplete: () => cv.remove() });
-    tl.fromTo(cv.children, { scaleX: 1.04 }, { scaleX: 0, duration: 1.35, ease: "expo.inOut", stagger: { each: .06, from: "center" } }, 0);
-    if (img) tl.fromTo(img, { scale: 1.16 }, { scale: 1, duration: 2, ease: "expo.out" }, .1);
+    const r = getComputedStyle(el).borderTopLeftRadius || "22px", img = el.querySelector(":scope > div, :scope > .ph");
+    const tl = gsap.timeline({ scrollTrigger: { trigger: el, start: "top 95%", end: "top 35%", scrub: .8 } });
+    tl.fromTo(el, { clipPath: `inset(7% 7% 7% 7% round ${r})` }, { clipPath: `inset(0% 0% 0% 0% round ${r})`, ease: "power2.out" }, 0);
+    if (img && !img.hasAttribute("data-par")) tl.fromTo(img, { scale: 1.14 }, { scale: 1, ease: "power2.out" }, 0);
   });
   // Construction : les couches s'allument une à une
   const b5 = app.querySelector(".b5-list");
@@ -6793,12 +6829,30 @@ function motion(page) {
   // Points forts des pages modèles
   const hl = app.querySelectorAll(".kit-hl i");
   if (hl.length) gsap.from(hl, { yPercent: 80, opacity: 0, duration: 1, ease: E, stagger: .1, scrollTrigger: { trigger: ".kit-hl", start: "top 85%", once: true } });
+  // Kickers : le filet se trace avant le texte
+  app.querySelectorAll(".kicker").forEach(k => { if (k.closest("[data-hero-in], .sc-txt, .n-txt")) return; k.classList.add("kd"); ScrollTrigger.create({ trigger: k, start: "top 92%", once: true, onEnter: () => k.classList.add("in") }); });
+  // Listes et tableaux : les lignes arrivent l'une après l'autre
+  app.querySelectorAll(".pts4, .visit-dl, .kit-inc dl, .eqspec dl, .eqpts, .coords").forEach(list => gsap.from(list.children, { y: 16, opacity: 0, duration: .8, ease: E, stagger: .05, scrollTrigger: { trigger: list, start: "top 86%", once: true } }));
+  // Signature du fondateur
+  const sig = app.querySelector(".sig4 i");
+  if (sig) gsap.from(sig, { scale: 0, rotate: -120, duration: 1.1, ease: "back.out(2)", scrollTrigger: { trigger: sig, start: "top 92%", once: true } });
+  // Bardage WEO : les quatre teintes montent l'une après l'autre
+  app.querySelectorAll(".slats").forEach(sl => gsap.fromTo(sl.children, { clipPath: "inset(100% 0% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.2, ease: "expo.out", stagger: .12, scrollTrigger: { trigger: sl, start: "top 85%", once: true } }));
+  // Frise : les étapes s'allument
+  const tlx = app.querySelector(".tl"); if (tlx) tlx.classList.add("anim");
+  // Chiffres des pages modèles
+  app.querySelectorAll(".facts b").forEach(b => { const n = +b.textContent.trim(); if (!Number.isInteger(n) || !n) return; const o = { v: 0 }; gsap.to(o, { v: n, duration: 1.6, delay: .6, ease: "power2.out", onUpdate: () => { b.textContent = Math.round(o.v); } }); });
+  // Équipements : cartes en cascade, photo qui se pose
+  const eqc = gsap.utils.toArray(app.querySelectorAll(".eqc"));
+  if (eqc.length) { gsap.set(eqc, { y: 40, opacity: 0 }); ScrollTrigger.batch(eqc, { start: "top 92%", once: true, onEnter: b => { gsap.to(b, { y: 0, opacity: 1, duration: 1, ease: E, stagger: .08 }); gsap.from(b.map(c => c.querySelector(".ph")), { scale: 1.18, duration: 1.4, ease: E, stagger: .08, clearProps: "transform" }); } }); }
+  // Pied de page : colonnes en cascade
+  gsap.from(document.querySelectorAll("footer .cols > div, footer .brand"), { y: 24, opacity: 0, duration: .9, ease: E, stagger: .08, scrollTrigger: { trigger: "footer .top", start: "top 92%", once: true } });
   if (page === "home") {
     const hk = app.querySelector("[data-hero-k]"), hf = app.querySelectorAll("[data-hero-f]"), hs = app.querySelectorAll("[data-hero-in] .ln>span");
     const tl = gsap.timeline({ delay: window.__loaded ? .1 : 1.5 });
     tl.from(hk, { opacity: 0, y: 16, duration: 1, ease: E }, .2)
       .from(hf, { opacity: 0, y: 24, duration: 1, ease: E, stagger: .12 }, .4)
-      .fromTo("[data-hero-media] .cv i", { scaleX: 1.04 }, { scaleX: 0, duration: 1.5, ease: "expo.inOut", stagger: { each: .07, from: "center" } }, .25)
+      .fromTo("[data-hero-media]", { clipPath: "inset(10% 10% 10% 10% round 24px)" }, { clipPath: "inset(0% 0% 0% 0% round 24px)", duration: 1.8, ease: "expo.inOut" }, .25)
       .from("[data-hero-media]>div", { scale: 1.18, duration: 2.6, ease: "expo.out" }, .3);
     // Bandeau claire-voie : les lames s'ouvrent comme des persiennes
     const lv = app.querySelectorAll(".slat5 .lv i");
@@ -6827,6 +6881,18 @@ function motion(page) {
         .fromTo(clk, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .12 }, .12)
         .to(t, { v: 1, ease: "none", duration: .78, onUpdate: upd }, .2);
     }
+    // Ouverture : le logo se dessine de gauche à droite, la photo suit la souris
+    const lg = app.querySelector(".h6-logo");
+    if (lg) tl.fromTo(lg, { clipPath: "inset(0% 100% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.6, ease: "expo.inOut" }, .15);
+    const hm = app.querySelector("[data-hero-media]"), hi = hm && hm.querySelector(":scope > div");
+    if (hm && hi && matchMedia("(hover:hover)").matches) {
+      const qx = gsap.quickTo(hi, "x", { duration: 1.2, ease: "power3.out" }), qy = gsap.quickTo(hi, "y", { duration: 1.2, ease: "power3.out" });
+      const mv = e => { const r = hm.getBoundingClientRect(); qx((e.clientX - r.left - r.width / 2) / r.width * -22); qy((e.clientY - r.top - r.height / 2) / r.height * -16); };
+      hm.addEventListener("mousemove", mv); hm.addEventListener("mouseleave", () => { qx(0); qy(0); });
+      cleanups.push(() => hm.removeEventListener("mousemove", mv));
+    }
+    // Gamme : les photos se posent dans les cartes
+    gsap.from(app.querySelectorAll(".panel .vis.vph"), { scale: 1.25, duration: 1.6, ease: E, stagger: .12, clearProps: "transform", scrollTrigger: { trigger: ".range4 .track", start: "top 85%", once: true } });
     // Gamme : les cotes se tracent comme sur un plan
     gsap.fromTo(app.querySelectorAll(".panel .cote i"), { scaleX: 0 }, { scaleX: 1, duration: 1.4, ease: "expo.inOut", stagger: .18, delay: .3, scrollTrigger: { trigger: ".range4 .track", start: "top 80%", once: true } });
     gsap.from(app.querySelectorAll(".panel .cote em"), { opacity: 0, y: 6, duration: .6, ease: E, stagger: .18, delay: 1.1, scrollTrigger: { trigger: ".range4 .track", start: "top 80%", once: true } });

@@ -1121,6 +1121,26 @@ body:not(.is-home) #app .head .intro{font-size:17px}body:not(.is-home) #app .hea
 .eqd-txt .h-title,.eqh .h-title{line-height:1.1}
 .qa button{line-height:1.3}
 .m-hero .h-name{margin-top:.22em}.nextm small{margin-bottom:1.6em}
+/* v13 : mouvement des pages cuisines et équipements */
+.snav .right{position:relative}
+.snav .right.has-ind a.sl.on::after{display:none}
+.sn-ind{position:absolute;left:0;bottom:-18px;width:0;height:2px;border-radius:2px;background:var(--v300);opacity:0;pointer-events:none;transition:transform .7s var(--ease),width .7s var(--ease),opacity .3s}
+.kit-hero.bleed{aspect-ratio:auto;height:clamp(440px,44vw,640px);width:calc(100% + 2 * var(--sh,0px));max-width:none;margin-left:calc(-1 * var(--sh,0px));border-radius:calc(24px * (1 - var(--x,0)))}
+.kit-hero.bleed figcaption{left:calc(clamp(20px,4vw,48px) + var(--sh,0px))}
+.kit-hero.bleed .tagr{right:calc(16px + var(--sh,0px))}
+.kit-hl>div{will-change:transform}
+.eqc{position:relative}
+.eqc::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(380px circle at var(--mx,50%) var(--my,50%),rgba(45,106,79,.12),transparent 62%);opacity:0;transition:opacity .45s}
+.eqc:hover::after{opacity:1}
+.eqc:hover{transform:none}.eqc:hover .ph{transform:none}
+.eqd-ph{will-change:transform}
+.eqd-ph.prod{box-shadow:0 40px 70px -50px rgba(14,42,31,.45)}
+.cw{display:inline-block;white-space:nowrap}.cw .c{display:inline-block}
+.eqpts.anim li::before{transform:scale(0);transition:transform .6s var(--ease),box-shadow .8s ease}
+.eqpts.anim li.in::before{transform:scale(1);box-shadow:0 0 0 6px rgba(45,106,79,0)}
+.eqpts.anim li{transition:color .6s}
+.cnt{font-variant-numeric:tabular-nums}
+.cnt{white-space:nowrap}
 
 </style>
 </head>
@@ -6472,6 +6492,7 @@ function after(page) {
   if (page === "home") { galleryInit(); fitInit(); sceneInit(); }
   if (MODELS[page]) modelInit(page);
   motion(page);
+  pageMotion(page);
   // Les sections épinglées créées en dernier décalent celles d'après : on recalcule dans l'ordre de la page
   if (HAS_G) { ScrollTrigger.sort(); ScrollTrigger.refresh(); }
 }
@@ -6541,7 +6562,10 @@ function realInit(box) {
     } catch (e) { ld.querySelector("span").textContent = "La vue 3D n’a pas pu démarrer."; return; }
     real = api;
     api.onProgress = p => { bar.style.width = Math.round(p * 100) + "%"; };
-    api.onReady = () => { ld.classList.add("done"); };
+    api.onReady = () => {
+      ld.classList.add("done");
+      if (box.id === "st-model" && !REDUCED) { api.jump("face"); setTimeout(() => { if (!api) return; api.view("trois"); setTimeout(() => { if (api && st.auto) api.setAuto(true); }, 1500); }, 700); }
+    };
     setTimeout(() => ld.classList.add("done"), 6000);
     api.setCladding(state.clad);
     api.onInteract = () => { if (st.auto) { st.auto = false; api.setAuto(false); sync(); } };
@@ -6760,6 +6784,101 @@ function viewer3D(stage, M) {
   }
   setAmb(state.amb); loop();
   return { setFin, setAmb, reset, dispose() { dead = true; cancelAnimationFrame(raf); ro.disconnect(); window.removeEventListener("pointermove", move); window.removeEventListener("pointerup", up); renderer.dispose(); el.remove(); } };
+}
+
+/* ---------- Pages cuisines et équipements : mouvement ---------- */
+function splitChars(el) {
+  if (el.dataset.chars) return [...el.querySelectorAll(".c")];
+  el.dataset.chars = "1"; el.setAttribute("aria-label", el.textContent.trim());
+  el.innerHTML = el.textContent.trim().split(/(\s+)/).map(w => /^\s+$/.test(w) ? " " : `<span class="cw" aria-hidden="true">${[...w].map(c => `<span class="c">${c}</span>`).join("")}</span>`).join("");
+  return [...el.querySelectorAll(".c")];
+}
+function countUp(root) {
+  const re = /\d{1,3}(?:[   ]\d{3})*(?:,\d+)?(?=\s?(?:×|W\b|kW|V\b|mm|cm|kg|L\b|°C|%|personnes|ans|à\s\d))/g;
+  root.querySelectorAll("dd").forEach(dd => {
+    if (dd.dataset.cnt || !re.test(dd.textContent)) return; re.lastIndex = 0; dd.dataset.cnt = "1";
+    dd.innerHTML = dd.textContent.replace(re, m => `<span class="cnt">${m}</span>`);
+  });
+  root.querySelectorAll(".cnt").forEach(sp => {
+    const raw = sp.textContent, sep = (raw.match(/[   ]/) || [""])[0], dec = (raw.split(",")[1] || "").length;
+    const n = parseFloat(raw.replace(/[   ]/g, "").replace(",", ".")), o = { v: 0 };
+    const fmt = v => { let t = v.toFixed(dec).replace(".", ","); if (sep) t = t.replace(/\B(?=(\d{3})+(?!\d))/g, sep); return t; };
+    sp.textContent = fmt(0);
+    gsap.to(o, { v: n, duration: 1.8, ease: "power3.out", scrollTrigger: { trigger: sp.closest("dl") || sp, start: "top 85%", once: true }, onUpdate: () => { sp.textContent = fmt(o.v); }, onComplete: () => { sp.textContent = raw; } });
+  });
+}
+function tiltOn(card, img, amt = 7, sc = 0) {
+  if (!matchMedia("(hover:hover)").matches) return;
+  gsap.set(card, { transformPerspective: 900 });
+  const rx = gsap.quickTo(card, "rotationX", { duration: .6, ease: "power3.out" }), ry = gsap.quickTo(card, "rotationY", { duration: .6, ease: "power3.out" });
+  const ix = img && gsap.quickTo(img, "x", { duration: .8, ease: "power3.out" }), iy = img && gsap.quickTo(img, "y", { duration: .8, ease: "power3.out" });
+  card.addEventListener("pointermove", e => {
+    const r = card.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+    ry(x * amt); rx(-y * amt); if (ix) { ix(-x * 14); iy(-y * 10); }
+    card.style.setProperty("--mx", (x + .5) * 100 + "%"); card.style.setProperty("--my", (y + .5) * 100 + "%");
+  });
+  card.addEventListener("pointerenter", () => { if (img && sc) gsap.to(img, { scale: sc, duration: .9, ease: "power3.out" }); });
+  card.addEventListener("pointerleave", () => { rx(0); ry(0); if (ix) { ix(0); iy(0); } if (img && sc) gsap.to(img, { scale: 1, duration: .9, ease: "power3.out" }); });
+}
+function pageMotion(page) {
+  if (!HAS_G || REDUCED) return;
+  const E = "expo.out", desk = matchMedia("(min-width:761px)").matches;
+  if (MODELS[page]) {
+    // Héro : le nom recule et s'efface quand la 3D prend la place
+    const mh = app.querySelector(".m-hero");
+    if (mh) gsap.to(mh, { y: -90, opacity: .1, ease: "none", scrollTrigger: { trigger: mh, start: "top 8%", end: "bottom top", scrub: true } });
+    // Sous-navigation : un repère glisse sous la section en cours
+    const right = app.querySelector(".snav .right");
+    if (right) {
+      const ind = document.createElement("span"); ind.className = "sn-ind"; ind.setAttribute("aria-hidden", "true"); right.appendChild(ind); right.classList.add("has-ind");
+      const place = () => { const on = right.querySelector("a.sl.on"); if (!on) { ind.style.opacity = 0; return; } const a = on.getBoundingClientRect(), b = right.getBoundingClientRect(); ind.style.opacity = 1; ind.style.width = a.width + "px"; ind.style.transform = `translateX(${a.left - b.left}px)`; };
+      const mo = new MutationObserver(place); right.querySelectorAll("a.sl").forEach(a => mo.observe(a, { attributes: true, attributeFilter: ["class"] }));
+      addEventListener("resize", place); cleanups.push(() => { mo.disconnect(); removeEventListener("resize", place); }); place();
+    }
+    // La cuisine : la photo s'élargit jusqu'aux bords de l'écran
+    const kh = app.querySelector(".kit-hero");
+    if (kh && desk) {
+      kh.classList.add("bleed");
+      const o = { x: 0 }, upd = () => { const vw = document.documentElement.clientWidth, w = kh.parentElement.clientWidth - parseFloat(getComputedStyle(kh.parentElement).paddingLeft) * 2; kh.style.setProperty("--sh", Math.max(0, (vw - w) / 2 * o.x).toFixed(1) + "px"); kh.style.setProperty("--x", o.x.toFixed(3)); };
+      gsap.to(o, { x: 1, ease: "none", onUpdate: upd, scrollTrigger: { trigger: kh, start: "top 85%", end: "top 12%", scrub: .6, onRefresh: upd } });
+      const fc = kh.querySelector("figcaption");
+      gsap.from(fc.children, { y: 40, opacity: 0, duration: 1.2, ease: E, stagger: .1, scrollTrigger: { trigger: kh, start: "top 55%", once: true } });
+    }
+    // Points forts : les cartes basculent en place
+    const hl = app.querySelectorAll(".kit-hl > div");
+    if (hl.length) { gsap.from(hl, { rotationX: -35, transformPerspective: 900, transformOrigin: "50% 0%", duration: 1.3, ease: E, stagger: .1, scrollTrigger: { trigger: ".kit-hl", start: "top 88%", once: true } }); hl.forEach(c => tiltOn(c, null, 6)); }
+    // Options : les « ou » apparaissent après les lignes
+    const ous = app.querySelectorAll(".opt-cols li i");
+    if (ous.length) gsap.from(ous, { scale: 0, rotate: -25, duration: .7, ease: "back.out(3)", stagger: .12, delay: .5, scrollTrigger: { trigger: ".opt-cols", start: "top 85%", once: true } });
+    // Bardage : les pastilles arrivent une à une
+    const cb = app.querySelectorAll(".cladrow button");
+    if (cb.length) gsap.from(cb, { y: 14, opacity: 0, scale: .9, duration: .7, ease: E, stagger: .06, scrollTrigger: { trigger: ".cladrow", start: "top 88%", once: true } });
+    // Modèle suivant : l'illustration se construit pièce par pièce
+    const nv = app.querySelector(".nextm .vis svg");
+    if (nv) gsap.from([...nv.children].filter(c => c.tagName !== "defs"), { opacity: 0, y: 26, duration: .6, ease: "power3.out", stagger: .018, scrollTrigger: { trigger: ".nextm", start: "top 75%", once: true } });
+  }
+  if (page === "equipements") {
+    const cards = app.querySelectorAll(".eqc");
+    gsap.set(cards, { transformPerspective: 1000, transformOrigin: "50% 0%" });
+    ScrollTrigger.batch(cards, { start: "top 92%", once: true, onEnter: b => gsap.from(b, { rotationX: -28, duration: 1.4, ease: E, stagger: .08 }) });
+    cards.forEach(c => tiltOn(c, c.querySelector(".ph"), 8, 1.06));
+    app.querySelectorAll(".eqcat .h-sub").forEach(h => gsap.from(h, { x: -30, opacity: 0, duration: 1, ease: E, scrollTrigger: { trigger: h, start: "top 90%", once: true } }));
+  }
+  if (page.startsWith("eq-")) {
+    const h1 = app.querySelector(".eqd-txt h1");
+    if (h1) gsap.from(splitChars(h1), { yPercent: 60, opacity: 0, rotate: 8, duration: 1.1, ease: E, stagger: .025, delay: .35 });
+    const ph = app.querySelector(".eqd-ph"), img = ph && ph.querySelector(":scope > div");
+    if (ph && ph.classList.contains("prod") && img) {
+      gsap.fromTo(img, { x: 80, rotate: 6, scale: .86, opacity: 0 }, { x: 0, rotate: 0, scale: 1, opacity: 1, duration: 1.8, ease: E, delay: .3, onComplete: () => gsap.to(img, { y: -10, duration: 2.6, ease: "sine.inOut", yoyo: true, repeat: -1 }) });
+      tiltOn(ph, null, 10);
+    } else if (ph) tiltOn(ph, img, 4, 1.04);
+    countUp(app);
+    const pts = app.querySelector(".eqpts");
+    if (pts) { pts.classList.add("anim"); pts.querySelectorAll("li").forEach((li, k) => ScrollTrigger.create({ trigger: pts, start: "top 85%", once: true, onEnter: () => setTimeout(() => li.classList.add("in"), 250 + k * 110) })); }
+    const pills = app.querySelectorAll(".eqav .pill");
+    if (pills.length) gsap.from(pills, { y: 18, opacity: 0, duration: .8, ease: E, stagger: .08, scrollTrigger: { trigger: ".eqav", start: "top 88%", once: true } });
+    app.querySelectorAll(".eqspec").forEach(t => gsap.from(t.querySelector(".h-sub"), { x: -24, opacity: 0, duration: 1, ease: E, scrollTrigger: { trigger: t, start: "top 88%", once: true } }));
+  }
 }
 
 /* ---------- Motion design ---------- */

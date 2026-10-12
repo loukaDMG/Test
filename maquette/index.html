@@ -1215,6 +1215,12 @@ body:not(.is-home) #comparer .head{margin-bottom:20px}
 .kit-hl{margin-bottom:48px}
 .chipc.o{background:transparent;color:var(--v500);padding:0;height:auto;font-weight:500}
 .chipc.o svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none;padding:3px;box-sizing:content-box;border-radius:50%;background:var(--v50)}
+/* v15.3 : liens texte */
+.link,.h6-link,.eqnav a,.lnk{text-decoration:none!important;background-image:linear-gradient(currentColor,currentColor);background-repeat:no-repeat;background-position:100% 100%;background-size:0% 1px;padding-bottom:2px;transition:background-size .5s var(--ease),color .3s}
+.link:hover,.h6-link:hover,.eqnav a:hover,.lnk:hover{background-size:100% 1px;background-position:0 100%}
+.h6-link{border-bottom:1px solid var(--wl)}
+footer .cols a{width:fit-content;background-image:linear-gradient(#fff,#fff);background-repeat:no-repeat;background-position:100% 100%;background-size:0% 1px;transition:background-size .45s var(--ease),color .3s}
+footer .cols a:hover{background-size:100% 1px;background-position:0 100%}
 
 </style>
 </head>
@@ -6062,7 +6068,7 @@ const OPT = {
   dekton: O("Plan de travail Dekton", "Cosentino", "Surface ultracompacte : résiste aux UV, aux rayures, aux taches et à la chaleur. Ne se décolore pas au soleil.", ["Teinte au choix"]),
   tv: O("Téléviseur", "", "Pour regarder un match ou un film dehors."),
 };
-const PAIRS = [["Froid", "frigo", "cave"], ["Cuisson", "plancha", "bbq"], ["Abri ou îlot", "store", "ilot"]];
+const PAIRS = [["Froid", "frigo", "cave"], ["Cuisson", "plancha", "bbq"], ["Store ou îlot bar", "store", "ilot"]];
 const MODELS = {
   "evidence": { ph: "petite", hl: [["2\u00a0m de façade", "Pensée pour les terrasses où chaque mètre compte."], ["L’essentiel intégré", "Plancha, évier et réfrigérateur, tous compatibles."], ["Elle se referme", "Après le repas, les équipements restent à l’abri."], ["Livrée en un bloc", "Assemblée en atelier, posée sur 4 plots béton."]], desc: ["Évidence est la plus compacte des trois cuisines : 2\u00a0m de façade, pensée pour les terrasses où chaque mètre compte.", "Elle réunit l’essentiel sous sa propre toiture : plancha, évier et réfrigérateur, avec des rangements en portes et tiroirs. Le soir, l’éclairage intégré au plafond prend le relais ; après le repas, la cuisine se referme et les équipements restent à l’abri."], name: "Évidence", n: 1, m: 2, size: "2 m", tag: "L’essentiel pour cuisiner dehors, même sur une petite terrasse.", long: "Le modèle compact de la gamme. Trois équipements au choix, tous compatibles entre eux.", choix: [], options: ["plancha1", "evier1", "frigo1"], photo: "petite", cap: "Réalisation DMG Concept", sw: .5, real: true },
   "harmonie": { ph: "r_store", hl: [["3\u00a0m de façade", "Assez de plan de travail pour cuisiner à plusieurs."], ["Équipée comme à l’intérieur", "Froid, cuisson, évier, friteuse, eau bouillante."], ["Store ou îlot bar", "L’ombre sur la terrasse, ou un comptoir pour recevoir."], ["Livrée en un bloc", "Assemblée en atelier, posée sur 4 plots béton."]], desc: ["Harmonie offre 3\u00a0m de façade : assez de plan de travail pour cuisiner à plusieurs, et la place pour les équipements d’une vraie cuisine.", "Froid, cuisson, évier, friteuse, eau bouillante : on compose l’équipement selon sa façon de recevoir. Côté terrasse, on choisit entre un store banne intégré à la toiture et un îlot bar sur roulettes."], name: "Harmonie", n: 2, m: 3, size: "3 m", tag: "Plus de plan de travail pour cuisiner à plusieurs.", long: "Le format intermédiaire, avec les équipements d’une vraie cuisine.", choix: PAIRS, options: ["evier", "gaz", "friteuse", "robinet", "son", "dekton"], photo: "detail", cap: "Exemple d’équipements encastrés", sw: .66 },

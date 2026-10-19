@@ -49,13 +49,13 @@ button:focus-visible{outline:2px solid var(--green);outline-offset:2px}
 @media (max-width:900px){.wrap{grid-template-columns:minmax(0,1fr)}.stage{height:62svh;min-height:420px}.views{right:16px}}
 @media (max-width:640px){.top{padding:16px 16px 10px}.wrap{padding:0 16px 20px}.tools button{padding:9px 11px;font-size:13px}.views button{padding:6px 10px;font-size:12px}}
 </style>
-<header class="top"><div><h1>Harmonie <em>en 3D</em></h1><p>3 m de façade, hotte inox centrée, façades anthracite. Faites tourner la cuisine, ouvrez portes et tiroirs, allumez ou éteignez les équipements.</p></div><span class="tag">Version d’essai · à valider</span></header>
+<header class="top"><div><h1>Harmonie <em>en 3D</em></h1><p>3 m de façade, 1,66 m de profondeur avec plancher, hotte inox centrée, façades anthracite. Faites tourner la cuisine, ouvrez portes et tiroirs, allumez ou éteignez les équipements.</p></div><span class="tag">Version d’essai · à valider</span></header>
 <main class="wrap">
   <section class="stage" aria-label="Vue 3D d’Harmonie">
     <div class="ld" id="ld"><span>Chargement de la vue 3D</span><i><b id="bar"></b></i></div>
     <canvas id="c" aria-label="Cuisine Harmonie en 3D : faites glisser pour la faire pivoter"></canvas>
     <div class="views" role="group" aria-label="Points de vue">
-      <button type="button" data-v="trois">3/4</button><button type="button" data-v="face">Face</button><button type="button" data-v="cote">Côté</button><button type="button" data-v="detail">Cuisson</button><button type="button" data-v="evier">Évier</button><button type="button" data-v="frigo">Froid</button>
+      <button type="button" data-v="trois">3/4</button><button type="button" data-v="face">Face</button><button type="button" data-v="dedans">Intérieur</button><button type="button" data-v="cote">Côté</button><button type="button" data-v="detail">Cuisson</button><button type="button" data-v="evier">Évier</button><button type="button" data-v="frigo">Froid</button>
     </div>
     <div class="tools" role="toolbar" aria-label="Animer la cuisine">
       <button type="button" data-t="auto" aria-pressed="true">Rotation</button><button type="button" data-t="doors" aria-pressed="false">Portes</button><button type="button" data-t="drawers" aria-pressed="false">Tiroirs</button><button type="button" data-t="lid" aria-pressed="false">Couvercles</button><button type="button" data-t="blind" aria-pressed="false">Fermer</button>

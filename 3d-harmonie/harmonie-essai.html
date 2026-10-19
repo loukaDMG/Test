@@ -5301,7 +5301,7 @@ void main() {
     }),
     D0 = new ke;
   D0.visible = !1, b0.add(D0);
-  let BRv = 0, BRt = 0, BRg = new ke, BRp = new ke, BL = 1.2, BD = .5, BH = 1.05, BC = .105;
+  let BRv = 0, BRt = 0, BRi = 0, BRit = 0, BRg = new ke, BRp = new ke, BL = 1.2, BD = .5, BH = 1.05, BC = .105;
   b0.add(BRg), BRp.visible = !1, BRg.add(BRp);
   let BRk = X(-BL / 2 + .022, BL / 2 - .022, BC, BH - .012, -BD / 2 + .022, BD / 2 - .022, O, 0, BRg, !1),
     BRb = Y0(M);
@@ -5329,13 +5329,13 @@ void main() {
     }
 
   function brApply() {
-    let XR = j + .515, ZP = WF + .66, ZT = ZP - .46, ZS = -WB + .65, XT = XR - .135, LA = ZT - ZS, LB = .9,
-      s = K1(BRv) * (LA + LB + XT), x, z, yw;
+    let XR = j + .515, ZP = WF + .66, ZT = ZP - .46, ZS = -WB + .65, XT = XR - .135, XE = n0 - .7, ZIN = .595, LA = ZT - ZS, LB = .9,
+      s = K1(BRv) * (LA + LB + XT - XE), x, z, yw;
     if (s < LA) x = XR, z = ZS + s, yw = Math.PI / 2;
     else if (s < LA + LB) {
       let u = (s - LA) / LB, uu = u * u * (3 - 2 * u);
       x = XR - .135 * uu, z = ZT + .46 * uu, yw = Math.PI / 2 * (1 - uu);
-    } else x = XT - (s - LA - LB), z = ZP, yw = 0;
+    } else x = XT - (s - LA - LB), z = ZP + (ZIN - ZP) * K1(BRi), yw = 0;
     BRg.visible = BRv > .002, BRg.position.set(x, .014, z), BRg.rotation.y = yw, k = !0;
   }
   brApply();
@@ -6626,18 +6626,18 @@ void main() {
     if (!b2) return;
     let T = Wh.getDelta(),
       z = Math.min(T, .05);
-    if (Ui !== Vs && (Ui = io(Ui, Vs, z, .3), ec()), (us !== Ws || ds !== Xs) && (us = io(us, Ws, z, .8), ds = io(ds, Xs, z, .7), l2()), hs !== ks && (hs = io(hs, ks, z, .7), J1()), SB !== SBt && (SB = io(SB, SBt, z, .2), sbApply()), BRv !== BRt && (BRv = io(BRv, BRt, z, .28), brApply()), Yt) {
+    if (Ui !== Vs && (Vs < Ui || BRi >= BRit) && (Ui = io(Ui, Vs, z, .3), ec()), (us !== Ws || ds !== Xs) && (us = io(us, Ws, z, .8), ds = io(ds, Xs, z, .7), l2()), hs !== ks && (hs = io(hs, ks, z, .7), J1()), SB !== SBt && (SB = io(SB, SBt, z, .2), sbApply()), BRv !== BRt && (BRt > BRv || BRi === 0) && (BRv = io(BRv, BRt, z, .28), brApply()), BRi !== BRit && (BRit > BRi ? BRv === 1 : Ui === 0 || !te.bar) && (BRi = io(BRi, BRit, z, .45), brApply()), Yt) {
       Yt.t = Math.min(1, Yt.t + z / 1.3);
       let _0 = K1(Yt.t);
       l.position.lerpVectors(Yt.p0, Yt.p1, _0), h.target.lerpVectors(Yt.q0, Yt.q1, _0), Yt.t >= 1 && (Yt = null)
     }
     let e0 = ic();
-    Pn.visible && qs && (qs.offset.x += z * .012, qs.offset.y += z * .007, js && (js.offset.x += z * .02, js.offset.y -= z * .013)), (h.update(z) || e0 || Pn.visible || h.autoRotate || Yt || Ui !== Vs || us !== Ws || ds !== Xs || hs !== ks || SB !== SBt || BRv !== BRt) && ia(), (Ui !== Vs || us !== Ws || ds !== Xs || hs !== ks || SB !== SBt || BRv !== BRt) && (k = !0), qn > 0 && (qn--, k && c0(), Dn.render(), no = no * .9 + Math.min(T, .2) * .1, sc += T, sc > 1.2 && (sc = 0, no > 1 / 28 && ps > .55 ? ps = Math.max(.55, ps - .15) : no < 1 / 55 && ps < 1 && (ps = Math.min(1, ps + .1)))), requestAnimationFrame(x2)
+    Pn.visible && qs && (qs.offset.x += z * .012, qs.offset.y += z * .007, js && (js.offset.x += z * .02, js.offset.y -= z * .013)), (h.update(z) || e0 || Pn.visible || h.autoRotate || Yt || Ui !== Vs || us !== Ws || ds !== Xs || hs !== ks || SB !== SBt || BRv !== BRt || BRi !== BRit) && ia(), (Ui !== Vs || us !== Ws || ds !== Xs || hs !== ks || SB !== SBt || BRv !== BRt || BRi !== BRit) && (k = !0), qn > 0 && (qn--, k && c0(), Dn.render(), no = no * .9 + Math.min(T, .2) * .1, sc += T, sc > 1.2 && (sc = 0, no > 1 / 28 && ps > .55 ? ps = Math.max(.55, ps - .15) : no < 1 / 55 && ps < 1 && (ps = Math.min(1, ps + .1)))), requestAnimationFrame(x2)
   }
   Ys(), x2();
   let ms = {
     setBlind(T) {
-      Vs = T ? 1 : 0
+      Vs = T ? 1 : 0, BRit = te.bar && Vs ? 1 : 0
     },
     setDrawers(T) {
       Ws = T ? 1 : 0
@@ -6661,7 +6661,7 @@ void main() {
       De[L][T].setRGB(z, e0, g0), P0(), qn = 30
     },
     setOption(T, z) {
-      T in te && (te[T] = !!z, T === "plancha" && (ie.visible = te.plancha, Le()), T === "evier" && (Zr.visible = te.evier, Le()), T === "frigo" && (Kr.visible = te.frigo, cs.visible = !te.frigo), T === "friteuse" && (Fq.visible = te.friteuse, Le()), T === "gaz" && (Gz.visible = te.gaz), T === "store" && (SBt = te.store ? 1 : 0), T === "bar" && (BRt = te.bar ? 1 : 0), qn = 60, k = !0)
+      T in te && (te[T] = !!z, T === "plancha" && (ie.visible = te.plancha, Le()), T === "evier" && (Zr.visible = te.evier, Le()), T === "frigo" && (Kr.visible = te.frigo, cs.visible = !te.frigo), T === "friteuse" && (Fq.visible = te.friteuse, Le()), T === "gaz" && (Gz.visible = te.gaz), T === "store" && (SBt = te.store ? 1 : 0), T === "bar" && (BRt = te.bar ? 1 : 0, BRit = te.bar && Vs ? 1 : 0, Vs && (BRv = BRi = te.bar ? 1 : 0, brApply())), qn = 60, k = !0)
     },
     setDecor(T) {
       return ea = T === "studio" ? "studio" : "jardin", Ys(), ea
@@ -6691,8 +6691,8 @@ void main() {
           [0, 1.22, .4]
         ],
         bar: [
-          [-2.2, 1.9, 8.4],
-          [-.1, 1.05, 1.5]
+          [-1.8, 1.9, 8.4],
+          [.3, 1.05, 1.5]
         ],
         store: [
           [-6.4, 3.0, 9.4],
@@ -6734,7 +6734,7 @@ void main() {
       Yt = null, z && (l.position.set(...z[0]), h.target.set(...z[1]))
     },
     snap() {
-      us = Ws, ds = Xs, hs = ks, Ui = Vs, SB = SBt, BRv = BRt, l2(), J1(), ec(), sbApply(), brApply(), k = !0, ia()
+      us = Ws, ds = Xs, hs = ks, Ui = Vs, SB = SBt, BRv = BRt, BRi = BRit, l2(), J1(), ec(), sbApply(), brApply(), k = !0, ia()
     },
     dispose() {
       b2 = !1, g2.disconnect(), h.dispose(), Dn.dispose(), t.dispose()
@@ -6788,7 +6788,7 @@ three/build/three.module.js:
       var t = b.dataset.t; st[t] = !st[t];
       if (t === "auto") api.setAuto(st.auto);
       else { if (st.auto) { st.auto = false; api.setAuto(false); }
-        if (t === "doors") api.setDoors(st.doors); if (t === "drawers") api.setDrawers(st.drawers); if (t === "lid") api.setLid(!st.lid); if (t === "blind") api.setBlind(st.blind); }
+        if (t === "doors") api.setDoors(st.doors); if (t === "drawers") api.setDrawers(st.drawers); if (t === "lid") api.setLid(!st.lid); if (t === "blind") { if (st.blind && document.querySelector('[data-o="bar"]').getAttribute("aria-checked") === "true") { st.doors = st.drawers = false; api.setDoors(false); api.setDrawers(false); } api.setBlind(st.blind); } }
       sync();
     });
   });

@@ -1,7 +1,8 @@
 # ---------- Bar sur roulettes (option) : lames bois comme le bardage, plateau noir, 4 roulettes ----------
-# Il part de la terrasse de droite, tourne au coin et se gare devant la cuisine, sur la terrasse.
+# Il part de la terrasse de droite, tourne au coin et se gare devant la cuisine, à droite.
+# Quand on ferme, il rentre contre les meubles avant que le volet descende ; à l'ouverture, le volet remonte puis il ressort.
 BAR = """  D0.visible = !1, b0.add(D0);
-  let BRv = 0, BRt = 0, BRg = new ke, BRp = new ke, BL = 1.2, BD = .5, BH = 1.05, BC = .105;
+  let BRv = 0, BRt = 0, BRi = 0, BRit = 0, BRg = new ke, BRp = new ke, BL = 1.2, BD = .5, BH = 1.05, BC = .105;
   b0.add(BRg), BRp.visible = !1, BRg.add(BRp);
   let BRk = X(-BL / 2 + .022, BL / 2 - .022, BC, BH - .012, -BD / 2 + .022, BD / 2 - .022, O, 0, BRg, !1),
     BRb = Y0(M);
@@ -29,13 +30,13 @@ BAR = """  D0.visible = !1, b0.add(D0);
     }
 
   function brApply() {
-    let XR = j + .515, ZP = WF + .66, ZT = ZP - .46, ZS = -WB + .65, XT = XR - .135, LA = ZT - ZS, LB = .9,
-      s = K1(BRv) * (LA + LB + XT), x, z, yw;
+    let XR = j + .515, ZP = WF + .66, ZT = ZP - .46, ZS = -WB + .65, XT = XR - .135, XE = n0 - .7, ZIN = .595, LA = ZT - ZS, LB = .9,
+      s = K1(BRv) * (LA + LB + XT - XE), x, z, yw;
     if (s < LA) x = XR, z = ZS + s, yw = Math.PI / 2;
     else if (s < LA + LB) {
       let u = (s - LA) / LB, uu = u * u * (3 - 2 * u);
       x = XR - .135 * uu, z = ZT + .46 * uu, yw = Math.PI / 2 * (1 - uu);
-    } else x = XT - (s - LA - LB), z = ZP, yw = 0;
+    } else x = XT - (s - LA - LB), z = ZP + (ZIN - ZP) * K1(BRi), yw = 0;
     BRg.visible = BRv > .002, BRg.position.set(x, .014, z), BRg.rotation.y = yw, k = !0;
   }
   brApply();"""
@@ -47,12 +48,14 @@ rep('''      gaz: !0,
       store: !1,
       bar: !1
     },''')
-rep('T === "store" && (SBt = te.store ? 1 : 0)', 'T === "store" && (SBt = te.store ? 1 : 0), T === "bar" && (BRt = te.bar ? 1 : 0)')
-rep('SB !== SBt && (SB = io(SB, SBt, z, .2), sbApply()), Yt) {', 'SB !== SBt && (SB = io(SB, SBt, z, .2), sbApply()), BRv !== BRt && (BRv = io(BRv, BRt, z, .28), brApply()), Yt) {')
-rep('|| SB !== SBt) && ia(), (Ui !== Vs || us !== Ws || ds !== Xs || hs !== ks || SB !== SBt) && (k = !0)', '|| SB !== SBt || BRv !== BRt) && ia(), (Ui !== Vs || us !== Ws || ds !== Xs || hs !== ks || SB !== SBt || BRv !== BRt) && (k = !0)')
-rep('SB = SBt, l2(), J1(), ec(), sbApply(), k = !0, ia()', 'SB = SBt, BRv = BRt, l2(), J1(), ec(), sbApply(), brApply(), k = !0, ia()')
+rep('T === "store" && (SBt = te.store ? 1 : 0)', 'T === "store" && (SBt = te.store ? 1 : 0), T === "bar" && (BRt = te.bar ? 1 : 0, BRit = te.bar && Vs ? 1 : 0, Vs && (BRv = BRi = te.bar ? 1 : 0, brApply()))')
+rep('SB !== SBt && (SB = io(SB, SBt, z, .2), sbApply()), Yt) {', 'SB !== SBt && (SB = io(SB, SBt, z, .2), sbApply()), BRv !== BRt && (BRt > BRv || BRi === 0) && (BRv = io(BRv, BRt, z, .28), brApply()), BRi !== BRit && (BRit > BRi ? BRv === 1 : Ui === 0 || !te.bar) && (BRi = io(BRi, BRit, z, .45), brApply()), Yt) {')
+rep('|| SB !== SBt) && ia(), (Ui !== Vs || us !== Ws || ds !== Xs || hs !== ks || SB !== SBt) && (k = !0)', '|| SB !== SBt || BRv !== BRt || BRi !== BRit) && ia(), (Ui !== Vs || us !== Ws || ds !== Xs || hs !== ks || SB !== SBt || BRv !== BRt || BRi !== BRit) && (k = !0)')
+rep('SB = SBt, l2(), J1(), ec(), sbApply(), k = !0, ia()', 'SB = SBt, BRv = BRt, BRi = BRit, l2(), J1(), ec(), sbApply(), brApply(), k = !0, ia()')
 rep('''        store: [''', '''        bar: [
-          [-2.2, 1.9, 8.4],
-          [-.1, 1.05, 1.5]
+          [-1.8, 1.9, 8.4],
+          [.3, 1.05, 1.5]
         ],
         store: [''')
+rep('Ui !== Vs && (Ui = io(Ui, Vs, z, .3), ec())', 'Ui !== Vs && (Vs < Ui || BRi >= BRit) && (Ui = io(Ui, Vs, z, .3), ec())')
+rep('      Vs = T ? 1 : 0\n', '      Vs = T ? 1 : 0, BRit = te.bar && Vs ? 1 : 0\n')

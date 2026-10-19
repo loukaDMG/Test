@@ -104,7 +104,7 @@ button:focus-visible{outline:2px solid var(--green);outline-offset:2px}
       var t = b.dataset.t; st[t] = !st[t];
       if (t === "auto") api.setAuto(st.auto);
       else { if (st.auto) { st.auto = false; api.setAuto(false); }
-        if (t === "doors") api.setDoors(st.doors); if (t === "drawers") api.setDrawers(st.drawers); if (t === "lid") api.setLid(!st.lid); if (t === "blind") api.setBlind(st.blind); }
+        if (t === "doors") api.setDoors(st.doors); if (t === "drawers") api.setDrawers(st.drawers); if (t === "lid") api.setLid(!st.lid); if (t === "blind") { if (st.blind && document.querySelector('[data-o="bar"]').getAttribute("aria-checked") === "true") { st.doors = st.drawers = false; api.setDoors(false); api.setDrawers(false); } api.setBlind(st.blind); } }
       sync();
     });
   });

@@ -18,11 +18,11 @@ HRM = {
   "frigoDx": -1.27 - 0.7505,   # le froid passe dans le module de gauche
   "si": 0.0,                   # plancha centrée sous la hotte
   "sink": 1.27,
-  "frit": [-0.675, -0.385],
-  "gaz": [0.385, 0.675],
-  "hood": 1.40,
-  "bz": [-0.72, 0.72],         # crédence noire derrière la cuisson
-  "sockDx": 0.80 - (-0.9),
+  "frit": [-0.88, -0.59],
+  "gaz": [0.59, 0.88],
+  "hood": 1.80,
+  "bz": [-0.92, 0.92],         # crédence noire derrière la cuisson
+  "sockDx": -1.50 - (-0.9),
   "orchid": [-1.2, None, -0.14],
 }
 rep('function u7(s, e = {}) {', 'function u7(s, e = {}) {\n  const HRM = ' + json.dumps(HRM) + ';')
@@ -146,7 +146,7 @@ NEW = r'''
     Hm.castShadow = !0, Hm.receiveShadow = !0, Hd.add(Hm);
     X(-HW / 2 + .035, HW / 2 - .035, HB - .006, HB + .001, ZB + .03, ZF - .03, G.steelDark, .002, Hd);
     for (let FX = -HW / 2 + .06; FX < HW / 2 - .05; FX += .028) X(FX, FX + .012, HB - .009, HB - .005, ZB + .05, ZF - .05, G.steel, 0, Hd, !1);
-    for (let LX of [-.38, .38]) S0(.022, .022, .004, 32, G.lamp, LX, HB - .011, ZF - .09, 0, 0, Hd);
+    for (let LX of [-.6, .6]) S0(.022, .022, .004, 32, G.lamp, LX, HB - .011, ZF - .09, 0, 0, Hd);
     let Ih = new Br("#ffd9a3", 5, 1.1, Math.PI / 2.5, .8, 1.4);
     Ih.position.set(0, HB - .02, -.05), Ih.target.position.set(0, i0, -.05), Hd.add(Ih, Ih.target);
   }

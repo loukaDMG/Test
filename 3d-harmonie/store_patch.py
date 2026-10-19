@@ -44,7 +44,7 @@ rep('''      friteuse: !0,
       store: !1
     },''')
 rep('T === "gaz" && (Gz.visible = te.gaz)', 'T === "gaz" && (Gz.visible = te.gaz), T === "store" && (SBt = te.store ? 1 : 0)')
-rep('hs !== ks && (hs = io(hs, ks, z, .7), J1()), Yt) {', 'hs !== ks && (hs = io(hs, ks, z, .7), J1()), SB !== SBt && (SB = io(SB, SBt, z, .45), sbApply()), Yt) {')
+rep('hs !== ks && (hs = io(hs, ks, z, .7), J1()), Yt) {', 'hs !== ks && (hs = io(hs, ks, z, .7), J1()), SB !== SBt && (SB = io(SB, SBt, z, .2), sbApply()), Yt) {')
 rep('|| hs !== ks) && ia(), (Ui !== Vs || us !== Ws || ds !== Xs || hs !== ks) && (k = !0)', '|| hs !== ks || SB !== SBt) && ia(), (Ui !== Vs || us !== Ws || ds !== Xs || hs !== ks || SB !== SBt) && (k = !0)')
 rep('us = Ws, ds = Xs, hs = ks, Ui = Vs, l2(), J1(), ec(), k = !0, ia()', 'us = Ws, ds = Xs, hs = ks, Ui = Vs, SB = SBt, l2(), J1(), ec(), sbApply(), k = !0, ia()')
 rep('''        dedans: [''', '''        store: [

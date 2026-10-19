@@ -5904,8 +5904,8 @@ void main() {
   b0.add(SBg);
   X(-j - .02, j + .02, a0 - .128, a0 - .008, WF - .05, WF + .075, G.frame, .006);
   X(-j - .02, j + .02, a0 - .132, a0 - .122, WF + .035, WF + .08, G.cap, .003);
-  let SBM = new K0({ color: "#55585d", roughness: 1, metalness: 0, side: Mt, envMapIntensity: .6 }),
-    SBf = new U0(new cn(1, 1), SBM);
+  let SBM = new xe({ color: "#55585d", roughness: 1, metalness: 0, specularIntensity: 0, envMapIntensity: .6 }),
+    SBf = new U0(new bn(1, .008, 1), SBM);
   SBf.castShadow = !0, SBf.receiveShadow = !1, SBg.add(SBf);
   let SBb = X(-SBW / 2, SBW / 2, -.034, .034, -.045, .045, G.frame, .008, SBg),
     SBarms = [];
@@ -5921,7 +5921,8 @@ void main() {
   function sbApply() {
     let e = K1(SB), L = Math.max(.001, SBP * e), dy = -Math.sin(SBA) * L, dz = Math.cos(SBA) * L, Fy = SBY + dy, Fz = SBZ + dz;
     SBg.visible = SB > .01;
-    SBf.scale.set(SBW, L, 1), SBf.rotation.x = Math.PI / 2 + SBA, SBf.position.set(0, SBY + dy / 2, SBZ + dz / 2);
+    g.position.y = 2.1 - .36 * Math.min(1, SB * 4), g.lookAt(0, 1.2, -.3);
+    SBf.scale.set(SBW, 1, L), SBf.rotation.x = SBA, SBf.position.set(0, SBY + dy / 2, SBZ + dz / 2);
     SBb.position.set(0, Fy - .03, Fz);
     for (let R of SBarms) {
       let x0 = R.s * (j - .35), A = [x0, SBY - .035, SBZ - .02], B = [x0, Fy - .05, Fz - .02],

@@ -63,7 +63,7 @@ button:focus-visible{outline:2px solid var(--green);outline-offset:2px}
   </section>
   <aside class="panel">
     <div class="box"><h2>Équipements</h2><p>Allumez ou éteignez chaque élément.</p>
-      <button type="button" class="opt" data-o="plancha" aria-checked="true" role="switch"><span>Plancha + feu<small>Planet Oasi 80 lisse + feu dual</small></span><i class="sw"></i></button>
+      <button type="button" class="opt" data-o="plancha" aria-checked="true" role="switch"><span>Plancha<small>Planet Oasi 80 lisse</small></span><i class="sw"></i></button>
       <button type="button" class="opt" data-o="friteuse" aria-checked="true" role="switch"><span>Friteuse<small>À gauche de la plancha, avec couvercle</small></span><i class="sw"></i></button>
       <button type="button" class="opt" data-o="evier" aria-checked="true" role="switch"><span>Évier<small>À droite</small></span><i class="sw"></i></button>
       <button type="button" class="opt" data-o="frigo" aria-checked="true" role="switch"><span>Réfrigérateur<small>Porte de gauche</small></span><i class="sw"></i></button>

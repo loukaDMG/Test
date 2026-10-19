@@ -10,15 +10,18 @@ def rep(a, b, n=1):
 # ---------- Configuration d'Harmonie (mètres, x = 0 au centre de la cuisine) ----------
 HRM = {
   "car": 1.285,                # demi-largeur du caisson bas (intérieur 2,60 m)
-  "doors": [[-1.285, -0.685, "L"], [-0.685, -0.335, "L"], [0.565, 1.285, "R"]],
-  "drawers": [[-0.335, 0.565]],
-  "div": [-0.685, -0.335, 0.565],
-  "shelves": [[-0.667, -0.353], [0.583, 1.267]],
+  # portes : [début, fin, charnière, haut (option), poignée horizontale (option)]
+  "doors": [[-1.285, -0.685, "L"], [-0.225, 0.205, "L", 0.658, "h"], [0.205, 0.80, "R", 0.658, "h"], [0.80, 1.285, "R"]],
+  "drawers": [[-0.685, -0.225]],
+  "band": [-0.685, 0.80, 0.658], # bandeau fixe sous la cuisson : début, fin, bas
+  "div": [-0.685, 0.80],
+  "divLow": [-0.225, 0.205],
+  "shelves": [[-0.216, 0.196], [0.214, 0.791], [0.809, 1.267]],
   "feet": [-1.2, -0.4, 0.4, 1.2],
   "frigoDx": -0.985 - 0.7505,  # le froid dans le module de gauche
-  "si": 0.265,                 # Oasi 80 + feu (115 cm) : x de -0,31 à 0,84
+  "si": 0.185,                 # Oasi 80 lisse (103 cm) : x de -0,33 à 0,70
   "sink": 1.065,
-  "frit": [-0.67, -0.38],
+  "frit": [-0.70, -0.41],
   "hood": 1.50,
   "bz": [-0.75, 0.75],         # crédence noire de la largeur de la hotte
   "sockDx": -1.26 - (-0.9),
@@ -207,6 +210,7 @@ exec(open('store_patch.py', encoding='utf-8').read())
 exec(open('deck_patch.py', encoding='utf-8').read())
 exec(open('bar_patch.py', encoding='utf-8').read())
 exec(open('oasi_patch.py', encoding='utf-8').read())
+exec(open('cab_patch.py', encoding='utf-8').read())
 # plus d'option plaque gaz (remplacée par le feu de la Oasi 80)
 rep('      gaz: !0,\n', '')
 rep(', T === "gaz" && (Gz.visible = te.gaz)', '')

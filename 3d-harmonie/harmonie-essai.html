@@ -54,7 +54,7 @@ button:focus-visible{outline:2px solid var(--green);outline-offset:2px}
   </section>
   <aside class="panel">
     <div class="box"><h2>Équipements</h2><p>Allumez ou éteignez chaque élément.</p>
-      <button type="button" class="opt" data-o="plancha" aria-checked="true" role="switch"><span>Plancha + feu<small>Planet Oasi 80 lisse + feu dual</small></span><i class="sw"></i></button>
+      <button type="button" class="opt" data-o="plancha" aria-checked="true" role="switch"><span>Plancha<small>Planet Oasi 80 lisse</small></span><i class="sw"></i></button>
       <button type="button" class="opt" data-o="friteuse" aria-checked="true" role="switch"><span>Friteuse<small>À gauche de la plancha, avec couvercle</small></span><i class="sw"></i></button>
       <button type="button" class="opt" data-o="evier" aria-checked="true" role="switch"><span>Évier<small>À droite</small></span><i class="sw"></i></button>
       <button type="button" class="opt" data-o="frigo" aria-checked="true" role="switch"><span>Réfrigérateur<small>Porte de gauche</small></span><i class="sw"></i></button>
@@ -4811,7 +4811,7 @@ void main() {
 			gl_FragColor = sum;
 
 		}`};function qr(s){let e=s;return()=>(e=e*16807%2147483647,e/2147483647)}var as=qr(42),K1=s=>s<.5?4*s*s*s:1-Math.pow(-2*s+2,3)/2;function Cn(s,e,t,n=!0){let i=document.createElement("canvas");i.width=s,i.height=e,t(i.getContext("2d"),s,e);let r=new h1(i);return n&&(r.colorSpace=yt),r.wrapS=r.wrapT=Bt,r.anisotropy=8,r}function o2(s,e,t){return Cn(256,256,n=>{let i=qr(s),r=256,a=new Float32Array(r*r);for(let c=0;c<a.length;c++)a[c]=i();for(let c=0;c<t;c++){let l=new Float32Array(a.length);for(let h=0;h<r;h++)for(let u=0;u<r;u++){let d=0;for(let f=-1;f<=1;f++)for(let g=-1;g<=1;g++)d+=a[(h+f+r)%r*r+(u+g+r)%r];l[h*r+u]=d/9}a.set(l)}let o=n.createImageData(r,r);for(let c=0;c<r;c++)for(let l=0;l<r;l++){let h=a[c*r+(l+1)%r]-a[c*r+(l+r-1)%r],u=a[(c+1)%r*r+l]-a[(c+r-1)%r*r+l],d=(c*r+l)*4;o.data[d]=128+h*e,o.data[d+1]=128+u*e,o.data[d+2]=255,o.data[d+3]=255}n.putImageData(o,0,0)},!1)}function Lh(s,e=110){return Cn(1024,1024,t=>{let n=qr(s);t.fillStyle=`rgb(${e},${e},${e})`,t.fillRect(0,0,1024,1024);for(let i=0;i<9e3;i++){let r=Math.floor(e-45+n()*90);t.fillStyle=`rgba(${r},${r},${r},${.1+n()*.25})`,t.fillRect(n()*1024-300,n()*1024,200+n()*900,.5+n()*.9)}},!1)}function a7(){return Cn(512,512,s=>{s.fillStyle="#ffffff",s.fillRect(0,0,512,512);for(let[e,t]of[[150,256],[362,256]]){let n=s.createRadialGradient(e,t,10,e,t,200);n.addColorStop(0,"rgba(235,225,205,0.0)"),n.addColorStop(.35,"rgba(214,176,110,0.12)"),n.addColorStop(.6,"rgba(150,140,190,0.08)"),n.addColorStop(1,"rgba(255,255,255,0)"),s.fillStyle=n,s.fillRect(0,0,512,512)}})}function o7(){return Cn(128,128,s=>{s.fillStyle="#5a5d62",s.fillRect(0,0,128,128);for(let e=0;e<128;e+=4)s.fillStyle="rgba(28,30,34,0.6)",s.fillRect(e,0,1.4,128),s.fillStyle="rgba(150,154,160,0.35)",s.fillRect(0,e+2,128,1.1)})}function c7(){return Cn(512,256,s=>{let e=s.createLinearGradient(0,0,512,256);e.addColorStop(0,"#e9eaec"),e.addColorStop(.5,"#cfd1d4"),e.addColorStop(1,"#e3e4e6"),s.fillStyle=e,s.fillRect(0,0,512,256),s.strokeStyle="#9a9ca0",s.lineWidth=6,s.strokeRect(3,3,506,250),s.fillStyle="#2a2b2e",s.textAlign="center",s.font="700 96px Arial, sans-serif",s.fillText("DMG",256,135),s.font="500 44px Arial, sans-serif",s.fillText("C O N C E P T",256,205)})}function l7(){return Cn(256,256,s=>{s.fillStyle="#d7191f",s.fillRect(0,0,256,256),s.strokeStyle="#fff",s.lineWidth=10,s.beginPath(),s.arc(128,108,60,0,Math.PI*2),s.stroke(),s.beginPath(),s.moveTo(108,80),s.lineTo(108,140),s.moveTo(148,76),s.lineTo(148,140),s.stroke(),s.fillStyle="#fff",s.font="700 40px Arial, sans-serif",s.textAlign="center",s.fillText("PLANET",128,222)})}function h7(){return Cn(256,256,s=>{s.clearRect(0,0,256,256),s.strokeStyle="#d9d9d9",s.lineCap="round";for(let e=0;e<=10;e++){let t=Math.PI*.75+e/10*Math.PI*1.5;s.lineWidth=e%5?3:6,s.beginPath(),s.moveTo(128+Math.cos(t)*100,128+Math.sin(t)*100),s.lineTo(128+Math.cos(t)*(e%5?114:120),128+Math.sin(t)*(e%5?114:120)),s.stroke()}s.fillStyle="#e8e8e8",s.beginPath(),s.moveTo(128+Math.cos(Math.PI*.72)*104,128+Math.sin(Math.PI*.72)*104),s.arc(128,128,104,Math.PI*.72,Math.PI*.75),s.fill()})}function u7(s, e = {}) {
-  const HRM = {"car": 1.285, "doors": [[-1.285, -0.685, "L"], [-0.685, -0.335, "L"], [0.565, 1.285, "R"]], "drawers": [[-0.335, 0.565]], "div": [-0.685, -0.335, 0.565], "shelves": [[-0.667, -0.353], [0.583, 1.267]], "feet": [-1.2, -0.4, 0.4, 1.2], "frigoDx": -1.7355, "si": 0.265, "sink": 1.065, "frit": [-0.67, -0.38], "hood": 1.5, "bz": [-0.75, 0.75], "sockDx": -0.36, "orchid": [-1.0, null, -0.14]};
+  const HRM = {"car": 1.285, "doors": [[-1.285, -0.685, "L"], [-0.225, 0.205, "L", 0.658, "h"], [0.205, 0.8, "R", 0.658, "h"], [0.8, 1.285, "R"]], "drawers": [[-0.685, -0.225]], "band": [-0.685, 0.8, 0.658], "div": [-0.685, 0.8], "divLow": [-0.225, 0.205], "shelves": [[-0.216, 0.196], [0.214, 0.791], [0.809, 1.267]], "feet": [-1.2, -0.4, 0.4, 1.2], "frigoDx": -1.7355, "si": 0.185, "sink": 1.065, "frit": [-0.7, -0.41], "hood": 1.5, "bz": [-0.75, 0.75], "sockDx": -0.36, "orchid": [-1.0, null, -0.14]};
   let t = new t1({
     canvas: s,
     antialias: !1,
@@ -5404,6 +5404,8 @@ void main() {
     Ve = l0 + .004;
   X(-HRM.car, -HRM.car + pe, fe, Te, Ve, ut, G.carcass, .001), X(HRM.car - pe, HRM.car, fe, Te, Ve, ut, G.carcass, .001), X(-HRM.car, HRM.car, fe, fe + pe, Ve, ut, G.carcass, .001), X(-HRM.car, HRM.car, fe, Te, Ve, Ve + .01, G.carcass, 0), X(-HRM.car, HRM.car, Te - pe, Te, Ve, -.28, G.carcass, .001), X(-HRM.car, HRM.car, Te - pe, Te, .256, ut, G.carcass, .001), X(-HRM.car, (HRM.sink - .185), Te - pe, Te, -.28, .256, G.carcass, .001), X((HRM.sink + .185), HRM.car, Te - pe, Te, -.28, .256, G.carcass, .001);
   for (let T of HRM.div) X(T - pe / 2, T + pe / 2, fe, Te, Ve, ut, G.carcass, .001);
+  for (let T of HRM.divLow) X(T - pe / 2, T + pe / 2, fe, HRM.band[2] - .018, Ve, ut, G.carcass, .001);
+  X(HRM.band[0] + pe / 2, HRM.band[1] - pe / 2, HRM.band[2] - .018, HRM.band[2], Ve, ut, G.carcass, .001);
   for (let [SA, SB] of HRM.shelves) X(SA, SB, .5, .518, Ve + .03, ut - .03, G.carcass, .001);
   X(-HRM.car + .03, HRM.car - .03, .01, fe, -.3, .2, G.black, 0, b0, !1);
   for (let T of HRM.feet)
@@ -5411,6 +5413,7 @@ void main() {
   let zt = .265,
     Di = .285,
     ii = .0035;
+  X(HRM.band[0] + ii / 2, HRM.band[1] - ii / 2, HRM.band[2] + ii / 2, .908, zt, Di, G.front, .0025);
 
   function Vn(T, z, e0, g0, _0) {
     let s0 = new ke;
@@ -5423,15 +5426,15 @@ void main() {
     _0 || (s0.rotation.z = Math.PI / 2), s0.position.set(z, e0, Di + .028), T.add(s0)
   }
   let Fs = [];
-  for (let [DA, DB, DH] of HRM.doors) {
+  for (let [DA, DB, DH, DT = .908, DS] of HRM.doors) {
     let T = DH === "L" ? -1 : 1,
       z = T < 0 ? DA + .002 : DB - .002,
       e0 = T < 0 ? DB - ii / 2 : DA + ii / 2,
       g0 = new ke;
     g0.position.set(z, 0, Di), b0.add(g0);
     let _0 = new ke;
-    _0.position.set(-z, 0, -Di), g0.add(_0), X(Math.min(z, e0), Math.max(z, e0), .112, .908, zt, Di, G.front, .0025, _0), Vn(_0, T < 0 ? DB - .035 : DA + .035, .8, .128, !0);
-    for (let s0 of [.2, .82]) X(T < 0 ? z + .02 : z - .07, T < 0 ? z + .07 : z - .02, s0 - .02, s0 + .02, zt - .012, zt, G.drawerSide, .003, _0);
+    _0.position.set(-z, 0, -Di), g0.add(_0), X(Math.min(z, e0), Math.max(z, e0), .112, DT, zt, Di, G.front, .0025, _0), DS ? Vn(_0, (DA + DB) / 2, DT - .045, .16, !1) : Vn(_0, T < 0 ? DB - .035 : DA + .035, .8, .128, !0);
+    for (let s0 of [.2, DT - .088]) X(T < 0 ? z + .02 : z - .07, T < 0 ? z + .07 : z - .02, s0 - .02, s0 + .02, zt - .012, zt, G.drawerSide, .003, _0);
     Fs.push({
       pivot: g0,
       s: T
@@ -5439,15 +5442,14 @@ void main() {
   }
   let jr = [],
     eo = [
-      [.112, .376, .2],
-      [.376, .642, .17],
-      [.642, .908, .07]
+      [.112, .418, .2],
+      [.418, HRM.band[2], .14]
     ],
     os, Yr;
   for (let [KA, KB] of HRM.drawers) { os = KA + ii / 2, Yr = KB - ii / 2;
   eo.forEach(([T, z, e0], g0) => {
     let _0 = new ke;
-    if (b0.add(_0), X(os, Yr, T + ii / 2, z - ii / 2, zt, Di, G.front, .0025, _0), g0 < 2 && Vn(_0, (os + Yr) / 2, z - .042, .128, !1), g0 === 2) return;
+    if (b0.add(_0), X(os, Yr, T + ii / 2, z - ii / 2, zt, Di, G.front, .0025, _0), g0 < 2 && Vn(_0, (os + Yr) / 2, z - .042, .16, !1), g0 === 2) return;
     let s0 = os + .02,
       N0 = Yr - .02,
       Q0 = T + .03,
@@ -5637,7 +5639,7 @@ void main() {
     })
   }
   Kr.position.x = HRM.frigoDx, cs.position.x = HRM.frigoDx;
-  let Jr = 1.15,
+  let Jr = 1.03,
     Qr = .56,
     si = HRM.si,
     E = -.012,
@@ -5672,14 +5674,14 @@ void main() {
   b0.add(ie);
   let se = i0 + .006;
   X(v0 + .005, L0 - .005, i0 - .2, i0 - .032, z0 + .005, H0 - .005, G.steelDark, .004, ie, !1);
-  let kt = .05,
+  let kt = .12,
     Ue = .06,
     V0 = .1,
     Oe = N + kt,
-    de = Oe + .79,
+    de = V - kt,
     Ze = W + Ue,
     Ct = U - V0;
-  X(N, V, i0, se, W, Ze, G.steel, .003, ie), X(N, V, i0, se, Ct, U, G.steel, .003, ie), X(N, Oe, i0, se, Ze, Ct, G.steel, .002, ie), X(de, de + .02, i0, se, Ze, Ct, G.steel, .002, ie), X(V - .05, V, i0, se, Ze, Ct, G.steel, .002, ie);
+  X(N, V, i0, se, W, Ze, G.steel, .003, ie), X(N, V, i0, se, Ct, U, G.steel, .003, ie), X(N, Oe, i0, se, Ze, Ct, G.steel, .002, ie), X(de, V, i0, se, Ze, Ct, G.steel, .002, ie);
   let ft = .03;
   X(Oe, Oe + .004, se - ft, se - 5e-4, Ze, Ct, G.steelDark, .001, ie), X(de - .004, de, se - ft, se - 5e-4, Ze, Ct, G.steelDark, .001, ie), X(Oe, de, se - ft, se - 5e-4, Ct - .004, Ct, G.steelDark, .001, ie), X(Oe, de, se - ft, se - 5e-4, Ze, Ze + .004, G.steelDark, .001, ie);
   let Bs = X(Oe + .004, de - .004, se - ft - .005, se - ft + .001, Ze + .004, Ct - .004, G.steelPlate, .0015, ie),
@@ -5689,7 +5691,7 @@ void main() {
   let Xn = se - ft + .001;
   X(Oe + .01, de - .01, Xn - 5e-4, Xn, Ze + .006, Ze + .02, G.steelDark, 0, ie, !1);
   for (let T = Oe + .03; T < de - .03; T += .022) X(T, T + .012, se - 5e-4, se + 3e-4, W + .02, W + .04, G.hole, 0, ie, !1);
-  for (let T of [Oe + .2, de - .2, (de + .02 + V - .05) / 2]) {
+  for (let T of [si - .26, si, si + .26]) {
     let z = U - V0 / 2,
       e0 = new U0(new Na(.036, 48), G.scale);
     e0.rotation.x = -Math.PI / 2, e0.position.set(T, se + 6e-4, z), ie.add(e0);
@@ -5707,7 +5709,7 @@ void main() {
     let s0 = new U0(new Ba(.0205, .0012, 10, 48), G.handle);
     s0.rotation.x = Math.PI / 2, s0.position.set(T, se + .02, z), ie.add(s0), X(T - .003, T + .003, se + .026, se + .031, z - .017, z + .017, G.knob, .002, ie), X(T - .0012, T + .0012, se + .031, se + .0315, z + .006, z + .016, G.handle, 0, ie, !1)
   }
-  S0(.009, .009, .006, 32, G.handle, (Oe + de) / 2, se + .003, U - V0 / 2, 0, 0, ie), S0(.003, .003, .002, 16, G.led, (Oe + de) / 2 + .05, se + .001, U - V0 / 2, 0, 0, ie);
+  S0(.009, .009, .006, 32, G.handle, si - .43, se + .003, U - V0 / 2, 0, 0, ie), S0(.003, .003, .002, 16, G.led, si + .43, se + .001, U - V0 / 2, 0, 0, ie);
   let Ii = new ke;
   Ii.position.set(si, se + .002, W - .004), ie.add(Ii);
   let hn = Jr + .01,
@@ -5719,20 +5721,6 @@ void main() {
   let Z1 = new U0(new cn(.028, .028), G.badge);
   Z1.rotation.x = -Math.PI / 2, Z1.position.set(hn / 2 - .035, Li + 4e-4, ls - .035), Ni.add(Z1);
   for (let T of [-hn / 2 + .07, hn / 2 - .07]) S0(.006, .006, .05, 24, G.handle, T, .006, 0, 0, Math.PI / 2, Ii), X(T - .02, T + .02, -.004, .012, -.012, .002, G.handle, .002, Ii);
-  {
-    let BX0 = de + .02, BX1 = V - .05, BXc = (BX0 + BX1) / 2, BZc = (Ze + Ct) / 2, BY = se - .028;
-    X(BX0, BX1, BY - .004, BY, Ze, Ct, G.black, .001, ie, !1);
-    X(BX0, BX0 + .003, BY, se - 5e-4, Ze, Ct, G.steelDark, .001, ie, !1), X(BX1 - .003, BX1, BY, se - 5e-4, Ze, Ct, G.steelDark, .001, ie, !1), X(BX0, BX1, BY, se - 5e-4, Ze, Ze + .003, G.steelDark, .001, ie, !1), X(BX0, BX1, BY, se - 5e-4, Ct - .003, Ct, G.steelDark, .001, ie, !1);
-    S0(.07, .074, .014, 48, G.steelDark, BXc, BY + .007, BZc, 0, 0, ie);
-    S0(.06, .06, .008, 48, G.black, BXc, BY + .017, BZc, 0, 0, ie);
-    S0(.038, .042, .012, 40, G.steelDark, BXc, BY + .02, BZc, 0, 0, ie);
-    S0(.022, .022, .008, 32, G.black, BXc, BY + .029, BZc, 0, 0, ie);
-    let GW = (BX1 - BX0) / 2 - .006, GD = (Ct - Ze) / 2 - .008, GY = se + .012;
-    X(BXc - GW, BXc + GW, GY - .007, GY, BZc - GD, BZc - GD + .012, G.black, .002, ie), X(BXc - GW, BXc + GW, GY - .007, GY, BZc + GD - .012, BZc + GD, G.black, .002, ie);
-    X(BXc - GW, BXc - GW + .012, GY - .007, GY, BZc - GD, BZc + GD, G.black, .002, ie), X(BXc + GW - .012, BXc + GW, GY - .007, GY, BZc - GD, BZc + GD, G.black, .002, ie);
-    X(BXc - GW, BXc - .05, GY - .007, GY, BZc - .006, BZc + .006, G.black, .002, ie), X(BXc + .05, BXc + GW, GY - .007, GY, BZc - .006, BZc + .006, G.black, .002, ie);
-    X(BXc - .006, BXc + .006, GY - .007, GY, BZc - GD, BZc - .05, G.black, .002, ie), X(BXc - .006, BXc + .006, GY - .007, GY, BZc + .05, BZc + GD, G.black, .002, ie);
-  }
   let hs = 1,
     ks = 1;
 

@@ -1,8 +1,8 @@
 # ---------- Bar sur roulettes (option) : lames bois comme le bardage, plateau noir, 4 roulettes ----------
-# Il arrive en roulant depuis la droite et se gare devant la cuisine, sur le sol de la terrasse.
+# Il part de la terrasse de droite, tourne au coin et se gare devant la cuisine, sur la terrasse.
 BAR = """  D0.visible = !1, b0.add(D0);
-  let BRv = 0, BRt = 0, BRg = new ke, BRp = new ke, BL = 1.2, BD = .5, BH = 1.05, BC = .105, BXS = 5.5, BRz = WF + .6 + BD / 2;
-  BRg.visible = !1, BRg.position.set(BXS, -.15, BRz), b0.add(BRg), BRp.visible = !1, BRg.add(BRp);
+  let BRv = 0, BRt = 0, BRg = new ke, BRp = new ke, BL = 1.2, BD = .5, BH = 1.05, BC = .105;
+  b0.add(BRg), BRp.visible = !1, BRg.add(BRp);
   let BRk = X(-BL / 2 + .022, BL / 2 - .022, BC, BH - .012, -BD / 2 + .022, BD / 2 - .022, O, 0, BRg, !1),
     BRb = Y0(M);
   for (let sz of [-1, 1]) {
@@ -29,9 +29,16 @@ BAR = """  D0.visible = !1, b0.add(D0);
     }
 
   function brApply() {
-    let e = K1(BRv);
-    BRg.visible = BRv > .002, BRg.position.x = BXS * (1 - e), k = !0;
-  }"""
+    let XR = j + .515, ZP = WF + .66, ZT = ZP - .46, ZS = -WB + .65, XT = XR - .135, LA = ZT - ZS, LB = .9,
+      s = K1(BRv) * (LA + LB + XT), x, z, yw;
+    if (s < LA) x = XR, z = ZS + s, yw = Math.PI / 2;
+    else if (s < LA + LB) {
+      let u = (s - LA) / LB, uu = u * u * (3 - 2 * u);
+      x = XR - .135 * uu, z = ZT + .46 * uu, yw = Math.PI / 2 * (1 - uu);
+    } else x = XT - (s - LA - LB), z = ZP, yw = 0;
+    BRg.visible = BRv > .002, BRg.position.set(x, .014, z), BRg.rotation.y = yw, k = !0;
+  }
+  brApply();"""
 rep('  D0.visible = !1, b0.add(D0);', BAR)
 rep('    for (let z of J) z.visible = !T;', '    for (let z of J) z.visible = !T;\n    BRs.visible = BRk.visible = !T, BRp.visible = T;')
 rep('''      gaz: !0,

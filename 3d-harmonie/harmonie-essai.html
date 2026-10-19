@@ -40,7 +40,7 @@ button:focus-visible{outline:2px solid var(--green);outline-offset:2px}
 @media (max-width:900px){.wrap{grid-template-columns:minmax(0,1fr)}.stage{height:62svh;min-height:420px}.views{right:16px}}
 @media (max-width:640px){.top{padding:16px 16px 10px}.wrap{padding:0 16px 20px}.tools button{padding:9px 11px;font-size:13px}.views button{padding:6px 10px;font-size:12px}}
 </style>
-<header class="top"><div><h1>Harmonie <em>en 3D</em></h1><p>3 m de façade, 1,66 m de profondeur, plancher de 15 cm, intérieur bois, hotte inox au plafond, store banne intégré, façades anthracite. Faites tourner la cuisine, ouvrez portes et tiroirs, allumez ou éteignez les équipements.</p></div><span class="tag">Version d’essai · à valider</span></header>
+<header class="top"><div><h1>Harmonie <em>en 3D</em></h1><p>3 m de façade, 1,66 m de profondeur, plancher de 15 cm, terrasse bois de 1 m devant et sur les côtés, intérieur bois, hotte inox au plafond, store banne intégré, façades anthracite. Faites tourner la cuisine, ouvrez portes et tiroirs, allumez ou éteignez les équipements.</p></div><span class="tag">Version d’essai · à valider</span></header>
 <main class="wrap">
   <section class="stage" aria-label="Vue 3D d’Harmonie">
     <div class="ld" id="ld"><span>Chargement de la vue 3D</span><i><b id="bar"></b></i></div>
@@ -5268,6 +5268,29 @@ void main() {
   X(-j - .03, j + .03, -.15, -.13, -WB - .033, WF + .011, G.cap, .003);
   ue(-j + .02, j - .02, SX0 => o0.add(SX0, SX0 + A0, y0 + .012, a0 - .132, WF + .004, WF + .022, .43, (a0 - .144 - y0) / 1.4, B0(), 6e-4, as() * .57, as()));
   let ne = o0.done();
+  {
+    let DX = j + .03, DO = DX + 1, DZ0 = -WB - .033, DZ1 = WF + .011, DZ2 = DZ1 + 1, DG = .006,
+      DC = () => new G0().setHSL(.08, .22, .66 + as() * .06),
+      DF = () => new G0().setHSL(.08, .22, .6 + as() * .04),
+      rows = (a, b, n, f) => {
+        let p = (b - a) / n;
+        for (let i = 0; i < n; i++) f(a + i * p + DG / 2, a + (i + 1) * p - DG / 2, i)
+      };
+    rows(DZ1, DZ2, 7, (z0, z1, i) => {
+      let jx = i % 2 ? .9 : -.9;
+      Q.add(-DO, jx - DG / 2, -.013, .014, z0, z1, (DO + jx) / 1.1, (z1 - z0) / 1.1, DC(), .002);
+      Q.add(jx + DG / 2, DO, -.013, .014, z0, z1, (DO - jx) / 1.1, (z1 - z0) / 1.1, DC(), .002);
+    });
+    X(-DO, DO, -.15, -.013, DZ1, DZ2, G.black, 0, b0, !1);
+    Q.add(-DO - .02, DO + .02, -.15, .014, DZ2, DZ2 + .02, (2 * DO) / 1.1, .164 / 1.1, DF(), .002);
+    for (let sd of [-1, 1]) {
+      let xa = sd < 0 ? -DO : DX, xb = sd < 0 ? -DX : DO;
+      rows(DZ0, DZ1, 11, (z0, z1) => Q.add(xa, xb, -.013, .014, z0, z1, 1 / 1.1, (z1 - z0) / 1.1, DC(), .002));
+      X(xa, xb, -.15, -.013, DZ0, DZ1, G.black, 0, b0, !1);
+      Q.add(sd < 0 ? -DO - .02 : DO, sd < 0 ? -DO : DO + .02, -.15, .014, DZ0 - .02, DZ2, (DZ2 - DZ0) / 1.1, .164 / 1.1, DF(), .002);
+      Q.add(sd < 0 ? -DO - .02 : DX, sd < 0 ? -DX : DO + .02, -.15, .014, DZ0 - .02, DZ0, 1 / 1.1, .164 / 1.1, DF(), .002);
+    }
+  }
   Q.done();
   let ee = new xe({
       color: "#33353a",
@@ -5278,8 +5301,8 @@ void main() {
     }),
     D0 = new ke;
   D0.visible = !1, b0.add(D0);
-  let BRv = 0, BRt = 0, BRg = new ke, BRp = new ke, BL = 1.2, BD = .5, BH = 1.05, BC = .105, BXS = 5.5, BRz = WF + .6 + BD / 2;
-  BRg.visible = !1, BRg.position.set(BXS, -.15, BRz), b0.add(BRg), BRp.visible = !1, BRg.add(BRp);
+  let BRv = 0, BRt = 0, BRg = new ke, BRp = new ke, BL = 1.2, BD = .5, BH = 1.05, BC = .105;
+  b0.add(BRg), BRp.visible = !1, BRg.add(BRp);
   let BRk = X(-BL / 2 + .022, BL / 2 - .022, BC, BH - .012, -BD / 2 + .022, BD / 2 - .022, O, 0, BRg, !1),
     BRb = Y0(M);
   for (let sz of [-1, 1]) {
@@ -5306,9 +5329,16 @@ void main() {
     }
 
   function brApply() {
-    let e = K1(BRv);
-    BRg.visible = BRv > .002, BRg.position.x = BXS * (1 - e), k = !0;
+    let XR = j + .515, ZP = WF + .66, ZT = ZP - .46, ZS = -WB + .65, XT = XR - .135, LA = ZT - ZS, LB = .9,
+      s = K1(BRv) * (LA + LB + XT), x, z, yw;
+    if (s < LA) x = XR, z = ZS + s, yw = Math.PI / 2;
+    else if (s < LA + LB) {
+      let u = (s - LA) / LB, uu = u * u * (3 - 2 * u);
+      x = XR - .135 * uu, z = ZT + .46 * uu, yw = Math.PI / 2 * (1 - uu);
+    } else x = XT - (s - LA - LB), z = ZP, yw = 0;
+    BRg.visible = BRv > .002, BRg.position.set(x, .014, z), BRg.rotation.y = yw, k = !0;
   }
+  brApply();
   for (let T of [-1, 1]) X(T < 0 ? -j - .02 : j + .004, T < 0 ? -j - .004 : j + .02, .025, a0 - .055, -WB + .05, WF - .05, ee, .002, D0);
   {
     let T = [-j + .05, -.0015, .0015, j - .05];

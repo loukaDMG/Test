@@ -49,7 +49,7 @@ button:focus-visible{outline:2px solid var(--green);outline-offset:2px}
 @media (max-width:900px){.wrap{grid-template-columns:minmax(0,1fr)}.stage{height:62svh;min-height:420px}.views{right:16px}}
 @media (max-width:640px){.top{padding:16px 16px 10px}.wrap{padding:0 16px 20px}.tools button{padding:9px 11px;font-size:13px}.views button{padding:6px 10px;font-size:12px}}
 </style>
-<header class="top"><div><h1>Harmonie <em>en 3D</em></h1><p>3 m de façade, 1,66 m de profondeur, plancher de 15 cm, terrasse bois de 1 m devant et sur les côtés, intérieur bois, hotte inox au plafond, store banne intégré, façades anthracite. Faites tourner la cuisine, ouvrez portes et tiroirs, allumez ou éteignez les équipements.</p></div><span class="tag">Version d’essai · à valider</span></header>
+<header class="top"><div><h1>Harmonie <em>en 3D</em></h1><p>3 m de façade (2,60 m intérieur), 1,66 m de profondeur, plancher de 15 cm, terrasse bois de 1 m devant et sur les côtés, intérieur bois, hotte inox au plafond, store banne intégré, façades anthracite. Faites tourner la cuisine, ouvrez portes et tiroirs, allumez ou éteignez les équipements.</p></div><span class="tag">Version d’essai · à valider</span></header>
 <main class="wrap">
   <section class="stage" aria-label="Vue 3D d’Harmonie">
     <div class="ld" id="ld"><span>Chargement de la vue 3D</span><i><b id="bar"></b></i></div>
@@ -63,9 +63,8 @@ button:focus-visible{outline:2px solid var(--green);outline-offset:2px}
   </section>
   <aside class="panel">
     <div class="box"><h2>Équipements</h2><p>Allumez ou éteignez chaque élément.</p>
-      <button type="button" class="opt" data-o="plancha" aria-checked="true" role="switch"><span>Plancha<small>Planet Oasi 55, au centre</small></span><i class="sw"></i></button>
-      <button type="button" class="opt" data-o="friteuse" aria-checked="true" role="switch"><span>Friteuse<small>À gauche de la plancha</small></span><i class="sw"></i></button>
-      <button type="button" class="opt" data-o="gaz" aria-checked="true" role="switch"><span>Plaque gaz<small>À droite de la plancha</small></span><i class="sw"></i></button>
+      <button type="button" class="opt" data-o="plancha" aria-checked="true" role="switch"><span>Plancha + feu<small>Planet Oasi 80 lisse + feu dual</small></span><i class="sw"></i></button>
+      <button type="button" class="opt" data-o="friteuse" aria-checked="true" role="switch"><span>Friteuse<small>À gauche de la plancha, avec couvercle</small></span><i class="sw"></i></button>
       <button type="button" class="opt" data-o="evier" aria-checked="true" role="switch"><span>Évier<small>À droite</small></span><i class="sw"></i></button>
       <button type="button" class="opt" data-o="frigo" aria-checked="true" role="switch"><span>Réfrigérateur<small>Porte de gauche</small></span><i class="sw"></i></button>
       <button type="button" class="opt" data-o="store" aria-checked="false" role="switch"><span>Store banne<small>Intégré à la toiture, il se déploie à l’avant</small></span><i class="sw"></i></button>
@@ -112,7 +111,7 @@ button:focus-visible{outline:2px solid var(--green);outline-offset:2px}
   document.querySelectorAll("[data-o]").forEach(function (b) {
     b.addEventListener("click", function () {
       var on = b.getAttribute("aria-checked") !== "true"; b.setAttribute("aria-checked", String(on)); api.setOption(b.dataset.o, on);
-      if (on) { st.auto = false; api.setAuto(false); sync(); var v = { plancha: "detail", friteuse: "detail", gaz: "detail", evier: "evier", frigo: "frigo", store: "store", bar: "bar" }[b.dataset.o]; if (b.dataset.o === "frigo") { st.doors = true; api.setDoors(true); sync(); } api.view(v); }
+      if (on) { st.auto = false; api.setAuto(false); sync(); var v = { plancha: "detail", friteuse: "detail", evier: "evier", frigo: "frigo", store: "store", bar: "bar" }[b.dataset.o]; if (b.dataset.o === "frigo") { st.doors = true; api.setDoors(true); sync(); } api.view(v); }
     });
   });
   clads.addEventListener("click", function (e) {

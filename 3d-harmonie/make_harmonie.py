@@ -9,27 +9,26 @@ def rep(a, b, n=1):
 
 # ---------- Configuration d'Harmonie (mètres, x = 0 au centre de la cuisine) ----------
 HRM = {
-  "car": 1.57,                 # demi-largeur du caisson bas
-  "doors": [[-1.57, -0.97, "L"], [-0.97, -0.45, "L"], [0.45, 0.97, "R"], [0.97, 1.57, "R"]],
-  "drawers": [[-0.45, 0.45]],
-  "div": [-0.97, -0.45, 0.45, 0.97],
-  "shelves": [[-0.952, -0.468], [0.468, 0.952]],
-  "feet": [-1.45, -0.5, 0.5, 1.45],
-  "frigoDx": -1.27 - 0.7505,   # le froid passe dans le module de gauche
-  "si": 0.0,                   # plancha centrée sous la hotte
-  "sink": 1.27,
-  "frit": [-0.88, -0.59],
-  "gaz": [0.59, 0.88],
-  "hood": 1.80,
-  "bz": [-0.92, 0.92],         # crédence noire derrière la cuisson
-  "sockDx": -1.50 - (-0.9),
-  "orchid": [-1.2, None, -0.14],
+  "car": 1.285,                # demi-largeur du caisson bas (intérieur 2,60 m)
+  "doors": [[-1.285, -0.685, "L"], [-0.685, -0.335, "L"], [0.565, 1.285, "R"]],
+  "drawers": [[-0.335, 0.565]],
+  "div": [-0.685, -0.335, 0.565],
+  "shelves": [[-0.667, -0.353], [0.583, 1.267]],
+  "feet": [-1.2, -0.4, 0.4, 1.2],
+  "frigoDx": -0.985 - 0.7505,  # le froid dans le module de gauche
+  "si": 0.265,                 # Oasi 80 + feu (115 cm) : x de -0,31 à 0,84
+  "sink": 1.065,
+  "frit": [-0.67, -0.38],
+  "hood": 1.50,
+  "bz": [-0.86, 0.86],         # crédence noire derrière la cuisson
+  "sockDx": -1.26 - (-0.9),
+  "orchid": [-1.0, None, -0.14],
 }
 rep('function u7(s, e = {}) {', 'function u7(s, e = {}) {\n  const HRM = ' + json.dumps(HRM) + ';')
 
 # largeur : +1 m
-rep('    j = 1.25,\n', '    j = 1.75,\n')
-rep('    n0 = 1.085,\n', '    n0 = 1.585,\n')
+rep('    j = 1.25,\n', '    j = 1.50,\n')
+rep('    n0 = 1.085,\n', '    n0 = 1.30,\n')
 
 # crédence noire au centre, bois de part et d'autre
 rep('R0(-n0, -.49, F0, y0, l0, .018), R0(.51, n0, F0, y0, l0, .018)', 'R0(-n0, HRM.bz[0], F0, y0, l0, .018), R0(HRM.bz[1], n0, F0, y0, l0, .018)')
@@ -107,8 +106,8 @@ rep('''    let T = [];
 
 # nouveaux éléments : friteuse, plaque gaz, hotte (insérés avant le bloc évier)
 NEW = r'''
-  let Fq = new ke, Gz = new ke, Hd = new ke;
-  b0.add(Fq, Gz, Hd);
+  let Fq = new ke, Hd = new ke;
+  b0.add(Fq, Hd);
   {
     let FA = HRM.frit[0], FB = HRM.frit[1], FZ0 = W, FZ1 = U, FY = i0 + .004, FC = (FA + FB) / 2;
     X(FA, FB, i0 - .004, FY, FZ0, FZ1, G.steel, .003, Fq);
@@ -119,21 +118,12 @@ NEW = r'''
     X(FC - .004, FC + .004, FY + .012, FY + .03, FZ1 - .14, FZ1 - .136, G.steel, 0, Fq, !1);
     X(FA + .02, FB - .02, FY, FY + .004, FZ1 - .085, FZ1 - .02, G.lidBlack, .002, Fq);
     S0(.017, .017, .014, 32, G.knob, FC - .05, FY + .011, FZ1 - .052, 0, 0, Fq), S0(.006, .006, .003, 16, G.led, FC + .05, FY + .005, FZ1 - .052, 0, 0, Fq);
-  }
-  {
-    let GA = HRM.gaz[0], GB = HRM.gaz[1], GZ0 = W + .01, GZ1 = U - .01, GY = i0 + .006, GC = (GA + GB) / 2;
-    X(GA, GB, i0, GY, GZ0, GZ1, G.lidBlack, .003, Gz);
-    for (let [BZ, BR] of [[GZ0 + .15, .048], [GZ1 - .17, .038]]) {
-      S0(BR + .014, BR + .014, .006, 48, G.steelDark, GC, GY + .003, BZ, 0, 0, Gz);
-      S0(BR * .72, BR * .72, .014, 40, G.black, GC, GY + .009, BZ, 0, 0, Gz);
-      for (let k = 0; k < 4; k++) {
-        let Bm = X(-(BR + .05) / 2, (BR + .05) / 2, -.004, .004, -.006, .006, G.black, .002, Gz);
-        Bm.position.set(GC + Math.cos(k * Math.PI / 2) * (BR + .05) / 2, GY + .022, BZ + Math.sin(k * Math.PI / 2) * (BR + .05) / 2), Bm.rotation.y = -k * Math.PI / 2;
-      }
-      X(GC - BR - .07, GC + BR + .07, GY + .026, GY + .032, BZ - .006, BZ + .006, G.black, .002, Gz);
-      X(GC - .006, GC + .006, GY + .026, GY + .032, BZ - BR - .07, BZ + BR + .07, G.black, .002, Gz);
-    }
-    for (let KX of [GC - .05, GC + .05]) S0(.016, .016, .013, 32, G.knob, KX, GY + .007, GZ1 - .035, 0, 0, Gz);
+    var FNi = new ke;
+    let FIi = new ke, fhn = FB - FA + .01, fls = Qr + .008, FLi = .05, fri = .004;
+    FIi.position.set(FC, FY + .004, FZ0 - .004), Fq.add(FIi), FIi.add(FNi);
+    X(-fhn / 2, fhn / 2, FLi - fri, FLi, 0, fls, G.lidBlack, .0035, FNi), X(-fhn / 2, -fhn / 2 + fri, .004, FLi - .001, 0, fls, G.lidBlack, .0015, FNi), X(fhn / 2 - fri, fhn / 2, .004, FLi - .001, 0, fls, G.lidBlack, .0015, FNi), X(-fhn / 2, fhn / 2, .004, FLi - .001, fls - fri, fls, G.lidBlack, .0015, FNi), X(-fhn / 2 + fri, fhn / 2 - fri, FLi - fri - .0015, FLi - fri, .004, fls - fri, G.lidBlack, 0, FNi, !1);
+    for (let T of [-fhn / 2 + .05, fhn / 2 - .05]) S0(.006, .006, .04, 24, G.handle, T, .006, 0, 0, Math.PI / 2, FIi), X(T - .016, T + .016, -.004, .012, -.012, .002, G.handle, .002, FIi);
+    J1();
   }
   {
     let HW = HRM.hood, HT = y0 - .003, HB = y0 - .27, ZB = l0 + .012, ZF = .2, ZT = .05;
@@ -146,7 +136,7 @@ NEW = r'''
     Hm.castShadow = !0, Hm.receiveShadow = !0, Hd.add(Hm);
     X(-HW / 2 + .035, HW / 2 - .035, HB - .006, HB + .001, ZB + .03, ZF - .03, G.steelDark, .002, Hd);
     for (let FX = -HW / 2 + .06; FX < HW / 2 - .05; FX += .028) X(FX, FX + .012, HB - .009, HB - .005, ZB + .05, ZF - .05, G.steel, 0, Hd, !1);
-    for (let LX of [-.6, .6]) S0(.022, .022, .004, 32, G.lamp, LX, HB - .011, ZF - .09, 0, 0, Hd);
+    for (let LX of [-.5, .5]) S0(.022, .022, .004, 32, G.lamp, LX, HB - .011, ZF - .09, 0, 0, Hd);
     let Ih = new Br("#ffd9a3", 5, 1.1, Math.PI / 2.5, .8, 1.4);
     Ih.position.set(0, HB - .02, -.05), Ih.target.position.set(0, i0, -.05), Hd.add(Ih, Ih.target);
   }
@@ -187,8 +177,8 @@ views = '''        face: [
           [0, 1.1, 0]
         ],
         detail: [
-          [.45, 1.6, 1.45],
-          [0, 1, -.05]
+          [.7, 1.6, 1.5],
+          [.2, 1, -.05]
         ],
         rangement: [
           [-1.6, .95, 3.2],
@@ -204,18 +194,22 @@ rep('''        evier: [
           [.05, .85, 1.75],
           [.72, .5, 0]
         ]''', '''        evier: [
-          [1.55, 1.65, 1.15],
-          [1.27, .98, -.05]
+          [1.35, 1.65, 1.15],
+          [1.065, .98, -.05]
         ],
         frigo: [
-          [-.6, .85, 1.75],
-          [-1.27, .5, 0]
+          [-.3, .85, 1.75],
+          [-.985, .5, 0]
         ]''')
 
 exec(open('depth_patch.py', encoding='utf-8').read())
 exec(open('store_patch.py', encoding='utf-8').read())
 exec(open('deck_patch.py', encoding='utf-8').read())
 exec(open('bar_patch.py', encoding='utf-8').read())
+exec(open('oasi_patch.py', encoding='utf-8').read())
+# plus d'option plaque gaz (remplacée par le feu de la Oasi 80)
+rep('      gaz: !0,\n', '')
+rep(', T === "gaz" && (Gz.visible = te.gaz)', '')
 open('harmonie-model.js', 'w', encoding='utf-8').write(s)
 head = open('head.min.js', encoding='utf-8').read()
 open('site/harmonie.js', 'w', encoding='utf-8').write(head + s)

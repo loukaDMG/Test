@@ -19,3 +19,9 @@ rep('''  let zt = .265,
     Di = .285,
     ii = .0035;
   X(HRM.band[0] + ii / 2, HRM.band[1] - ii / 2, HRM.band[2] + ii / 2, .908, zt, Di, G.front, .0025);''')
+# vue large pour l'accueil (cuisine, terrasse et bar dans le cadre)
+rep('''        bar: [''', '''        accueil: [
+          [-6.5, 2.1, 8.3],
+          [.25, .95, .75]
+        ],
+        bar: [''')

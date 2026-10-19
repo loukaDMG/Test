@@ -8003,6 +8003,10 @@ void main() {
           [4.2, 1.6, -6.4],
           [0, 1.22, .4]
         ],
+        accueil: [
+          [-6.5, 2.1, 8.3],
+          [.25, .95, .75]
+        ],
         bar: [
           [-1.8, 1.9, 8.4],
           [.3, 1.05, 1.5]
@@ -8156,10 +8160,10 @@ const CMP = [
 
 /* Séquence 3D de l'accueil : chaque étape = un état du modèle et un angle de caméra */
 const SCENE = [
-  { k: "Ouverte", t: "Ouverte, à l’abri.", d: "La cuisine s’ouvre sur la terrasse, sous sa propre toiture, avec son éclairage intégré au plafond.", v: "trois", blind: 0, lid: 0, doors: 0, drawers: 0 },
-  { k: "Plancha", t: "La plancha, encastrée.", d: "Plancha Planet Oasi 55 affleurante, couvercle en inox marine. Évier inox à côté, dans le même plan de travail.", v: "detail", blind: 0, lid: 1, doors: 0, drawers: 0 },
+  { k: "Ouverte", t: "Ouverte, à l’abri.", d: "La cuisine s’ouvre sur la terrasse, sous sa propre toiture, avec son éclairage intégré au plafond.", v: "accueil", blind: 0, lid: 0, doors: 0, drawers: 0 },
+  { k: "Plancha", t: "La plancha, encastrée.", d: "Plancha Planet Oasi 80 et friteuse encastrées, sous la hotte inox. Évier inox à côté, dans le même plan de travail.", v: "detail", blind: 0, lid: 1, doors: 0, drawers: 0 },
   { k: "Bardage", t: "Votre bardage.", d: "Côtés et arrière en Fundermax anthracite ou en lames WEO®35 : Teak, Cedar, Ipé, Dark grey.", v: "cote", blind: 0, lid: 1, doors: 0, drawers: 0, wood: ["teak", "cedar", "ipe", "darkgrey", "fundermax"] },
-  { k: "Fermée", t: "Fermée, elle protège tout.", d: "Entre deux repas, le store descend devant la cuisine : plan de travail et équipements restent à l’abri.", v: "trois", blind: 1, lid: 0, doors: 0, drawers: 0 }
+  { k: "Fermée", t: "Fermée, elle protège tout.", d: "Entre deux repas, le bar sur roulettes rentre à l’intérieur et le store descend devant la cuisine : plan de travail et équipements restent à l’abri.", v: "accueil", blind: 1, lid: 0, doors: 0, drawers: 0 }
 ];
 
 /* Illustration de face (façade avant Fundermax), 100 unités = 1 m */
@@ -8270,10 +8274,10 @@ function home() {
 </section>
 
 <section class="scene" id="configurer"><div class="sc-pin">
-  <div class="sc-stage" id="scene3d"><div class="ld" style="background-image:url(${IMG.poster})"><span>Chargement de la vue 3D</span><i><b></b></i></div><canvas aria-label="Évidence en 3D, animée au défilement"></canvas><span class="sc-tag"><i></i>Vue 3D · Évidence</span><span class="sc-wood" aria-live="polite"></span></div>
+  <div class="sc-stage" id="scene3d"><div class="ld" style="background-image:url(${IMG.posterH})"><span>Chargement de la vue 3D</span><i><b></b></i></div><canvas aria-label="Harmonie en 3D, animée au défilement"></canvas><span class="sc-tag"><i></i>Vue 3D · Harmonie</span><span class="sc-wood" aria-live="polite"></span></div>
   <div class="sc-txt">
-    <p class="kicker">En 3D · Évidence</p>
-    <div class="sc-steps">${SCENE.map((st, i) => `<div class="sc-step${i ? "" : " on"}" data-i="${i}"><span class="n">0${i + 1}</span><h2>${st.t}</h2><p>${st.d}</p>${i === SCENE.length - 1 ? `<figure class="sc-real"><div style="background-image:url(${IMG.ferme})"></div><figcaption>En vrai · store descendu</figcaption></figure><div class="actions"><a class="pill mag" href="#evidence--vue-3d">Composer la vôtre en 3D</a><a class="link" href="#evidence">Découvrir Évidence ${CHEV}</a></div>` : ""}</div>`).join("")}</div>
+    <p class="kicker">En 3D · Harmonie</p>
+    <div class="sc-steps">${SCENE.map((st, i) => `<div class="sc-step${i ? "" : " on"}" data-i="${i}"><span class="n">0${i + 1}</span><h2>${st.t}</h2><p>${st.d}</p>${i === SCENE.length - 1 ? `<figure class="sc-real"><div style="background-image:url(${IMG.ferme})"></div><figcaption>En vrai · store descendu</figcaption></figure><div class="actions"><a class="pill mag" href="#harmonie--vue-3d">Composer la vôtre en 3D</a><a class="link" href="#harmonie">Découvrir Harmonie ${CHEV}</a></div>` : ""}</div>`).join("")}</div>
     <ol class="sc-rail" aria-label="Étapes">${SCENE.map((st, i) => `<li><button type="button" data-go="${i}" aria-label="Étape ${i + 1} : ${st.k}"><i></i><span>${st.k}</span></button></li>`).join("")}</ol>
   </div>
   <span class="sc-hint" aria-hidden="true">Faites défiler</span>
@@ -8821,14 +8825,14 @@ function sceneInit() {
   };
   const start = () => {
     if (started) return; started = true;
-    if (!window.DMG3D || !webgl()) { ld.querySelector("span").textContent = "La vue 3D n’est pas disponible sur cet appareil."; bar.parentElement.remove(); return; }
-    try { api = window.DMG3D.mount(canvas, { pine: TX.pine, pineNor: TX.pineNor, pineRough: TX.pineRough, slat: TX.slat, slatNor: TX.slatNor, envRgb: TX.envRgb, envM: TX.envM, weo: TX.weo }); }
+    if (!window.DMG3D || !window.DMG3D.mountH || !webgl()) { ld.querySelector("span").textContent = "La vue 3D n’est pas disponible sur cet appareil."; bar.parentElement.remove(); return; }
+    try { api = window.DMG3D.mountH(canvas, { pine: TX.pine, pineNor: TX.pineNor, pineRough: TX.pineRough, slat: TX.slat, slatNor: TX.slatNor, envRgb: TX.envRgb, envM: TX.envM, weo: TX.weo }); }
     catch (e) { ld.querySelector("span").textContent = "La vue 3D n’a pas pu démarrer."; return; }
     api.onProgress = p => { bar.style.width = Math.round(p * 100) + "%"; };
     api.onReady = () => { ld.classList.add("done"); apply(true); };
     window.__scene = api;
     setTimeout(() => ld.classList.add("done"), 6000);
-    ["plancha", "evier", "frigo"].forEach(k => api.setOption(k, true));
+    api.setOption("bar", true);
     api.setAuto(false); api.setCladding(wood);
     apply(true);
   };

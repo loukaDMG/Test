@@ -1297,6 +1297,66 @@ body.editing .ed-empty::after{content:"vide";font-style:italic;opacity:.5}
 }
 .st3 .fin-p{font-weight:500;color:var(--txt2)}
 @media (max-width:640px){.st3 .fin-p{display:none}}
+/* ---------- v17 : accueil resserré et orienté devis ---------- */
+.sec.compact{padding-block:clamp(60px,7vw,104px)}
+/* Gamme : carte entière cliquable, lien devis à côté de « Découvrir » */
+.panel[data-href]{cursor:pointer}
+.panel .pacts{display:flex;align-items:center;flex-wrap:wrap;gap:12px 22px;margin-top:auto}
+.panel .pacts .go{margin-top:0;color:#fff;text-decoration:none}
+.panel .dv{position:relative;z-index:2;color:var(--v300);font-size:15px;font-weight:500;text-decoration:none;background-image:linear-gradient(currentColor,currentColor);background-repeat:no-repeat;background-position:0 100%;background-size:100% 1px;padding-bottom:2px;transition:color .3s}
+.panel .dv:hover{color:#fff}
+/* Réalisations : modèle sous la légende */
+.shot p .shc{display:flex;flex-direction:column;gap:3px;min-width:0}
+.shot p .shc em{font-style:normal;font-family:inherit;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--v300)}
+/* 3D : la photo réelle de la cuisine fermée dans la dernière étape */
+.sc-real{position:relative;margin:4px 0 0;width:min(260px,100%);aspect-ratio:16/10;border-radius:16px;overflow:hidden}
+.sc-real div{position:absolute;inset:0;background-size:cover;background-position:50% 55%}
+.sc-real figcaption{position:absolute;left:10px;bottom:10px;padding:4px 10px;border-radius:980px;background:rgba(8,25,15,.6);color:#fff;font-size:11px;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+/* Construction : même contenu, plus serré */
+.build5.compact .b5-grid{margin-top:40px}
+.build5.compact .b5-list li{padding:16px 0}
+.build5.compact .b5-list b{font-size:clamp(19px,1.6vw,23px);margin:4px 0}
+.build5.compact .b5-list p{font-size:15px}
+.build5.compact .b5-ph{aspect-ratio:4/4.4}
+.build5.compact .b5-mat{margin-top:48px}
+/* Votre projet : à la suite de la livraison, sur fond sombre */
+.proj2{background:var(--v950);color:#fff;padding:0 0 clamp(72px,8vw,120px)}
+.proj2-h{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;margin-bottom:8px}
+.proj2-h .h-sub{margin:0;font-size:clamp(22px,2.2vw,30px);font-weight:500;letter-spacing:-.02em;color:#fff}
+.proj2-h .h-sub em{color:var(--v300)}
+.proj2 .tl .rail{background:rgba(255,255,255,.16)}
+.proj2 .tl .rail i{background:var(--v300)}
+.proj2 .tl .st::before{background:var(--v950);box-shadow:inset 0 0 0 2px var(--v300)}
+.proj2 .tl .st.on::before{background:var(--v300)}
+.proj2 .tl .st b{color:var(--v300)}
+.proj2 .tl .st h3{color:#fff}
+.proj2 .tl .st p{color:var(--w2)}
+/* Qui sommes-nous : la visite en bas de section */
+.qv{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:clamp(28px,5vw,72px);align-items:end;margin-top:clamp(48px,6vw,80px);padding-top:clamp(32px,4vw,48px);border-top:1px solid var(--line);scroll-margin-top:90px}
+.qv-t .h-sub{margin:10px 0 12px;font-size:clamp(22px,2.2vw,30px);font-weight:500;letter-spacing:-.02em}
+.qv-t p:last-child{margin:0;color:var(--txt2);max-width:560px}
+.qv-r{display:flex;flex-direction:column;gap:20px}
+.qv-r .pill{align-self:flex-start;margin-top:0}
+/* Barre fixe sur téléphone : appeler + devis */
+.mcta{padding:6px 6px 6px 14px}
+.mcta .mc-tel{display:inline-flex;align-items:center;gap:8px;color:#fff;text-decoration:none;font-size:15px;font-weight:500;font-variant-numeric:tabular-nums;white-space:nowrap}
+.mcta .mc-tel svg{width:18px;height:18px;fill:none;stroke:var(--v300);stroke-width:1.7;stroke-linejoin:round;flex:none}
+.mcta .pill{white-space:nowrap}
+@media (max-width:900px){
+  .qv{grid-template-columns:minmax(0,1fr);align-items:start}
+  /* Téléphone : la photo d'abord */
+  .h6 .h6-grid{padding-top:calc(var(--nav) + 16px);gap:30px}
+  .h6-ph{order:-1}
+}
+@media (max-width:640px){
+  .build5.compact .b5-ph{aspect-ratio:16/10}
+  .build5.compact .b5-list li{padding:14px 0;grid-template-columns:44px minmax(0,1fr)}
+  .proj2-h{margin-bottom:0}
+  .mcta .mc-tel{font-size:14px}
+}
+@media (max-width:360px){.mcta .mc-tel span{display:none}}
+#comparer .head-s .h-title{font-size:clamp(30px,3.4vw,48px)}
+#comparer .head-s{margin-bottom:28px}
 
 </style>
 </head>
@@ -6167,12 +6227,10 @@ const CMP = [
 
 /* Séquence 3D de l'accueil : chaque étape = un état du modèle et un angle de caméra */
 const SCENE = [
-  { k: "Fermée", t: "Fermée, elle protège tout.", d: "Entre deux repas, le store descend devant la cuisine : plan de travail et équipements restent à l’abri.", v: "trois", blind: 1, lid: 0, doors: 0, drawers: 0 },
-  { k: "Ouverte", t: "Le store remonte.", d: "La cuisine s’ouvre sur la terrasse, sous sa propre toiture, avec son éclairage intégré au plafond.", v: "face", blind: 0, lid: 0, doors: 0, drawers: 0 },
+  { k: "Ouverte", t: "Ouverte, à l’abri.", d: "La cuisine s’ouvre sur la terrasse, sous sa propre toiture, avec son éclairage intégré au plafond.", v: "trois", blind: 0, lid: 0, doors: 0, drawers: 0 },
   { k: "Plancha", t: "La plancha, encastrée.", d: "Plancha Planet Oasi 55 affleurante, couvercle en inox marine. Évier inox à côté, dans le même plan de travail.", v: "detail", blind: 0, lid: 1, doors: 0, drawers: 0 },
-  { k: "Rangements", t: "Tout trouve sa place.", d: "Portes et tiroirs sous le plan de travail. Le réfrigérateur se cache derrière la porte de droite.", v: "rangement", blind: 0, lid: 1, doors: 1, drawers: 1 },
   { k: "Bardage", t: "Votre bardage.", d: "Côtés et arrière en Fundermax anthracite ou en lames WEO®35 : Teak, Cedar, Ipé, Dark grey.", v: "cote", blind: 0, lid: 1, doors: 0, drawers: 0, wood: ["teak", "cedar", "ipe", "darkgrey", "fundermax"] },
-  { k: "Prête", t: "Prête à recevoir.", d: "Livrée assemblée en un seul bloc, posée sur 4 plots béton, sans fixation au bâtiment.", v: "trois", blind: 0, lid: 1, doors: 0, drawers: 0 }
+  { k: "Fermée", t: "Fermée, elle protège tout.", d: "Entre deux repas, le store descend devant la cuisine : plan de travail et équipements restent à l’abri.", v: "trois", blind: 1, lid: 0, doors: 0, drawers: 0 }
 ];
 
 /* Illustration de face (façade avant Fundermax), 100 unités = 1 m */
@@ -6233,20 +6291,19 @@ const cladButtons = () => `<div class="clad clad2" role="group" aria-label="Bard
 
 function panel(s, i) {
   const M = MODELS[s];
-  return `<a class="panel" href="#${s}" data-cursor="Découvrir"><div class="txt"><span class="cote" style="--w:${M.m / 4}"><i></i><em>${M.size}</em></span><span class="idx">0${i + 1} · ${M.size} de façade</span><div><h3>${M.name}<em>${M.tag}</em></h3></div><span class="go"><i>${ARR}</i>Découvrir ${M.name}</span></div><div class="vis vph" style="background-image:url(${IMG[M.ph]})"></div><div hidden style="--sw:${Math.min(96, Math.round(M.sw * 118))}%">${svgKitchen(M.m, true)}</div></a>`;
+  return `<div class="panel" data-href="${s}"><div class="txt"><span class="cote" style="--w:${M.m / 4}"><i></i><em>${M.size}</em></span><span class="idx">0${i + 1} · ${M.size} de façade</span><div><h3>${M.name}<em>${M.tag}</em></h3></div><div class="pacts"><a class="go" href="#${s}"><i>${ARR}</i>Découvrir ${M.name}</a><a class="dv" href="#devis-${s}">Demander un devis</a></div></div><div class="vis vph" style="background-image:url(${IMG[M.ph]})"></div><div hidden style="--sw:${Math.min(96, Math.round(M.sw * 118))}%">${svgKitchen(M.m, true)}</div></div>`;
 }
 
 /* ---------- Accueil ---------- */
 function home() {
-  const shots = [["nuit", "w", "Éclairage intégré", "De nuit"], ["bois", "n", "Bardage bois, crédence noire", "Réalisation"], ["fundermax", "w", "Panneaux Fundermax", "Façade"], ["interieur", "n", "Équipements encastrés", "Intérieur"], ["petite", "w", "Format compact, façade anthracite", "Réalisation"], ["pergola", "w", "Cuisine et îlot extérieur", "Réalisation"], ["r_ilot", "w", "Store banne déployé, îlot sur roulettes", "Réalisation"], ["r_store", "w", "Store intégré à la toiture", "Réalisation"], ["r_jardin", "w", "Le coin repas à l’ombre du store", "Réalisation"]];
-  return `
-<section class="h4 h6 dark" id="haut">
+  const shots = [["nuit", "w", "Éclairage intégré", "De nuit"], ["bois", "n", "Bardage bois, crédence noire", "Réalisation"], ["fundermax", "w", "Panneaux Fundermax", "Façade"], ["interieur", "n", "Équipements encastrés", "Intérieur"], ["petite", "w", "Format compact, façade anthracite", "Réalisation", "Évidence"], ["pergola", "w", "Cuisine et îlot extérieur", "Réalisation", "Harmonie"], ["r_ilot", "w", "Store banne déployé, îlot sur roulettes", "Réalisation", "Harmonie"], ["r_store", "w", "Store intégré à la toiture", "Réalisation"], ["r_jardin", "w", "Le coin repas à l’ombre du store", "Réalisation"]];
+  return `<section class="h4 h6 dark" id="haut">
   <div class="wrap h6-grid" data-hero-in>
     <div class="h6-txt">
       <img class="h6-logo" data-hero-k src="${(document.querySelector(".gnav .logo img") || {}).src || ""}" alt="DMG Concept">
       <p class="h6-lead" data-hero-f>DMG Concept conçoit et construit des cuisines extérieures couvertes. Trois modèles, fabriqués en atelier à Évires et livrés en un seul bloc, assemblés et équipés.</p>
       <dl class="h6-facts" data-hero-f>${[["Siège", "Évires, Haute-Savoie"], ["Gamme", "3 modèles · 2, 3 et 4\u00a0m"], ["Fabrication", "En atelier"], ["Livraison", "Partout en France"]].map(f => `<div><dt>${f[0]}</dt><dd>${f[1]}</dd></div>`).join("")}</dl>
-      <div class="actions" data-hero-f><a class="pill light mag" href="#gamme">Découvrir la gamme</a><a class="h6-link" href="#devis">Nous contacter</a></div>
+      <div class="actions" data-hero-f><a class="pill light mag" href="#devis">Demander un devis</a><a class="h6-link" href="#gamme">Découvrir la gamme</a></div>
     </div>
     <figure class="h6-ph" data-hero-media><div style="background-image:url(${IMG.bois})"></div><figcaption>Réalisation DMG Concept</figcaption></figure>
   </div>
@@ -6258,12 +6315,45 @@ function home() {
   <div class="figs4">${[["1", "seul bloc", "livré assemblé et équipé"], ["3", "modèles", "2, 3 et 4 m de façade"], ["5", "finitions", "pour les côtés et l’arrière"], ["4", "plots béton", "sans fixation au bâtiment"]].map(f => `<div data-a="up"><b data-count="${f[0]}">${f[0]}</b><span>${f[1]}</span><small>${f[2]}</small></div>`).join("")}</div>
 </div></section>
 
-<section class="sec build5" id="construction"><div class="wrap">
+<section class="range4 dark" id="gamme"><div class="pin">
+  <div class="wrap"><div class="top"><div><p class="kicker">La gamme</p><h2 class="h-title" style="margin-top:14px">${ln("Trois tailles.\nUne même <em>exigence.</em>")}</h2></div><p class="intro">Choisissez la taille qui correspond à votre terrasse. La construction et les matériaux restent les mêmes.</p></div></div>
+  <div class="track">${SLUGS.map(panel).join("")}</div>
+  <div class="wrap"><div class="prog" aria-hidden="true"><i></i></div></div>
+</div></section>
+
+<section class="sec compact" id="comparer"><div class="wrap">
+  <div class="head head-s" data-a="up"><p class="kicker">Comparer</p><h2 class="h-title">${ln("Quel modèle\npour <em>vous ?</em>")}</h2><p class="intro">Chaque cuisine a des dimensions fixes. Vous choisissez ensuite vos équipements, un par un.</p></div>
+  <div class="fit" data-a="up">
+    <div class="fit-top"><label for="fit-w">Largeur disponible sur votre terrasse</label><output id="fit-o" for="fit-w">3,5 m</output></div>
+    <input type="range" id="fit-w" min="1.5" max="6" step="0.1" value="3.5" aria-describedby="fit-note">
+    <div class="fit-scale" aria-hidden="true"><span>1,5 m</span><span>3 m</span><span>4,5 m</span><span>6 m</span></div>
+    <div class="fit-row">${SLUGS.map(s => `<a class="fit-m" href="#${s}" data-w="${MODELS[s].m}"><div class="v">${svgKitchen(MODELS[s].m, false)}</div><div><b>${MODELS[s].name}</b><br><span>${MODELS[s].size} de façade</span></div><em>Tient</em></a>`).join("")}</div>
+    <p class="small muted" id="fit-note">Indication basée sur la largeur de façade de chaque modèle. L’implantation exacte est vérifiée avec vous lors du rendez-vous.</p>
+  </div>
+  ${cmpBox(null)}
+</div></section>
+
+<section class="gal dark" id="realisations">
+  <div class="wrap top"><div><p class="kicker">Réalisations</p><h2 class="h-title" style="margin-top:14px">${ln("Quelques\n<em>réalisations.</em>")}</h2></div><div class="gal-nav"><button type="button" data-gal="-1" aria-label="Photo précédente">${ARL}</button><button type="button" data-gal="1" aria-label="Photo suivante">${ARR}</button></div></div>
+  <div class="strip" data-cursor="Glisser">${shots.map((x, i) => `<figure class="shot ${x[1]}"><div style="background-image:url(${IMG[x[0]]})" role="img" aria-label="${x[2]}"></div><p><span class="shc"><b>${x[2]}</b>${x[4] ? `<em>${x[4]}</em>` : ""}</span><span>${String(i + 1).padStart(2, "0")} / 0${shots.length}</span></p></figure>`).join("")}</div>
+</section>
+
+<section class="scene" id="configurer"><div class="sc-pin">
+  <div class="sc-stage" id="scene3d"><div class="ld" style="background-image:url(${IMG.poster})"><span>Chargement de la vue 3D</span><i><b></b></i></div><canvas aria-label="Évidence en 3D, animée au défilement"></canvas><span class="sc-tag"><i></i>Vue 3D · Évidence</span><span class="sc-wood" aria-live="polite"></span></div>
+  <div class="sc-txt">
+    <p class="kicker">En 3D · Évidence</p>
+    <div class="sc-steps">${SCENE.map((st, i) => `<div class="sc-step${i ? "" : " on"}" data-i="${i}"><span class="n">0${i + 1}</span><h2>${st.t}</h2><p>${st.d}</p>${i === SCENE.length - 1 ? `<figure class="sc-real"><div style="background-image:url(${IMG.ferme})"></div><figcaption>En vrai · store descendu</figcaption></figure><div class="actions"><a class="pill mag" href="#evidence--vue-3d">Composer la vôtre en 3D</a><a class="link" href="#evidence">Découvrir Évidence ${CHEV}</a></div>` : ""}</div>`).join("")}</div>
+    <ol class="sc-rail" aria-label="Étapes">${SCENE.map((st, i) => `<li><button type="button" data-go="${i}" aria-label="Étape ${i + 1} : ${st.k}"><i></i><span>${st.k}</span></button></li>`).join("")}</ol>
+  </div>
+  <span class="sc-hint" aria-hidden="true">Faites défiler</span>
+</div></section>
+
+<section class="sec build5 compact" id="construction"><div class="wrap">
   <div class="head" data-a="up"><p class="kicker">Construction</p><h2 class="h-title">${ln("Construite comme une maison.\nPas comme un <em>meuble de jardin.</em>")}</h2><p class="intro">Chaque couche a un rôle : porter, protéger, durer. Ce sont des matériaux de bâtiment, choisis pour passer les saisons dehors.</p></div>
   <div class="b5-grid">
     <figure class="b5-ph"><div style="background-image:url(${IMG.piscine})"></div><figcaption>Façade Fundermax, intérieur bois</figcaption><span class="b5-count" aria-hidden="true"><b>01</b><span>/ 07</span></span></figure>
     <ol class="b5-list">${[
-      ["Pose", "Sur 4 plots béton", "Posée sans fixation au bâtiment, sans travaux de maçonnerie."],
+      ["Mise en place", "Sur 4 plots béton", "Sans fixation au bâtiment, sans travaux de maçonnerie."],
       ["Structure", "Ossature bois", "Une charpente de construction, pas un assemblage de meubles."],
       ["Toiture", "Plate, membrane EPDM", "Une étanchéité de toiture-terrasse, au-dessus du plan de travail."],
       ["Façade", "Panneau Fundermax", "Compact stratifié haute pression, conçu pour les façades, protégé des UV et des intempéries."],
@@ -6280,51 +6370,16 @@ function home() {
   </div>
 </div></section>
 
-<section class="range4 dark" id="gamme"><div class="pin">
-  <div class="wrap"><div class="top"><div><p class="kicker">La gamme</p><h2 class="h-title" style="margin-top:14px">${ln("Trois tailles.\nUne même <em>exigence.</em>")}</h2></div><p class="intro">Choisissez la taille qui correspond à votre terrasse. La construction et les matériaux restent les mêmes.</p></div></div>
-  <div class="track">${SLUGS.map(panel).join("")}</div>
-  <div class="wrap"><div class="prog" aria-hidden="true"><i></i></div></div>
-</div></section>
-
-<section class="scene" id="configurer"><div class="sc-pin">
-  <div class="sc-stage" id="scene3d"><div class="ld" style="background-image:url(${IMG.poster})"><span>Chargement de la vue 3D</span><i><b></b></i></div><canvas aria-label="Évidence en 3D, animée au défilement"></canvas><span class="sc-tag"><i></i>Vue 3D · Évidence</span><span class="sc-wood" aria-live="polite"></span></div>
-  <div class="sc-txt">
-    <p class="kicker">En 3D · Évidence</p>
-    <div class="sc-steps">${SCENE.map((st, i) => `<div class="sc-step${i ? "" : " on"}" data-i="${i}"><span class="n">0${i + 1}</span><h2>${st.t}</h2><p>${st.d}</p>${i === SCENE.length - 1 ? `<div class="actions"><a class="pill mag" href="#evidence--vue-3d">Composer la vôtre en 3D</a><a class="link" href="#evidence">Découvrir Évidence ${CHEV}</a></div>` : ""}</div>`).join("")}</div>
-    <ol class="sc-rail" aria-label="Étapes">${SCENE.map((st, i) => `<li><button type="button" data-go="${i}" aria-label="Étape ${i + 1} : ${st.k}"><i></i><span>${st.k}</span></button></li>`).join("")}</ol>
-  </div>
-  <span class="sc-hint" aria-hidden="true">Faites défiler</span>
-</div></section>
-
-<section class="sec story4 closes" id="fermeture"><div class="wrap split">
-  <div class="txt">
-    <p class="kicker" data-a="up">Fermeture</p>
-    <h2 class="h-title">${ln("Après le repas,\nelle se <em>referme.</em>")}</h2>
-    <p class="intro" data-a="up">Un store descend devant la cuisine : le plan de travail et les équipements restent à l’abri entre deux utilisations.</p>
-    <div class="actions" data-a="up"><a class="pill outline mag" href="#configurer">Voir la fermeture en 3D</a></div>
-  </div>
-  <figure class="ph" data-a="up"><div style="background-image:url(${IMG.ferme})" data-par="-6"></div><figcaption>Store descendu</figcaption></figure>
-</div></section>
-
 <div class="slat5" aria-hidden="true"><div class="tx" style="background-image:url(${FIN.teak.tex})" data-par="-4"></div><div class="lv">${"<i></i>".repeat(Math.max(10, Math.round(innerWidth / 64)))}</div><img src="${(document.querySelector(".gnav .logo img") || {}).src || ""}" alt=""></div>
-
-
-<section class="sec" id="comparer"><div class="wrap">
-  <div class="head" data-a="up"><p class="kicker">Comparer</p><h2 class="h-title">${ln("Quel modèle\npour <em>vous ?</em>")}</h2><p class="intro">Chaque cuisine a des dimensions fixes. Vous choisissez ensuite vos équipements, un par un.</p></div>
-  <div class="fit" data-a="up">
-    <div class="fit-top"><label for="fit-w">Largeur disponible sur votre terrasse</label><output id="fit-o" for="fit-w">3,5 m</output></div>
-    <input type="range" id="fit-w" min="1.5" max="6" step="0.1" value="3.5" aria-describedby="fit-note">
-    <div class="fit-scale" aria-hidden="true"><span>1,5 m</span><span>3 m</span><span>4,5 m</span><span>6 m</span></div>
-    <div class="fit-row">${SLUGS.map(s => `<a class="fit-m" href="#${s}" data-w="${MODELS[s].m}"><div class="v">${svgKitchen(MODELS[s].m, false)}</div><div><b>${MODELS[s].name}</b><br><span>${MODELS[s].size} de façade</span></div><em>Tient</em></a>`).join("")}</div>
-    <p class="small muted" id="fit-note">Indication basée sur la largeur de façade de chaque modèle. L’implantation exacte est vérifiée avec vous lors du rendez-vous.</p>
-  </div>
-  ${cmpBox(null)}
-</div></section>
 
 <section class="deliv dark" id="livraison"><div class="wrap">
   <div class="frame"><div class="ph" style="background-image:url(${IMG.grue})"></div><div class="clock" aria-hidden="true"><b>09:00</b><i><u></u></i><span class="cl-now">Livraison</span><ol class="cl-steps"><li>Livraison</li><li>Déchargée en un seul bloc</li><li>Mise en place sur 4 plots béton</li><li>À table</li></ol></div>
     <div class="cap4"><div><p class="kicker">Livraison</p><h2 class="h-title" style="margin-top:14px">${ln("9\u00a0h, livrée.\nMidi, <em>à table.</em>")}</h2></div><p>Livraison partout en France. La cuisine quitte l’atelier assemblée et équipée. Elle est déchargée en un seul bloc puis mise en place sur 4 plots béton, sans fixation au bâtiment. Les raccordements sont à prévoir séparément.</p></div>
   </div>
+</div></section>
+<section class="proj2 dark" id="projet"><div class="wrap">
+  <div class="proj2-h" data-a="up"><p class="kicker">Votre projet</p><h3 class="h-sub">Du premier échange à la <em>livraison.</em></h3></div>
+  <div class="tl"><span class="rail"><i></i></span>${[["Rendez-vous", "Chez vous ou à Évires, pour parler de votre projet et de vos envies."], ["Devis détaillé", "Modèle, bardage et options chiffrés poste par poste."], ["Assemblage", "La cuisine est construite et assemblée avant de partir."], ["Livraison et mise en place", "Mise en place sur 4 plots béton. Raccordements à prévoir séparément."]].map((s, i) => `<div class="st" data-a="up"><b>${i + 1}.</b><h3>${s[0]}</h3><p class="muted">${s[1]}</p></div>`).join("")}</div>
 </div></section>
 
 <section class="sec story4" id="qui"><div class="wrap">
@@ -6340,24 +6395,10 @@ function home() {
     <ul class="pts4" data-a="up"><li><b>Bien construire</b><span>Ossature bois, toiture EPDM, façade Fundermax.</span></li><li><b>Dessiner juste</b><span>Une gamme courte, des proportions équilibrées.</span></li><li><b>Suivre chaque client</b><span>Un seul interlocuteur, du devis au suivi après livraison.</span></li></ul>
   </div>
   </div>
-</div></section>
-
-<section class="gal dark" id="realisations">
-  <div class="wrap top"><div><p class="kicker">Réalisations</p><h2 class="h-title" style="margin-top:14px">${ln("Quelques\n<em>réalisations.</em>")}</h2></div><div class="gal-nav"><button type="button" data-gal="-1" aria-label="Photo précédente">${ARL}</button><button type="button" data-gal="1" aria-label="Photo suivante">${ARR}</button></div></div>
-  <div class="strip" data-cursor="Glisser">${shots.map((x, i) => `<figure class="shot ${x[1]}"><div style="background-image:url(${IMG[x[0]]})" role="img" aria-label="${x[2]}"></div><p><b>${x[2]}</b><span>${String(i + 1).padStart(2, "0")} / 0${shots.length}</span></p></figure>`).join("")}</div>
-</section>
-
-<section class="sec" id="projet"><div class="wrap">
-  <div class="head" data-a="up"><p class="kicker">Votre projet</p><h2 class="h-title">${ln("Du premier échange\nà la <em>livraison.</em>")}</h2></div>
-  <div class="tl"><span class="rail"><i></i></span>${[["Rendez-vous", "Chez vous ou à Évires, pour parler de votre projet et de vos envies."], ["Devis détaillé", "Modèle, bardage et options chiffrés poste par poste."], ["Assemblage", "La cuisine est construite et assemblée avant de partir."], ["Livraison et mise en place", "Mise en place sur 4 plots béton. Raccordements à prévoir séparément."]].map((s, i) => `<div class="st" data-a="up"><b>${i + 1}.</b><h3>${s[0]}</h3><p class="muted">${s[1]}</p></div>`).join("")}</div>
-</div></section>
-
-<section class="sec visit" id="visite"><div class="wrap visit-g">
-  <figure class="visit-ph" data-a="up"><div style="background-image:url(${IMG.bois})"></div></figure>
-  <div class="visit-txt" data-a="up"><p class="kicker">Venez la voir</p><h2 class="h-title">${ln("Une cuisine se juge\n<em>en vrai.</em>")}</h2>
-    <p class="intro">Ouvrez les portes, posez la main sur le plan de travail, refermez la cuisine. Nous vous recevons à Évires, sur rendez-vous, pour en voir une et parler de votre projet.</p>
-    <dl class="visit-dl"><dt>Adresse</dt><dd>58 impasse des Roseaux, 74570 Évires</dd><dt>Visite</dt><dd>Sur rendez-vous</dd><dt>Téléphone</dt><dd>07 49 66 12 56</dd></dl>
-    <a class="pill" href="#devis">Prendre rendez-vous</a></div>
+  <div class="qv" id="visite" data-a="up">
+    <div class="qv-t"><p class="kicker">Venez la voir</p><h3 class="h-sub">Une cuisine se juge <em>en vrai.</em></h3><p>Ouvrez les portes, posez la main sur le plan de travail, refermez la cuisine. Nous vous recevons à Évires, sur rendez-vous, pour en voir une et parler de votre projet.</p></div>
+    <div class="qv-r"><dl class="visit-dl"><dt>Adresse</dt><dd>58 impasse des Roseaux, 74570 Évires</dd><dt>Visite</dt><dd>Sur rendez-vous</dd><dt>Téléphone</dt><dd>07 49 66 12 56</dd></dl><a class="pill" href="#devis">Prendre rendez-vous</a></div>
+  </div>
 </div></section>
 
 <section class="sec bg-v50" id="faq"><div class="wrap">
@@ -6646,6 +6687,7 @@ function toast(msg) { const t = document.getElementById("toast"); t.textContent 
 /* ---------- Après rendu ---------- */
 function after(page) {
   frTypo(app); edPrep(app);
+  app.querySelectorAll(".panel[data-href]").forEach(c => c.addEventListener("click", e => { if (!e.target.closest("a")) location.hash = c.dataset.href; }));
   app.querySelectorAll(".cmp-tg").forEach(b => b.addEventListener("click", () => { const box = b.nextElementSibling, open = box.hidden; box.hidden = !open; b.setAttribute("aria-expanded", String(open)); b.classList.toggle("on", open); if (HAS_G) ScrollTrigger.refresh(); }));
   app.querySelectorAll(".qa button").forEach(b => b.addEventListener("click", () => { const q = b.parentElement, o = q.classList.toggle("open"); b.setAttribute("aria-expanded", o); if (HAS_G) setTimeout(() => ScrollTrigger.refresh(), 520); }));
   const form = document.getElementById("form");
@@ -6858,7 +6900,7 @@ function sceneInit() {
   io.observe(box);
   if (HAS_G && !REDUCED) {
     const st = ScrollTrigger.create({
-      trigger: sec, pin: sec.querySelector(".sc-pin"), start: "top top", end: () => "+=" + Math.round(innerHeight * (N - .4)),
+      trigger: sec, pin: sec.querySelector(".sc-pin"), start: "top top", end: () => "+=" + Math.round(innerHeight * (N - .4) * .66),
       onUpdate: s => {
         const x = s.progress * N, i = Math.min(N - 1, Math.floor(x));
         sec.style.setProperty("--p", s.progress.toFixed(4));
@@ -7279,7 +7321,7 @@ function globals() {
     }
     lastY = y;
   };
-  const mc = document.createElement("div"); mc.className = "mcta"; mc.innerHTML = `<span>Votre projet de cuisine extérieure</span><a class="pill sm" href="#devis">Demander un devis</a>`; document.body.appendChild(mc);
+  const mc = document.createElement("div"); mc.className = "mcta"; mc.innerHTML = `<a class="mc-tel" href="tel:+33749661256" aria-label="Appeler DMG Concept au 07 49 66 12 56"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 3.5h3l1.5 4-2 1.3a11 11 0 0 0 6.1 6.1l1.3-2 4 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 4.6 5.7a2 2 0 0 1 2-2.2z"/></svg><span>07 49 66 12 56</span></a><a class="pill sm" href="#devis">Demander un devis</a>`; document.body.appendChild(mc);
   const onScroll2 = () => {
     const vis = el => { if (!el) return false; const r = el.getBoundingClientRect(); return r.top < window.innerHeight && r.bottom > 0; };
     const blocked = vis(document.getElementById("devis")) || vis(document.querySelector(".st3")) || vis(document.getElementById("stage")) || vis(document.querySelector(".summary")) || vis(document.querySelector(".scene .sc-pin")) || vis(document.querySelector(".deliv.timed .frame")) || vis(document.querySelector("footer"));

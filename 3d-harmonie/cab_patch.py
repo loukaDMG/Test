@@ -36,3 +36,26 @@ rep('    getCladding() {', '''    setHalf(T) {
       HFon = !!T, HF.visible = HFon && $ !== "fundermax", k = !0, qn = 60
     },
     getCladding() {''')
+# entrer dans la cuisine : caméra à hauteur d'yeux, on regarde autour en faisant glisser (champ de vision élargi)
+rep('''        accueil: [''', '''        entree: [
+          [1, 1.75, 1.15],
+          [.955, 1.733, 1.114]
+        ],
+        accueil: [''')
+rep('l.position.lerpVectors(Yt.p0, Yt.p1, _0), h.target.lerpVectors(Yt.q0, Yt.q1, _0), Yt.t >= 1 && (Yt = null)',
+    'l.position.lerpVectors(Yt.p0, Yt.p1, _0), h.target.lerpVectors(Yt.q0, Yt.q1, _0), Yt.f1 && (FVo = Yt.f0 + (Yt.f1 - Yt.f0) * _0, l.fov = FVo, l.updateProjectionMatrix(), Yt.t >= 1 && !Yt.in && (FVo = 0)), Yt.t >= 1 && (Yt = null)')
+rep('l.fov = Math.min(52, 30 * Math.max(1, Math.pow(1.35 / l.aspect, .75)))', 'l.fov = FVo || FVb()')
+rep('    setHalf(T) {', '''    enter(T, I) {
+      clearTimeout(EXt), EXin = !!T, T ? (h.minDistance = .02, h.enableZoom = !1, h.maxPolarAngle = Math.PI * .85, h.autoRotate = !1, this.view("entree")) : (h.enableZoom = !0, h.maxPolarAngle = Math.PI * .495, this.view("trois"), EXt = setTimeout(() => { EXin || (h.minDistance = 1) }, 1500)), I && Yt && (l.position.copy(Yt.p1), h.target.copy(Yt.q1), FVo = T ? 64 : 0, l.fov = Yt.f1, l.updateProjectionMatrix(), Yt = null), k = !0, ia()
+    },
+    setHalf(T) {''')
+rep('  let HF = new ke, HFon = !1,', '  let EXt = 0, EXin = !1, FVo = 0, FVb = () => Math.min(52, 30 * Math.max(1, Math.pow(1.35 / l.aspect, .75))), HF = new ke, HFon = !1,')
+# toute transition de caméra ramène aussi le champ de vision (large dedans, normal dehors)
+rep('''      q0: h.target.clone(),
+      q1: new P(...z)
+    }''', '''      q0: h.target.clone(),
+      q1: new P(...z),
+      f0: l.fov,
+      f1: EXin ? 64 : FVb(),
+      in: EXin
+    }''')

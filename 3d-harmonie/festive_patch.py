@@ -41,7 +41,7 @@ def setview(name, cam, tgt):
     assert n == 1, name
 for v in [('face', '0, 1.6, 11.2', '0, 1.15, 1.1'), ('trois', '-6.4, 2, 8.8', '0, 1.1, 1.1'), ('cote', '-10.5, 1.6, 2.2', '0, 1.1, 1.2'),
           ('arriere', '5.2, 1.8, -8', '0, 1.1, 1'), ('accueil', '-7.4, 2.4, 10', '.3, 1, 1.4'), ('store', '-7.6, 3.4, 12', '0, 1.5, 3'),
-          ('dedans', '-.6, 1.8, 3.4', '.3, 1.2, .3'), ('rangement', '1.2, 1, 2.4', '-.1, .6, .3'), ('frigo', '-.4, .85, 1.45', '-1.485, .5, 0')]:
+          ('dedans', '-.6, 1.8, 3.4', '.3, 1.2, .3'), ('rangement', '1.2, 1, 2.4', '-.1, .6, .3'), ('frigo', '-.4, .85, 1.45', '-1.485, .5, 0'), ('entree', '1.2, 1.75, .95', '1.149, 1.732, .977')]:
     setview(*v)
 # lumière principale du studio : avancée de la profondeur en plus, pour rester devant la cuisine
 rep('g.position.set(-.6, 2.1, 2.4), g.lookAt(0, 1.2, -.3)', 'g.position.set(-.6, 2.1, 3.74), g.lookAt(0, 1.2, 1.04)')

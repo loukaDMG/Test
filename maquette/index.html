@@ -6627,6 +6627,9 @@ void main() {
     }),
     D0 = new ke;
   D0.visible = !1, b0.add(D0);
+  let HF = new ke, HFon = !1, HFz = (WF - WB) / 2;
+  HF.visible = !1, b0.add(HF);
+  for (let T of [-1, 1]) X(T < 0 ? -j - .024 : j + .006, T < 0 ? -j - .006 : j + .024, .025, a0 - .055, -WB + .045, HFz, ee, .002, HF);
   let BRv = 0, BRt = 0, BRi = 0, BRit = 0, BRg = new ke, BRp = new ke, BL = 1.2, BD = .5, BH = 1.05, BC = .105;
   b0.add(BRg), BRp.visible = !1, BRg.add(BRp);
   let BRk = X(-BL / 2 + .022, BL / 2 - .022, BC, BH - .012, -BD / 2 + .022, BD / 2 - .022, O, 0, BRg, !1),
@@ -6707,7 +6710,7 @@ void main() {
     let T = $ === "fundermax";
     D0.visible = T, ne && (ne.visible = !T);
     for (let z of J) z.visible = !T;
-    BRs.visible = BRk.visible = !T, BRp.visible = T;
+    BRs.visible = BRk.visible = !T, BRp.visible = T, HF.visible = HFon && !T;
     if (!T) {
       let z = A[$];
       if (z && z.d) {
@@ -7967,6 +7970,9 @@ void main() {
     setCladding(T) {
       return $ = T in Ee || T === "fundermax" ? T : "teak", P0(), k = !0, qn = 60, $
     },
+    setHalf(T) {
+      HFon = !!T, HF.visible = HFon && $ !== "fundermax", k = !0, qn = 60
+    },
     getCladding() {
       return $
     },
@@ -8161,8 +8167,8 @@ const CMP = [
 /* Séquence 3D de l'accueil : chaque étape = un état du modèle et un angle de caméra */
 const SCENE = [
   { k: "Ouverte", t: "Ouverte, à l’abri.", d: "La cuisine s’ouvre sur la terrasse, sous sa propre toiture, avec son éclairage intégré au plafond.", v: "accueil", blind: 0, lid: 0, doors: 0, drawers: 0 },
-  { k: "Plancha", t: "La plancha, encastrée.", d: "Plancha Planet Oasi 80 et friteuse encastrées, sous la hotte inox. Évier inox à côté, dans le même plan de travail.", v: "detail", blind: 0, lid: 1, doors: 0, drawers: 0 },
-  { k: "Bardage", t: "Votre bardage.", d: "Côtés et arrière en Fundermax anthracite ou en lames WEO®35 : Teak, Cedar, Ipé, Dark grey.", v: "cote", blind: 0, lid: 1, doors: 0, drawers: 0, wood: ["teak", "cedar", "ipe", "darkgrey", "fundermax"] },
+  { k: "Store", t: "Le store banne, intégré.", d: "Logé dans la toiture, il se déploie au-dessus de la terrasse : l’ombre pour le coin repas, sans structure en plus.", v: "store", blind: 0, lid: 0, doors: 0, drawers: 0, store: 1 },
+  { k: "Bardage", t: "Votre bardage.", d: "Côtés et arrière en lames WEO®35 (Teak, Cedar, Ipé, Dark grey), en Fundermax anthracite, ou les deux associés sur un même mur.", v: "cote", blind: 0, lid: 0, doors: 0, drawers: 0, wood: ["teak"], half: 1 },
   { k: "Fermée", t: "Fermée, elle protège tout.", d: "Entre deux repas, le bar sur roulettes rentre à l’intérieur et le store descend devant la cuisine : plan de travail et équipements restent à l’abri.", v: "accueil", blind: 1, lid: 0, doors: 0, drawers: 0 }
 ];
 
@@ -8812,6 +8818,7 @@ function sceneInit() {
     const S = SCENE[cur];
     api.setAuto(false);
     api.setBlind(!!S.blind); api.setLid(!!S.lid); api.setDoors(!!S.doors); api.setDrawers(!!S.drawers);
+    api.setOption("store", !!S.store); if (api.setHalf) api.setHalf(!!S.half);
     if (instant) { api.jump(S.v); api.snap(); } else api.view(S.v);
   };
   const show = i => {
@@ -8821,6 +8828,7 @@ function sceneInit() {
     sec.classList.toggle("moved", i > 0);
     sec.classList.toggle("wood", !!SCENE[i].wood);
     if (!SCENE[i].wood) setWood("teak");
+    woodEl.textContent = SCENE[i].half ? "Lames WEO®35 · Teak + Fundermax anthracite" : woodName(wood);
     apply(first);
   };
   const start = () => {

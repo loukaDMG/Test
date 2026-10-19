@@ -5299,6 +5299,9 @@ void main() {
     }),
     D0 = new ke;
   D0.visible = !1, b0.add(D0);
+  let HF = new ke, HFon = !1, HFz = (WF - WB) / 2;
+  HF.visible = !1, b0.add(HF);
+  for (let T of [-1, 1]) X(T < 0 ? -j - .024 : j + .006, T < 0 ? -j - .006 : j + .024, .025, a0 - .055, -WB + .045, HFz, ee, .002, HF);
   let BRv = 0, BRt = 0, BRi = 0, BRit = 0, BRg = new ke, BRp = new ke, BL = 1.2, BD = .5, BH = 1.05, BC = .105;
   b0.add(BRg), BRp.visible = !1, BRg.add(BRp);
   let BRk = X(-BL / 2 + .022, BL / 2 - .022, BC, BH - .012, -BD / 2 + .022, BD / 2 - .022, O, 0, BRg, !1),
@@ -5379,7 +5382,7 @@ void main() {
     let T = $ === "fundermax";
     D0.visible = T, ne && (ne.visible = !T);
     for (let z of J) z.visible = !T;
-    BRs.visible = BRk.visible = !T, BRp.visible = T;
+    BRs.visible = BRk.visible = !T, BRp.visible = T, HF.visible = HFon && !T;
     if (!T) {
       let z = A[$];
       if (z && z.d) {
@@ -6638,6 +6641,9 @@ void main() {
     },
     setCladding(T) {
       return $ = T in Ee || T === "fundermax" ? T : "teak", P0(), k = !0, qn = 60, $
+    },
+    setHalf(T) {
+      HFon = !!T, HF.visible = HFon && $ !== "fundermax", k = !0, qn = 60
     },
     getCladding() {
       return $

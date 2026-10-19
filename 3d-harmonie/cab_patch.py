@@ -25,3 +25,14 @@ rep('''        bar: [''', '''        accueil: [
           [.25, .95, .75]
         ],
         bar: [''')
+# bardage mixte : Fundermax anthracite sur la moitié arrière des murs latéraux, lames sur la moitié avant
+rep('  D0.visible = !1, b0.add(D0);\n', '''  D0.visible = !1, b0.add(D0);
+  let HF = new ke, HFon = !1, HFz = (WF - WB) / 2;
+  HF.visible = !1, b0.add(HF);
+  for (let T of [-1, 1]) X(T < 0 ? -j - .024 : j + .006, T < 0 ? -j - .006 : j + .024, .025, a0 - .055, -WB + .045, HFz, ee, .002, HF);
+''')
+rep('    BRs.visible = BRk.visible = !T, BRp.visible = T;', '    BRs.visible = BRk.visible = !T, BRp.visible = T, HF.visible = HFon && !T;')
+rep('    getCladding() {', '''    setHalf(T) {
+      HFon = !!T, HF.visible = HFon && $ !== "fundermax", k = !0, qn = 60
+    },
+    getCladding() {''')

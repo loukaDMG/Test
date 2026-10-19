@@ -49,7 +49,7 @@ button:focus-visible{outline:2px solid var(--green);outline-offset:2px}
 @media (max-width:900px){.wrap{grid-template-columns:minmax(0,1fr)}.stage{height:62svh;min-height:420px}.views{right:16px}}
 @media (max-width:640px){.top{padding:16px 16px 10px}.wrap{padding:0 16px 20px}.tools button{padding:9px 11px;font-size:13px}.views button{padding:6px 10px;font-size:12px}}
 </style>
-<header class="top"><div><h1>Harmonie <em>en 3D</em></h1><p>3 m de façade, 1,66 m de profondeur, plancher de 15 cm, intérieur bois, hotte inox centrée, façades anthracite. Faites tourner la cuisine, ouvrez portes et tiroirs, allumez ou éteignez les équipements.</p></div><span class="tag">Version d’essai · à valider</span></header>
+<header class="top"><div><h1>Harmonie <em>en 3D</em></h1><p>3 m de façade, 1,66 m de profondeur, plancher de 15 cm, intérieur bois, hotte inox au plafond, store banne intégré, façades anthracite. Faites tourner la cuisine, ouvrez portes et tiroirs, allumez ou éteignez les équipements.</p></div><span class="tag">Version d’essai · à valider</span></header>
 <main class="wrap">
   <section class="stage" aria-label="Vue 3D d’Harmonie">
     <div class="ld" id="ld"><span>Chargement de la vue 3D</span><i><b id="bar"></b></i></div>
@@ -68,9 +68,10 @@ button:focus-visible{outline:2px solid var(--green);outline-offset:2px}
       <button type="button" class="opt" data-o="gaz" aria-checked="true" role="switch"><span>Plaque gaz<small>À droite de la plancha</small></span><i class="sw"></i></button>
       <button type="button" class="opt" data-o="evier" aria-checked="true" role="switch"><span>Évier<small>À droite</small></span><i class="sw"></i></button>
       <button type="button" class="opt" data-o="frigo" aria-checked="true" role="switch"><span>Réfrigérateur<small>Porte de gauche</small></span><i class="sw"></i></button>
+      <button type="button" class="opt" data-o="store" aria-checked="false" role="switch"><span>Store banne<small>Intégré à la toiture, il se déploie à l’avant</small></span><i class="sw"></i></button>
     </div>
     <div class="box"><h2>Côtés et arrière</h2><div class="clads" id="clads"></div><div class="cname" id="cname">Teak</div></div>
-    <div class="box note">À venir dans les prochaines versions : barbecue Napoléon, cave à vin, robinet Quooker, enceintes, plan Dekton, store banne et îlot sur roulettes.</div>
+    <div class="box note">À venir dans les prochaines versions : barbecue Napoléon, cave à vin, robinet Quooker, enceintes, plan Dekton et îlot sur roulettes.</div>
   </aside>
 </main>
 <script>window.__TEX = %%TEX%%; window.__WEO = %%WEO%%;</script>
@@ -110,7 +111,7 @@ button:focus-visible{outline:2px solid var(--green);outline-offset:2px}
   document.querySelectorAll("[data-o]").forEach(function (b) {
     b.addEventListener("click", function () {
       var on = b.getAttribute("aria-checked") !== "true"; b.setAttribute("aria-checked", String(on)); api.setOption(b.dataset.o, on);
-      if (on) { st.auto = false; api.setAuto(false); sync(); var v = { plancha: "detail", friteuse: "detail", gaz: "detail", evier: "evier", frigo: "frigo" }[b.dataset.o]; if (b.dataset.o === "frigo") { st.doors = true; api.setDoors(true); sync(); } api.view(v); }
+      if (on) { st.auto = false; api.setAuto(false); sync(); var v = { plancha: "detail", friteuse: "detail", gaz: "detail", evier: "evier", frigo: "frigo", store: "store" }[b.dataset.o]; if (b.dataset.o === "frigo") { st.doors = true; api.setDoors(true); sync(); } api.view(v); }
     });
   });
   clads.addEventListener("click", function (e) {

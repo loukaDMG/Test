@@ -136,7 +136,7 @@ NEW = r'''
     for (let KX of [GC - .05, GC + .05]) S0(.016, .016, .013, 32, G.knob, KX, GY + .007, GZ1 - .035, 0, 0, Gz);
   }
   {
-    let HW = HRM.hood, HT = y0 - .003, HB = y0 - .3, ZB = l0 + .012, ZF = .2, ZT = .05;
+    let HW = HRM.hood, HT = y0 - .003, HB = y0 - .27, ZB = l0 + .012, ZF = .2, ZT = .05;
     let Hs0 = new Si;
     Hs0.moveTo(ZB, HB), Hs0.lineTo(ZF, HB), Hs0.lineTo(ZF, HB + .06), Hs0.lineTo(ZT, HT), Hs0.lineTo(ZB, HT), Hs0.lineTo(ZB, HB);
     let Hg = new g1(Hs0, { depth: HW, bevelEnabled: !0, bevelThickness: .003, bevelSize: .003, bevelSegments: 2, curveSegments: 2 });
@@ -213,6 +213,7 @@ rep('''        evier: [
         ]''')
 
 exec(open('depth_patch.py', encoding='utf-8').read())
+exec(open('store_patch.py', encoding='utf-8').read())
 open('harmonie-model.js', 'w', encoding='utf-8').write(s)
 head = open('head.min.js', encoding='utf-8').read()
 open('site/harmonie.js', 'w', encoding='utf-8').write(head + s)

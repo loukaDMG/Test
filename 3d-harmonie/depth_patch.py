@@ -61,3 +61,20 @@ NEWV = """        face: [
         ],"""
 rep(OLDV, NEWV)
 rep('l.position.set(-5.0, 1.55, 6.0);', 'l.position.set(-5.2, 1.65, 6.6);')
+# ---------- Côtés intérieurs tout en bois, plancher de 15 cm ----------
+rep('R0(l0 + .018, WF - .1, F0, y0, -n0, .016, "z"), R0(l0 + .018, WF - .1, F0, y0, n0 - .016, .016, "z"), X(-n0, -n0 + .012, i0, F0, l0 + .008, .29, G.black, 0), X(n0 - .012, n0, i0, F0, l0 + .008, .29, G.black, 0);',
+    'R0(l0 + .018, WF - .08, .014, y0, -n0, .016, "z"), R0(l0 + .018, WF - .08, .014, y0, n0 - .016, .016, "z");')
+# toute la cuisine pose sur le plancher : on la remonte de 15 cm et on dessine le plancher dessous
+rep('  let b0 = new ke;\n  i.add(b0);', '  let b0 = new ke;\n  i.add(b0), b0.position.y = .15;')
+PLAT = """  X(-n0, n0, -.02, -.004, .18, WF - .02, G.black, 0, b0, !1);
+  X(-j - .024, j + .024, -.15, -.004, -WB - .027, WF + .005, G.frame, .004);
+  X(-j - .03, j + .03, -.15, -.13, -WB - .033, WF + .011, G.cap, .003);"""
+rep('  X(-n0, n0, -.02, -.004, .18, WF - .02, G.black, 0, b0, !1);', PLAT)
+# caméras : on vise 15 cm plus haut
+for v in ['[0, 1.1, .4]', '[0, 1.05, .4]']:
+    s = s.replace(v, v.replace('1.1,', '1.22,').replace('1.05,', '1.17,'))
+rep('h.target.set(0, 1.08, .4), h.enableDamping', 'h.target.set(0, 1.2, .4), h.enableDamping')
+for a, b2 in [('[0, 1, -.05]', '[0, 1.15, -.05]'), ('[-.2, .55, .3]', '[-.2, .7, .3]'), ('[1.27, .98, -.05]', '[1.27, 1.13, -.05]'), ('[-1.27, .5, 0]', '[-1.27, .65, 0]'), ('[.35, 1.15, -.1]', '[.35, 1.3, -.1]')]:
+    s = s.replace(a, b2)
+for a, b2 in [('[.45, 1.6, 1.45]', '[.45, 1.75, 1.45]'), ('[-1.6, .95, 3.2]', '[-1.6, 1.1, 3.2]'), ('[1.55, 1.65, 1.15]', '[1.55, 1.8, 1.15]'), ('[-.6, .85, 1.75]', '[-.6, 1.0, 1.75]'), ('[-1.05, 1.62, 2.5]', '[-1.05, 1.77, 2.5]')]:
+    s = s.replace(a, b2)

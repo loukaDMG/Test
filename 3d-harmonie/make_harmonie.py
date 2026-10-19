@@ -20,7 +20,7 @@ HRM = {
   "sink": 1.065,
   "frit": [-0.67, -0.38],
   "hood": 1.50,
-  "bz": [-0.86, 0.86],         # crédence noire derrière la cuisson
+  "bz": [-0.75, 0.75],         # crédence noire de la largeur de la hotte
   "sockDx": -1.26 - (-0.9),
   "orchid": [-1.0, None, -0.14],
 }

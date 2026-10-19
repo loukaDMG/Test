@@ -69,9 +69,10 @@ button:focus-visible{outline:2px solid var(--green);outline-offset:2px}
       <button type="button" class="opt" data-o="evier" aria-checked="true" role="switch"><span>Évier<small>À droite</small></span><i class="sw"></i></button>
       <button type="button" class="opt" data-o="frigo" aria-checked="true" role="switch"><span>Réfrigérateur<small>Porte de gauche</small></span><i class="sw"></i></button>
       <button type="button" class="opt" data-o="store" aria-checked="false" role="switch"><span>Store banne<small>Intégré à la toiture, il se déploie à l’avant</small></span><i class="sw"></i></button>
+      <button type="button" class="opt" data-o="bar" aria-checked="false" role="switch"><span>Bar sur roulettes<small>Même habillage que la cuisine, il se place devant</small></span><i class="sw"></i></button>
     </div>
     <div class="box"><h2>Côtés et arrière</h2><div class="clads" id="clads"></div><div class="cname" id="cname">Teak</div></div>
-    <div class="box note">À venir dans les prochaines versions : barbecue Napoléon, cave à vin, robinet Quooker, enceintes, plan Dekton et îlot sur roulettes.</div>
+    <div class="box note">À venir dans les prochaines versions : barbecue Napoléon, cave à vin, robinet Quooker, enceintes et plan Dekton.</div>
   </aside>
 </main>
 <script>window.__TEX = %%TEX%%; window.__WEO = %%WEO%%;</script>
@@ -111,7 +112,7 @@ button:focus-visible{outline:2px solid var(--green);outline-offset:2px}
   document.querySelectorAll("[data-o]").forEach(function (b) {
     b.addEventListener("click", function () {
       var on = b.getAttribute("aria-checked") !== "true"; b.setAttribute("aria-checked", String(on)); api.setOption(b.dataset.o, on);
-      if (on) { st.auto = false; api.setAuto(false); sync(); var v = { plancha: "detail", friteuse: "detail", gaz: "detail", evier: "evier", frigo: "frigo", store: "store" }[b.dataset.o]; if (b.dataset.o === "frigo") { st.doors = true; api.setDoors(true); sync(); } api.view(v); }
+      if (on) { st.auto = false; api.setAuto(false); sync(); var v = { plancha: "detail", friteuse: "detail", gaz: "detail", evier: "evier", frigo: "frigo", store: "store", bar: "bar" }[b.dataset.o]; if (b.dataset.o === "frigo") { st.doors = true; api.setDoors(true); sync(); } api.view(v); }
     });
   });
   clads.addEventListener("click", function (e) {

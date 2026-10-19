@@ -214,6 +214,7 @@ rep('''        evier: [
 
 exec(open('depth_patch.py', encoding='utf-8').read())
 exec(open('store_patch.py', encoding='utf-8').read())
+exec(open('bar_patch.py', encoding='utf-8').read())
 open('harmonie-model.js', 'w', encoding='utf-8').write(s)
 head = open('head.min.js', encoding='utf-8').read()
 open('site/harmonie.js', 'w', encoding='utf-8').write(head + s)

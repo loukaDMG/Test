@@ -1,5 +1,6 @@
 import re, json, sys
 src = open('model.js', encoding='utf-8').read()
+VAR = sys.argv[1] if len(sys.argv) > 1 else 'harmonie'
 s = src
 def rep(a, b, n=1):
     global s
@@ -26,12 +27,37 @@ HRM = {
   "bz": [-0.75, 0.75],         # crédence noire de la largeur de la hotte
   "sockDx": -1.26 - (-0.9),
   "orchid": [-1.0, None, -0.14],
+  "spots": [-1.12, 1.0],
 }
+
+# ---------- La Festive : 4 m extérieur, 3,60 m intérieur, 3 m de profondeur ----------
+# Mêmes équipements qu'Harmonie, avec un module de rangement en plus de chaque côté.
+HRM_F = {
+  "car": 1.785,
+  "doors": [[-1.785, -1.185, "L"], [-1.185, -0.685, "L"], [-0.225, 0.205, "L", 0.658, "h"], [0.205, 0.80, "R", 0.658, "h"], [0.80, 1.285, "R"], [1.285, 1.785, "R"]],
+  "drawers": [[-0.685, -0.225]],
+  "band": [-0.685, 0.80, 0.658],
+  "div": [-1.185, -0.685, 0.80, 1.285],
+  "divLow": [-0.225, 0.205],
+  "shelves": [[-1.167, -0.703], [-0.216, 0.196], [0.214, 0.791], [0.809, 1.267], [1.303, 1.767]],
+  "feet": [-1.6, -0.8, 0.0, 0.8, 1.6],
+  "frigoDx": -1.485 - 0.7505,
+  "si": 0.185,
+  "sink": 1.065,
+  "frit": [-0.70, -0.41],
+  "hood": 1.50,
+  "bz": [-0.75, 0.75],
+  "sockDx": -1.76 - (-0.9),
+  "orchid": [-0.95, None, -0.14],
+  "spots": [-1.3, 1.3],
+}
+SIZE = {"harmonie": ("1.50", "1.30"), "festive": ("2.00", "1.80")}[VAR]
+if VAR == "festive": HRM = HRM_F
 rep('function u7(s, e = {}) {', 'function u7(s, e = {}) {\n  const HRM = ' + json.dumps(HRM) + ';')
 
 # largeur : +1 m
-rep('    j = 1.25,\n', '    j = 1.50,\n')
-rep('    n0 = 1.085,\n', '    n0 = 1.30,\n')
+rep('    j = 1.25,\n', '    j = ' + SIZE[0] + ',\n')
+rep('    n0 = 1.085,\n', '    n0 = ' + SIZE[1] + ',\n')
 
 # crédence noire au centre, bois de part et d'autre
 rep('R0(-n0, -.49, F0, y0, l0, .018), R0(.51, n0, F0, y0, l0, .018)', 'R0(-n0, HRM.bz[0], F0, y0, l0, .018), R0(HRM.bz[1], n0, F0, y0, l0, .018)')
@@ -42,7 +68,7 @@ rep('X(-.9, -.745, 1.07, 1.155, l0 + .008, l0 + .02, G.socket, .006);\n  for (le
 
 # spots : un au-dessus de chaque plan libre (la hotte occupe le centre)
 rep('S0(.034, .034, .008, 40, G.steel, -.04, y0 - .006, -.04), S0(.026, .026, .004, 40, G.lamp, -.04, y0 - .011, -.04);\n  let I0 = new Br("#ffd9a3", 7, 1.12, Math.PI / 2.8, .9, 1.4);\n  I0.position.set(-.04, y0 - .02, -.04), I0.target.position.set(-.04, i0, -.12), b0.add(I0, I0.target);',
-    'for (let SX of [-1.12, 1.0]) S0(.034, .034, .008, 40, G.steel, SX, y0 - .006, -.04), S0(.026, .026, .004, 40, G.lamp, SX, y0 - .011, -.04);\n  let I0 = new Br("#ffd9a3", 6.5, 1.35, Math.PI / 2.8, .9, 1.4);\n  I0.position.set(1.0, y0 - .02, -.04), I0.target.position.set(1.0, i0, -.12), b0.add(I0, I0.target);\n  let I1 = new Br("#ffd9a3", 6.5, 1.35, Math.PI / 2.8, .9, 1.4);\n  I1.position.set(-1.12, y0 - .02, -.04), I1.target.position.set(-1.12, i0, -.12), b0.add(I1, I1.target);')
+    'for (let SX of HRM.spots) S0(.034, .034, .008, 40, G.steel, SX, y0 - .006, -.04), S0(.026, .026, .004, 40, G.lamp, SX, y0 - .011, -.04);\n  let I0 = new Br("#ffd9a3", 6.5, 1.35, Math.PI / 2.8, .9, 1.4);\n  I0.position.set(HRM.spots[1], y0 - .02, -.04), I0.target.position.set(HRM.spots[1], i0, -.12), b0.add(I0, I0.target);\n  let I1 = new Br("#ffd9a3", 6.5, 1.35, Math.PI / 2.8, .9, 1.4);\n  I1.position.set(HRM.spots[0], y0 - .02, -.04), I1.target.position.set(HRM.spots[0], i0, -.12), b0.add(I1, I1.target);')
 
 # caisson bas sur 3,14 m, ouverture du plan au droit de l'évier
 old = 'X(-1.07, -1.07 + pe, fe, Te, Ve, ut, G.carcass, .001), X(1.07 - pe, 1.07, fe, Te, Ve, ut, G.carcass, .001), X(-1.07, 1.07, fe, fe + pe, Ve, ut, G.carcass, .001), X(-1.07, 1.07, fe, Te, Ve, Ve + .01, G.carcass, 0), X(-1.07, 1.07, Te - pe, Te, Ve, -.28, G.carcass, .001), X(-1.07, 1.07, Te - pe, Te, .256, ut, G.carcass, .001), X(-1.07, -.905, Te - pe, Te, -.28, .256, G.carcass, .001), X(-.535, 1.07, Te - pe, Te, -.28, .256, G.carcass, .001);'
@@ -211,10 +237,11 @@ exec(open('deck_patch.py', encoding='utf-8').read())
 exec(open('bar_patch.py', encoding='utf-8').read())
 exec(open('oasi_patch.py', encoding='utf-8').read())
 exec(open('cab_patch.py', encoding='utf-8').read())
+if VAR == 'festive': exec(open('festive_patch.py', encoding='utf-8').read())
 # plus d'option plaque gaz (remplacée par le feu de la Oasi 80)
 rep('      gaz: !0,\n', '')
 rep(', T === "gaz" && (Gz.visible = te.gaz)', '')
-open('harmonie-model.js', 'w', encoding='utf-8').write(s)
+open(VAR + '-model.js', 'w', encoding='utf-8').write(s)
 head = open('head.min.js', encoding='utf-8').read()
-open('site/harmonie.js', 'w', encoding='utf-8').write(head + s)
+open('site/' + VAR + '.js', 'w', encoding='utf-8').write(head + s)
 print('ok', len(s))

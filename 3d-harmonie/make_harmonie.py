@@ -40,7 +40,7 @@ rep('X(-.9, -.745, 1.07, 1.155, l0 + .008, l0 + .02, G.socket, .006);\n  for (le
 
 # spots : un au-dessus de chaque plan libre (la hotte occupe le centre)
 rep('S0(.034, .034, .008, 40, G.steel, -.04, y0 - .006, -.04), S0(.026, .026, .004, 40, G.lamp, -.04, y0 - .011, -.04);\n  let I0 = new Br("#ffd9a3", 7, 1.12, Math.PI / 2.8, .9, 1.4);\n  I0.position.set(-.04, y0 - .02, -.04), I0.target.position.set(-.04, i0, -.12), b0.add(I0, I0.target);',
-    'for (let SX of [-1.12, 1.0]) S0(.034, .034, .008, 40, G.steel, SX, y0 - .006, -.04), S0(.026, .026, .004, 40, G.lamp, SX, y0 - .011, -.04);\n  let I0 = new Br("#ffd9a3", 6, 1.12, Math.PI / 2.8, .9, 1.4);\n  I0.position.set(1.0, y0 - .02, -.04), I0.target.position.set(1.0, i0, -.12), b0.add(I0, I0.target);\n  let I1 = new Br("#ffd9a3", 6, 1.12, Math.PI / 2.8, .9, 1.4);\n  I1.position.set(-1.12, y0 - .02, -.04), I1.target.position.set(-1.12, i0, -.12), b0.add(I1, I1.target);')
+    'for (let SX of [-1.12, 1.0]) S0(.034, .034, .008, 40, G.steel, SX, y0 - .006, -.04), S0(.026, .026, .004, 40, G.lamp, SX, y0 - .011, -.04);\n  let I0 = new Br("#ffd9a3", 6.5, 1.35, Math.PI / 2.8, .9, 1.4);\n  I0.position.set(1.0, y0 - .02, -.04), I0.target.position.set(1.0, i0, -.12), b0.add(I0, I0.target);\n  let I1 = new Br("#ffd9a3", 6.5, 1.35, Math.PI / 2.8, .9, 1.4);\n  I1.position.set(-1.12, y0 - .02, -.04), I1.target.position.set(-1.12, i0, -.12), b0.add(I1, I1.target);')
 
 # caisson bas sur 3,14 m, ouverture du plan au droit de l'évier
 old = 'X(-1.07, -1.07 + pe, fe, Te, Ve, ut, G.carcass, .001), X(1.07 - pe, 1.07, fe, Te, Ve, ut, G.carcass, .001), X(-1.07, 1.07, fe, fe + pe, Ve, ut, G.carcass, .001), X(-1.07, 1.07, fe, Te, Ve, Ve + .01, G.carcass, 0), X(-1.07, 1.07, Te - pe, Te, Ve, -.28, G.carcass, .001), X(-1.07, 1.07, Te - pe, Te, .256, ut, G.carcass, .001), X(-1.07, -.905, Te - pe, Te, -.28, .256, G.carcass, .001), X(-.535, 1.07, Te - pe, Te, -.28, .256, G.carcass, .001);'
@@ -136,15 +136,14 @@ NEW = r'''
     for (let KX of [GC - .05, GC + .05]) S0(.016, .016, .013, 32, G.knob, KX, GY + .007, GZ1 - .035, 0, 0, Gz);
   }
   {
-    let HW = HRM.hood, HB = 1.62, HT = 1.79, ZB = l0 + .012, ZF = .2, ZT = .07;
+    let HW = HRM.hood, HT = y0 - .003, HB = y0 - .3, ZB = l0 + .012, ZF = .2, ZT = .05;
     let Hs0 = new Si;
-    Hs0.moveTo(ZB, HB), Hs0.lineTo(ZF, HB), Hs0.lineTo(ZF, HB + .04), Hs0.lineTo(ZT, HT), Hs0.lineTo(ZB, HT), Hs0.lineTo(ZB, HB);
+    Hs0.moveTo(ZB, HB), Hs0.lineTo(ZF, HB), Hs0.lineTo(ZF, HB + .06), Hs0.lineTo(ZT, HT), Hs0.lineTo(ZB, HT), Hs0.lineTo(ZB, HB);
     let Hg = new g1(Hs0, { depth: HW, bevelEnabled: !0, bevelThickness: .003, bevelSize: .003, bevelSegments: 2, curveSegments: 2 });
     Hg.rotateY(-Math.PI / 2), Hg.translate(HW / 2, 0, 0);
     let HSt = new xe({ color: "#d3d7db", metalness: .7, roughness: .3, roughnessMap: w0, anisotropy: .4, clearcoat: .15, clearcoatRoughness: .4 });
     let Hm = new U0(Hg, HSt);
     Hm.castShadow = !0, Hm.receiveShadow = !0, Hd.add(Hm);
-    X(-.3, .3, HT - .01, y0 - .002, ZB + .01, ZB + .26, HSt, .003, Hd);
     X(-HW / 2 + .035, HW / 2 - .035, HB - .006, HB + .001, ZB + .03, ZF - .03, G.steelDark, .002, Hd);
     for (let FX = -HW / 2 + .06; FX < HW / 2 - .05; FX += .028) X(FX, FX + .012, HB - .009, HB - .005, ZB + .05, ZF - .05, G.steel, 0, Hd, !1);
     for (let LX of [-.38, .38]) S0(.022, .022, .004, 32, G.lamp, LX, HB - .011, ZF - .09, 0, 0, Hd);

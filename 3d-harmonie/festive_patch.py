@@ -6,19 +6,22 @@ rep('    WF = 1.202,\n', '    WF = 2.542,\n')
 # Côté terrasse : lames (même bardage que la cuisine). Côté cuisine : plateau en débord pour les tabourets,
 # fond noir en retrait et un meuble tiroir + porte au bout, contre le mur.
 ILOT = '''  D0.visible = !1, b0.add(D0);
-  let ILg = new ke, ILp = new ke, IX0 = -n0 + .016, IX1 = .35, IZ1 = WF - .26, IZ0 = IZ1 - .4, IY0 = .014, IY1 = .014 + 1.1;
+  let ILg = new ke, ILp = new ke, IX0 = -n0 + .016, IX1 = .35, IZ1 = WF - .26, IZ0 = IZ1 - .4, IY0 = .014, IY1 = .014 + 1.1, IK0 = IX0 + .5, IK1 = IX1 - .3, IH = (IY1 - .012 - IY0) / 1.4;
   b0.add(ILg), ILp.visible = !1, ILg.add(ILp);
-  let ILk = X(IX0, IX1 - .022, IY0, IY1 - .012, IZ0, IZ1 - .022, G.black, 0, ILg, !1),
-    ILb = Y0(M);
-  ue(IX0, IX1, x => ILb.add(x, x + A0, IY0, IY1 - .012, IZ1 - .022, IZ1, .43, (IY1 - .012 - IY0) / 1.4, B0(), 6e-4, as() * .57, as()));
-  ue(IZ0, IZ1 - .022, z => ILb.add(IX1 - .022, IX1, IY0, IY1 - .012, z, z + A0, .43, (IY1 - .012 - IY0) / 1.4, B0(), 6e-4, as() * .57, as()));
-  X(IX0, IX1, IY0, IY1 - .012, IZ1 - .012, IZ1, ee, .002, ILp), X(IX1 - .012, IX1, IY0, IY1 - .012, IZ0, IZ1 - .012, ee, .002, ILp);
+  // paroi avant (côté volet), pied au bout libre, meuble contre le mur ; entre les deux, l'espace pour les jambes
+  X(IX0, IX1 - .022, IY0, IY1 - .012, IZ1 - .05, IZ1 - .022, G.black, 0, ILg, !1);
+  X(IK1, IX1 - .022, IY0, IY1 - .012, IZ0, IZ1 - .05, G.black, .002, ILg);
+  X(IX0, IK0, IY0, IY1 - .012, IZ1 - .45, IZ1 - .05, G.black, .002, ILg);
+  let ILb = Y0(M);
+  ue(IX0, IX1, x => ILb.add(x, x + A0, IY0, IY1 - .012, IZ1 - .022, IZ1, .43, IH, B0(), 6e-4, as() * .57, as()));
+  ue(IZ0, IZ1 - .022, z => ILb.add(IX1 - .022, IX1, IY0, IY1 - .012, z, z + A0, .43, IH, B0(), 6e-4, as() * .57, as()));
+  ue(IK0, IK1, x => ILb.add(x, x + A0, IY0, IY1 - .012, IZ1 - .072, IZ1 - .05, .43, IH, B0(), 6e-4, as() * .57, as()));
+  X(IX0, IX1, IY0, IY1 - .012, IZ1 - .012, IZ1, ee, .002, ILp), X(IX1 - .012, IX1, IY0, IY1 - .012, IZ0, IZ1 - .012, ee, .002, ILp), X(IK0, IK1, IY0, IY1 - .012, IZ1 - .062, IZ1 - .05, ee, .002, ILp);
   let ILs = ILb.done(ILg);
-  X(IX0, IX1 + .02, IY1 - .012, IY1, IZ0 - .22, IZ1 + .02, G.stone, .002, ILg);
+  X(IX0, IX1 + .12, IY1 - .012, IY1, IZ1 - .5, IZ1 + .02, G.stone, .002, ILg);
   {
-    let CX0 = IX0 + .004, CX1 = IX0 + .5, CZ = IZ0, DY = IY1 - .012 - .17;
+    let CX0 = IX0 + .004, CX1 = IK0 - .004, CZ = IZ1 - .45, DY = IY1 - .012 - .17;
     X(CX0, CX1, DY + .002, IY1 - .016, CZ - .02, CZ, G.front, .0025, ILg), X(CX0, CX1, IY0 + .1, DY - .002, CZ - .02, CZ, G.front, .0025, ILg);
-    X(IX0, IX1 - .022, IY0, IY0 + .1, IZ0 + .05, IZ0 + .07, G.black, 0, ILg, !1);
     for (let HY of [IY1 - .06, DY - .05]) {
       let HX = (CX0 + CX1) / 2;
       S0(.006, .006, .16, 24, G.handle, HX, HY, CZ - .048, 0, Math.PI / 2, ILg);
@@ -29,7 +32,7 @@ ILOT = '''  D0.visible = !1, b0.add(D0);
   }
 '''
 rep('  D0.visible = !1, b0.add(D0);\n', ILOT)
-rep('BRp.visible = T, HF.visible = HFon && !T;', 'BRp.visible = T, HF.visible = HFon && !T, ILs.visible = ILk.visible = !T, ILp.visible = T;')
+rep('BRp.visible = T, HF.visible = HFon && !T;', 'BRp.visible = T, HF.visible = HFon && !T, ILs.visible = !T, ILp.visible = T;')
 
 # caméra et vues pour une cuisine plus profonde
 rep('  l.position.set(-5.2, 1.65, 6.6);', '  l.position.set(-6.4, 2, 8.8);')

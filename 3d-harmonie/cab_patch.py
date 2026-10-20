@@ -64,3 +64,18 @@ rep('    getCladding() {', '''    setStoreAmount(T) {
       T = Math.max(0, Math.min(1, T)), te.store = T > 0, SB = SBt = T, sbApply(), ia()
     },
     getCladding() {''')
+# séquence de l'accueil pilotée par le défilement : caméra entre deux vues, volet, bar, bardage mixte
+rep('    setStoreAmount(T) {', '''    pose(A, B, t) {
+      let a = this.view(A), b = this.view(B || A);
+      Yt = null, h.autoRotate = !1, a && b && (l.position.set(...a[0]).lerp(new P(...b[0]), t), h.target.set(...a[1]).lerp(new P(...b[1]), t)), k = !0, ia()
+    },
+    setBlindAmount(T) {
+      Ui = Vs = Math.max(0, Math.min(1, T)), ec(), k = !0, ia()
+    },
+    setBarIn(T) {
+      te.bar && (BRi = BRit = Math.max(0, Math.min(1, T)), brApply()), ia()
+    },
+    setHalfAmount(T) {
+      T = Math.max(0, Math.min(1, T)), HFon = T > 0, HF.visible = HFon && $ !== "fundermax", HF.scale.z = Math.max(.001, T), HF.position.z = (-WB + .045) * (1 - HF.scale.z), k = !0, ia()
+    },
+    setStoreAmount(T) {''')

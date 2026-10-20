@@ -7981,6 +7981,19 @@ void main() {
     setHalf(T) {
       HFon = !!T, HF.visible = HFon && $ !== "fundermax", k = !0, qn = 60
     },
+    pose(A, B, t) {
+      let a = this.view(A), b = this.view(B || A);
+      Yt = null, h.autoRotate = !1, a && b && (l.position.set(...a[0]).lerp(new P(...b[0]), t), h.target.set(...a[1]).lerp(new P(...b[1]), t)), k = !0, ia()
+    },
+    setBlindAmount(T) {
+      Ui = Vs = Math.max(0, Math.min(1, T)), ec(), k = !0, ia()
+    },
+    setBarIn(T) {
+      te.bar && (BRi = BRit = Math.max(0, Math.min(1, T)), brApply()), ia()
+    },
+    setHalfAmount(T) {
+      T = Math.max(0, Math.min(1, T)), HFon = T > 0, HF.visible = HFon && $ !== "fundermax", HF.scale.z = Math.max(.001, T), HF.position.z = (-WB + .045) * (1 - HF.scale.z), k = !0, ia()
+    },
     setStoreAmount(T) {
       T = Math.max(0, Math.min(1, T)), te.store = T > 0, SB = SBt = T, sbApply(), ia()
     },
@@ -9977,6 +9990,19 @@ function u7f(s, e = {}) {
     setHalf(T) {
       HFon = !!T, HF.visible = HFon && $ !== "fundermax", k = !0, qn = 60
     },
+    pose(A, B, t) {
+      let a = this.view(A), b = this.view(B || A);
+      Yt = null, h.autoRotate = !1, a && b && (l.position.set(...a[0]).lerp(new P(...b[0]), t), h.target.set(...a[1]).lerp(new P(...b[1]), t)), k = !0, ia()
+    },
+    setBlindAmount(T) {
+      Ui = Vs = Math.max(0, Math.min(1, T)), ec(), k = !0, ia()
+    },
+    setBarIn(T) {
+      te.bar && (BRi = BRit = Math.max(0, Math.min(1, T)), brApply()), ia()
+    },
+    setHalfAmount(T) {
+      T = Math.max(0, Math.min(1, T)), HFon = T > 0, HF.visible = HFon && $ !== "fundermax", HF.scale.z = Math.max(.001, T), HF.position.z = (-WB + .045) * (1 - HF.scale.z), k = !0, ia()
+    },
     setStoreAmount(T) {
       T = Math.max(0, Math.min(1, T)), te.store = T > 0, SB = SBt = T, sbApply(), ia()
     },
@@ -10831,15 +10857,29 @@ function sceneInit() {
     if (api) api.setCladding(k);
     woodEl.textContent = woodName(k);
   };
-  // Store : en défilement, la toile suit le scroll (stF = 0 rentrée → 1 sortie) ; sans défilement animé, il sort d'un coup.
+  // En défilement animé, tout l'état 3D suit le scroll (scrubTo) ; sinon chaque étape s'anime d'un coup.
   const scrub = HAS_G && !REDUCED;
-  let stF = 0;
+  let lastX = 0;
+  const sm = (a, b, v) => Math.min(1, Math.max(0, (v - a) / (b - a)));
+  const scrubTo = x => {
+    lastX = x;
+    if (!api || !api.pose) return;
+    const i = Math.min(N - 1, Math.floor(x)), f = x - i, S = SCENE[i];
+    // caméra : elle garde la vue de l'étape, puis glisse vers celle de la suivante sur la fin de l'étape
+    api.pose(S.v, SCENE[Math.min(N - 1, i + 1)].v, i < N - 1 ? sm(.7, 1, f) : 0);
+    api.setStoreAmount(S.store ? Math.min(sm(0, .45, f), 1 - sm(.7, 1, f)) : 0);
+    api.setHalfAmount(S.half ? Math.min(sm(0, .5, f), 1 - sm(.75, 1, f)) : 0);
+    // fermeture : le bar rentre d'abord, puis le volet descend
+    api.setBarIn(S.blind ? sm(0, .35, f) : 0);
+    api.setBlindAmount(S.blind ? sm(.35, .85, f) : 0);
+  };
   const apply = instant => {
     if (!api || cur < 0) return;
     const S = SCENE[cur];
     api.setAuto(false);
-    api.setBlind(!!S.blind); api.setLid(!!S.lid); api.setDoors(!!S.doors); api.setDrawers(!!S.drawers);
-    if (!S.store) api.setOption("store", false); else if (scrub && api.setStoreAmount) api.setStoreAmount(stF); else api.setOption("store", true);
+    api.setLid(!!S.lid); api.setDoors(!!S.doors); api.setDrawers(!!S.drawers);
+    if (scrub && api.pose) { if (instant) api.snap(); scrubTo(lastX); return; }
+    api.setBlind(!!S.blind); api.setOption("store", !!S.store);
     if (api.setHalf) api.setHalf(!!S.half);
     if (instant) { api.jump(S.v); api.snap(); } else api.view(S.v);
   };
@@ -10876,15 +10916,15 @@ function sceneInit() {
       trigger: sec, pin: sec.querySelector(".sc-pin"), start: "top top", end: () => "+=" + Math.round(innerHeight * (N - .4) * .66),
       onUpdate: s => {
         const x = s.progress * N, i = Math.min(N - 1, Math.floor(x));
-        if (SCENE[i].store) stF = Math.min(1, Math.max(0, (x - i) / .7));
         sec.style.setProperty("--p", s.progress.toFixed(4));
+        lastX = x;
         show(i);
-        if (SCENE[i].store && api && api.setStoreAmount) api.setStoreAmount(stF);
+        scrubTo(x);
         const W = SCENE[i].wood;
         if (W) setWood(W[Math.min(W.length - 1, Math.floor((x - i) * W.length))]);
       }
     });
-    dots.forEach((d, k) => d.addEventListener("click", () => { const y = st.start + (st.end - st.start) * ((k + (SCENE[k].store ? .75 : .35)) / N); if (lenis) lenis.scrollTo(y, { duration: 1.4 }); else window.scrollTo({ top: y, behavior: "smooth" }); }));
+    dots.forEach((d, k) => d.addEventListener("click", () => { const y = st.start + (st.end - st.start) * ((k + (SCENE[k].store ? .55 : SCENE[k].half ? .6 : SCENE[k].blind ? .9 : .35)) / N); if (lenis) lenis.scrollTo(y, { duration: 1.4 }); else window.scrollTo({ top: y, behavior: "smooth" }); }));
   } else {
     sec.classList.add("static");
     dots.forEach((d, k) => d.addEventListener("click", () => { show(k); const W = SCENE[k].wood; if (W) setWood(W[0]); }));

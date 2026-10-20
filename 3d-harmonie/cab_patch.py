@@ -59,3 +59,8 @@ rep('''      q0: h.target.clone(),
       f1: EXin ? 64 : FVb(),
       in: EXin
     }''')
+# store piloté directement (défilement de l'accueil) : 0 = rentré, 1 = sorti, sans animation propre
+rep('    getCladding() {', '''    setStoreAmount(T) {
+      T = Math.max(0, Math.min(1, T)), te.store = T > 0, SB = SBt = T, sbApply(), ia()
+    },
+    getCladding() {''')

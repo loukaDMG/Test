@@ -1,0 +1,694 @@
+<title>DMG Concept</title>
+<meta name="description" content="Cuisines extérieures couvertes, conçues sur mesure et fabriquées à Évires, en Haute-Savoie.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&display=swap">
+<style>
+:root{
+  --paper:#F2EFE9; --paper-2:#E9E4DB; --card:#F7F5F1;
+  --ink:#1B1C1E; --ink-2:#55565A; --ink-3:#86868A; --line:#D7D1C6;
+  --night:#151617; --night-2:#1F2022; --on-night:#EEEBE5; --on-night-2:#A7A49E; --line-night:#34353A;
+  --green:#2F4D3D; --green-2:#3E6450; --wood:#A06F3E;
+  --serif:"Newsreader","Iowan Old Style","Palatino Linotype",Georgia,serif;
+  --sans:"Geist","Helvetica Neue",Arial,system-ui,sans-serif;
+  --mono:"Geist Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+  --gut:clamp(16px,4vw,56px); --max:1320px;
+  --ease:cubic-bezier(.2,.7,.1,1);
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit}
+p{margin:0}
+h1,h2,h3,h4{margin:0;font-weight:400;text-wrap:balance}
+em{font-style:italic}
+.wrap{max-width:var(--max);margin-inline:auto;padding-inline:var(--gut)}
+.serif{font-family:var(--serif)}
+.kicker{font:500 12px/1.3 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2);display:flex;align-items:center;gap:12px}
+.kicker::before{content:"";width:22px;height:1px;background:currentColor;opacity:.6}
+.dark .kicker{color:var(--on-night-2)}
+.h2{font-family:var(--serif);font-weight:300;font-size:clamp(38px,4.8vw,72px);line-height:1.02;letter-spacing:-.02em}
+.h2 em{color:var(--ink-2)}
+.dark .h2 em{color:var(--on-night-2)}
+.lead{font-size:clamp(17px,1.35vw,20px);line-height:1.6;color:var(--ink-2);max-width:56ch}
+.dark .lead{color:var(--on-night-2)}
+.mono{font-family:var(--mono);font-size:12.5px;letter-spacing:.02em}
+.sec{padding-block:clamp(88px,11vw,168px)}
+.dark{background:var(--night);color:var(--on-night)}
+
+/* boutons */
+.btn{display:inline-flex;align-items:center;gap:12px;height:52px;padding:0 26px;border-radius:999px;font:500 15px/1 var(--sans);text-decoration:none;border:1px solid transparent;cursor:pointer;transition:background .3s var(--ease),color .3s var(--ease),border-color .3s var(--ease)}
+.btn svg{width:16px;height:16px;transition:transform .35s var(--ease)}
+.btn:hover svg{transform:translateX(4px)}
+.btn-green{background:var(--green);color:#F2EFE9}
+.btn-green:hover{background:var(--green-2)}
+.btn-line{border-color:rgba(238,235,229,.4);color:var(--on-night)}
+.btn-line:hover{border-color:var(--on-night)}
+.btn-ink{border-color:var(--line);color:var(--ink)}
+.btn-ink:hover{border-color:var(--ink)}
+.link{display:inline-flex;align-items:center;gap:10px;font:500 15px/1.2 var(--sans);text-decoration:none;padding-bottom:4px;border-bottom:1px solid currentColor}
+.link svg{width:14px;height:14px;transition:transform .35s var(--ease)}
+.link:hover svg{transform:translateX(4px)}
+
+/* en-tête */
+.hdr{position:fixed;inset:0 0 auto 0;z-index:50;padding-top:env(safe-area-inset-top,0px);transition:background .4s var(--ease),border-color .4s var(--ease),color .4s var(--ease);color:var(--on-night);border-bottom:1px solid transparent}
+.hdr .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;height:78px}
+.hdr .logo img{height:42px;width:auto;transition:filter .4s var(--ease)}
+.hdr nav{display:flex;align-items:center;gap:clamp(18px,2.4vw,36px)}
+.hdr nav a{font:500 14px/1 var(--sans);text-decoration:none;opacity:.85;transition:opacity .2s}
+.hdr nav a:hover{opacity:1}
+.hdr .btn{height:44px;padding:0 20px;font-size:14px}
+.hdr.solid{background:rgba(242,239,233,.92);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);color:var(--ink);border-bottom-color:var(--line)}
+.hdr.solid .logo img{filter:brightness(0) opacity(.88)}
+.menu-b{display:none;background:none;border:0;color:inherit;width:44px;height:44px;padding:0;cursor:pointer}
+.menu-b span{display:block;width:24px;height:1.5px;background:currentColor;margin:6px auto;transition:transform .3s var(--ease),opacity .3s}
+.menu-open .menu-b span:nth-child(1){transform:translateY(3.75px) rotate(45deg)}
+.menu-open .menu-b span:nth-child(2){transform:translateY(-3.75px) rotate(-45deg)}
+.mnav{position:fixed;inset:0;z-index:49;background:var(--night);color:var(--on-night);padding:calc(110px + env(safe-area-inset-top,0px)) var(--gut) 40px;display:flex;flex-direction:column;gap:6px;opacity:0;visibility:hidden;transition:opacity .35s var(--ease),visibility .35s}
+.mnav a{font:300 40px/1.25 var(--serif);text-decoration:none}
+.mnav .btn{margin-top:28px;align-self:flex-start}
+.menu-open .mnav{opacity:1;visibility:visible}
+.menu-open .hdr{background:transparent;color:var(--on-night);border-bottom-color:transparent}
+.menu-open .hdr .logo img{filter:none}
+@media (max-width:920px){.hdr nav{display:none}.menu-b{display:block}}
+
+/* hero */
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;background:#0c0c0c;color:var(--on-night);overflow:hidden}
+.hero-ph{position:absolute;inset:0}
+.hero-ph img{width:100%;height:100%;object-fit:cover;object-position:72% 50%;transform:scale(1.06);transition:transform 2.4s var(--ease)}
+.ready .hero-ph img{transform:scale(1)}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,10,10,.82) 0%,rgba(10,10,10,.45) 42%,rgba(10,10,10,0) 70%),linear-gradient(0deg,rgba(10,10,10,.7) 0%,rgba(10,10,10,0) 38%)}
+.hero .wrap{position:relative;z-index:2;width:100%;padding-top:140px}
+@media (max-width:760px){.hero::after{background:linear-gradient(0deg,rgba(10,10,10,.9) 0%,rgba(10,10,10,.72) 55%,rgba(10,10,10,.35) 100%)}}
+.hero h1{font-family:var(--serif);font-weight:300;font-size:clamp(46px,6.6vw,104px);line-height:.98;letter-spacing:-.025em;max-width:11ch}
+.hero h1 em{color:#CFC9BF}
+.hero .lead{color:#CFCBC4;margin-top:28px;max-width:46ch}
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:38px}
+.facts{position:relative;z-index:2;margin-top:clamp(56px,8vw,96px);border-top:1px solid rgba(238,235,229,.18)}
+.facts .wrap{padding-top:0;display:grid;grid-template-columns:repeat(3,1fr)}
+.facts .wrap>div{padding:22px 0 28px;display:flex;flex-direction:column;gap:4px}
+.facts .wrap>div+div{padding-left:clamp(16px,3vw,40px);border-left:1px solid rgba(238,235,229,.18)}
+.facts b{font:300 clamp(24px,2.4vw,34px)/1.1 var(--serif)}
+.facts span{font-size:13.5px;color:var(--on-night-2)}
+@media (max-width:640px){.facts .wrap{grid-template-columns:1fr}.facts .wrap>div+div{padding-left:0;border-left:0;border-top:1px solid rgba(238,235,229,.14)}.facts .wrap>div{padding:16px 0;flex-direction:row;align-items:baseline;justify-content:space-between;gap:16px}.facts b{font-size:24px}}
+
+/* principe */
+.principe .grid{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(40px,7vw,120px);align-items:start}
+.principe .h2{margin-top:26px}
+.pts{list-style:none;margin:44px 0 0;padding:0;display:grid}
+.pts li{display:grid;grid-template-columns:52px 1fr;gap:8px;padding:22px 0;border-top:1px solid var(--line)}
+.pts li:last-child{border-bottom:1px solid var(--line)}
+.pts i{font:400 13px/1.9 var(--mono);font-style:normal;color:var(--ink-3)}
+.pts b{display:block;font-weight:500;font-size:17px}
+.pts span{color:var(--ink-2);font-size:15.5px}
+@media (max-width:860px){.principe .grid{grid-template-columns:1fr}}
+
+/* formats */
+.formats{background:var(--paper-2)}
+.sec-h{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap}
+.sec-h .h2{margin-top:22px}
+.sec-h .lead{max-width:44ch}
+.fgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2vw,28px);margin-top:clamp(48px,6vw,80px)}
+.fcard{display:flex;flex-direction:column;min-width:0}
+.fcard .ph{aspect-ratio:4/5;overflow:hidden;background:#cfc9be;max-width:100%}
+.fcard .ph img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
+.fcard:hover .ph img{transform:scale(1.035)}
+.fcard .top{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:26px 0 14px;border-bottom:1px solid var(--line)}
+.fcard .size{font:300 clamp(54px,5.4vw,84px)/.9 var(--serif);letter-spacing:-.03em}
+.fcard .size small{font-size:.42em;letter-spacing:0;margin-left:4px;color:var(--ink-2)}
+.fcard h3{font:500 15px/1.3 var(--sans);letter-spacing:.14em;text-transform:uppercase}
+.fcard p{color:var(--ink-2);margin-top:16px;font-size:15.5px;flex:1}
+.fcard .spec{margin-top:18px;color:var(--ink-3)}
+.fcard .link{margin-top:22px;align-self:flex-start}
+.fnote{margin-top:clamp(40px,5vw,64px);display:flex;gap:18px;align-items:baseline;max-width:760px;color:var(--ink-2);font-size:15.5px}
+.fnote b{color:var(--ink);font-weight:500;white-space:nowrap}
+@media (max-width:900px){.fgrid{grid-template-columns:1fr;gap:56px}.fcard .ph{aspect-ratio:4/3}}
+
+/* éléments */
+.elem .sec-h{margin-bottom:clamp(56px,7vw,100px)}
+.el-grid{display:grid;grid-template-columns:230px 1fr;gap:clamp(32px,6vw,96px);align-items:start}
+.el-idx{position:sticky;top:120px;list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.el-idx a{display:grid;grid-template-columns:34px 1fr;padding:9px 0;text-decoration:none;color:var(--ink-3);font-size:14.5px;transition:color .25s}
+.el-idx a i{font:400 12px/1.9 var(--mono);font-style:normal}
+.el-idx a:hover,.el-idx a.on{color:var(--ink)}
+.el-idx a.on span{border-bottom:1px solid var(--ink)}
+.chap{padding-bottom:clamp(72px,9vw,128px);scroll-margin-top:100px}
+.chap+.chap{padding-top:clamp(56px,6vw,80px);border-top:1px solid var(--line)}
+.chap-h{display:grid;grid-template-columns:auto 1fr;gap:20px 28px;align-items:baseline}
+.chap-h .n{font:400 13px/1 var(--mono);color:var(--ink-3)}
+.chap-h h3{font:300 clamp(32px,3.2vw,48px)/1.06 var(--serif);letter-spacing:-.015em}
+.chap-h h3 em{color:var(--ink-2)}
+.chap-h p{grid-column:2;color:var(--ink-2);max-width:58ch}
+.fig{margin:clamp(32px,4vw,48px) 0 0;min-width:0}
+.fig .ph{overflow:hidden;background:#cfc9be;aspect-ratio:3/2;max-width:100%}
+.fig .ph img{width:100%;height:100%;object-fit:cover}
+.fig figcaption{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 16px;margin-top:12px;font-size:13px;color:var(--ink-3)}
+.items{list-style:none;margin:clamp(28px,3.5vw,44px) 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;column-gap:clamp(24px,4vw,56px)}
+.items li{padding:20px 0 22px;border-top:1px solid var(--line);min-width:0}
+.items b{display:block;font-weight:500;font-size:16.5px;line-height:1.35}
+.items .mono{display:block;color:var(--ink-3);margin-top:4px}
+.items p{color:var(--ink-2);font-size:15px;margin-top:8px;line-height:1.55}
+@media (max-width:1000px){.el-grid{grid-template-columns:1fr}.el-idx{display:none}}
+@media (max-width:640px){.items{grid-template-columns:1fr}.chap-h{grid-template-columns:1fr}.chap-h p{grid-column:1}}
+
+/* nuancier bardage */
+.swatches{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:clamp(28px,3.5vw,40px)}
+.sw{min-width:0}
+.sw .chip{aspect-ratio:3/4;max-width:100%;background-color:#2b2c2f;position:relative;overflow:hidden}
+.sw .chip.slats{background-repeat:repeat;background-size:45px 220px}
+.sw .chip.slats::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 35px,#141414 35px 45px);opacity:.92}
+.sw .chip.fx{background:linear-gradient(160deg,#3a3c41,#2c2e32 60%,#26282b)}
+.sw b{display:block;font-weight:500;font-size:14.5px;margin-top:12px}
+.sw span{display:block;font-size:12px;color:var(--ink-3);font-family:var(--mono)}
+.scale{display:flex;align-items:center;gap:10px;margin-top:16px;color:var(--ink-3)}
+.scale i{display:inline-flex;height:10px}
+.scale i u{display:block;height:10px;width:35px;background:var(--ink-3);opacity:.5;text-decoration:none}
+.scale i u+u{margin-left:10px}
+@media (max-width:640px){.swatches{grid-template-columns:repeat(3,1fr)}}
+
+/* réalisations */
+.real .grid{display:grid;grid-template-columns:1.5fr 1fr;gap:clamp(16px,2vw,28px);margin-top:clamp(48px,6vw,80px)}
+.real figure{margin:0;min-width:0}
+.real .ph{overflow:hidden;background:#222;height:100%;max-width:100%}
+.real .ph img{width:100%;height:100%;object-fit:cover}
+.real .big .ph{aspect-ratio:4/3}
+.real .side{display:grid;grid-template-rows:auto 1fr;gap:clamp(16px,2vw,28px)}
+.real .side .ph{aspect-ratio:4/3}
+.real figcaption{margin-top:12px;font-size:13px;color:var(--on-night-2)}
+.stat{border:1px solid var(--line-night);padding:clamp(24px,3vw,36px);display:flex;flex-direction:column;justify-content:space-between;gap:24px}
+.stat b{font:300 clamp(64px,7vw,110px)/.9 var(--serif);letter-spacing:-.03em}
+.stat p{color:var(--on-night-2);font-size:15.5px}
+@media (max-width:860px){.real .grid{grid-template-columns:1fr}}
+
+/* démarche */
+.steps{list-style:none;margin:clamp(48px,6vw,80px) 0 0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:0;counter-reset:s}
+.steps li{padding:28px clamp(16px,1.6vw,26px) 8px 0;border-top:1px solid var(--ink);position:relative;min-width:0}
+.steps li+li{padding-left:clamp(16px,1.6vw,26px);border-left:1px solid var(--line)}
+.steps i{font:400 12.5px/1 var(--mono);font-style:normal;color:var(--ink-3)}
+.steps h3{font:400 clamp(22px,1.9vw,27px)/1.15 var(--serif);margin-top:20px}
+.steps p{color:var(--ink-2);font-size:15px;margin-top:12px}
+@media (max-width:1000px){.steps{grid-template-columns:1fr 1fr}.steps li+li{border-left:0;padding-left:0}.steps li:nth-child(even){padding-left:clamp(16px,3vw,28px);border-left:1px solid var(--line)}}
+@media (max-width:600px){.steps{grid-template-columns:1fr}.steps li:nth-child(even){padding-left:0;border-left:0}.steps li{padding-bottom:24px}}
+
+/* atelier */
+.atelier{background:var(--paper-2)}
+.atelier .grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,7vw,120px);align-items:start}
+.atelier .h2{margin-top:26px}
+.sig{display:flex;align-items:center;gap:16px;margin-top:36px}
+.sig .mark{width:52px;height:52px;border-radius:50%;border:1px solid var(--ink);display:grid;place-items:center;font:300 22px/1 var(--serif)}
+.sig b{display:block;font-weight:500}
+.sig span{color:var(--ink-2);font-size:14px}
+.atelier .txt p+p{margin-top:18px}
+.atelier .txt p{color:var(--ink-2)}
+.visit{margin-top:40px;background:var(--card);padding:clamp(24px,3vw,36px);display:grid;gap:22px}
+.visit h3{font:400 clamp(24px,2.2vw,30px)/1.15 var(--serif)}
+.visit dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:10px 28px;font-size:15.5px}
+.visit dt{color:var(--ink-3);font-family:var(--mono);font-size:12.5px;padding-top:3px}
+.visit dd{margin:0}
+@media (max-width:860px){.atelier .grid{grid-template-columns:1fr}}
+
+/* faq */
+.faq .grid{display:grid;grid-template-columns:1fr 1.4fr;gap:clamp(40px,7vw,120px);align-items:start}
+.faq .h2{margin-top:26px}
+.qa{border-top:1px solid var(--line)}
+.qa:last-child{border-bottom:1px solid var(--line)}
+.qa summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:24px;padding:24px 0;font:400 clamp(19px,1.6vw,23px)/1.3 var(--serif)}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary i{flex:none;width:14px;height:14px;position:relative}
+.qa summary i::before,.qa summary i::after{content:"";position:absolute;left:0;top:6.5px;width:14px;height:1px;background:var(--ink);transition:transform .3s var(--ease)}
+.qa summary i::after{transform:rotate(90deg)}
+.qa[open] summary i::after{transform:rotate(0)}
+.qa p{color:var(--ink-2);padding:0 0 26px;max-width:60ch}
+@media (max-width:860px){.faq .grid{grid-template-columns:1fr}}
+
+/* contact */
+.contact .grid{display:grid;grid-template-columns:1fr 1.25fr;gap:clamp(40px,7vw,120px);align-items:start}
+.contact .h2{margin-top:26px}
+.contact .lead{margin-top:24px}
+.coords{margin-top:44px;display:grid;gap:0}
+.coords div{display:grid;grid-template-columns:110px 1fr;gap:16px;padding:16px 0;border-top:1px solid var(--line-night)}
+.coords div:last-child{border-bottom:1px solid var(--line-night)}
+.coords span{font:400 12.5px/1.9 var(--mono);color:var(--on-night-2)}
+.coords b{font-weight:400;font-size:16.5px;user-select:all;-webkit-user-select:all}
+form{display:grid;gap:26px;min-width:0}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+.f{display:grid;gap:10px;min-width:0}
+.f>span,.f legend{font:400 12.5px/1 var(--mono);color:var(--on-night-2);padding:0}
+fieldset{border:0;margin:0;padding:0;min-width:0}
+.f input,.f textarea{width:100%;background:transparent;border:0;border-bottom:1px solid var(--line-night);color:var(--on-night);font:400 17px/1.4 var(--sans);padding:10px 0 12px;border-radius:0;outline:none;transition:border-color .25s}
+.f input:focus,.f textarea:focus{border-bottom-color:var(--on-night)}
+.f input::placeholder,.f textarea::placeholder{color:#6d6b67}
+.f textarea{min-height:110px;resize:vertical}
+.f.err input{border-bottom-color:#d08a6e}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.chips button{font:400 14px/1 var(--sans);color:var(--on-night);background:transparent;border:1px solid var(--line-night);border-radius:999px;padding:11px 16px;cursor:pointer;transition:background .25s,border-color .25s,color .25s}
+.chips button:hover{border-color:var(--on-night-2)}
+.chips button[aria-pressed="true"]{background:var(--on-night);color:var(--night);border-color:var(--on-night)}
+.consent{display:flex;gap:12px;align-items:flex-start;font-size:14px;color:var(--on-night-2);cursor:pointer}
+.consent input{margin-top:3px;accent-color:var(--green-2);width:16px;height:16px;flex:none}
+.send{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.send .btn{background:var(--on-night);color:var(--night)}
+.send .btn:hover{background:#fff}
+.done{display:none;border:1px solid var(--line-night);padding:20px 22px;font-size:15px;color:var(--on-night)}
+.done.on{display:block}
+.done small{display:block;color:var(--on-night-2);margin-top:6px;font-size:13px}
+@media (max-width:900px){.contact .grid{grid-template-columns:1fr}}
+@media (max-width:560px){.row2{grid-template-columns:1fr}.coords div{grid-template-columns:90px 1fr}}
+
+/* pied de page */
+.foot{background:var(--night);color:var(--on-night-2);border-top:1px solid var(--line-night);padding-block:56px calc(40px + env(safe-area-inset-bottom,0px))}
+.foot .grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px}
+.foot img{height:54px;width:auto}
+.foot p{font-size:14px;margin-top:18px;max-width:36ch}
+.foot h4{font:400 12px/1 var(--mono);color:var(--on-night);margin-bottom:16px}
+.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:14px}
+.foot a{text-decoration:none}
+.foot a:hover{color:var(--on-night)}
+.foot .base{margin-top:48px;padding-top:22px;border-top:1px solid var(--line-night);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:12.5px}
+@media (max-width:760px){.foot .grid{grid-template-columns:1fr}}
+
+/* apparition au défilement */
+.js .rv{opacity:0;transform:translateY(22px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.js .rv.in{opacity:1;transform:none}
+.js .ph.rv{transform:none;opacity:1;clip-path:inset(0 0 100% 0);transition:clip-path 1.3s var(--ease)}
+.js .ph.rv img{transform:scale(1.08);transition:transform 1.8s var(--ease)}
+.js .ph.rv.in{clip-path:inset(0 0 0 0)}
+.js .ph.rv.in img{transform:scale(1)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.js .rv,.js .ph.rv,.js .ph.rv img,.hero-ph img{transition:none!important;transform:none!important;opacity:1!important;clip-path:none!important}}
+</style>
+
+<header class="hdr" id="hdr">
+  <div class="wrap">
+    <a class="logo" href="#haut" aria-label="DMG Concept, retour en haut"><img src="{{logo}}" alt="DMG Concept"></a>
+    <nav aria-label="Navigation principale">
+      <a href="#formats">Les formats</a>
+      <a href="#elements">Les éléments</a>
+      <a href="#realisations">Réalisations</a>
+      <a href="#demarche">La démarche</a>
+      <a href="#atelier">L’atelier</a>
+      <a class="btn btn-green" href="#contact">Demander un devis</a>
+    </nav>
+    <button class="menu-b" type="button" aria-label="Ouvrir le menu" aria-expanded="false"><span></span><span></span></button>
+  </div>
+</header>
+<div class="mnav" id="mnav">
+  <a href="#formats">Les formats</a>
+  <a href="#elements">Les éléments</a>
+  <a href="#realisations">Réalisations</a>
+  <a href="#demarche">La démarche</a>
+  <a href="#atelier">L’atelier</a>
+  <a class="btn btn-green" href="#contact">Demander un devis</a>
+</div>
+
+<main>
+<section class="hero" id="haut">
+  <div class="hero-ph"><img src="{{nuit}}" alt="Cuisine extérieure DMG Concept éclairée de nuit, intérieur bois et crédence noire"></div>
+  <div class="wrap">
+    <p class="kicker rv">Cuisines extérieures couvertes · Évires, Haute-Savoie</p>
+    <h1 class="rv" style="margin-top:24px">La cuisine d’extérieur, <em>pensée avec vous.</em></h1>
+    <p class="lead rv">Nous concevons et fabriquons des cuisines extérieures couvertes, sur mesure. On part d’un format, on choisit ensemble chaque élément, et elle arrive chez vous assemblée, en un seul bloc.</p>
+    <div class="hero-cta rv">
+      <a class="btn btn-green" href="#contact">Parler de votre projet <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+      <a class="btn btn-line" href="#elements">Découvrir les éléments</a>
+    </div>
+  </div>
+  <div class="facts">
+    <div class="wrap">
+      <div><b>25</b><span>cuisines livrées</span></div>
+      <div><b>Évires (74)</b><span>conçues et fabriquées à l’atelier</span></div>
+      <div><b>Partout en France</b><span>livrées assemblées, en un seul bloc</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec principe" id="principe">
+  <div class="wrap grid">
+    <div>
+      <p class="kicker rv">Le principe</p>
+      <h2 class="h2 rv">Pas un modèle de catalogue. <em>Votre cuisine.</em></h2>
+    </div>
+    <div>
+      <p class="lead rv">Chaque cuisine DMG Concept est construite pour une terrasse, une famille et une façon de recevoir. Le site vous montre ce qui est possible&nbsp;; le projet, nous le construisons ensemble.</p>
+      <ol class="pts">
+        <li class="rv"><i>01</i><div><b>Un format pour commencer</b><span>2, 3 ou 4&nbsp;m de façade, selon la place et le nombre de convives.</span></div></li>
+        <li class="rv"><i>02</i><div><b>Chaque élément choisi avec vous</b><span>Matériaux, équipements, rangements, lumière, store, îlot.</span></div></li>
+        <li class="rv"><i>03</i><div><b>Construite à l’atelier</b><span>Assemblée et équipée à Évires, puis livrée en un seul bloc.</span></div></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="sec formats" id="formats">
+  <div class="wrap">
+    <div class="sec-h">
+      <div>
+        <p class="kicker rv">Les formats</p>
+        <h2 class="h2 rv">Trois tailles <em>pour commencer.</em></h2>
+      </div>
+      <p class="lead rv">La largeur de façade donne le point de départ. Ensuite, tout se décide avec vous&nbsp;: implantation, équipements, finitions.</p>
+    </div>
+    <div class="fgrid">
+      <article class="fcard rv">
+        <div class="ph rv"><img src="{{petite}}" alt="Évidence, cuisine extérieure compacte à façade anthracite"></div>
+        <div class="top"><span class="size">2<small>m</small></span><h3>Évidence</h3></div>
+        <p>La plus compacte, pensée pour les terrasses où chaque mètre compte. L’essentiel pour cuisiner dehors, sous sa propre toiture.</p>
+        <span class="mono spec">Façade 2&nbsp;m</span>
+        <a class="link" href="#contact" data-format="Évidence · 2 m">Parler de ce format <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+      </article>
+      <article class="fcard rv">
+        <div class="ph rv"><img src="{{pergola}}" alt="Harmonie, cuisine extérieure avec store banne et îlot bar en bois"></div>
+        <div class="top"><span class="size">3<small>m</small></span><h3>Harmonie</h3></div>
+        <p>Assez de plan de travail pour cuisiner à plusieurs, et la place pour les équipements d’une vraie cuisine.</p>
+        <span class="mono spec">Façade 3&nbsp;m · 2,60&nbsp;m intérieur</span>
+        <a class="link" href="#contact" data-format="Harmonie · 3 m">Parler de ce format <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+      </article>
+      <article class="fcard rv">
+        <div class="ph rv"><img src="{{r_jardin}}" alt="La Festive, grande cuisine extérieure avec store banne au-dessus du coin repas"></div>
+        <div class="top"><span class="size">4<small>m</small></span><h3>La Festive</h3></div>
+        <p>Le grand format, plus profond, avec un îlot bar à l’intérieur&nbsp;: pour recevoir nombreux.</p>
+        <span class="mono spec">Façade 4&nbsp;m · 3&nbsp;m de profondeur</span>
+        <a class="link" href="#contact" data-format="La Festive · 4 m">Parler de ce format <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+      </article>
+    </div>
+    <p class="fnote rv"><b>Sur mesure.</b> Les trois formats sont des bases de travail, pas des modèles figés&nbsp;: chaque cuisine est ensuite construite autour de votre projet.</p>
+  </div>
+</section>
+
+<section class="sec elem" id="elements">
+  <div class="wrap">
+    <div class="sec-h">
+      <div>
+        <p class="kicker rv">Les éléments</p>
+        <h2 class="h2 rv">Ce que nous pouvons <em>construire pour vous.</em></h2>
+      </div>
+      <p class="lead rv">Structure, matériaux, équipements, confort&nbsp;: voici les éléments que nous intégrons. Le choix se fait ensemble, au rendez-vous.</p>
+    </div>
+    <div class="el-grid">
+      <ol class="el-idx" aria-label="Sommaire des éléments">
+        <li><a href="#el-structure"><i>01</i><span>Structure</span></a></li>
+        <li><a href="#el-facades"><i>02</i><span>Façades et bardages</span></a></li>
+        <li><a href="#el-interieur"><i>03</i><span>Intérieur et lumière</span></a></li>
+        <li><a href="#el-plan"><i>04</i><span>Plan de travail et rangements</span></a></li>
+        <li><a href="#el-cuisson"><i>05</i><span>Cuisson</span></a></li>
+        <li><a href="#el-eau"><i>06</i><span>Eau et froid</span></a></li>
+        <li><a href="#el-recevoir"><i>07</i><span>Pour recevoir</span></a></li>
+        <li><a href="#el-fermeture"><i>08</i><span>Fermeture</span></a></li>
+      </ol>
+      <div>
+
+        <article class="chap" id="el-structure">
+          <div class="chap-h rv"><span class="n">01</span><h3>Construite comme un petit bâtiment, <em>pas comme un meuble de jardin.</em></h3><p>Chaque couche a un rôle&nbsp;: porter, protéger, durer. Ce sont des matériaux de bâtiment, choisis pour passer les saisons dehors.</p></div>
+          <figure class="fig"><div class="ph rv"><img src="{{grue}}" alt="Cuisine DMG Concept déchargée à la grue, en un seul bloc, au-dessus d’un jardin"></div><figcaption><span>Livraison&nbsp;: la cuisine arrive assemblée et se décharge en un seul bloc.</span><span class="mono">Réalisation</span></figcaption></figure>
+          <ul class="items">
+            <li class="rv"><b>Ossature bois</b><p>Une charpente de construction, pas un assemblage de meubles.</p></li>
+            <li class="rv"><b>Toiture plate, membrane EPDM</b><p>Une étanchéité de toiture-terrasse au-dessus du plan de travail.</p></li>
+            <li class="rv"><b>Mise en place sur 4 plots béton</b><p>Sans fixation au bâtiment, sans travaux de maçonnerie.</p></li>
+            <li class="rv"><b>Livrée en un seul bloc</b><p>Assemblée et équipée à l’atelier. Les raccordements sont à prévoir séparément.</p></li>
+          </ul>
+        </article>
+
+        <article class="chap" id="el-facades">
+          <div class="chap-h rv"><span class="n">02</span><h3>Façades et bardages.</h3><p>Une façade avant en Fundermax anthracite, et pour les côtés et l’arrière, un bardage au choix&nbsp;: lames, Fundermax, ou les deux associés sur un même mur.</p></div>
+          <figure class="fig"><div class="ph rv"><img src="{{fundermax}}" alt="Cuisine extérieure en panneaux Fundermax anthracite, intérieur bois"></div><figcaption><span>Façade et côtés en Fundermax anthracite, intérieur bois.</span><span class="mono">Réalisation</span></figcaption></figure>
+          <div class="swatches">
+            <div class="sw rv"><div class="chip fx" role="img" aria-label="Fundermax gris anthracite"></div><b>Fundermax</b><span>Gris anthracite</span></div>
+            <div class="sw rv"><div class="chip slats" style="background-image:url({{sw_teak}})" role="img" aria-label="Lames WEO teinte Teak"></div><b>Teak</b><span>WEO®35</span></div>
+            <div class="sw rv"><div class="chip slats" style="background-image:url({{sw_cedar}})" role="img" aria-label="Lames WEO teinte Cedar"></div><b>Cedar</b><span>WEO®35</span></div>
+            <div class="sw rv"><div class="chip slats" style="background-image:url({{sw_ipe}})" role="img" aria-label="Lames WEO teinte Ipé"></div><b>Ipé</b><span>WEO®35</span></div>
+            <div class="sw rv"><div class="chip slats" style="background-image:url({{sw_darkgrey}})" role="img" aria-label="Lames WEO teinte Dark grey"></div><b>Dark grey</b><span>WEO®35</span></div>
+          </div>
+          <p class="scale mono rv"><i aria-hidden="true"><u></u><u></u><u></u></i>Lames de 35&nbsp;mm, joints de 10&nbsp;mm, à l’échelle</p>
+          <ul class="items">
+            <li class="rv"><b>Panneau Fundermax</b><span class="mono">Compact stratifié haute pression (HPL)</span><p>Conçu pour les façades, sa surface est protégée des UV et des intempéries.</p></li>
+            <li class="rv"><b>Lames composite WEO®35</b><span class="mono">Teak · Cedar · Ipé · Dark grey</span><p>Effet claire-voie. Fabriquées à 95&nbsp;% à partir de matières recyclées, recyclables à 100&nbsp;%.</p></li>
+          </ul>
+        </article>
+
+        <article class="chap" id="el-interieur">
+          <div class="chap-h rv"><span class="n">03</span><h3>Intérieur et lumière.</h3><p>Sous la toiture, un intérieur chaleureux et une lumière pensée pour cuisiner aussi le soir.</p></div>
+          <figure class="fig"><div class="ph rv"><img src="{{bois}}" alt="Intérieur bois, crédence noire et spots au plafond d’une cuisine DMG Concept"></div><figcaption><span>Bardage bois, intérieur trois plis, crédence noire et spots intégrés.</span><span class="mono">Réalisation</span></figcaption></figure>
+          <ul class="items">
+            <li class="rv"><b>Habillage bois trois plis</b><p>Les murs et le plafond de la cuisine, en bois.</p></li>
+            <li class="rv"><b>Crédence noire</b><p>Derrière la cuisson, sur la largeur de la hotte.</p></li>
+            <li class="rv"><b>Éclairage intégré au plafond</b><p>Des spots encastrés pour cuisiner à la nuit tombée.</p></li>
+            <li class="rv"><b>Prises et appareillage noirs</b><p>Discrets, dans la continuité de la crédence.</p></li>
+          </ul>
+        </article>
+
+        <article class="chap" id="el-plan">
+          <div class="chap-h rv"><span class="n">04</span><h3>Plan de travail <em>et rangements.</em></h3><p>Un plan de travail fait pour l’extérieur, et des rangements composés autour de vos équipements.</p></div>
+          <figure class="fig"><div class="ph rv"><img src="{{interieur}}" alt="Plan de travail noir, hotte inox, portes et tiroirs effet béton clair"></div><figcaption><span>Plan noir, hotte inox, portes et tiroirs effet béton clair.</span><span class="mono">Réalisation</span></figcaption></figure>
+          <ul class="items">
+            <li class="rv"><b>Plan de travail Dekton</b><span class="mono">Cosentino · surface ultracompacte</span><p>Résiste aux UV, au gel, aux rayures et à la chaleur jusqu’à 300&nbsp;°C. Ne se décolore pas au soleil. Teinte au choix.</p></li>
+            <li class="rv"><b>Portes et tiroirs</b><p>Composés selon les équipements&nbsp;: tiroirs, portes, bandeau sous la cuisson.</p></li>
+            <li class="rv"><b>Teinte des façades de meubles</b><p>Au choix&nbsp;: ici un effet béton clair, sur d’autres réalisations un anthracite.</p></li>
+            <li class="rv"><b>Étagères intérieures</b><p>Derrière les portes, pour ranger ustensiles et vaisselle.</p></li>
+          </ul>
+        </article>
+
+        <article class="chap" id="el-cuisson">
+          <div class="chap-h rv"><span class="n">05</span><h3>Cuisson.</h3><p>Des appareils encastrés de marques spécialisées dans la cuisine d’extérieur. Fermés, leurs couvercles prolongent le plan de travail.</p></div>
+          <figure class="fig"><div class="ph rv"><img src="{{detail}}" alt="Plancha, friteuse et évier encastrés dans un plan de travail noir"></div><figcaption><span>Friteuse, plancha et évier encastrés, couvercles ouverts.</span><span class="mono">Réalisation</span></figcaption></figure>
+          <ul class="items">
+            <li class="rv"><b>Plancha encastrable</b><span class="mono">Planet · gamme Oasi</span><p>Plaque inox de 5&nbsp;mm, couvercle inox marine 316 ou noir. Oasi 55 ou 80, gaz ou électrique, ou avec un feu à côté. Plaque garantie 10 ans par Planet.</p></li>
+            <li class="rv"><b>Barbecue encastrable</b><span class="mono">Napoléon · Série 700</span><p>Grilles inox en vague, brûleur arrière infrarouge et rôtissoire, boutons rétroéclairés.</p></li>
+            <li class="rv"><b>Friteuse encastrable</b><span class="mono">Planet · cuve 4 L · 2,3 kW</span><p>Rare en extérieur&nbsp;: les fritures se font dehors, sans odeur dans la maison.</p></li>
+            <li class="rv"><b>Plaque à gaz</b><p>Pour cuisiner à la casserole ou à la poêle, comme à l’intérieur.</p></li>
+            <li class="rv"><b>Hotte inox</b><p>Au-dessus de la cuisson, sous la toiture.</p></li>
+          </ul>
+        </article>
+
+        <article class="chap" id="el-eau">
+          <div class="chap-h rv"><span class="n">06</span><h3>Eau et froid.</h3><p>Préparer, rincer, garder au frais&nbsp;: sans allers-retours dans la maison.</p></div>
+          <ul class="items">
+            <li class="rv"><b>Évier inox encastrable</b><span class="mono">Planet · INLAV40</span><p>Inox alimentaire 304, couvercle inox marine 316 ou noir&nbsp;: fermé, il prolonge le plan de travail.</p></li>
+            <li class="rv"><b>Robinet Quooker</b><span class="mono">Froide · chaude · 100&nbsp;°C · pétillante</span><p>Toute l’eau dont on a besoin en cuisinant, depuis un seul robinet.</p></li>
+            <li class="rv"><b>Réfrigérateur intégré</b><p>Derrière une porte de la cuisine, ou en porte vitrée fumée avec éclairage LED.</p></li>
+            <li class="rv"><b>Cave à vin</b><p>Pour servir les vins à bonne température, directement depuis la cuisine.</p></li>
+          </ul>
+        </article>
+
+        <article class="chap" id="el-recevoir">
+          <div class="chap-h rv"><span class="n">07</span><h3>Pour recevoir.</h3><p>Ce qui prolonge la cuisine vers la terrasse et les invités.</p></div>
+          <figure class="fig"><div class="ph rv"><img src="{{r_ilot}}" alt="Store banne déployé au-dessus de la terrasse et îlot bar en lames bois sur roulettes"></div><figcaption><span>Store banne déployé et îlot bar sur roulettes.</span><span class="mono">Réalisation · Harmonie</span></figcaption></figure>
+          <ul class="items">
+            <li class="rv"><b>Store banne intégré</b><span class="mono">Logé dans la toiture</span><p>Il se déploie au-dessus de la terrasse&nbsp;: l’ombre pour le coin repas, sans pergola ni structure en plus.</p></li>
+            <li class="rv"><b>Îlot bar sur roulettes</b><span class="mono">Même bardage que la cuisine</span><p>On y sert l’apéritif face aux invités. Il se range dans la cuisine une fois fermée.</p></li>
+            <li class="rv"><b>Îlot bar fixe</b><span class="mono">À l’intérieur de la cuisine</span><p>Le comptoir où l’on se retrouve&nbsp;: l’apéritif d’un côté, la cuisine de l’autre.</p></li>
+            <li class="rv"><b>Porte vitrée coulissante</b><span class="mono">Escamotée dans le mur latéral</span><p>Pour entrer dans la cuisine par le côté.</p></li>
+            <li class="rv"><b>Sonorisation intégrée</b><span class="mono">Elipson · au plafond</span><p>Des enceintes noires encastrées&nbsp;: la musique sans rien poser sur le plan de travail.</p></li>
+            <li class="rv"><b>Téléviseur</b><p>Pour regarder un match ou un film dehors.</p></li>
+          </ul>
+        </article>
+
+        <article class="chap" id="el-fermeture">
+          <div class="chap-h rv"><span class="n">08</span><h3>Fermée, <em>elle protège tout.</em></h3><p>Entre deux repas, un store descend devant la cuisine&nbsp;: plan de travail et équipements restent à l’abri, et la cuisine peut rester dehors toute l’année.</p></div>
+          <figure class="fig"><div class="ph rv"><img src="{{ferme}}" alt="Cuisine fermée par son store toile, tiroirs anthracite en dessous"></div><figcaption><span>Le store de fermeture descendu devant la cuisine.</span><span class="mono">Réalisation</span></figcaption></figure>
+        </article>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec real dark" id="realisations">
+  <div class="wrap">
+    <div class="sec-h">
+      <div>
+        <p class="kicker rv">Réalisations</p>
+        <h2 class="h2 rv">Chaque cuisine <em>est différente.</em></h2>
+      </div>
+      <p class="lead rv">Toutes les photos de ce site sont des cuisines que nous avons livrées.</p>
+    </div>
+    <div class="grid">
+      <figure class="big"><div class="ph rv"><img src="{{r_store}}" alt="Cuisine extérieure avec store banne déployé au-dessus d’une table ronde"></div><figcaption>Store intégré à la toiture, au-dessus du coin repas.</figcaption></figure>
+      <div class="side">
+        <figure><div class="ph rv"><img src="{{ilotfixe}}" alt="Cuisine en lames bois avec store banne et îlot bar"></div><figcaption>Lames bois, cuisine anthracite et îlot bar.</figcaption></figure>
+        <div class="stat rv"><b>25</b><p>cuisines livrées. Nous vous recevons à Évires, sur rendez-vous, pour en voir une en vrai.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec demarche" id="demarche">
+  <div class="wrap">
+    <div class="sec-h">
+      <div>
+        <p class="kicker rv">La démarche</p>
+        <h2 class="h2 rv">Du premier échange <em>à la livraison.</em></h2>
+      </div>
+      <p class="lead rv">Votre cuisine se construit avec vous, étape par étape, jusqu’à sa mise en place chez vous.</p>
+    </div>
+    <ol class="steps">
+      <li class="rv"><i>01</i><h3>Premier échange</h3><p>Par téléphone ou à Évires&nbsp;: votre terrasse, vos envies, votre façon de recevoir.</p></li>
+      <li class="rv"><i>02</i><h3>Conception</h3><p>Nous choisissons ensemble le format, l’implantation et chaque élément.</p></li>
+      <li class="rv"><i>03</i><h3>Devis détaillé</h3><p>Chaque élément chiffré poste par poste.</p></li>
+      <li class="rv"><i>04</i><h3>Fabrication</h3><p>La cuisine est construite et assemblée à l’atelier, équipements compris.</p></li>
+      <li class="rv"><i>05</i><h3>Livraison et mise en place</h3><p>Déchargée en un seul bloc, mise en place sur 4 plots béton. Raccordements à prévoir séparément.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec atelier" id="atelier">
+  <div class="wrap grid">
+    <div>
+      <p class="kicker rv">L’atelier</p>
+      <h2 class="h2 rv">Bien construire, <em>pour bien recevoir.</em></h2>
+      <div class="sig rv"><span class="mark" aria-hidden="true">A</span><div><b>Adrien Métral</b><span>Fondateur de DMG Concept</span></div></div>
+    </div>
+    <div class="txt">
+      <p class="lead rv" style="color:var(--ink)">DMG Concept conçoit et construit à Évires, en Haute-Savoie, des cuisines extérieures couvertes.</p>
+      <p class="rv" style="margin-top:18px">Des lignes sobres, des matériaux choisis pour durer, des équipements pensés pour cuisiner vraiment&nbsp;: tout est fait pour que vous profitiez du dehors, en famille ou entre amis. Un seul interlocuteur, du premier échange au suivi après livraison.</p>
+      <div class="visit rv" id="visite">
+        <h3>Une cuisine se juge en vrai.</h3>
+        <p style="color:var(--ink-2)">Ouvrez les portes, posez la main sur le plan de travail, refermez la cuisine. Nous vous recevons sur rendez-vous pour en voir une et parler de votre projet.</p>
+        <dl><dt>Adresse</dt><dd>58 impasse des Roseaux, 74570 Évires</dd><dt>Visite</dt><dd>Sur rendez-vous</dd><dt>Téléphone</dt><dd>07 49 66 12 56</dd></dl>
+        <a class="btn btn-ink" href="#contact" style="justify-self:start">Prendre rendez-vous</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec faq" id="faq">
+  <div class="wrap grid">
+    <div>
+      <p class="kicker rv">Questions fréquentes</p>
+      <h2 class="h2 rv">Avant de vous <em>lancer.</em></h2>
+    </div>
+    <div class="rv">
+      <details class="qa" open><summary>Les cuisines sont-elles faites sur mesure&nbsp;?<i aria-hidden="true"></i></summary><p>Oui. Nous partons d’un des trois formats (2, 3 ou 4&nbsp;m de façade), puis les équipements, les matériaux et les aménagements se choisissent avec vous, selon votre terrasse et votre façon de recevoir.</p></details>
+      <details class="qa"><summary>Faut-il une autorisation d’urbanisme&nbsp;?<i aria-hidden="true"></i></summary><p>Cela dépend de l’emprise au sol et du règlement de votre commune. En règle générale, aucune formalité n’est requise sous 5&nbsp;m², et une déclaration préalable suffit entre 5 et 20&nbsp;m². Votre mairie vous confirmera les règles applicables.</p></details>
+      <details class="qa"><summary>Comment se passe la livraison&nbsp;?<i aria-hidden="true"></i></summary><p>Nous livrons partout en France. La cuisine arrive assemblée, en un seul bloc, puis elle est mise en place sur 4 plots béton. Les conditions d’accès sont précisées avec vous lors du devis.</p></details>
+      <details class="qa"><summary>Quels raccordements faut-il prévoir&nbsp;?<i aria-hidden="true"></i></summary><p>Une alimentation électrique et, selon les équipements, une arrivée d’eau, une évacuation et le gaz. Les raccordements sont à prévoir séparément.</p></details>
+      <details class="qa"><summary>La cuisine peut-elle rester dehors l’hiver&nbsp;?<i aria-hidden="true"></i></summary><p>Oui, elle est conçue pour rester dehors et se referme entre deux utilisations. Pensez simplement à purger l’arrivée d’eau avant le gel.</p></details>
+      <details class="qa"><summary>Quels sont les délais&nbsp;?<i aria-hidden="true"></i></summary><p>Le délai figure sur le devis&nbsp;; il dépend du projet, des équipements et de la saison.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="sec contact dark" id="contact">
+  <div class="wrap grid">
+    <div>
+      <p class="kicker rv">Demande de devis</p>
+      <h2 class="h2 rv">Parlons de <em>votre projet.</em></h2>
+      <p class="lead rv">Décrivez-nous votre terrasse et ce que vous imaginez&nbsp;: nous vous rappelons pour en parler et préparer votre devis.</p>
+      <div class="coords rv">
+        <div><span>Téléphone</span><b>07 49 66 12 56</b></div>
+        <div><span>E-mail</span><b>contact@dmg-concept.com</b></div>
+        <div><span>Atelier</span><b>58 impasse des Roseaux, 74570 Évires</b></div>
+      </div>
+    </div>
+    <form id="form" class="rv" novalidate>
+      <div class="row2">
+        <label class="f" for="f-nom"><span>Nom</span><input id="f-nom" name="nom" placeholder="Prénom et nom" autocomplete="name" required></label>
+        <label class="f" for="f-tel"><span>Téléphone</span><input id="f-tel" name="tel" type="tel" placeholder="06 00 00 00 00" autocomplete="tel" required></label>
+      </div>
+      <div class="row2">
+        <label class="f" for="f-mail"><span>E-mail</span><input id="f-mail" name="mail" type="email" placeholder="vous@exemple.fr" autocomplete="email"></label>
+        <label class="f" for="f-cp"><span>Code postal</span><input id="f-cp" name="cp" placeholder="74000" inputmode="numeric" autocomplete="postal-code"></label>
+      </div>
+      <fieldset class="f"><legend>Format envisagé</legend>
+        <div class="chips" data-single>
+          <button type="button" aria-pressed="false">Évidence · 2 m</button>
+          <button type="button" aria-pressed="false">Harmonie · 3 m</button>
+          <button type="button" aria-pressed="false">La Festive · 4 m</button>
+          <button type="button" aria-pressed="false">À définir ensemble</button>
+        </div>
+      </fieldset>
+      <fieldset class="f"><legend>Éléments qui vous intéressent</legend>
+        <div class="chips">
+          <button type="button" aria-pressed="false">Plancha</button>
+          <button type="button" aria-pressed="false">Barbecue</button>
+          <button type="button" aria-pressed="false">Friteuse</button>
+          <button type="button" aria-pressed="false">Évier</button>
+          <button type="button" aria-pressed="false">Quooker</button>
+          <button type="button" aria-pressed="false">Réfrigérateur ou cave</button>
+          <button type="button" aria-pressed="false">Store banne</button>
+          <button type="button" aria-pressed="false">Îlot bar</button>
+          <button type="button" aria-pressed="false">Sonorisation</button>
+          <button type="button" aria-pressed="false">Téléviseur</button>
+        </div>
+      </fieldset>
+      <label class="f" for="f-msg"><span>Votre projet</span><textarea id="f-msg" name="msg" placeholder="Terrasse, accès, nombre de convives, ce que vous imaginez…"></textarea></label>
+      <label class="consent" for="f-ok"><input id="f-ok" type="checkbox"> J’accepte que DMG Concept me recontacte au sujet de ma demande.</label>
+      <div class="send">
+        <button class="btn" type="submit">Envoyer la demande <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></button>
+      </div>
+      <div class="done" id="done" role="status" aria-live="polite"></div>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="grid">
+      <div><img src="{{logo}}" alt="DMG Concept"><p>Cuisines extérieures couvertes, conçues sur mesure et fabriquées à Évires, en Haute-Savoie.</p></div>
+      <div><h4>Le site</h4><ul><li><a href="#formats">Les formats</a></li><li><a href="#elements">Les éléments</a></li><li><a href="#realisations">Réalisations</a></li><li><a href="#demarche">La démarche</a></li><li><a href="#faq">Questions fréquentes</a></li></ul></div>
+      <div><h4>Contact</h4><ul><li>07 49 66 12 56</li><li>contact@dmg-concept.com</li><li>58 impasse des Roseaux<br>74570 Évires</li><li>Visite sur rendez-vous</li></ul></div>
+    </div>
+    <div class="base"><span>© 2026 DMG Concept SASU</span><span>Livraison partout en France · raccordements à prévoir séparément</span></div>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const root = document.documentElement;
+  root.classList.add("js");
+  const hdr = document.getElementById("hdr");
+  const onScroll = () => hdr.classList.toggle("solid", scrollY > innerHeight * .72);
+  addEventListener("scroll", onScroll, { passive: true }); onScroll();
+  requestAnimationFrame(() => setTimeout(() => root.classList.add("ready"), 60));
+
+  /* menu mobile */
+  const mb = document.querySelector(".menu-b");
+  const setMenu = on => { root.classList.toggle("menu-open", on); mb.setAttribute("aria-expanded", on); mb.setAttribute("aria-label", on ? "Fermer le menu" : "Ouvrir le menu"); document.body.style.overflow = on ? "hidden" : ""; };
+  mb.addEventListener("click", () => setMenu(!root.classList.contains("menu-open")));
+  document.querySelectorAll("#mnav a").forEach(a => a.addEventListener("click", () => setMenu(false)));
+
+  /* apparition au défilement */
+  const rv = [...document.querySelectorAll(".rv")];
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { rootMargin: "0px 0px -8% 0px", threshold: .06 });
+    rv.forEach(el => io.observe(el));
+  } else rv.forEach(el => el.classList.add("in"));
+  document.querySelectorAll(".hero .rv").forEach((el, i) => { el.style.transitionDelay = (.15 + i * .12) + "s"; });
+
+  /* sommaire des éléments */
+  const links = [...document.querySelectorAll(".el-idx a")];
+  const chaps = links.map(a => document.querySelector(a.getAttribute("href")));
+  const spy = () => {
+    let cur = 0; const y = innerHeight * .35;
+    chaps.forEach((c, i) => { if (c && c.getBoundingClientRect().top < y) cur = i; });
+    links.forEach((a, i) => a.classList.toggle("on", i === cur));
+  };
+  addEventListener("scroll", spy, { passive: true }); spy();
+
+  /* formulaire */
+  document.querySelectorAll(".chips").forEach(g => g.addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return;
+    const on = b.getAttribute("aria-pressed") !== "true";
+    if (g.hasAttribute("data-single")) g.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", "false"));
+    b.setAttribute("aria-pressed", on);
+  }));
+  document.querySelectorAll("[data-format]").forEach(a => a.addEventListener("click", () => {
+    const g = document.querySelector(".chips[data-single]");
+    g.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x.textContent.trim() === a.dataset.format));
+  }));
+  const form = document.getElementById("form"), done = document.getElementById("done");
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+    let ok = true;
+    ["f-nom", "f-tel"].forEach(id => { const i = document.getElementById(id), bad = !i.value.trim(); i.closest(".f").classList.toggle("err", bad); if (bad) ok = false; });
+    if (!ok) { done.innerHTML = "Indiquez au moins votre nom et votre téléphone."; done.classList.add("on"); return; }
+    const nom = document.getElementById("f-nom").value.trim().split(" ")[0];
+    done.innerHTML = `Merci ${nom.replace(/[<>&"]/g, "")}, votre demande est prête&nbsp;: nous vous rappelons pour parler de votre projet.<small>Maquette&nbsp;: aucun envoi réel pour l’instant.</small>`;
+    done.classList.add("on");
+    form.querySelectorAll("input:not([type=checkbox]),textarea").forEach(i => i.value = "");
+    form.querySelectorAll(".chips button").forEach(b => b.setAttribute("aria-pressed", "false"));
+    form.querySelector("#f-ok").checked = false;
+  });
+})();
+</script>

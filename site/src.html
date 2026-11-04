@@ -300,6 +300,18 @@ figcaption{font-size:14px;color:var(--bone-3);margin-top:12px;font-weight:300}
 #fest-cuisine .eq b{color:var(--bone)}#fest-cuisine .eq span{color:var(--bone-2)}#fest-cuisine .eq li{border-color:var(--line-d)}
 @media (max-width:800px){.two,.rooms{grid-template-columns:1fr}.tw{aspect-ratio:4/3}}
 
+.more{margin-top:40px}
+.more summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:16px;min-height:54px;padding:0 28px;border:1px solid var(--ink);border-radius:999px;font:500 12px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;transition:background .4s var(--ease),color .4s var(--ease)}
+.more summary::-webkit-details-marker{display:none}
+.more summary:hover{background:var(--ink);color:var(--paper)}
+.more summary i{position:relative;width:12px;height:12px}
+.more summary i::before,.more summary i::after{content:"";position:absolute;left:0;top:5.5px;width:12px;height:1px;background:currentColor;transition:transform .4s var(--ease)}
+.more summary i::after{transform:rotate(90deg)}
+.more[open] summary i::after{transform:rotate(0)}
+.more .c,.more[open] .o{display:none}
+.more[open] .c{display:inline}
+.more .specs{margin-top:26px;border-top:1px solid var(--line-l)}
+
 /* 3D */
 .studio{background:var(--studio);color:var(--ink)}
 .v3d{position:relative;margin-top:clamp(36px,4vw,60px);aspect-ratio:16/8.4;max-height:84vh;min-height:440px;width:100%;max-width:100%;background:var(--studio);overflow:hidden}
@@ -1089,7 +1101,7 @@ form{display:grid;gap:28px;min-width:0}
       <section class="wrap msec sp">
         <figure class="sp-fig rv"><div class="ph r45"><img src="${IMG[M.side[0][0]]}" alt="${M.side[0][1]}"></div><figcaption>${M.side[0][1]}</figcaption></figure>
         <div class="sp-tx"><p class="lab rv">Le modèle</p><h2 class="rv">${M.name}, <em>en détail.</em></h2><div class="desc rv" style="margin-top:26px">${M.desc.map(p => `<p>${p}</p>`).join("")}</div>
-          <p class="sp-h rv">Caractéristiques</p><div class="specs one rv"><dl>${M.dims.concat(COMMON).map(r => `<div><dt>${r[0]}</dt><dd>${r[1]}</dd></div>`).join("")}</dl></div></div>
+          <details class="more rv"><summary><span class="o">Voir les caractéristiques de ${M.name}</span><span class="c">Masquer les caractéristiques</span><i aria-hidden="true"></i></summary><div class="specs one"><dl>${M.dims.concat(COMMON).map(r => `<div><dt>${r[0]}</dt><dd>${r[1]}</dd></div>`).join("")}</dl></div></details></div>
       </section>
       <section class="wrap msec sp rev">
         <figure class="sp-fig rv"><div class="ph r45"><img src="${IMG[M.side[1][0]]}" alt="${M.side[1][1]}"></div><figcaption>${M.side[1][1]}</figcaption></figure>

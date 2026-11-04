@@ -572,7 +572,7 @@ form{display:grid;gap:28px;min-width:0}
         <p class="lead rv">Toutes les photos de ce site montrent des cuisines que nous avons construites et livrées.</p>
         <a class="arrow rv" href="#realisations">Voir les réalisations<svg viewBox="0 0 18 10" fill="none" stroke="currentColor" aria-hidden="true"><path d="M0 5h17M13 1l4 4-4 4"/></svg></a>
       </div>
-      <figure class="rv"><div class="ph r45"><img data-img="nuit" alt="Cuisine DMG Concept éclairée de nuit : intérieur bois, crédence noire"></div><figcaption>De nuit : éclairage intégré au plafond.</figcaption></figure>
+      <figure class="rv"><div class="ph r45"><img data-img="fundermax" alt="Cuisine DMG Concept en Fundermax anthracite, intérieur bois, dans un jardin"></div><figcaption>Fundermax anthracite, intérieur bois.</figcaption></figure>
     </div>
   </section>
   <section class="sec cta-band" data-cta></section>
@@ -918,7 +918,7 @@ form{display:grid;gap:28px;min-width:0}
   root.classList.add("js");
   const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const ARR = '<svg viewBox="0 0 18 10" fill="none" stroke="currentColor" aria-hidden="true"><path d="M0 5h17M13 1l4 4-4 4"/></svg>';
-  const IMG = { petite: "{{petite}}", pergola: "{{pergola}}", r_jardin: "{{r_jardin}}", r_ilot: "{{r_ilot}}", nuit: "{{nuit}}", bois: "{{bois}}", interieur: "{{interieur}}", detail: "{{detail}}", fundermax: "{{fundermax}}", ferme: "{{ferme}}", r_store: "{{r_store}}", grue: "{{grue}}", posterH: "{{posterH}}" };
+  const IMG = { petite: "{{petite}}", pergola: "{{pergola}}", r_jardin: "{{r_jardin}}", r_ilot: "{{r_ilot}}", bois: "{{bois}}", interieur: "{{interieur}}", detail: "{{detail}}", fundermax: "{{fundermax}}", ferme: "{{ferme}}", r_store: "{{r_store}}", grue: "{{grue}}", posterH: "{{posterH}}" };
 
   $$("img[data-img]").forEach(i => i.src = IMG[i.dataset.img]);
 
@@ -1049,7 +1049,7 @@ form{display:grid;gap:28px;min-width:0}
   $("[data-cards='format']").innerHTML = SLUGS.map(s => { const M = MODELS[s]; return `<a class="gcard gfmt rv" href="#${s}"><div class="gimg"><img src="${IMG[M.ph]}" alt="${M.alt}" loading="lazy"><b>${M.size}<small>m</small></b></div><div class="gtx"><span class="lab">Façade ${M.size} m</span><h3>${M.name}</h3><p>${M.tag}</p><span class="arrow">Voir ${M.name}${ARR}</span></div></a>`; }).join("");
 
   /* galerie */
-  const GAL = [["r_store", "Store intégré à la toiture, au-dessus du coin repas."], ["petite", "Évidence : format compact, façade anthracite."], ["nuit", "De nuit : éclairage intégré au plafond."], ["bois", "Bardage bois, crédence noire."], ["fundermax", "Fundermax anthracite, intérieur bois."], ["interieur", "Équipements encastrés, hotte inox."], ["pergola", "Harmonie : store banne et îlot bar."], ["detail", "Friteuse, plancha et évier encastrés."], ["r_jardin", "La Festive : le coin repas à l’ombre du store."], ["ferme", "Fermée : le store descendu devant la cuisine."], ["grue", "Livraison : déchargée en un seul bloc."], ["r_ilot", "Harmonie : îlot bar sur roulettes."]];
+  const GAL = [["r_store", "Store intégré à la toiture, au-dessus du coin repas."], ["petite", "Évidence : format compact, façade anthracite."], ["bois", "Bardage bois, crédence noire."], ["fundermax", "Fundermax anthracite, intérieur bois."], ["interieur", "Équipements encastrés, hotte inox."], ["pergola", "Harmonie : store banne et îlot bar."], ["detail", "Friteuse, plancha et évier encastrés."], ["r_jardin", "La Festive : le coin repas à l’ombre du store."], ["ferme", "Fermée : le store descendu devant la cuisine."], ["grue", "Livraison : déchargée en un seul bloc."], ["r_ilot", "Harmonie : îlot bar sur roulettes."]];
   $("[data-gal]").innerHTML = GAL.map(g => `<figure class="rv"><div class="ph"><img src="${IMG[g[0]]}" alt="${g[1]}" loading="lazy"></div><figcaption>${g[1]}</figcaption></figure>`).join("");
 
   /* étapes du parcours */

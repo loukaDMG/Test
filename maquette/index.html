@@ -317,6 +317,16 @@ figcaption{font-size:14px;color:var(--bone-3);margin-top:12px;font-weight:300}
 .more[open] .c{display:inline}
 .more .specs{margin-top:26px;border-top:1px solid var(--line-l)}
 
+.pull{font:300 clamp(28px,2.6vw,40px)/1.22 var(--serif);margin-top:26px;max-width:24ch}
+.pts3{list-style:none;margin:36px 0 0;padding:0}
+.pts3 li{display:grid;grid-template-columns:56px 1fr;gap:16px;padding:20px 0;border-top:1px solid var(--line-l)}
+.pts3 li:last-child{border-bottom:1px solid var(--line-l)}
+.pts3 i{font:300 italic 26px/1 var(--serif);color:var(--ink-3)}
+.pts3 b{display:block;font:400 clamp(21px,1.7vw,25px)/1.2 var(--serif)}
+.pts3 span{display:block;margin-top:6px;color:var(--ink-2);font-weight:300;font-size:16.5px;max-width:46ch}
+.smb{margin-top:32px;padding:22px 26px;border-left:2px solid var(--wood-d);background:var(--card)}
+.smb p{margin-top:8px;font:400 clamp(19px,1.5vw,22px)/1.45 var(--serif);color:var(--ink)}
+
 /* 3D */
 .studio{background:var(--studio);color:var(--ink)}
 .v3d{position:relative;margin-top:clamp(36px,4vw,60px);aspect-ratio:16/8.4;max-height:84vh;min-height:440px;width:100%;max-width:100%;background:var(--studio);overflow:hidden}
@@ -9751,15 +9761,21 @@ three/build/three.module.js:
   };
   const MODELS = {
     evidence: { name: "Évidence", size: "2", ph: "petite", alt: "Évidence, cuisine compacte à façade anthracite", tag: "La plus compacte, pour les terrasses où chaque mètre compte.",
-      desc: ["Évidence est la plus compacte des trois cuisines : 2 m de façade, pensée pour les terrasses où chaque mètre compte.", "Elle réunit l’essentiel sous sa propre toiture : plancha, évier et réfrigérateur, avec des rangements en portes et tiroirs. Le soir, l’éclairage intégré au plafond prend le relais ; après le repas, la cuisine se referme et les équipements restent à l’abri."],
+      pull: "Une vraie cuisine, là où l’on pensait n’avoir la place pour rien.",
+      pts: [["Pour les petites terrasses", "Deux mètres de façade : elle trouve sa place contre une haie, au bout d’une terrasse, à côté de la table."], ["Dehors, sans aller-retour", "On cuisine, on rince et on garde au frais sur place : la maison reste fermée pendant le repas."], ["Fermée en un geste", "Après le repas, le store descend : la cuisine reste à l’abri jusqu’à la prochaine fois."]],
+      sm: "Compacte ne veut pas dire standard : bardage, teinte des meubles, plan de travail et équipements se choisissent avec vous, comme sur les grands modèles.",
       dims: [["Façade", "2 m"], ["Profondeur", "0,90 m"], ["Hauteur", "<span class='tbd'>à préciser</span>"]],
       eq: ["plancha55", "evier", "frigo"], side: [["bois", "Bardage bois, intérieur trois plis et crédence noire."], ["c_plancha", "Plancha encastrée, couvercle relevé."]], photos: [] },
     harmonie: { name: "Harmonie", size: "3", ph: "pergola", alt: "Harmonie, cuisine en lames bois avec store banne et îlot bar sur roulettes", tag: "Assez de plan de travail pour cuisiner à plusieurs, avec les équipements d’une vraie cuisine.",
-      desc: ["Harmonie offre 3 m de façade : assez de plan de travail pour cuisiner à plusieurs, et la place pour les équipements d’une vraie cuisine.", "Froid, cuisson, évier, friteuse, eau bouillante : on compose l’équipement selon sa façon de recevoir. Côté terrasse, un store banne intégré à la toiture et un îlot bar sur roulettes, qui rentre dans la cuisine quand on la ferme."],
+      pull: "La cuisine de ceux qui reçoivent souvent, et qui aiment cuisiner à plusieurs.",
+      pts: [["De la place pour deux", "2,60 m de plan à l’intérieur : on prépare à deux sans se gêner."], ["Ouverte sur la terrasse", "Le store banne prolonge la toiture au-dessus de la table, l’îlot bar garde les invités autour de celui qui cuisine."], ["Rangée en un geste", "L’îlot rentre à l’intérieur, le store de fermeture descend : tout est à l’abri."]],
+      sm: "On part de trois mètres de façade, puis on dessine ensemble l’intérieur : matériaux, rangements, équipements et lumière, selon votre façon de recevoir.",
       dims: [["Façade", "3 m"], ["Intérieur", "2,60 m"], ["Profondeur", "1,66 m"], ["Hauteur", "<span class='tbd'>à préciser</span>"]],
       eq: ["plancha", "bbq", "friteuse", "gaz", "hotte", "evier", "quooker", "froid", "dekton", "son", "store", "ilot"], side: [["r_ilot", "Store banne déployé et îlot bar sur roulettes."], ["detail", "Friteuse, plancha et évier encastrés."]], photos: [], d3: true },
     "la-festive": { name: "La Festive", size: "5", ph: "f3", pan: "f7", alt: "La Festive : cuisine avec bar intégré, tabourets et pièce attenante", tag: "Une cuisine avec bar et, sous la même toiture, une vraie pièce en plus : sauna ou salle de bain.",
-      desc: ["La Festive est la plus grande de la gamme : 5 m de façade, une cuisine plus profonde avec un bar intégré, et sur le côté une pièce fermée avec sa propre porte.", "Cette pièce fait partie du modèle : elle est construite en même temps que la cuisine, sous la même toiture, et livrée avec elle en un seul bloc. Vous choisissez son usage : un sauna ou une salle de bain."],
+      pull: "Plus qu’une cuisine : un lieu pour passer la journée dehors.",
+      pts: [["Une cuisine plus profonde", "On cuisine à l’abri, avec le bar intégré face à la terrasse."], ["Une pièce à part entière", "Sauna ou salle de bain, fermée, avec sa propre porte, sous la même toiture."], ["Pensée pour recevoir", "Les invités s’installent au bar pendant que la cuisine tourne ; la pièce attenante est à deux pas."]],
+      sm: "La pièce attenante, l’agencement de la cuisine et les finitions se dessinent avec vous, pour votre jardin et votre façon de vivre dehors.",
       dims: [["Façade", "5 m"], ["Profondeur", "3 m"], ["Hauteur", "<span class='tbd'>à préciser</span>"]],
       eq: ["bar", "piece", "plancha", "bbq", "friteuse", "gaz", "hotte", "evier", "quooker", "froid", "dekton", "son", "susp", "store", "porte", "tv"],
       side: [["f4", "Le bar et la pièce attenante, au bord de la piscine."], ["f2", "Le bar intégré, côté terrasse."]],
@@ -9834,8 +9850,10 @@ three/build/three.module.js:
     <div class="light">
       <section class="wrap msec sp">
         <figure class="sp-fig rv"><div class="ph r45"><img src="${IMG[M.side[0][0]]}" alt="${M.side[0][1]}"></div><figcaption>${M.side[0][1]}</figcaption></figure>
-        <div class="sp-tx"><p class="lab rv">Le modèle</p><h2 class="rv">${M.name}, <em>en détail.</em></h2><div class="desc rv" style="margin-top:26px">${M.desc.map(p => `<p>${p}</p>`).join("")}</div>
-          <details class="more rv"><summary><span class="o">Voir les caractéristiques de ${M.name}</span><span class="c">Masquer les caractéristiques</span><i aria-hidden="true"></i></summary><div class="specs one"><dl>${M.dims.concat(COMMON).map(r => `<div><dt>${r[0]}</dt><dd>${r[1]}</dd></div>`).join("")}</dl></div></details></div>
+        <div class="sp-tx"><p class="lab rv">Le modèle</p><h2 class="rv">${M.name}, <em>en détail.</em></h2><p class="pull rv">${M.pull}</p>
+          <ol class="pts3">${M.pts.map((p, i) => `<li class="rv"><i>0${i + 1}</i><div><b>${p[0]}</b><span>${p[1]}</span></div></li>`).join("")}</ol>
+          <div class="smb rv"><span class="lab">Sur mesure</span><p>${M.sm}</p></div>
+          <details class="more rv"><summary><span class="o">Voir les caractéristiques ${/^[AEIOUÉÈH]/i.test(M.name) ? "d’" + M.name : "de " + M.name}</span><span class="c">Masquer les caractéristiques</span><i aria-hidden="true"></i></summary><div class="specs one"><dl>${M.dims.concat(COMMON).map(r => `<div><dt>${r[0]}</dt><dd>${r[1]}</dd></div>`).join("")}</dl></div></details></div>
       </section>
       <section class="wrap msec sp rev">
         <figure class="sp-fig rv"><div class="ph r45"><img src="${IMG[M.side[1][0]]}" alt="${M.side[1][1]}"></div><figcaption>${M.side[1][1]}</figcaption></figure>

@@ -246,6 +246,39 @@ figcaption{font-size:14px;color:var(--bone-3);margin-top:12px;font-weight:300}
 .mgal figure:only-child{grid-column:span 2}.mgal figure:only-child .ph{aspect-ratio:3/2}
 @media (max-width:700px){.mgal{grid-template-columns:1fr}.mgal figure:only-child{grid-column:auto}.mgal .ph{aspect-ratio:4/3}}
 
+.sp{display:grid;grid-template-columns:.92fr 1.08fr;gap:clamp(36px,6vw,110px);align-items:start}
+.sp.rev .sp-fig{order:2}
+.sp-fig{position:sticky;top:110px}
+.sp-tx{min-width:0}
+.sp-tx>h2{font:300 clamp(36px,3.4vw,56px)/1.02 var(--serif);margin-top:20px}
+.sp-tx>h2 em{font-style:italic;color:var(--ink-2)}
+.sp-h{font:500 12px/1.4 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3);margin:48px 0 4px}
+.specs.one{grid-template-columns:1fr}
+.eq.one{grid-template-columns:1fr}
+.dark .layers li,.sp-tx .layers li{grid-template-columns:52px 1fr}
+.sp-tx .layers span{grid-column:2}
+.steps.v{grid-template-columns:1fr;border-top:0;margin-top:clamp(36px,4vw,56px)}
+.steps.v li,.steps.v li+li{display:grid;grid-template-columns:64px 1fr;column-gap:16px;padding:20px 0;border-left:0;border-top:1px solid var(--line-l)}
+.steps.v i{grid-row:span 2;font-size:34px}
+.steps.v h3{margin-top:0}
+.steps.v p{margin-top:4px}
+.duo2{display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(40px,7vw,120px);align-items:center}
+.collage{position:relative;aspect-ratio:1/1;max-width:100%}
+.collage img{position:absolute;object-fit:cover;box-shadow:0 30px 60px -30px rgba(0,0,0,.6)}
+.collage .c1{right:0;top:0;width:72%;height:78%}
+.collage .c2{left:0;bottom:6%;width:46%;height:40%;border:6px solid var(--night)}
+.collage .c3{right:8%;bottom:0;width:34%;height:28%;border:6px solid var(--night)}
+.cmp-ph{display:block;aspect-ratio:4/3;overflow:hidden;margin-bottom:16px;max-width:240px}
+.cmp-ph img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
+.cmp-ph:hover img{transform:scale(1.04)}
+.mgal{grid-template-columns:repeat(3,1fr)!important}
+.mgal figure{position:relative}
+.mgal figure:first-child{grid-column:span 2;grid-row:span 2}
+.mgal figure:first-child .ph{aspect-ratio:auto;height:100%}
+.mgal figcaption{position:absolute;left:0;right:0;bottom:0;margin:0;padding:48px 18px 14px;background:linear-gradient(0deg,rgba(0,0,0,.62),transparent);color:#F2EEE8;font-size:14px}
+@media (max-width:900px){.sp,.duo2{grid-template-columns:1fr}.sp-fig{position:static}.sp.rev .sp-fig{order:0}.sp-fig .ph{aspect-ratio:4/3}.collage{aspect-ratio:4/3}}
+@media (max-width:700px){.mgal{grid-template-columns:1fr!important}.mgal figure:first-child{grid-column:auto;grid-row:auto}.mgal figure:first-child .ph{aspect-ratio:4/5;height:auto}}
+
 /* 3D */
 .studio{background:var(--studio);color:var(--ink)}
 .v3d{position:relative;margin-top:clamp(36px,4vw,60px);aspect-ratio:16/8.4;max-height:84vh;min-height:440px;width:100%;max-width:100%;background:var(--studio);overflow:hidden}
@@ -541,9 +574,11 @@ form{display:grid;gap:28px;min-width:0}
   </section>
 
   <section class="sec" style="padding-top:0">
-    <div class="wrap split2">
-      <div><p class="lab rv">Sur mesure</p><p class="mf-text rv" style="margin-top:26px">Matériaux, équipements, lumière, façon de recevoir&nbsp;: <em>tout se choisit avec vous.</em></p></div>
-      <div class="side rv"><p class="lead">Bardage, plan de travail, plancha ou barbecue, évier, réfrigérateur, store, îlot bar&nbsp;: découvrez les éléments que nous intégrons.</p><a class="arrow" href="#options">Voir les options<svg viewBox="0 0 18 10" fill="none" stroke="currentColor" aria-hidden="true"><path d="M0 5h17M13 1l4 4-4 4"/></svg></a></div>
+    <div class="wrap duo2">
+      <div><p class="lab rv">Sur mesure</p><p class="mf-text rv" style="margin-top:26px">Matériaux, équipements, lumière, façon de recevoir&nbsp;: <em>tout se choisit avec vous.</em></p>
+        <p class="lead rv" style="margin-top:30px">Bardage, plan de travail, plancha ou barbecue, évier, réfrigérateur, store, bar&nbsp;: découvrez ce que nous pouvons intégrer à votre cuisine.</p>
+        <a class="arrow rv" href="#options" style="margin-top:22px">Voir le guide des options<svg viewBox="0 0 18 10" fill="none" stroke="currentColor" aria-hidden="true"><path d="M0 5h17M13 1l4 4-4 4"/></svg></a></div>
+      <div class="collage rv" aria-hidden="true"><img class="c1" data-img="f2" alt=""><img class="c2" data-img="c_plancha" alt=""><img class="c3" data-img="c_evier" alt=""></div>
     </div>
   </section>
 
@@ -558,13 +593,14 @@ form{display:grid;gap:28px;min-width:0}
   </section>
 
   <section class="sec light">
-    <div class="wrap">
-      <div class="head">
+    <div class="wrap sp">
+      <figure class="sp-fig rv"><div class="ph r45"><img data-img="f5" alt="La Festive au bord d’une piscine, en fin de journée"></div><figcaption>La Festive, livrée au bord d’une piscine.</figcaption></figure>
+      <div class="sp-tx">
         <p class="lab rv">Votre projet</p>
-        <h2 class="h2 rv">De la découverte <em>à la livraison.</em></h2>
-        <p class="lead rv">Le contact vient avant le devis&nbsp;: on parle d’abord de votre projet, puis nous le chiffrons.</p>
+        <h2 class="h2 rv" style="margin-top:22px">De la découverte <em>à la livraison.</em></h2>
+        <p class="lead rv" style="margin-top:24px">Le contact vient avant le devis&nbsp;: on parle d’abord de votre projet, puis nous le chiffrons.</p>
+        <ol class="steps v" data-steps></ol>
       </div>
-      <ol class="steps" data-steps></ol>
     </div>
   </section>
 
@@ -709,7 +745,9 @@ form{display:grid;gap:28px;min-width:0}
     <div class="wrap band-t"><p class="lab rv">La construction</p><h2 class="h2 rv">Comme un petit bâtiment, <em>pas comme un meuble de jardin.</em></h2></div>
   </section>
   <section class="sec" style="padding-top:0">
-    <div class="wrap">
+    <div class="wrap sp">
+      <figure class="sp-fig rv"><div class="ph r45"><img data-img="f9" alt="La Festive déchargée à la grue au-dessus d’une piscine, montagnes en arrière-plan"></div><figcaption>La Festive, déchargée à la grue en un seul bloc.</figcaption></figure>
+      <div class="sp-tx">
       <ol class="layers">
         <li class="rv"><i>01</i><b><small>Mise en place</small>Sur 4 plots béton</b><span>Sans fixation au bâtiment, sans travaux de maçonnerie.</span></li>
         <li class="rv"><i>02</i><b><small>Structure</small>Ossature bois</b><span>Une charpente de construction, pas un assemblage de meubles.</span></li>
@@ -719,7 +757,8 @@ form{display:grid;gap:28px;min-width:0}
         <li class="rv"><i>06</i><b><small>Intérieur</small>Bois trois plis, crédence noire</b><span>Éclairage intégré au plafond, pour cuisiner aussi le soir.</span></li>
         <li class="rv"><i>07</i><b><small>Équipements</small>Des marques spécialisées</b><span>Planet, Napoléon, Elipson, Quooker&nbsp;: encastrés, choisis pour l’extérieur.</span></li>
       </ol>
-      <p class="note rv" style="margin-top:36px"><b>À fournir</b>Photos de l’atelier et de la fabrication (charpente, assemblage, électricité) et gros plans de détails.</p>
+      <p class="note rv" style="margin-top:36px"><b>À fournir</b>Photos de l’atelier et de la fabrication (charpente, assemblage, électricité).</p>
+      </div>
     </div>
   </section>
   <section class="sec light">
@@ -777,6 +816,7 @@ form{display:grid;gap:28px;min-width:0}
           <div><span>E-mail</span><b>contact@dmg-concept.com</b></div>
           <div><span>Atelier</span><b>58 impasse des Roseaux, 74570 Évires</b></div>
         </div>
+        <figure class="rv" style="margin-top:44px"><div class="ph r43"><img data-img="pergola" alt="Harmonie avec store banne et îlot bar sur roulettes"></div><figcaption>Harmonie, store banne et îlot bar.</figcaption></figure>
       </div>
       <form id="form" class="rv" novalidate aria-describedby="form-help">
         <p id="form-help" class="lab">Cinq champs, une minute.</p>
@@ -923,7 +963,7 @@ form{display:grid;gap:28px;min-width:0}
   root.classList.add("js");
   const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const ARR = '<svg viewBox="0 0 18 10" fill="none" stroke="currentColor" aria-hidden="true"><path d="M0 5h17M13 1l4 4-4 4"/></svg>';
-  const IMG = { petite: "{{petite}}", pergola: "{{pergola}}", r_jardin: "{{r_jardin}}", r_ilot: "{{r_ilot}}", bois: "{{bois}}", interieur: "{{interieur}}", detail: "{{detail}}", fundermax: "{{fundermax}}", ferme: "{{ferme}}", r_store: "{{r_store}}", grue: "{{grue}}", posterH: "{{posterH}}", a1: "{{a1}}", f2: "{{f2}}", f3: "{{f3}}", f4: "{{f4}}", f5: "{{f5}}", f6: "{{f6}}", f7: "{{f7}}", f8: "{{f8}}", f9: "{{f9}}", f10: "{{f10}}", f11: "{{f11}}", f12: "{{f12}}" };
+  const IMG = { petite: "{{petite}}", pergola: "{{pergola}}", r_jardin: "{{r_jardin}}", r_ilot: "{{r_ilot}}", bois: "{{bois}}", interieur: "{{interieur}}", detail: "{{detail}}", fundermax: "{{fundermax}}", ferme: "{{ferme}}", r_store: "{{r_store}}", grue: "{{grue}}", posterH: "{{posterH}}", a1: "{{a1}}", c_plancha: "{{c_plancha}}", p_planchafeu: "{{p_planchafeu}}", p_bbq: "{{p_bbq}}", c_friteuse: "{{c_friteuse}}", p_gaz: "{{p_gaz}}", c_hotte: "{{c_hotte}}", c_evier: "{{c_evier}}", p_robinet: "{{p_robinet}}", c_frigo: "{{c_frigo}}", p_dekton: "{{p_dekton}}", c_tiroirs: "{{c_tiroirs}}", c_meubles: "{{c_meubles}}", c_store: "{{c_store}}", c_ilot: "{{c_ilot}}", p_son: "{{p_son}}", c_spots: "{{c_spots}}", c_credence: "{{c_credence}}", c_ferme: "{{c_ferme}}", f2: "{{f2}}", f3: "{{f3}}", f4: "{{f4}}", f5: "{{f5}}", f6: "{{f6}}", f7: "{{f7}}", f8: "{{f8}}", f9: "{{f9}}", f10: "{{f10}}", f11: "{{f11}}", f12: "{{f12}}" };
 
   $$("img[data-img]").forEach(i => i.src = IMG[i.dataset.img]);
 
@@ -954,16 +994,17 @@ form{display:grid;gap:28px;min-width:0}
     evidence: { name: "Évidence", size: "2", ph: "petite", alt: "Évidence, cuisine compacte à façade anthracite", tag: "La plus compacte, pour les terrasses où chaque mètre compte.",
       desc: ["Évidence est la plus compacte des trois cuisines : 2 m de façade, pensée pour les terrasses où chaque mètre compte.", "Elle réunit l’essentiel sous sa propre toiture : plancha, évier et réfrigérateur, avec des rangements en portes et tiroirs. Le soir, l’éclairage intégré au plafond prend le relais ; après le repas, la cuisine se referme et les équipements restent à l’abri."],
       dims: [["Façade", "2 m"], ["Profondeur", "0,90 m"], ["Hauteur", "<span class='tbd'>à préciser</span>"]],
-      eq: ["plancha55", "evier", "frigo"], photos: [] },
+      eq: ["plancha55", "evier", "frigo"], side: [["bois", "Bardage bois, intérieur trois plis et crédence noire."], ["c_plancha", "Plancha encastrée, couvercle relevé."]], photos: [] },
     harmonie: { name: "Harmonie", size: "3", ph: "pergola", alt: "Harmonie, cuisine en lames bois avec store banne et îlot bar sur roulettes", tag: "Assez de plan de travail pour cuisiner à plusieurs, avec les équipements d’une vraie cuisine.",
       desc: ["Harmonie offre 3 m de façade : assez de plan de travail pour cuisiner à plusieurs, et la place pour les équipements d’une vraie cuisine.", "Froid, cuisson, évier, friteuse, eau bouillante : on compose l’équipement selon sa façon de recevoir. Côté terrasse, un store banne intégré à la toiture et un îlot bar sur roulettes, qui rentre dans la cuisine quand on la ferme."],
       dims: [["Façade", "3 m"], ["Intérieur", "2,60 m"], ["Profondeur", "1,66 m"], ["Hauteur", "<span class='tbd'>à préciser</span>"]],
-      eq: ["plancha", "bbq", "friteuse", "gaz", "hotte", "evier", "quooker", "froid", "dekton", "son", "store", "ilot"], photos: [["r_ilot", "Store banne déployé et îlot bar sur roulettes."]], d3: true },
+      eq: ["plancha", "bbq", "friteuse", "gaz", "hotte", "evier", "quooker", "froid", "dekton", "son", "store", "ilot"], side: [["r_ilot", "Store banne déployé et îlot bar sur roulettes."], ["detail", "Friteuse, plancha et évier encastrés."]], photos: [], d3: true },
     "la-festive": { name: "La Festive", size: "4", ph: "f3", pan: "f7", alt: "La Festive : cuisine plus profonde avec bar intégré, tabourets et pièce attenante", tag: "Le grand format : plus profonde, un bar intégré et, sur le côté, un sauna ou une salle de bain.",
       desc: ["La Festive est la plus grande de la gamme : 4 m de façade et une cuisine plus profonde, avec un bar intégré directement à la cuisine. Côté terrasse, un comptoir en lames bois où l’on s’installe sur des tabourets pendant que la cuisine tourne.", "Sur le côté, une pièce fermée avec sa propre porte, aménagée au choix en sauna ou en salle de bain avec douche, lavabo et WC. Au plafond, le bois accueille les spots et des suspensions au-dessus du bar."],
       dims: [["Façade", "4 m"], ["Profondeur", "3 m"], ["Hauteur", "<span class='tbd'>à préciser</span>"]],
       eq: ["bar", "piece", "plancha", "bbq", "friteuse", "gaz", "hotte", "evier", "quooker", "froid", "dekton", "son", "susp", "store", "porte", "tv"],
-      photos: [["f4", "Le bar et la pièce attenante, au bord de la piscine."], ["f8", "Version sauna : poêle à pierres et banquettes en bois."], ["f12", "Version salle de bain : douche, lavabo et WC suspendu."], ["f10", "La porte de la pièce attenante, dans le bardage bois."], ["f6", "Fin de journée : spots et suspensions allumés."], ["f9", "Livraison : déchargée à la grue en un seul bloc."]] }
+      side: [["f4", "Le bar et la pièce attenante, au bord de la piscine."], ["f2", "Le bar intégré, côté terrasse."]],
+      photos: [["f6", "Fin de journée : spots et suspensions allumés."], ["f8", "Version sauna : poêle à pierres et banquettes en bois."], ["f12", "Version salle de bain : douche, lavabo et WC suspendu."]] }
   };
   const SLUGS = Object.keys(MODELS);
   const eqLi = k => { const e = E[k]; return `<li${e[3] ? ' class="inc"' : ""}><b>${e[0]}</b>${e[1] ? `<small>${e[1]}</small>` : ""}<span>${e[2]}</span></li>`; };
@@ -989,14 +1030,21 @@ form{display:grid;gap:28px;min-width:0}
       <figure class="rv"><div class="ph r43"><img src="${IMG[M.ph]}" alt="${M.alt}"></div><figcaption>Réalisation · ${M.name}</figcaption></figure>
     </div>
     <div class="light">
-      <section class="wrap msec"><div class="grid"><h2 class="rv">Le <em>modèle.</em></h2><div class="desc rv">${M.desc.map(p => `<p>${p}</p>`).join("")}</div></div></section>
-      <section class="wrap msec"><div class="grid"><h2 class="rv">Caractéristiques.</h2><div class="specs rv"><dl>${M.dims.concat(COMMON.slice(0, 3)).map(r => `<div><dt>${r[0]}</dt><dd>${r[1]}</dd></div>`).join("")}</dl><dl>${COMMON.slice(3).map(r => `<div><dt>${r[0]}</dt><dd>${r[1]}</dd></div>`).join("")}</dl></div></div></section>
-      <section class="wrap msec"><div class="grid"><div><h2 class="rv">Équipements <em>possibles.</em></h2><p class="rv" style="margin-top:20px;color:var(--ink-2);font-weight:300">Choisis avec vous au rendez-vous. <a href="#options">Toutes les options</a></p></div><div><ul class="eq rv">${M.eq.map(eqLi).join("")}</ul><p class="note rv" style="margin-top:24px"><b>À compléter</b>Ce qui est inclus dans la base de ${M.name} et ce qui est en option.</p></div></div></section>
+      <section class="wrap msec sp">
+        <figure class="sp-fig rv"><div class="ph r45"><img src="${IMG[M.side[0][0]]}" alt="${M.side[0][1]}"></div><figcaption>${M.side[0][1]}</figcaption></figure>
+        <div class="sp-tx"><p class="lab rv">Le modèle</p><h2 class="rv">${M.name}, <em>en détail.</em></h2><div class="desc rv" style="margin-top:26px">${M.desc.map(p => `<p>${p}</p>`).join("")}</div>
+          <p class="sp-h rv">Caractéristiques</p><div class="specs one rv"><dl>${M.dims.concat(COMMON).map(r => `<div><dt>${r[0]}</dt><dd>${r[1]}</dd></div>`).join("")}</dl></div></div>
+      </section>
+      <section class="wrap msec sp rev">
+        <figure class="sp-fig rv"><div class="ph r45"><img src="${IMG[M.side[1][0]]}" alt="${M.side[1][1]}"></div><figcaption>${M.side[1][1]}</figcaption></figure>
+        <div class="sp-tx"><p class="lab rv">Équipements</p><h2 class="rv">Ce que l’on peut <em>y intégrer.</em></h2><p class="rv" style="margin-top:20px;color:var(--ink-2);font-weight:300">Choisis avec vous au rendez-vous. <a href="#options">Voir le guide des options</a></p>
+          <ul class="eq one rv" style="margin-top:28px;border-top:1px solid var(--line-l)">${M.eq.map(eqLi).join("")}</ul><p class="note rv" style="margin-top:24px"><b>À compléter</b>Ce qui est inclus dans la base de ${M.name} et ce qui est en option.</p></div>
+      </section>
     </div>
     ${M.d3 ? `<section class="sec studio" id="harmonie-3d"><div class="wrap"><div class="head"><p class="lab rv">Vue 3D</p><h2 class="h2 rv">Faites le tour <em>d’Harmonie.</em></h2><p class="lead rv">Avec son îlot bar sur roulettes. Tournez autour, entrez dedans, puis refermez-la : l’îlot rentre à l’intérieur avant que le store descende.</p></div>
       <div class="v3d" id="v3d"><div class="ld" style="background-image:url(${IMG.posterH})"><span>Chargement de la vue 3D</span><i><b></b></i></div><canvas aria-label="Harmonie en 3D avec son îlot bar : faites glisser pour la faire pivoter"></canvas></div>
       <div class="tools"><div class="tb" role="toolbar" aria-label="Animer la cuisine"><button type="button" data-t="auto" aria-pressed="true"><i></i>Rotation</button><button type="button" data-t="enter" aria-pressed="false"><i></i>Entrer dedans</button><button type="button" data-t="doors" aria-pressed="false"><i></i>Ouvrir les portes</button><button type="button" data-t="blind" aria-pressed="false"><i></i>Fermer la cuisine</button></div><span class="hint">Glissez pour tourner autour.</span></div></div></section>` : ""}
-    ${M.photos.length ? `<section class="sec" style="padding-bottom:0"><div class="wrap mgal">${M.photos.map(p => `<figure class="rv"><div class="ph"><img src="${IMG[p[0]]}" alt="${p[1]}"></div><figcaption>${p[1]}</figcaption></figure>`).join("")}</div></section>` : `<section class="sec" style="padding-bottom:0"><div class="wrap"><p class="note rv"><b>À fournir</b>Photos haute résolution de ${M.name} : vues d’ensemble et gros plans.</p></div></section>`}
+    ${M.photos.length ? `<section class="sec" style="padding-bottom:0"><div class="wrap mgal">${M.photos.map(p => `<figure class="rv"><div class="ph"><img src="${IMG[p[0]]}" alt="${p[1]}"></div><figcaption>${p[1]}</figcaption></figure>`).join("")}</div></section>` : ""}
     <section class="sec"><div class="wrap"><div class="head" style="margin-bottom:clamp(36px,4vw,56px)"><p class="lab rv">Les autres modèles</p></div><div class="others rv">${others(s)}</div></div></section>
     <section class="sec cta-band" data-cta></section>`;
   });
@@ -1010,14 +1058,14 @@ form{display:grid;gap:28px;min-width:0}
     ["Confort", "Éclairage intégré", "Éclairage, sonorisation", "Éclairage, sonorisation, téléviseur"], ["Accès latéral", "—", "—", "Porte vitrée"],
     ["Plan de travail", "Noir", "Dekton possible", "Dekton possible"], ["Bardage", "Au choix", "Au choix", "Au choix"]
   ];
-  $("[data-cmp]").innerHTML = `<thead><tr><th scope="col"><span class="lab">Modèle</span></th>${SLUGS.map(s => `<th scope="col">${MODELS[s].name}<small>Façade ${MODELS[s].size} m</small></th>`).join("")}</tr></thead><tbody>${CMP.map(r => `<tr><th scope="row">${r[0]}</th>${r.slice(1).map(c => `<td${c === "—" ? ' class="no"' : ""}>${c}</td>`).join("")}</tr>`).join("")}</tbody><tfoot><tr><td></td>${SLUGS.map(s => `<td><a class="arrow" href="#${s}">${MODELS[s].name}${ARR}</a></td>`).join("")}</tr></tfoot>`;
+  $("[data-cmp]").innerHTML = `<thead><tr><th scope="col"><span class="lab">Modèle</span></th>${SLUGS.map(s => `<th scope="col"><a class="cmp-ph" href="#${s}"><img src="${IMG[MODELS[s].pan || MODELS[s].ph]}" alt=""></a>${MODELS[s].name}<small>Façade ${MODELS[s].size} m</small></th>`).join("")}</tr></thead><tbody>${CMP.map(r => `<tr><th scope="row">${r[0]}</th>${r.slice(1).map(c => `<td${c === "—" ? ' class="no"' : ""}>${c}</td>`).join("")}</tr>`).join("")}</tbody><tfoot><tr><td></td>${SLUGS.map(s => `<td><a class="arrow" href="#${s}">${MODELS[s].name}${ARR}</a></td>`).join("")}</tr></tfoot>`;
 
   /* guide des options : cartes illustrées, sans sélection */
   const C = {
     e: "Évidence", h: "Harmonie", f: "La Festive",
     av: s => s === "ehf" ? "Sur les trois modèles" : "Sur " + s.split("").map(k => C[k]).join(" et "),
   };
-  const PIC = { c_plancha: "{{c_plancha}}", p_planchafeu: "{{p_planchafeu}}", p_bbq: "{{p_bbq}}", c_friteuse: "{{c_friteuse}}", p_gaz: "{{p_gaz}}", c_hotte: "{{c_hotte}}", c_evier: "{{c_evier}}", p_robinet: "{{p_robinet}}", c_frigo: "{{c_frigo}}", p_dekton: "{{p_dekton}}", c_tiroirs: "{{c_tiroirs}}", c_meubles: "{{c_meubles}}", c_store: "{{c_store}}", c_ilot: "{{c_ilot}}", p_son: "{{p_son}}", c_spots: "{{c_spots}}", c_credence: "{{c_credence}}", c_ferme: "{{c_ferme}}" };
+  const PIC = IMG;
   const GUIDE = {
     cuisson: [
       ["c_plancha", "Planet · gamme Oasi", "Plancha encastrable", "La plaque en inox de 5 mm monte vite en température et la garde. Les graisses s’écoulent dans un bac en façade.", ["Oasi 55 : 6 à 10 personnes", "Oasi 80 : 8 à 12 personnes", "Gaz ou électrique · plaque garantie 10 ans"], "ehf"],

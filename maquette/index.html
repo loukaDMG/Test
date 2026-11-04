@@ -327,6 +327,17 @@ figcaption{font-size:14px;color:var(--bone-3);margin-top:12px;font-weight:300}
 .smb{margin-top:32px;padding:22px 26px;border-left:2px solid var(--wood-d);background:var(--card)}
 .smb p{margin-top:8px;font:400 clamp(19px,1.5vw,22px)/1.45 var(--serif);color:var(--ink)}
 
+.diag img{transition:transform 1.6s var(--ease)}
+.diag .d1{clip-path:polygon(0 0,100% 0,0 100%)}
+.diag .d2{clip-path:polygon(100% 0,100% 100%,0 100%)}
+.diag svg{position:absolute;inset:0;width:100%;height:100%;z-index:2}
+.diag line{stroke:#F2EEE8;stroke-width:2;vector-effect:non-scaling-stroke}
+.diag .dl{position:absolute;z-index:3;font:500 11.5px/1 var(--sans);font-style:normal;letter-spacing:.2em;text-transform:uppercase;color:#fff;background:rgba(10,10,10,.45);padding:9px 12px;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.diag .dl1{left:clamp(16px,2vw,28px);top:clamp(16px,2vw,28px)}
+.diag .dl2{right:clamp(16px,2vw,28px);top:52%}
+.diag::after{z-index:2;background:linear-gradient(0deg,rgba(8,8,8,.82),rgba(8,8,8,0) 42%)}
+.diag span{z-index:4}
+
 /* 3D */
 .studio{background:var(--studio);color:var(--ink)}
 .v3d{position:relative;margin-top:clamp(36px,4vw,60px);aspect-ratio:16/8.4;max-height:84vh;min-height:440px;width:100%;max-width:100%;background:var(--studio);overflow:hidden}
@@ -9799,7 +9810,7 @@ three/build/three.module.js:
         <div class="head"><p class="lab rv">Deux espaces, un seul bloc</p><h2 class="h2 rv">Une cuisine avec bar, <em>et une pièce à vivre.</em></h2><p class="lead rv">Sous la même toiture, la cuisine s’ouvre sur la terrasse et la pièce attenante se ferme sur elle-même. Les deux comptent autant&nbsp;: c’est ce qui fait La Festive.</p></div>
         <div class="two">
           <a class="tw" href="#la-festive" data-jump="fest-cuisine"><img src="${IMG.f2}" alt="Le bar intégré de La Festive, en lames bois, avec ses tabourets"><span><small>Côté terrasse</small>La cuisine et le bar</span></a>
-          <a class="tw" href="#la-festive" data-jump="fest-piece"><img src="${IMG.f10}" alt="La porte de la pièce attenante, ouverte sur la salle de bain"><span><small>Côté pièce</small>Sauna ou salle de bain</span></a>
+          <a class="tw diag" href="#la-festive" data-jump="fest-piece"><img class="d1" src="${IMG.f8}" alt="Le sauna de la pièce attenante"><img class="d2" src="${IMG.f12}" alt="La salle de bain de la pièce attenante"><svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><line x1="100" y1="0" x2="0" y2="100"/></svg><em class="dl dl1">Sauna</em><em class="dl dl2">Salle de bain</em><span><small>Côté pièce</small>Sauna ou salle de bain</span></a>
         </div>
       </div>
     </section>

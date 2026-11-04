@@ -17,7 +17,7 @@ def data_uri(name):
             return 'data:%s;base64,%s' % (mime, base64.b64encode(open(p, 'rb').read()).decode())
     raise SystemExit('image manquante : ' + name)
 
-html = re.sub(r'\{\{([A-Za-z_]+)\}\}', lambda m: data_uri(m.group(1)), html)
+html = re.sub(r'\{\{([A-Za-z0-9_]+)\}\}', lambda m: data_uri(m.group(1)), html)
 html = re.sub(r'<!--JS:([^>]+)-->', lambda m: '<script>' + open(os.path.join(src_dir, m.group(1)), encoding='utf-8').read() + '</script>', html)
 open(out_page, 'w', encoding='utf-8').write(html)
 full = ('<!doctype html>\n<html lang="fr">\n<head>\n<meta charset="utf-8">\n'

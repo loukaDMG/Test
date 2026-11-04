@@ -271,6 +271,39 @@ figcaption{font-size:14px;color:var(--bone-3);margin-top:12px;font-weight:300}
 .cmp .no{color:var(--ink-3)}
 .cmp tfoot td{border:0;padding-top:24px}
 
+/* guide des options */
+.gnav{position:sticky;top:0;z-index:40;background:rgba(15,16,17,.92);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-block:1px solid var(--line-d)}
+.gnav ol{list-style:none;margin:0;padding:0;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+.gnav ol::-webkit-scrollbar{display:none}
+.gnav a{display:flex;align-items:center;gap:10px;white-space:nowrap;min-height:58px;padding:0 16px;text-decoration:none;font:500 11.5px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--bone-3);border-bottom:1px solid transparent;transition:color .3s,border-color .3s}
+.gnav a i{font:300 italic 17px/1 var(--serif);letter-spacing:0;text-transform:none}
+.gnav a:hover,.gnav a.on{color:var(--bone)}
+.gnav a.on{border-bottom-color:var(--bone)}
+.hdr.solid~main .gnav{top:0}
+.gstep{scroll-margin-top:120px}
+.gcards{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2vw,28px);margin-top:clamp(44px,5vw,72px)}
+.gcard{display:flex;flex-direction:column;background:var(--card);min-width:0;text-decoration:none;color:inherit}
+.gimg{position:relative;aspect-ratio:4/3;overflow:hidden;background:#E6E1D8;max-width:100%}
+.gimg img{width:100%;height:100%;object-fit:cover;transition:transform 1.4s var(--ease)}
+.gcard:hover .gimg img{transform:scale(1.035)}
+.gimg.pack{background:#EEEAE3}
+.gimg.pack img{object-fit:contain;padding:8% 10%;mix-blend-mode:multiply}
+.gph{position:absolute;inset:0;display:grid;place-items:center;padding:24px;text-align:center;font:300 italic clamp(28px,2.4vw,38px)/1.1 var(--serif);color:var(--ink-3);background:repeating-linear-gradient(90deg,#E9E4DB 0 34px,#E2DCD2 34px 44px)}
+.gtx{padding:clamp(22px,2.2vw,32px);display:flex;flex-direction:column;gap:10px;flex:1}
+.gtx h3{font:400 clamp(26px,2.1vw,32px)/1.1 var(--serif)}
+.gtx p{color:var(--ink-2);font-weight:300;font-size:16px}
+.gtx ul{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:4px}
+.gtx li{font-size:14.5px;color:var(--ink-2);padding-left:18px;position:relative;font-weight:300}
+.gtx li::before{content:"";position:absolute;left:0;top:.75em;width:8px;height:1px;background:var(--wood-d)}
+.gav{margin-top:auto;padding-top:16px;border-top:1px solid var(--line-l);font:500 11px/1.4 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+.gfmt .gimg b{position:absolute;left:20px;bottom:14px;font:300 clamp(64px,6vw,96px)/.8 var(--serif);color:#fff;text-shadow:0 2px 24px rgba(0,0,0,.35)}
+.gfmt .gimg b small{font-size:.35em;margin-left:4px}
+.gfmt .arrow{margin-top:auto;align-self:flex-start}
+.tip{margin-top:clamp(36px,4vw,56px);display:grid;grid-template-columns:200px 1fr;gap:12px 40px;padding:clamp(24px,3vw,40px) 0 0;border-top:1px solid var(--ink)}
+.tip p{font:400 clamp(21px,1.8vw,27px)/1.45 var(--serif);color:var(--ink);max-width:56ch}
+@media (max-width:1000px){.gcards{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.gcards{grid-template-columns:1fr}.tip{grid-template-columns:1fr}}
+
 /* options */
 .mat{display:grid;grid-template-columns:1fr 1.08fr;gap:clamp(40px,7vw,130px);align-items:center}
 .mat .h2{margin-top:24px}
@@ -570,17 +603,25 @@ form{display:grid;gap:28px;min-width:0}
 <div class="page" data-page="la-festive" data-mpage="la-festive"></div>
 
 <!-- ============ OPTIONS ============ -->
-<div class="page" data-page="options" data-title="Options et finitions · bardage, équipements, store, îlot · DMG Concept" data-desc="Bardage Fiberdeck WEO 35 ou Fundermax, plan Dekton, plancha Planet, barbecue Napoléon, évier, Quooker, store banne, îlot bar : les options des cuisines DMG Concept." data-crumb="Options">
+<div class="page" data-page="options" data-title="Options et finitions · le guide pour composer votre cuisine · DMG Concept" data-desc="Format, bardage, plancha ou barbecue, évier, Quooker, réfrigérateur, plan Dekton, store banne, îlot bar, éclairage : le guide des options des cuisines DMG Concept." data-crumb="Options">
   <div class="wrap crumb" data-crumbs></div>
   <div class="wrap phead">
     <p class="lab rv">Options et finitions</p>
-    <h1 class="h1 rv">Chaque élément, <em>choisi avec vous.</em></h1>
-    <p class="lead rv">Voici ce que nous pouvons intégrer à votre cuisine. Le choix se fait ensemble, au rendez-vous, selon votre terrasse et votre façon de recevoir.</p>
+    <h1 class="h1 rv">Ce que nous pouvons <em>faire pour vous.</em></h1>
+    <p class="lead rv">Sept étapes pour vous faire une idée de votre future cuisine&nbsp;: les formats, les matières, les équipements et ce qui les accompagne. Le reste, on le décide ensemble.</p>
   </div>
-  <section class="sec" style="padding-top:0">
+  <nav class="gnav" aria-label="Étapes du guide"><div class="wrap"><ol><li><a href="#options" data-go="g-format"><i>01</i>Le format</a></li><li><a href="#options" data-go="g-bardage"><i>02</i>Le bardage</a></li><li><a href="#options" data-go="g-cuisson"><i>03</i>La cuisson</a></li><li><a href="#options" data-go="g-eau"><i>04</i>L’eau et le froid</a></li><li><a href="#options" data-go="g-plan"><i>05</i>Plan et rangements</a></li><li><a href="#options" data-go="g-recevoir"><i>06</i>Pour recevoir</a></li><li><a href="#options" data-go="g-lumiere"><i>07</i>Lumière et fermeture</a></li></ol></div></nav>
+  <section class="gstep sec light" id="g-format">
+    <div class="wrap">
+      <div class="head"><p class="lab rv">Étape 01 · Le format</p><h2 class="h2 rv">D’abord, <em>la taille.</em></h2><p class="lead rv">Elle dépend de la place sur votre terrasse et du nombre de personnes que vous recevez.</p></div>
+      <div class="gcards" data-cards="format"></div>
+      <aside class="tip rv"><span class="lab">Notre conseil</span><p>Mesurez la place disponible et pensez aux circulations&nbsp;: autour de la cuisine, de la table et de l’îlot. Au rendez-vous, nous vérifions l’implantation avec vous.</p></aside>
+    </div>
+  </section>
+  <section class="sec dark gstep" id="g-bardage" style="padding-block:clamp(90px,10vw,150px)">
     <div class="wrap mat">
       <div>
-        <p class="lab rv">Le bardage</p>
+        <p class="lab rv">Étape 02 · Le bardage</p>
         <h2 class="h2 rv">La matière, <em>à votre goût.</em></h2>
         <p class="lead rv">En façade avant, du Fundermax anthracite. Pour les côtés et l’arrière, des lames Fiberdeck WEO 35 en quatre teintes, du Fundermax, ou les deux associés sur un même mur.</p>
         <ul class="mat-l rv" aria-label="Choisir un bardage">
@@ -599,18 +640,39 @@ form{display:grid;gap:28px;min-width:0}
       </figure>
     </div>
   </section>
-  <section class="sec light">
+  <section class="gstep sec light" id="g-cuisson">
     <div class="wrap">
-      <div class="head"><p class="lab rv">Les éléments</p><h2 class="h2 rv">Intérieur, équipements, <em>confort.</em></h2><p class="lead rv">Sous chaque élément, les modèles sur lesquels il est proposé.</p></div>
-      <div class="el-split">
-        <div class="el-media" aria-hidden="true">
-          <div class="el-frame" id="el-frame">
-            <img class="on" src="{{bois}}" alt=""><img data-img="interieur" alt=""><img data-img="detail" alt=""><img data-img="r_ilot" alt=""><img data-img="ferme" alt="">
-          </div>
-          <div class="el-meta"><span id="el-cap"></span><b id="el-cnt">01 / 05</b></div>
-        </div>
-        <div data-chaps></div>
-      </div>
+      <div class="head"><p class="lab rv">Étape 03 · La cuisson</p><h2 class="h2 rv">Plancha, barbecue <em>et le reste.</em></h2><p class="lead rv">Des appareils encastrés, de marques spécialisées dans la cuisine d’extérieur. Fermés, leurs couvercles prolongent le plan de travail.</p></div>
+      <div class="gcards" data-cards="cuisson"></div>
+      <aside class="tip rv"><span class="lab">Notre conseil</span><p>Plancha ou barbecue&nbsp;? Les deux prennent la même place dans le plan de travail. La plancha saisit viandes, poissons et légumes sur une plaque&nbsp;; le barbecue grille et rôtit, avec sa rôtissoire. Choisissez selon votre façon de cuisiner&nbsp;; friteuse et plaque à gaz viennent en complément.</p></aside>
+    </div>
+  </section>
+  <section class="gstep sec light" id="g-eau">
+    <div class="wrap">
+      <div class="head"><p class="lab rv">Étape 04 · L’eau et le froid</p><h2 class="h2 rv">L’eau <em>et le froid.</em></h2><p class="lead rv">Préparer, rincer, garder au frais&nbsp;: sans allers-retours dans la maison.</p></div>
+      <div class="gcards" data-cards="eau"></div>
+      <aside class="tip rv"><span class="lab">Notre conseil</span><p>Un évier change tout au quotidien. Réfrigérateur ou cave à vin&nbsp;: l’un ou l’autre trouve sa place sous le plan. Prévoyez l’arrivée d’eau, l’évacuation et l’électricité&nbsp;: les raccordements sont à faire réaliser séparément.</p></aside>
+    </div>
+  </section>
+  <section class="gstep sec light" id="g-plan">
+    <div class="wrap">
+      <div class="head"><p class="lab rv">Étape 05 · Plan et rangements</p><h2 class="h2 rv">Le plan <em>et les rangements.</em></h2><p class="lead rv">Un plan de travail fait pour l’extérieur, et des rangements composés autour de vos équipements.</p></div>
+      <div class="gcards" data-cards="plan"></div>
+      <aside class="tip rv"><span class="lab">Notre conseil</span><p>Le Dekton ne craint ni le soleil, ni le gel, ni un plat chaud. Pour les façades de meubles, un ton clair éclaire la cuisine, l’anthracite la rend plus graphique.</p></aside>
+    </div>
+  </section>
+  <section class="gstep sec light" id="g-recevoir">
+    <div class="wrap">
+      <div class="head"><p class="lab rv">Étape 06 · Pour recevoir</p><h2 class="h2 rv">Pour <em>recevoir.</em></h2><p class="lead rv">Ce qui prolonge la cuisine vers la terrasse et vos invités.</p></div>
+      <div class="gcards" data-cards="recevoir"></div>
+      <aside class="tip rv"><span class="lab">Notre conseil</span><p>Le store banne ombrage le coin repas sans pergola. L’îlot bar garde les invités autour de celui qui cuisine. Sur Harmonie, l’îlot est sur roulettes&nbsp;; sur La Festive, il est fixe, à l’intérieur.</p></aside>
+    </div>
+  </section>
+  <section class="gstep sec light" id="g-lumiere">
+    <div class="wrap">
+      <div class="head"><p class="lab rv">Étape 07 · Lumière et fermeture</p><h2 class="h2 rv">La lumière, <em>puis on referme.</em></h2><p class="lead rv">Pour cuisiner le soir, puis tout protéger entre deux repas.</p></div>
+      <div class="gcards" data-cards="lumiere"></div>
+      <aside class="tip rv"><span class="lab">Notre conseil</span><p>Les spots au plafond éclairent tout le plan de travail. Après le repas, le store de fermeture descend devant la cuisine&nbsp;; pensez à purger l’arrivée d’eau avant le gel.</p></aside>
     </div>
   </section>
   <section class="sec cta-band" data-cta></section>
@@ -942,17 +1004,49 @@ form{display:grid;gap:28px;min-width:0}
   ];
   $("[data-cmp]").innerHTML = `<thead><tr><th scope="col"><span class="lab">Modèle</span></th>${SLUGS.map(s => `<th scope="col">${MODELS[s].name}<small>Façade ${MODELS[s].size} m</small></th>`).join("")}</tr></thead><tbody>${CMP.map(r => `<tr><th scope="row">${r[0]}</th>${r.slice(1).map(c => `<td${c === "—" ? ' class="no"' : ""}>${c}</td>`).join("")}</tr>`).join("")}</tbody><tfoot><tr><td></td>${SLUGS.map(s => `<td><a class="arrow" href="#${s}">${MODELS[s].name}${ARR}</a></td>`).join("")}</tr></tfoot>`;
 
-  /* chapitres des options */
-  const ALL = "Évidence · Harmonie · La Festive", HF = "Harmonie · La Festive";
-  const CHAPS = [
-    ["Intérieur trois plis, crédence noire, spots intégrés.", "Intérieur <em>et lumière.</em>", "Sous la toiture, un intérieur bois et une lumière pensée pour cuisiner aussi le soir.", [["Habillage bois trois plis", ALL, "Les murs et le plafond de la cuisine."], ["Crédence noire", ALL, "Derrière la cuisson, sur la largeur de la hotte."], ["Spots intégrés au plafond", ALL, "Pour cuisiner à la nuit tombée."], ["Prises et appareillage noirs", ALL, "Discrets, dans la continuité de la crédence."]]],
-    ["Plan noir, hotte inox, portes et tiroirs effet béton clair.", "Plan de travail <em>et rangements.</em>", "Un plan fait pour l’extérieur, et des rangements composés autour de vos équipements.", [["Plan de travail Dekton", HF, "Cosentino. Résiste aux UV, au gel, aux rayures et à la chaleur jusqu’à 300 °C. Teinte au choix."], ["Portes et tiroirs", ALL, "Composés selon les équipements, avec un bandeau sous la cuisson."], ["Teinte des meubles", ALL, "Ici un effet béton clair, sur d’autres cuisines un anthracite."]]],
-    ["Friteuse, plancha et évier encastrés, couvercles ouverts.", "Les <em>équipements.</em>", "Des appareils encastrés, de marques spécialisées dans la cuisine d’extérieur. Fermés, leurs couvercles prolongent le plan de travail.", [["Plancha Planet Oasi", ALL, "Plaque inox de 5 mm, en 55 ou 80 cm, gaz, électrique ou avec un feu."], ["Barbecue Napoléon Série 700", HF, "Grilles inox, brûleur arrière infrarouge et rôtissoire."], ["Friteuse Planet", HF, "Cuve de 4 L et couvercle."], ["Plaque à gaz", HF, "Pour la casserole ou la poêle."], ["Évier inox Planet INLAV40", ALL, "Fermé, son couvercle prolonge le plan de travail."], ["Robinet Quooker", HF, "Eau froide, chaude, bouillante et pétillante."], ["Réfrigérateur", ALL, "Intégré sous le plan de travail."], ["Cave à vin", HF, "À la place du réfrigérateur."]]],
-    ["Store banne déployé et îlot bar sur roulettes · Harmonie.", "Pour <em>recevoir.</em>", "Ce qui prolonge la cuisine vers la terrasse et vos invités.", [["Store banne intégré", HF, "Logé dans la toiture, il ombrage le coin repas."], ["Îlot bar sur roulettes", "Harmonie", "Il se range dans la cuisine fermée."], ["Îlot bar fixe", "La Festive", "Le comptoir à l’intérieur de la cuisine."], ["Porte vitrée coulissante", "La Festive", "Escamotée dans le mur latéral."], ["Sonorisation Elipson", HF, "Des enceintes noires encastrées au plafond."], ["Téléviseur", "La Festive", "Pour un match ou un film dehors."]]],
-    ["Le store de fermeture descendu devant la cuisine.", "Fermée, <em>elle protège tout.</em>", "Entre deux repas, un store descend devant la cuisine : plan de travail et équipements restent à l’abri. Elle reste dehors toute l’année.", [["Store de fermeture", ALL, "Il descend devant la cuisine, jusqu’au plan de travail."], ["Îlot rangé à l’intérieur", "Harmonie", "L’îlot sur roulettes rentre contre les meubles avant la fermeture."]]]
-  ];
-  const chImgs = ["bois", "interieur", "detail", "r_ilot", "ferme"];
-  $("[data-chaps]").innerHTML = CHAPS.map((c, i) => `<article class="chap" data-cap="${c[0]}"><figure class="m-img"><div class="ph r43"><img src="${IMG[chImgs[i]]}" alt="${c[0]}"></div><figcaption>${c[0]}</figcaption></figure><span class="num">0${i + 1}</span><h2>${c[1]}</h2><p>${c[2]}</p><ul class="eq">${c[3].map(o => `<li><b>${o[0]}</b><small>${o[1]}</small><span>${o[2]}</span></li>`).join("")}</ul></article>`).join("");
+  /* guide des options : cartes illustrées, sans sélection */
+  const C = {
+    e: "Évidence", h: "Harmonie", f: "La Festive",
+    av: s => s === "ehf" ? "Sur les trois modèles" : "Sur " + s.split("").map(k => C[k]).join(" et "),
+  };
+  const PIC = { c_plancha: "{{c_plancha}}", p_planchafeu: "{{p_planchafeu}}", p_bbq: "{{p_bbq}}", c_friteuse: "{{c_friteuse}}", p_gaz: "{{p_gaz}}", c_hotte: "{{c_hotte}}", c_evier: "{{c_evier}}", p_robinet: "{{p_robinet}}", c_frigo: "{{c_frigo}}", p_dekton: "{{p_dekton}}", c_tiroirs: "{{c_tiroirs}}", c_meubles: "{{c_meubles}}", c_store: "{{c_store}}", c_ilot: "{{c_ilot}}", p_son: "{{p_son}}", c_spots: "{{c_spots}}", c_credence: "{{c_credence}}", c_ferme: "{{c_ferme}}" };
+  const GUIDE = {
+    cuisson: [
+      ["c_plancha", "Planet · gamme Oasi", "Plancha encastrable", "La plaque en inox de 5 mm monte vite en température et la garde. Les graisses s’écoulent dans un bac en façade.", ["Oasi 55 : 6 à 10 personnes", "Oasi 80 : 8 à 12 personnes", "Gaz ou électrique · plaque garantie 10 ans"], "ehf"],
+      ["p_planchafeu", "Planet · Oasi + feu", "Plancha avec un feu", "La plancha et, à côté, un feu gaz à double couronne pour une casserole ou une poêle.", ["Oasi 55 + feu ou Oasi 80 + feu", "Couvercle inox ou noir"], "hf", 1],
+      ["p_bbq", "Napoléon · Série 700", "Barbecue encastrable", "À la place de la plancha. Grilles inox en vague, brûleur arrière infrarouge pour la rôtissoire, boutons rétroéclairés.", ["Exemple BIG 32 : 4 brûleurs, environ 12 personnes", "Rôtissoire incluse"], "hf", 1],
+      ["c_friteuse", "Planet", "Friteuse encastrable", "Rare en extérieur : les fritures se font dehors, sans odeur dans la maison. Couvercle fermé, elle disparaît dans le plan.", ["Cuve de 4 L, amovible", "2 300 W · 230 V"], "hf"],
+      ["p_gaz", "Feu encastrable", "Plaque à gaz", "Pour cuisiner à la casserole ou à la poêle, comme à l’intérieur : sauces, pâtes, poêlées.", ["Encastrée dans le plan de travail"], "hf", 1],
+      ["c_hotte", "Inox", "Hotte", "Au-dessus de la cuisson, sous la toiture, avec la crédence noire derrière.", ["Largeur adaptée à la cuisson"], "ehf"]
+    ],
+    eau: [
+      ["c_evier", "Planet · INLAV40", "Évier inox encastrable", "Inox alimentaire 304, couvercle inox marine 316 ou noir : fermé, il prolonge le plan de travail.", ["Bac de 20 cm de profondeur", "Percé pour le robinet"], "ehf"],
+      ["p_robinet", "Quooker", "Robinet eau bouillante", "Froide, chaude, bouillante à 100 °C et pétillante, d’un seul robinet. Plus besoin de bouilloire.", ["Réservoir sous le plan de travail", "Sécurité enfant"], "hf"],
+      ["c_frigo", "Intégré", "Réfrigérateur", "Boissons et produits frais à portée de main, sous le plan de travail, derrière une porte ou en porte vitrée.", ["Porte vitrée fumée, éclairage LED"], "ehf"],
+      ["", "Intégrée", "Cave à vin", "Pour servir les vins à bonne température, directement depuis la cuisine. Elle prend la place du réfrigérateur.", ["Sous le plan de travail"], "hf"]
+    ],
+    plan: [
+      ["p_dekton", "Cosentino", "Plan de travail Dekton", "Surface ultracompacte faite pour l’extérieur : ni le soleil, ni le gel, ni la chaleur d’un plat ne l’abîment.", ["Résiste à 300 °C, aux UV et aux rayures", "Teinte au choix"], "hf", 1],
+      ["c_tiroirs", "Façades de meubles", "Ton clair, effet béton", "Des portes et tiroirs clairs qui éclairent l’intérieur de la cuisine et répondent au bois.", ["Tiroirs et portes composés selon les équipements"], "ehf"],
+      ["c_meubles", "Façades de meubles", "Anthracite", "Des façades sombres, dans la continuité du Fundermax, pour une cuisine plus graphique.", ["Poignées inox"], "ehf"]
+    ],
+    recevoir: [
+      ["c_store", "Dans la toiture", "Store banne intégré", "Replié, il disparaît dans la toiture. Déployé, il prolonge la cuisine au-dessus de la table.", ["Sans pergola ni structure en plus"], "hf"],
+      ["c_ilot", "Même bardage que la cuisine", "Îlot bar sur roulettes", "On y sert l’apéritif face aux invités. Quand on ferme la cuisine, il rentre à l’intérieur.", ["Comptoir et plan en plus", "Se range dans la cuisine"], "h"],
+      ["", "À l’intérieur", "Îlot bar fixe", "Le comptoir où l’on se retrouve : l’apéritif d’un côté, la cuisine de l’autre.", ["Inclus sur La Festive"], "f"],
+      ["", "Dans le mur latéral", "Porte vitrée coulissante", "Elle s’escamote dans l’épaisseur du mur pour entrer dans la cuisine par le côté.", ["Sur La Festive"], "f"],
+      ["p_son", "Elipson", "Sonorisation intégrée", "Des enceintes noires encastrées au plafond : la musique sans rien poser sur le plan de travail.", ["Marque française"], "hf", 1],
+      ["", "Intégré", "Téléviseur", "Pour regarder un match ou un film dehors.", ["Sur La Festive"], "f"]
+    ],
+    lumiere: [
+      ["c_spots", "Au plafond", "Spots intégrés", "Ils éclairent tout le plan de travail pour cuisiner à la nuit tombée.", ["Encastrés dans le plafond bois"], "ehf"],
+      ["c_credence", "Derrière la cuisson", "Crédence noire et prises", "Une crédence noire sur la largeur de la hotte, des prises et un appareillage noirs.", ["Intérieur en bois trois plis"], "ehf"],
+      ["c_ferme", "Devant la cuisine", "Store de fermeture", "Entre deux repas, il descend devant la cuisine : plan de travail et équipements restent à l’abri.", ["La cuisine reste dehors toute l’année"], "ehf"]
+    ]
+  };
+  const card = c => `<article class="gcard rv"><div class="gimg${c[6] ? " pack" : ""}">${c[0] ? `<img src="${PIC[c[0]]}" alt="${c[2]}" loading="lazy">` : `<span class="gph">${c[2]}</span>`}</div><div class="gtx"><span class="lab">${c[1]}</span><h3>${c[2]}</h3><p>${c[3]}</p><ul>${c[4].map(x => `<li>${x}</li>`).join("")}</ul><span class="gav">${C.av(c[5])}</span></div></article>`;
+  Object.entries(GUIDE).forEach(([k, list]) => { const el = $(`[data-cards="${k}"]`); if (el) el.innerHTML = list.map(card).join(""); });
+  $("[data-cards='format']").innerHTML = SLUGS.map(s => { const M = MODELS[s]; return `<a class="gcard gfmt rv" href="#${s}"><div class="gimg"><img src="${IMG[M.ph]}" alt="${M.alt}" loading="lazy"><b>${M.size}<small>m</small></b></div><div class="gtx"><span class="lab">Façade ${M.size} m</span><h3>${M.name}</h3><p>${M.tag}</p><span class="arrow">Voir ${M.name}${ARR}</span></div></a>`; }).join("");
 
   /* galerie */
   const GAL = [["r_store", "Store intégré à la toiture, au-dessus du coin repas."], ["petite", "Évidence : format compact, façade anthracite."], ["nuit", "De nuit : éclairage intégré au plafond."], ["bois", "Bardage bois, crédence noire."], ["fundermax", "Fundermax anthracite, intérieur bois."], ["interieur", "Équipements encastrés, hotte inox."], ["pergola", "Harmonie : store banne et îlot bar."], ["detail", "Friteuse, plancha et évier encastrés."], ["r_jardin", "La Festive : le coin repas à l’ombre du store."], ["ferme", "Fermée : le store descendu devant la cuisine."], ["grue", "Livraison : déchargée en un seul bloc."], ["r_ilot", "Harmonie : îlot bar sur roulettes."]];
@@ -970,7 +1064,7 @@ form{display:grid;gap:28px;min-width:0}
     ["Cadrage", [[1, "Objectif principal", "f", "Générer des demandes de devis, sans vente en ligne."], [2, "Objectif secondaire", "f", "Montrer la fabrication, rassurer, faire connaître la marque."], [3, "Public cible", "v", "Particuliers haut de gamme en priorité, avec un encart professionnels (paysagistes, piscinistes, architectes) sur la page Atelier."], [4, "Noms des trois modèles", "v", "Évidence, Harmonie, La Festive : à confirmer."], [5, "Options de chaque modèle", "v", "Reprises de l’ancien site, présentées par modèle : à valider."], [6, "Inclus / en supplément", "t", "À me donner pour chaque modèle."], [7, "Prix affichés ou sur devis", "v", "Sur devis, aucun prix affiché : à confirmer."], [8, "Ton", "v", "Sobre et chaleureux, phrases courtes."], [9, "Concurrents", "x", "Écarté à ta demande."], [10, "Liste des pages", "f", "Accueil, Modèles et comparatif, 3 pages modèles, Options, Réalisations, Atelier, Devis, Mentions légales, CGV, Confidentialité, 404."]]],
     ["Contenus", [[11, "Photos existantes en haute résolution", "t", "Les photos actuelles viennent de l’ancien site, en définition moyenne."], [12, "Séance photo professionnelle", "t", ""], [13, "Vidéo courte du module", "t", ""], [14, "Photos de l’atelier et de la fabrication", "t", "Emplacement prévu sur la page Atelier."], [15, "Texte de présentation de l’entreprise", "v", "Rédigé à partir de l’ancien site ; ta présentation personnelle reste à écrire."], [16, "Fiche par modèle", "v", "Rédigées. À vérifier : profondeur d’Évidence (0,90 m), hauteurs, inclusions."], [17, "Vérifier chaque donnée", "v", "Les données à confirmer sont soulignées en pointillés dans la maquette."], [18, "Nom exact du bardage", "v", "« Fiberdeck WEO 35 » utilisé partout : à confirmer."], [19, "Textes des réalisations", "t", "Lieux, contexte, études de cas."], [20, "FAQ", "v", "Délais, livraison, installation, garanties, entretien, paiement : rédigée, avec les parties à compléter."], [21, "Médiateur ANM Conso", "v", "Cité en pied de page, dans les mentions et les CGV ; coordonnées à compléter."], [22, "Mentions de garanties exactes", "t", "Garantie DMG Concept à préciser et à faire valider."]]],
     ["Identité visuelle", [[23, "Palette", "f", "Anthracite, crème, bois en accent, neutres chauds."], [24, "Polices", "f", "Cormorant Garamond (titres) et Jost (texte)."], [25, "Hiérarchie typographique", "f", ""], [26, "Style des boutons", "f", "Pilules, survol et focus visibles."], [27, "Style des images", "v", "Cadrages et légendes homogènes ; traitement uniforme possible avec la séance photo."], [28, "Espacements constants", "f", ""], [29, "Logo clair, foncé et vectoriel", "t", "Versions claire et foncée faites depuis le PNG ; il me faut le fichier vectoriel (SVG, AI ou PDF)."], [30, "Favicon et image de partage", "f", "Créées à partir du logo et de la photo de nuit."]]],
-    ["Structure", [[31, "Cinq entrées de menu maximum", "f", "Modèles, Options, Réalisations, L’atelier + bouton devis."], [32, "Bouton devis permanent", "f", ""], [33, "Accueil direct", "f", "Promesse, photo forte, les trois modèles, appel à l’action."], [34, "Une page par modèle", "f", ""], [35, "Comparatif trois colonnes", "f", "Sur la page Modèles."], [36, "Page options", "f", "Avec le nuancier de bardage."], [37, "Page réalisations", "f", ""], [38, "Page atelier", "f", ""], [39, "Formulaire court", "f", "Cinq champs."], [40, "Page 404", "f", ""], [41, "Fil d’Ariane", "f", ""], [42, "Liens internes", "f", ""]]],
+    ["Structure", [[31, "Cinq entrées de menu maximum", "f", "Modèles, Options, Réalisations, L’atelier + bouton devis."], [32, "Bouton devis permanent", "f", ""], [33, "Accueil direct", "f", "Promesse, photo forte, les trois modèles, appel à l’action."], [34, "Une page par modèle", "f", ""], [35, "Comparatif trois colonnes", "f", "Sur la page Modèles."], [36, "Page options", "f", "Guide en 7 étapes, avec photos, conseils et nuancier de bardage, sans sélection à cocher."], [37, "Page réalisations", "f", ""], [38, "Page atelier", "f", ""], [39, "Formulaire court", "f", "Cinq champs."], [40, "Page 404", "f", ""], [41, "Fil d’Ariane", "f", ""], [42, "Liens internes", "f", ""]]],
     ["Parcours", [[43, "Parcours étape par étape", "f", "Découverte, contact, choix, devis, validation, fabrication, livraison."], [44, "Schéma des étapes", "f", "Sur l’accueil et l’atelier."], [45, "Le contact précède le devis", "f", ""], [46, "Champs utiles seulement", "f", ""], [47, "Accusé de réception automatique", "l", "Nécessite l’envoi réel du formulaire."], [48, "Qui répond et sous quel délai", "t", ""], [49, "Panier et paiement", "x", "Sans objet : pas de vente en ligne."], [50, "Vente sans installation sur place", "v", "Écrit dans la FAQ, les mentions et les CGV : formulation à valider."]]],
     ["Juridique", [[51, "Mentions légales", "v", "Rédigées ; SIRET, capital, RCS, TVA et hébergeur à compléter."], [52, "CGV", "v", "Trame rédigée, à faire valider par ton conseil."], [53, "Politique de confidentialité", "v", ""], [54, "Bannière cookies", "l", "Inutile tant qu’il n’y a pas de mesure d’audience ; à ajouter avec elle."], [55, "Médiateur sur le site et les devis", "v", "Sur le site : fait. Sur les devis : à ajouter de ton côté."], [56, "Droit de rétractation", "v", "Dans les CGV, avec l’exception des biens personnalisés."], [57, "Obligations légales de vente", "t", "Validation juridique."], [58, "Protection des données", "f", "Page Confidentialité."]]],
     ["Qualité perçue", [[59, "Marges généreuses", "f", ""], [60, "Peu de polices et de couleurs", "f", ""], [61, "Photos de grande qualité", "t", "Dépend de la séance photo."], [62, "Animations discrètes", "f", "Apparitions en fondu."], [63, "Pas de pop-ups", "f", ""], [64, "Micro-interactions", "f", ""], [65, "Textes courts, sans superlatifs", "f", ""], [66, "Gros plans de fabrication", "t", "Photos à fournir."]]],
@@ -1037,11 +1131,10 @@ form{display:grid;gap:28px;min-width:0}
   $$(".hero .ln>span").forEach((s, i) => s.style.transitionDelay = (.2 + i * .14) + "s");
   $$(".hero .fd").forEach((s, i) => s.style.transitionDelay = (.6 + i * .15) + "s");
 
-  /* options : image fixe qui suit le chapitre */
-  const frameImgs = $$("#el-frame img"), chaps = $$(".chap"), cap = $("#el-cap"), cnt = $("#el-cnt");
-  let curC = -1;
-  const setC = i => { if (i === curC) return; curC = i; frameImgs.forEach((im, j) => im.classList.toggle("on", j === i)); cap.textContent = chaps[i].dataset.cap; cnt.textContent = "0" + (i + 1) + " / 0" + chaps.length; };
-  const spy = () => { if (byName.options.hidden) return; let i = 0; const y = innerHeight * .55; chaps.forEach((c, j) => { if (c.getBoundingClientRect().top < y) i = j; }); setC(i); };
+  /* guide : étape en cours dans la barre d'étapes */
+  const gl = $$(".gnav a"), gs = gl.map(a => document.getElementById(a.dataset.go));
+  gl.forEach(a => a.addEventListener("click", e => { e.preventDefault(); const t = document.getElementById(a.dataset.go); scrollTo({ top: t.getBoundingClientRect().top + scrollY - 120, behavior: still ? "auto" : "smooth" }); }));
+  const spy = () => { if (byName.options.hidden) return; let i = -1; gs.forEach((g, j) => { if (g.getBoundingClientRect().top < innerHeight * .4) i = j; }); gl.forEach((a, j) => a.classList.toggle("on", j === i)); const on = gl[i]; if (on) { const ol = on.closest("ol"); const x = on.offsetLeft - 20; if (Math.abs(ol.scrollLeft - x) > 40 && ol.scrollWidth > ol.clientWidth) ol.scrollTo({ left: x, behavior: "smooth" }); } };
   addEventListener("scroll", spy, { passive: true });
 
   /* options : mur de bardage à l'échelle (lames 35 mm, joints 10 mm) */

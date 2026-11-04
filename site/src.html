@@ -115,8 +115,8 @@ h1,h2,h3,h4{margin:0;font-weight:300;text-wrap:balance}
 /* hero accueil */
 .hero{position:relative;height:100vh;height:100svh;min-height:640px;overflow:hidden;background:#070707}
 .hero-ph{position:absolute;inset:0;overflow:hidden}
-.hero-ph img{width:100%;height:100%;object-fit:cover;object-position:68% 50%}
-.hero::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(7,7,7,.86) 0%,rgba(7,7,7,.5) 38%,rgba(7,7,7,0) 66%),linear-gradient(0deg,rgba(7,7,7,.8) 0%,rgba(7,7,7,0) 34%)}
+.hero-ph img{width:100%;height:100%;object-fit:cover;object-position:50% 38%}
+.hero::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(7,7,7,.6) 0%,rgba(7,7,7,0) 20%),linear-gradient(0deg,rgba(7,7,7,.85) 0%,rgba(7,7,7,0) 30%),linear-gradient(270deg,rgba(7,7,7,.88) 0%,rgba(7,7,7,.62) 36%,rgba(7,7,7,0) 62%)}
 .hero-in{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:flex-end}
 .hero h1{font-family:var(--serif);font-weight:300;font-size:clamp(54px,8.2vw,136px);line-height:.94;letter-spacing:-.015em;margin-top:26px}
 .ln{display:block;overflow:hidden;padding-bottom:.06em}
@@ -130,6 +130,8 @@ h1,h2,h3,h4{margin:0;font-weight:300;text-wrap:balance}
 .trust b{color:var(--bone);font-weight:500}
 @media (max-width:860px){.trust .wrap{grid-template-columns:1fr 1fr}}
 @media (max-width:760px){.hero{height:auto;min-height:100svh}.hero-in{position:relative;min-height:100vh;min-height:100svh;padding-top:120px}.hero::after{background:linear-gradient(0deg,rgba(7,7,7,.93) 0%,rgba(7,7,7,.7) 52%,rgba(7,7,7,.3) 100%)}.hero-ph img{object-position:72% 50%}}
+
+@media (min-width:901px){.hero-in>.wrap{width:100%;padding-left:max(var(--gut),59%)}.hero h1{font-size:clamp(44px,3.9vw,74px)}.hero-row{flex-direction:column;align-items:flex-start;gap:26px}}
 
 /* modèles en panneaux */
 .fx{display:flex;gap:clamp(8px,1vw,14px);height:min(80vh,780px);min-height:560px;margin-top:clamp(52px,6vw,90px)}
@@ -472,7 +474,7 @@ form{display:grid;gap:28px;min-width:0}
 <!-- ============ ACCUEIL ============ -->
 <div class="page" data-page="accueil" data-title="DMG Concept · Cuisines d’extérieur sur mesure en Haute-Savoie" data-desc="Cuisines d’extérieur couvertes, conçues sur mesure et construites à Évires, en Haute-Savoie. Trois formats, livrés assemblés en un seul bloc partout en France.">
   <section class="hero">
-    <div class="hero-ph"><img data-img="nuit" alt="Cuisine d’extérieur DMG Concept éclairée de nuit : intérieur bois, crédence noire, plancha encastrée"></div>
+    <div class="hero-ph"><img data-img="r_store" alt="Cuisine d’extérieur DMG Concept avec store banne déployé au-dessus du coin repas, montagnes de Haute-Savoie en arrière-plan"></div>
     <div class="hero-in">
       <div class="wrap">
         <p class="lab fd">Cuisines d’extérieur couvertes · Haute-Savoie</p>
@@ -537,7 +539,7 @@ form{display:grid;gap:28px;min-width:0}
         <p class="lead rv">Toutes les photos de ce site montrent des cuisines que nous avons construites et livrées.</p>
         <a class="arrow rv" href="#realisations">Voir les réalisations<svg viewBox="0 0 18 10" fill="none" stroke="currentColor" aria-hidden="true"><path d="M0 5h17M13 1l4 4-4 4"/></svg></a>
       </div>
-      <figure class="rv"><div class="ph r45"><img data-img="r_store" alt="Cuisine avec store banne déployé au-dessus d’une table ronde"></div><figcaption>Store intégré à la toiture, au-dessus du coin repas.</figcaption></figure>
+      <figure class="rv"><div class="ph r45"><img data-img="nuit" alt="Cuisine DMG Concept éclairée de nuit : intérieur bois, crédence noire"></div><figcaption>De nuit : éclairage intégré au plafond.</figcaption></figure>
     </div>
   </section>
   <section class="sec cta-band" data-cta></section>

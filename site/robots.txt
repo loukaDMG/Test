@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://www.dmg-concept.com/sitemap.xml

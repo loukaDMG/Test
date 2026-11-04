@@ -279,6 +279,27 @@ figcaption{font-size:14px;color:var(--bone-3);margin-top:12px;font-weight:300}
 @media (max-width:900px){.sp,.duo2{grid-template-columns:1fr}.sp-fig{position:static}.sp.rev .sp-fig{order:0}.sp-fig .ph{aspect-ratio:4/3}.collage{aspect-ratio:4/3}}
 @media (max-width:700px){.mgal{grid-template-columns:1fr!important}.mgal figure:first-child{grid-column:auto;grid-row:auto}.mgal figure:first-child .ph{aspect-ratio:4/5;height:auto}}
 
+.founder.solo{grid-template-columns:1fr;max-width:920px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,1.4vw,20px);margin-top:clamp(44px,5vw,72px)}
+.tw{position:relative;display:block;aspect-ratio:4/5;overflow:hidden;color:#F2EEE8;text-decoration:none;max-width:100%}
+.tw img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.6s var(--ease)}
+.tw:hover img{transform:scale(1.04)}
+.tw::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(8,8,8,.75),rgba(8,8,8,0) 50%)}
+.tw span{position:absolute;left:clamp(20px,2.4vw,36px);bottom:clamp(20px,2.4vw,34px);z-index:2;font:300 clamp(32px,3.2vw,52px)/1.05 var(--serif)}
+.tw small{display:block;font:500 11.5px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:#CFCAC2;margin-bottom:12px}
+.rooms{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,4vw,72px);margin-top:clamp(44px,5vw,72px)}
+.room{display:flex;flex-direction:column;gap:14px;min-width:0}
+.room .ph{margin-bottom:12px}
+.room h3{font:300 clamp(32px,3vw,48px)/1.05 var(--serif)}
+.room h3 em{font-style:italic;color:var(--ink-2)}
+.room p{color:var(--ink-2);font-weight:300;font-size:17.5px;max-width:52ch}
+.room ul{list-style:none;margin:6px 0 0;padding:0;border-top:1px solid var(--line-l)}
+.room li{padding:12px 0;border-bottom:1px solid var(--line-l);font-size:16px}
+.room-note{margin-top:36px;color:var(--ink-3);font-size:15px}
+#fest-cuisine .sp-tx>h2 em,#fest-cuisine .h2 em{color:var(--bone-2)}
+#fest-cuisine .eq b{color:var(--bone)}#fest-cuisine .eq span{color:var(--bone-2)}#fest-cuisine .eq li{border-color:var(--line-d)}
+@media (max-width:800px){.two,.rooms{grid-template-columns:1fr}.tw{aspect-ratio:4/3}}
+
 /* 3D */
 .studio{background:var(--studio);color:var(--ink)}
 .v3d{position:relative;margin-top:clamp(36px,4vw,60px);aspect-ratio:16/8.4;max-height:84vh;min-height:440px;width:100%;max-width:100%;background:var(--studio);overflow:hidden}
@@ -620,7 +641,7 @@ form{display:grid;gap:28px;min-width:0}
 </div>
 
 <!-- ============ MODÈLES + COMPARATIF ============ -->
-<div class="page light" data-page="modeles" data-title="Les modèles · Évidence, Harmonie, La Festive · DMG Concept" data-desc="Trois cuisines d’extérieur couvertes de 2, 3 et 4 m de façade, à adapter sur mesure. Comparez Évidence, Harmonie et La Festive." data-crumb="Modèles">
+<div class="page light" data-page="modeles" data-title="Les modèles · Évidence, Harmonie, La Festive · DMG Concept" data-desc="Trois cuisines d’extérieur couvertes de 2, 3 et 5 m de façade, à adapter sur mesure. Comparez Évidence, Harmonie et La Festive." data-crumb="Modèles">
   <div class="wrap crumb" data-crumbs></div>
   <div class="wrap phead">
     <p class="lab rv">Les modèles</p>
@@ -706,7 +727,7 @@ form{display:grid;gap:28px;min-width:0}
     <div class="wrap">
       <div class="head"><p class="lab rv">Étape 06 · Pour recevoir</p><h2 class="h2 rv">Pour <em>recevoir.</em></h2><p class="lead rv">Ce qui prolonge la cuisine vers la terrasse et vos invités.</p></div>
       <div class="gcards" data-cards="recevoir"></div>
-      <aside class="tip rv"><span class="lab">Notre conseil</span><p>Le store banne ombrage le coin repas sans pergola. L’îlot bar garde les invités autour de celui qui cuisine. Sur Harmonie, l’îlot est sur roulettes&nbsp;; sur La Festive, le bar est intégré à la cuisine, et une pièce sur le côté accueille un sauna ou une salle de bain.</p></aside>
+      <aside class="tip rv"><span class="lab">Notre conseil</span><p>Le store banne ombrage le coin repas sans pergola. L’îlot bar garde les invités autour de celui qui cuisine. Sur Harmonie, l’îlot est sur roulettes&nbsp;; sur La Festive, le bar est intégré à la cuisine. La Festive comprend aussi une pièce attenante, sauna ou salle de bain&nbsp;: <a href="#la-festive">voir La Festive</a>.</p></aside>
     </div>
   </section>
   <section class="sec cta-band" data-cta></section>
@@ -755,8 +776,7 @@ form{display:grid;gap:28px;min-width:0}
     </div>
   </section>
   <section class="sec light">
-    <div class="wrap founder">
-      <figure class="rv"><div class="ph r45"><img data-img="a1" alt="Devant une cuisine DMG Concept : store banne, hotte inox et bar en lames bois" style="object-position:35% 40%"></div><figcaption>Store banne, hotte inox et bar en lames bois.</figcaption></figure>
+    <div class="wrap founder solo">
       <div>
         <p class="lab rv">Le fondateur</p>
         <h2 class="h2 rv">Un seul <em>interlocuteur.</em></h2>
@@ -833,7 +853,7 @@ form{display:grid;gap:28px;min-width:0}
     <div class="wrap faq">
       <div><p class="lab rv">Questions fréquentes</p><h2 class="h2 rv" style="margin-top:24px">Avant de vous <em>lancer.</em></h2></div>
       <div class="rv">
-        <details class="qa" open><summary>Les cuisines sont-elles faites sur mesure&nbsp;?<i aria-hidden="true"></i></summary><p>Oui. Nous partons d’un des trois formats (2, 3 ou 4&nbsp;m de façade), puis les équipements, les matériaux et les aménagements se choisissent avec vous.</p></details>
+        <details class="qa" open><summary>Les cuisines sont-elles faites sur mesure&nbsp;?<i aria-hidden="true"></i></summary><p>Oui. Nous partons d’un des trois formats (2, 3 ou 5&nbsp;m de façade), puis les équipements, les matériaux et les aménagements se choisissent avec vous.</p></details>
         <details class="qa"><summary>Quels sont les délais&nbsp;?<i aria-hidden="true"></i></summary><p>Le délai de fabrication figure sur le devis&nbsp;; il dépend du projet, des équipements et de la saison.</p></details>
         <details class="qa"><summary>Comment se passe la livraison&nbsp;?<i aria-hidden="true"></i></summary><p>Nous livrons partout en France. La cuisine arrive assemblée, en un seul bloc, puis elle est mise en place sur 4 plots béton. Les conditions d’accès sont précisées avec vous lors du devis.</p></details>
         <details class="qa"><summary>L’installation est-elle comprise&nbsp;?<i aria-hidden="true"></i></summary><p>DMG Concept vend des cuisines livrées assemblées. Aucune prestation d’installation ni de raccordement n’est réalisée sur place&nbsp;: l’électricité, l’eau et le gaz sont à faire raccorder séparément par un professionnel.</p></details>
@@ -940,7 +960,7 @@ form{display:grid;gap:28px;min-width:0}
   <div class="wrap">
     <div class="foot-top">
       <div><img src="{{logo}}" alt="DMG Concept, l’espace du possible"><p>Cuisines d’extérieur couvertes, conçues sur mesure et construites à Évires, en Haute-Savoie.</p></div>
-      <div><h2>Modèles</h2><ul><li><a href="#evidence">Évidence · 2 m</a></li><li><a href="#harmonie">Harmonie · 3 m</a></li><li><a href="#la-festive">La Festive · 4 m</a></li><li><a href="#modeles">Comparatif</a></li><li><a href="#options">Options</a></li></ul></div>
+      <div><h2>Modèles</h2><ul><li><a href="#evidence">Évidence · 2 m</a></li><li><a href="#harmonie">Harmonie · 3 m</a></li><li><a href="#la-festive">La Festive · 5 m</a></li><li><a href="#modeles">Comparatif</a></li><li><a href="#options">Options</a></li></ul></div>
       <div><h2>DMG Concept</h2><ul><li><a href="#realisations">Réalisations</a></li><li><a href="#atelier">L’atelier</a></li><li><a href="#devis">Demander un devis</a></li><li><a href="#mentions-legales">Mentions légales</a></li><li><a href="#cgv">CGV</a></li><li><a href="#confidentialite">Confidentialité</a></li></ul></div>
       <div><h2>Contact</h2><ul><li>07 49 66 12 56</li><li>contact@dmg-concept.com</li><li>58 impasse des Roseaux<br>74570 Évires</li><li>Visite sur rendez-vous</li></ul></div>
     </div>
@@ -956,7 +976,7 @@ form{display:grid;gap:28px;min-width:0}
   root.classList.add("js");
   const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const ARR = '<svg viewBox="0 0 18 10" fill="none" stroke="currentColor" aria-hidden="true"><path d="M0 5h17M13 1l4 4-4 4"/></svg>';
-  const IMG = { petite: "{{petite}}", pergola: "{{pergola}}", r_jardin: "{{r_jardin}}", r_ilot: "{{r_ilot}}", bois: "{{bois}}", interieur: "{{interieur}}", detail: "{{detail}}", fundermax: "{{fundermax}}", ferme: "{{ferme}}", r_store: "{{r_store}}", grue: "{{grue}}", posterH: "{{posterH}}", a1: "{{a1}}", c_plancha: "{{c_plancha}}", p_planchafeu: "{{p_planchafeu}}", p_bbq: "{{p_bbq}}", c_friteuse: "{{c_friteuse}}", p_gaz: "{{p_gaz}}", c_hotte: "{{c_hotte}}", c_evier: "{{c_evier}}", p_robinet: "{{p_robinet}}", c_frigo: "{{c_frigo}}", p_dekton: "{{p_dekton}}", c_tiroirs: "{{c_tiroirs}}", c_meubles: "{{c_meubles}}", c_store: "{{c_store}}", c_ilot: "{{c_ilot}}", p_son: "{{p_son}}", c_spots: "{{c_spots}}", c_credence: "{{c_credence}}", c_ferme: "{{c_ferme}}", f2: "{{f2}}", f3: "{{f3}}", f4: "{{f4}}", f5: "{{f5}}", f6: "{{f6}}", f7: "{{f7}}", f8: "{{f8}}", f9: "{{f9}}", f10: "{{f10}}", f11: "{{f11}}", f12: "{{f12}}" };
+  const IMG = { petite: "{{petite}}", pergola: "{{pergola}}", r_jardin: "{{r_jardin}}", r_ilot: "{{r_ilot}}", bois: "{{bois}}", interieur: "{{interieur}}", detail: "{{detail}}", fundermax: "{{fundermax}}", ferme: "{{ferme}}", r_store: "{{r_store}}", grue: "{{grue}}", posterH: "{{posterH}}", c_plancha: "{{c_plancha}}", p_planchafeu: "{{p_planchafeu}}", p_bbq: "{{p_bbq}}", c_friteuse: "{{c_friteuse}}", p_gaz: "{{p_gaz}}", c_hotte: "{{c_hotte}}", c_evier: "{{c_evier}}", p_robinet: "{{p_robinet}}", c_frigo: "{{c_frigo}}", p_dekton: "{{p_dekton}}", c_tiroirs: "{{c_tiroirs}}", c_meubles: "{{c_meubles}}", c_store: "{{c_store}}", c_ilot: "{{c_ilot}}", p_son: "{{p_son}}", c_spots: "{{c_spots}}", c_credence: "{{c_credence}}", c_ferme: "{{c_ferme}}", f2: "{{f2}}", f3: "{{f3}}", f4: "{{f4}}", f5: "{{f5}}", f6: "{{f6}}", f7: "{{f7}}", f8: "{{f8}}", f9: "{{f9}}", f10: "{{f10}}", f11: "{{f11}}", f12: "{{f12}}" };
 
   $$("img[data-img]").forEach(i => i.src = IMG[i.dataset.img]);
 
@@ -978,7 +998,7 @@ form{display:grid;gap:28px;min-width:0}
     store: ["Store banne intégré", "Dans la toiture", "L’ombre sur le coin repas, sans pergola ni structure en plus."],
     ilot: ["Îlot bar sur roulettes", "Même bardage", "On y sert l’apéritif face aux invités ; il se range dans la cuisine fermée."],
     bar: ["Bar intégré", "Inclus", "Un comptoir en lames bois, face à la terrasse : on s’y installe pendant que la cuisine tourne.", 1],
-    piece: ["Sauna ou salle de bain", "Pièce attenante", "Sur le côté, une pièce fermée avec sa propre porte, aménagée au choix en sauna ou en salle de bain.", 1],
+    piece: ["Sauna ou salle de bain", "Inclus", "Sur le côté, une pièce fermée avec sa propre porte, aménagée au choix en sauna ou en salle de bain.", 1],
     susp: ["Suspensions au-dessus du bar", "", "En plus des spots du plafond, des suspensions noires éclairent le comptoir."],
     porte: ["Porte vitrée coulissante", "Mur latéral", "Escamotée dans le mur, pour entrer dans la cuisine par le côté."],
     tv: ["Téléviseur", "", "Pour regarder un match ou un film dehors."]
@@ -992,12 +1012,12 @@ form{display:grid;gap:28px;min-width:0}
       desc: ["Harmonie offre 3 m de façade : assez de plan de travail pour cuisiner à plusieurs, et la place pour les équipements d’une vraie cuisine.", "Froid, cuisson, évier, friteuse, eau bouillante : on compose l’équipement selon sa façon de recevoir. Côté terrasse, un store banne intégré à la toiture et un îlot bar sur roulettes, qui rentre dans la cuisine quand on la ferme."],
       dims: [["Façade", "3 m"], ["Intérieur", "2,60 m"], ["Profondeur", "1,66 m"], ["Hauteur", "<span class='tbd'>à préciser</span>"]],
       eq: ["plancha", "bbq", "friteuse", "gaz", "hotte", "evier", "quooker", "froid", "dekton", "son", "store", "ilot"], side: [["r_ilot", "Store banne déployé et îlot bar sur roulettes."], ["detail", "Friteuse, plancha et évier encastrés."]], photos: [], d3: true },
-    "la-festive": { name: "La Festive", size: "4", ph: "f3", pan: "f7", alt: "La Festive : cuisine plus profonde avec bar intégré, tabourets et pièce attenante", tag: "Le grand format : plus profonde, un bar intégré et, sur le côté, un sauna ou une salle de bain.",
-      desc: ["La Festive est la plus grande de la gamme : 4 m de façade et une cuisine plus profonde, avec un bar intégré directement à la cuisine. Côté terrasse, un comptoir en lames bois où l’on s’installe sur des tabourets pendant que la cuisine tourne.", "Sur le côté, une pièce fermée avec sa propre porte, aménagée au choix en sauna ou en salle de bain avec douche, lavabo et WC. Au plafond, le bois accueille les spots et des suspensions au-dessus du bar."],
-      dims: [["Façade", "4 m"], ["Profondeur", "3 m"], ["Hauteur", "<span class='tbd'>à préciser</span>"]],
+    "la-festive": { name: "La Festive", size: "5", ph: "f3", pan: "f7", alt: "La Festive : cuisine avec bar intégré, tabourets et pièce attenante", tag: "Une cuisine avec bar et, sous la même toiture, une vraie pièce en plus : sauna ou salle de bain.",
+      desc: ["La Festive est la plus grande de la gamme : 5 m de façade, une cuisine plus profonde avec un bar intégré, et sur le côté une pièce fermée avec sa propre porte.", "Cette pièce fait partie du modèle : elle est construite en même temps que la cuisine, sous la même toiture, et livrée avec elle en un seul bloc. Vous choisissez son usage : un sauna ou une salle de bain."],
+      dims: [["Façade", "5 m"], ["Profondeur", "3 m"], ["Hauteur", "<span class='tbd'>à préciser</span>"]],
       eq: ["bar", "piece", "plancha", "bbq", "friteuse", "gaz", "hotte", "evier", "quooker", "froid", "dekton", "son", "susp", "store", "porte", "tv"],
       side: [["f4", "Le bar et la pièce attenante, au bord de la piscine."], ["f2", "Le bar intégré, côté terrasse."]],
-      photos: [["f6", "Fin de journée : spots et suspensions allumés."], ["f8", "Version sauna : poêle à pierres et banquettes en bois."], ["f12", "Version salle de bain : douche, lavabo et WC suspendu."]] }
+      photos: [["f5", "Au bord de la piscine, en fin de journée."], ["f3", "Le bar et la pièce attenante, côté jardin."], ["f9", "Livraison : déchargée à la grue en un seul bloc."]] }
   };
   const SLUGS = Object.keys(MODELS);
   const eqLi = k => { const e = E[k]; return `<li${e[3] ? ' class="inc"' : ""}><b>${e[0]}</b>${e[1] ? `<small>${e[1]}</small>` : ""}<span>${e[2]}</span></li>`; };
@@ -1010,6 +1030,48 @@ form{display:grid;gap:28px;min-width:0}
   /* pages modèles */
   const others = (cur) => SLUGS.filter(s => s !== cur).map(s => `<a class="other" href="#${s}"><img src="${IMG[MODELS[s].ph]}" alt=""><span><small>Façade ${MODELS[s].size} m</small>${MODELS[s].name}</span></a>`).join("");
   $("[data-others='all']").innerHTML = SLUGS.map(s => `<a class="other" href="#${s}" style="aspect-ratio:4/5"><img src="${IMG[MODELS[s].ph]}" alt="${MODELS[s].alt}"><span><small>Façade ${MODELS[s].size} m</small>${MODELS[s].name}</span></a>`).join("");
+
+  const FEST = `
+    <section class="sec" style="padding-top:0">
+      <div class="wrap">
+        <div class="head"><p class="lab rv">Deux espaces, un seul bloc</p><h2 class="h2 rv">Une cuisine avec bar, <em>et une pièce à vivre.</em></h2><p class="lead rv">Sous la même toiture, la cuisine s’ouvre sur la terrasse et la pièce attenante se ferme sur elle-même. Les deux comptent autant&nbsp;: c’est ce qui fait La Festive.</p></div>
+        <div class="two">
+          <a class="tw" href="#la-festive" data-jump="fest-cuisine"><img src="${IMG.f2}" alt="Le bar intégré de La Festive, en lames bois, avec ses tabourets"><span><small>Côté terrasse</small>La cuisine et le bar</span></a>
+          <a class="tw" href="#la-festive" data-jump="fest-piece"><img src="${IMG.f10}" alt="La porte de la pièce attenante, ouverte sur la salle de bain"><span><small>Côté pièce</small>Sauna ou salle de bain</span></a>
+        </div>
+      </div>
+    </section>
+    <section class="sec light" id="fest-piece">
+      <div class="wrap">
+        <div class="head"><p class="lab rv">La pièce attenante</p><h2 class="h2 rv">Sauna ou salle de bain, <em>à vous de choisir.</em></h2><p class="lead rv">Une pièce fermée, avec sa propre porte sur la terrasse. On l’aménage selon votre façon de vivre dehors.</p></div>
+        <div class="rooms">
+          <article class="room rv">
+            <div class="ph r45"><img src="${IMG.f8}" alt="Intérieur du sauna : lambris bois, poêle à pierres, banquettes"></div>
+            <span class="lab">Version sauna</span>
+            <h3>Un vrai sauna, <em>au bord de la terrasse.</em></h3>
+            <p>Lambris bois, banquettes et poêle à pierres, dans une pièce fermée. Il chauffe pendant que le repas se prépare&nbsp;; après une baignade ou un soir d’hiver, il est à deux pas de la table.</p>
+            <ul><li>Lambris et banquettes en bois</li><li>Poêle à pierres</li><li>Thermomètre et hygromètre</li><li>Porte sur la terrasse</li></ul>
+          </article>
+          <article class="room rv">
+            <div class="ph r45"><img src="${IMG.f12}" alt="Salle de bain : douche à paroi vitrée, vasque, WC suspendu, murs bois"></div>
+            <span class="lab">Version salle de bain</span>
+            <h3>Une salle de bain, <em>sans traverser la maison.</em></h3>
+            <p>Douche, vasque et WC dans la pièce attenante&nbsp;: au bord d’une piscine, on se douche et on se change sur place, et les invités ont tout à portée de main.</p>
+            <ul><li>Douche avec paroi vitrée</li><li>Parois de douche effet marbre</li><li>Vasque sur meuble et WC suspendu</li><li>Murs et plafond bois, aération</li></ul>
+          </article>
+        </div>
+        <p class="room-note rv">Arrivée d’eau, évacuation et électricité sont à raccorder séparément par un professionnel.</p>
+      </div>
+    </section>
+    <section class="sec" id="fest-cuisine">
+      <div class="wrap sp rev">
+        <figure class="sp-fig rv"><div class="ph r45"><img src="${IMG.f6}" alt="La Festive en fin de journée, spots et suspensions allumés"></div><figcaption>Fin de journée&nbsp;: spots et suspensions allumés.</figcaption></figure>
+        <div class="sp-tx"><p class="lab rv">La cuisine et le bar</p><h2 class="h2 rv" style="margin-top:22px">On cuisine d’un côté, <em>on s’installe de l’autre.</em></h2>
+          <p class="lead rv" style="margin-top:24px">La cuisine est plus profonde que sur les autres modèles. Le bar est intégré à la cuisine&nbsp;: un comptoir en lames bois, face à la terrasse, où l’on s’installe sur des tabourets pendant que la cuisine tourne.</p>
+          <ul class="eq one rv" style="margin-top:30px;border-top:1px solid var(--line-d)"><li><b>Bar intégré</b><span>Comptoir en lames bois, tabourets côté terrasse.</span></li><li><b>Suspensions au-dessus du bar</b><span>En plus des spots du plafond bois.</span></li><li><b>Tous les équipements de la gamme</b><span>Plancha ou barbecue, évier, réfrigérateur ou cave, Quooker…</span></li></ul>
+        </div>
+      </div>
+    </section>`;
   SLUGS.forEach(s => {
     const M = MODELS[s], el = $(`[data-page="${s}"]`);
     el.dataset.title = `${M.name} · cuisine d’extérieur ${M.size} m sur mesure · DMG Concept`;
@@ -1022,6 +1084,7 @@ form{display:grid;gap:28px;min-width:0}
         <div class="ctas rv" style="margin-top:34px"><a class="btn btn-bone" href="#devis" data-model="${M.name} · ${M.size} m">Demander un devis${ARR}</a><a class="btn btn-line" href="#modeles">Comparer</a></div></div>
       <figure class="rv"><div class="ph r43"><img src="${IMG[M.ph]}" alt="${M.alt}"></div><figcaption>Réalisation · ${M.name}</figcaption></figure>
     </div>
+    ${s === "la-festive" ? FEST : ""}
     <div class="light">
       <section class="wrap msec sp">
         <figure class="sp-fig rv"><div class="ph r45"><img src="${IMG[M.side[0][0]]}" alt="${M.side[0][1]}"></div><figcaption>${M.side[0][1]}</figcaption></figure>
@@ -1044,10 +1107,10 @@ form{display:grid;gap:28px;min-width:0}
 
   /* comparatif */
   const CMP = [
-    ["Façade", "2 m", "3 m", "4 m"], ["Profondeur", "0,90 m", "1,66 m", "3 m"], ["Pour", "Les petites terrasses", "Cuisiner à plusieurs", "Recevoir nombreux"],
+    ["Façade", "2 m", "3 m", "5 m"], ["Profondeur", "0,90 m", "1,66 m", "3 m"], ["Pour", "Les petites terrasses", "Cuisiner à plusieurs", "Recevoir nombreux"],
     ["Cuisson", "Plancha", "Plancha ou barbecue, friteuse, plaque à gaz", "Plancha ou barbecue, friteuse, plaque à gaz"],
     ["Eau", "Évier", "Évier, robinet Quooker", "Évier, robinet Quooker"], ["Froid", "Réfrigérateur", "Réfrigérateur ou cave à vin", "Réfrigérateur ou cave à vin"],
-    ["Bar", "—", "Îlot sur roulettes", "Bar intégré à la cuisine"], ["Pièce attenante", "—", "—", "Sauna ou salle de bain"], ["Store banne", "—", "Intégré à la toiture", "Intégré à la toiture"],
+    ["Bar", "—", "Îlot sur roulettes", "Bar intégré à la cuisine"], ["Pièce attenante", "—", "—", "Sauna ou salle de bain, inclus"], ["Store banne", "—", "Intégré à la toiture", "Intégré à la toiture"],
     ["Confort", "Éclairage intégré", "Éclairage, sonorisation", "Éclairage, sonorisation, téléviseur"], ["Accès latéral", "—", "—", "Porte vitrée"],
     ["Plan de travail", "Noir", "Dekton possible", "Dekton possible"], ["Bardage", "Au choix", "Au choix", "Au choix"]
   ];
@@ -1083,8 +1146,6 @@ form{display:grid;gap:28px;min-width:0}
       ["c_store", "Dans la toiture", "Store banne intégré", "Replié, il disparaît dans la toiture. Déployé, il prolonge la cuisine au-dessus de la table.", ["Sans pergola ni structure en plus"], "hf"],
       ["c_ilot", "Même bardage que la cuisine", "Îlot bar sur roulettes", "On y sert l’apéritif face aux invités. Quand on ferme la cuisine, il rentre à l’intérieur.", ["Comptoir et plan en plus", "Se range dans la cuisine"], "h"],
       ["f2", "Intégré à la cuisine", "Bar intégré", "Un comptoir en lames bois face à la terrasse : l’apéritif d’un côté, la cuisine de l’autre.", ["Inclus sur La Festive", "Tabourets côté terrasse"], "f"],
-      ["f8", "Pièce attenante", "Sauna", "Une pièce fermée sur le côté de la cuisine, en bois, avec poêle à pierres et banquettes.", ["Au choix avec la salle de bain"], "f"],
-      ["f12", "Pièce attenante", "Salle de bain", "La même pièce, aménagée avec douche, lavabo et WC suspendu : pratique au bord d’une piscine.", ["Au choix avec le sauna"], "f"],
       ["", "Dans le mur latéral", "Porte vitrée coulissante", "Elle s’escamote dans l’épaisseur du mur pour entrer dans la cuisine par le côté.", ["Sur La Festive"], "f"],
       ["p_son", "Elipson", "Sonorisation intégrée", "Des enceintes noires encastrées au plafond : la musique sans rien poser sur le plan de travail.", ["Marque française"], "hf", 1],
       ["", "Intégré", "Téléviseur", "Pour regarder un match ou un film dehors.", ["Sur La Festive"], "f"]
@@ -1168,6 +1229,7 @@ form{display:grid;gap:28px;min-width:0}
   };
   addEventListener("hashchange", show);
   document.addEventListener("click", e => { const a = e.target.closest("a[data-model]"); if (a) setModel(a.dataset.model); });
+  document.addEventListener("click", e => { const a = e.target.closest("a[data-jump]"); if (!a) return; e.preventDefault(); const t = document.getElementById(a.dataset.jump); if (t) scrollTo({ top: t.getBoundingClientRect().top + scrollY - 90, behavior: still ? "auto" : "smooth" }); });
   $("[data-skip]").addEventListener("click", e => { e.preventDefault(); const m = $("#contenu"); m.focus(); });
 
   /* en-tête */

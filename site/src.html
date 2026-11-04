@@ -724,7 +724,7 @@ form{display:grid;gap:28px;min-width:0}
   </section>
   <section class="sec light">
     <div class="wrap founder">
-      <div class="ph-todo rv">Photo d’Adrien Métral à fournir</div>
+      <figure class="rv"><div class="ph r45"><img data-img="a1" alt="Devant une cuisine DMG Concept : store banne, hotte inox et bar en lames bois" style="object-position:35% 40%"></div><figcaption>Store banne, hotte inox et bar en lames bois.</figcaption></figure>
       <div>
         <p class="lab rv">Le fondateur</p>
         <h2 class="h2 rv">Un seul <em>interlocuteur.</em></h2>
@@ -923,7 +923,7 @@ form{display:grid;gap:28px;min-width:0}
   root.classList.add("js");
   const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const ARR = '<svg viewBox="0 0 18 10" fill="none" stroke="currentColor" aria-hidden="true"><path d="M0 5h17M13 1l4 4-4 4"/></svg>';
-  const IMG = { petite: "{{petite}}", pergola: "{{pergola}}", r_jardin: "{{r_jardin}}", r_ilot: "{{r_ilot}}", bois: "{{bois}}", interieur: "{{interieur}}", detail: "{{detail}}", fundermax: "{{fundermax}}", ferme: "{{ferme}}", r_store: "{{r_store}}", grue: "{{grue}}", posterH: "{{posterH}}", f2: "{{f2}}", f3: "{{f3}}", f4: "{{f4}}", f5: "{{f5}}", f6: "{{f6}}", f7: "{{f7}}", f8: "{{f8}}", f9: "{{f9}}", f10: "{{f10}}", f11: "{{f11}}", f12: "{{f12}}" };
+  const IMG = { petite: "{{petite}}", pergola: "{{pergola}}", r_jardin: "{{r_jardin}}", r_ilot: "{{r_ilot}}", bois: "{{bois}}", interieur: "{{interieur}}", detail: "{{detail}}", fundermax: "{{fundermax}}", ferme: "{{ferme}}", r_store: "{{r_store}}", grue: "{{grue}}", posterH: "{{posterH}}", a1: "{{a1}}", f2: "{{f2}}", f3: "{{f3}}", f4: "{{f4}}", f5: "{{f5}}", f6: "{{f6}}", f7: "{{f7}}", f8: "{{f8}}", f9: "{{f9}}", f10: "{{f10}}", f11: "{{f11}}", f12: "{{f12}}" };
 
   $$("img[data-img]").forEach(i => i.src = IMG[i.dataset.img]);
 

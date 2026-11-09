@@ -356,6 +356,8 @@ figcaption{font-size:14px;color:var(--bone-3);margin-top:12px;font-weight:300}
 .editing .ed:focus{outline:2px solid var(--wood);background:rgba(185,138,94,.08)}
 .editing .ed.has-ed{box-shadow:inset 3px 0 0 var(--wood)}
 .editing{padding-bottom:80px}
+.ed-empty:not(.ed){display:none}
+.editing .ed-empty{display:inline-block;min-width:4em;min-height:1em}
 
 /* 3D */
 .studio{background:var(--studio);color:var(--ink)}
@@ -678,7 +680,7 @@ form{display:grid;gap:28px;min-width:0}
       <div class="sp-tx">
         <p class="lab rv">Votre projet</p>
         <h2 class="h2 rv" style="margin-top:22px">De la découverte <em>à la livraison.</em></h2>
-        <p class="lead rv" style="margin-top:24px">Le contact vient avant le devis&nbsp;: on parle d’abord de votre projet, puis nous le chiffrons.</p>
+        <p class="lead rv" style="margin-top:24px">Chaque devis commence par un échange sur votre projet.</p>
         <ol class="steps v" data-steps></ol>
       </div>
     </div>
@@ -835,7 +837,7 @@ form{display:grid;gap:28px;min-width:0}
   </section>
   <section class="sec light">
     <div class="wrap">
-      <div class="head"><p class="lab rv">Votre projet</p><h2 class="h2 rv">De la découverte <em>à la livraison.</em></h2><p class="lead rv">Le contact vient avant le devis&nbsp;: on parle d’abord de votre projet, puis nous le chiffrons.</p></div>
+      <div class="head"><p class="lab rv">Votre projet</p><h2 class="h2 rv">De la découverte <em>à la livraison.</em></h2><p class="lead rv">Chaque devis commence par un échange sur votre projet.</p></div>
       <ol class="steps" data-steps></ol>
     </div>
   </section>
@@ -1018,7 +1020,7 @@ form{display:grid;gap:28px;min-width:0}
 
 <button class="edbtn" type="button" id="edbtn" hidden><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M10.5 2.5l3 3L5 14H2v-3z"/></svg>Modifier les textes</button>
 <div class="edbar" id="edbar" role="region" aria-label="Mode édition">
-  <span><b>Mode édition</b>Cliquez sur un texte pour le modifier. Entrée valide, Maj + Entrée passe à la ligne, Ctrl + I met en italique.</span>
+  <span><b>Mode édition</b>Cliquez sur un texte pour le modifier. Entrée valide, Maj + Entrée passe à la ligne, Ctrl + I met en italique. Un texte vidé disparaît du site.</span>
   <span class="acts"><span class="st-e" id="ed-st" role="status" aria-live="polite"></span><button type="button" id="ed-reset" disabled>Rétablir ce texte</button><button type="button" class="done-b" id="ed-done">Terminer</button></span>
 </div>
 
@@ -10143,6 +10145,7 @@ three/build/three.module.js:
         if (tag === "BR") return "<br>";
         if (tag === "EM" || tag === "I") return "<em>" + out(c) + "</em>";
         if (tag === "B" || tag === "STRONG") return "<b>" + out(c) + "</b>";
+        if (tag === "SMALL") return "<small>" + out(c) + "</small>";
         return out(c);
       }).join("");
       return out(t.content).replace(/(<br>)+$/, "").trim();
@@ -10166,6 +10169,7 @@ three/build/three.module.js:
       if (el === cur) return;
       el.innerHTML = h !== null ? h : el._orig;
       el.classList.toggle("has-ed", h !== null);
+      el.classList.toggle("ed-empty", h === "");
     });
     const setOn = v => {
       on = v; root.classList.toggle("editing", v);
@@ -10178,9 +10182,9 @@ three/build/three.module.js:
       if (html === before) return;
       st.textContent = "Enregistrement…";
       try {
-        if (!html || html === orig) { await db.doc("edits/" + k).delete(); delete map[k]; }
+        if (html === orig) { await db.doc("edits/" + k).delete(); delete map[k]; }
         else { await db.doc("edits/" + k).set({ h: html, at: Date.now() }); map[k] = { h: html }; }
-        $$(`[data-ek="${k}"]`).forEach(x => { if (x !== el) x.innerHTML = html || x._orig; x.classList.toggle("has-ed", !!html && html !== orig); });
+        $$(`[data-ek="${k}"]`).forEach(x => { if (x !== el) x.innerHTML = html; x.classList.toggle("has-ed", html !== orig); x.classList.toggle("ed-empty", html === ""); });
         st.textContent = "Enregistré";
       } catch (e) { st.textContent = "Non enregistré : " + (e && e.message ? e.message : "erreur"); }
     };

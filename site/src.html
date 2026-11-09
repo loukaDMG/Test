@@ -333,6 +333,25 @@ figcaption{font-size:14px;color:var(--bone-3);margin-top:12px;font-weight:300}
 .diag::after{z-index:2;background:linear-gradient(0deg,rgba(8,8,8,.82),rgba(8,8,8,0) 42%)}
 .diag span{z-index:4}
 
+/* mode édition (visible seulement pour les éditeurs) */
+.edbtn{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:80;display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 20px;border-radius:999px;border:1px solid var(--line-d);background:rgba(15,16,17,.92);color:var(--bone);font:500 11.5px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;cursor:pointer;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.edbtn svg{width:15px;height:15px}
+.edbtn:hover{border-color:var(--bone)}
+.edbar{position:fixed;left:0;right:0;bottom:0;z-index:81;display:none;align-items:center;justify-content:space-between;gap:12px 24px;flex-wrap:wrap;padding:14px var(--gut) calc(14px + env(safe-area-inset-bottom,0px));background:#1d1408;color:#F3E6D3;border-top:1px solid var(--wood);font-size:14.5px}
+.editing .edbar{display:flex}
+.editing .edbtn{display:none}
+.edbar b{font:500 11.5px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--wood);margin-right:12px}
+.edbar .acts{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.edbar button{min-height:42px;padding:0 18px;border-radius:999px;border:1px solid rgba(243,230,211,.35);background:none;color:inherit;font:500 11px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;cursor:pointer}
+.edbar button:disabled{opacity:.35;cursor:default}
+.edbar .done-b{background:var(--wood);border-color:var(--wood);color:#140e06}
+.edbar .st-e{color:#d8c3a5;min-width:9em}
+.editing .ed{outline:1px dashed rgba(185,138,94,.55);outline-offset:4px;cursor:text;border-radius:2px}
+.editing .ed:hover{outline-color:var(--wood)}
+.editing .ed:focus{outline:2px solid var(--wood);background:rgba(185,138,94,.08)}
+.editing .ed.has-ed{box-shadow:inset 3px 0 0 var(--wood)}
+.editing{padding-bottom:80px}
+
 /* 3D */
 .studio{background:var(--studio);color:var(--ink)}
 .v3d{position:relative;margin-top:clamp(36px,4vw,60px);aspect-ratio:16/8.4;max-height:84vh;min-height:440px;width:100%;max-width:100%;background:var(--studio);overflow:hidden}
@@ -1001,6 +1020,12 @@ form{display:grid;gap:28px;min-width:0}
   </div>
 </footer>
 
+<button class="edbtn" type="button" id="edbtn" hidden><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M10.5 2.5l3 3L5 14H2v-3z"/></svg>Modifier les textes</button>
+<div class="edbar" id="edbar" role="region" aria-label="Mode édition">
+  <span><b>Mode édition</b>Cliquez sur un texte pour le modifier. Entrée valide, Maj + Entrée passe à la ligne, Ctrl + I met en italique.</span>
+  <span class="acts"><span class="st-e" id="ed-st" role="status" aria-live="polite"></span><button type="button" id="ed-reset" disabled>Rétablir ce texte</button><button type="button" class="done-b" id="ed-done">Terminer</button></span>
+</div>
+
 <!--JS:3d/tx.js-->
 <!--JS:3d/engine-full.js-->
 <script>
@@ -1378,6 +1403,94 @@ form{display:grid;gap:28px;min-width:0}
     done.classList.add("on");
     form.reset(); setModel("");
   });
+
+  /* ---------- Mode édition : textes modifiables par les éditeurs, enregistrés dans la base de l'artifact ---------- */
+  (() => {
+    const SEL = "main h1, main h2, main h3, main p, main figcaption, main summary, main dd, main dt, main li > b, main li > span, main .lab, footer p, footer li";
+    const SKIP = "a, button, form, label, nav, .gnav, [data-suivi], .tools, .mat-l, .chips, .crumb, .wall, .v3d, .hero h1, .sv-legend, .edbar, .note b";
+    const BLOCK = "a,button,input,textarea,select,div,p,ul,ol,li,img,svg,h1,h2,h3,figure,details,section,table";
+    const hash = t => { let h = 2166136261; for (let i = 0; i < t.length; i++) { h ^= t.charCodeAt(i); h = Math.imul(h, 16777619); } return (h >>> 0).toString(36); };
+    const norm = t => t.replace(/\s+/g, " ").trim();
+    const clean = html => {
+      const t = document.createElement("template"); t.innerHTML = html;
+      const out = n => [...n.childNodes].map(c => {
+        if (c.nodeType === 3) return c.textContent.replace(/[&<>]/g, m => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[m]));
+        if (c.nodeType !== 1) return "";
+        const tag = c.tagName;
+        if (tag === "BR") return "<br>";
+        if (tag === "EM" || tag === "I") return "<em>" + out(c) + "</em>";
+        if (tag === "B" || tag === "STRONG") return "<b>" + out(c) + "</b>";
+        return out(c);
+      }).join("");
+      return out(t.content).replace(/(<br>)+$/, "").trim();
+    };
+    const items = [];
+    const seen = new Set();
+    $$(SEL).forEach(el => {
+      if (el.closest(SKIP) && !el.matches(".hero .ln > span")) return;
+      if (el.querySelector(BLOCK)) return;
+      if (!norm(el.textContent)) return;
+      items.push(el);
+    });
+    $$(".hero .ln > span").forEach(el => { if (!el.querySelector(BLOCK)) items.push(el); });
+    items.splice(0, items.length, ...new Set(items));
+    items.forEach(el => { if (seen.has(el)) return; seen.add(el); el.dataset.ek = "t" + hash(el.tagName + "|" + norm(el.textContent)); el._orig = el.innerHTML; });
+    let map = {}, db = null, can = false, on = false, cur = null, before = "";
+    const st = $("#ed-st"), resetB = $("#ed-reset"), btn = $("#edbtn");
+    const apply = () => items.forEach(el => {
+      const e = map[el.dataset.ek];
+      const h = e && typeof e.h === "string" ? clean(e.h) : null;
+      if (el === cur) return;
+      el.innerHTML = h !== null ? h : el._orig;
+      el.classList.toggle("has-ed", h !== null);
+    });
+    const setOn = v => {
+      on = v; root.classList.toggle("editing", v);
+      items.forEach(el => { if (v) { el.setAttribute("contenteditable", "true"); el.classList.add("ed"); el.spellcheck = true; } else { el.removeAttribute("contenteditable"); el.classList.remove("ed"); } });
+      if (!v && cur) cur.blur();
+      st.textContent = v ? "" : "";
+    };
+    const save = async el => {
+      const k = el.dataset.ek, html = clean(el.innerHTML), orig = clean(el._orig);
+      if (html === before) return;
+      st.textContent = "Enregistrement…";
+      try {
+        if (!html || html === orig) { await db.doc("edits/" + k).delete(); delete map[k]; }
+        else { await db.doc("edits/" + k).set({ h: html, at: Date.now() }); map[k] = { h: html }; }
+        $$(`[data-ek="${k}"]`).forEach(x => { if (x !== el) x.innerHTML = html || x._orig; x.classList.toggle("has-ed", !!html && html !== orig); });
+        st.textContent = "Enregistré";
+      } catch (e) { st.textContent = "Non enregistré : " + (e && e.message ? e.message : "erreur"); }
+    };
+    items.forEach(el => {
+      el.addEventListener("focus", () => { if (!on) return; cur = el; before = clean(el.innerHTML); resetB.disabled = !map[el.dataset.ek]; });
+      el.addEventListener("blur", () => { if (!on) return; const e = el; cur = null; resetB.disabled = true; save(e); });
+      el.addEventListener("keydown", e => {
+        if (!on) return;
+        if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); el.blur(); }
+        if (e.key === "Escape") { el.innerHTML = before; el.blur(); }
+      });
+      el.addEventListener("paste", e => { if (!on) return; e.preventDefault(); const t = (e.clipboardData || window.clipboardData).getData("text/plain"); document.execCommand("insertText", false, t.replace(/\s*\n\s*/g, " ")); });
+      el.addEventListener("click", e => { if (on) { e.preventDefault(); e.stopPropagation(); } });
+    });
+    resetB.addEventListener("mousedown", e => e.preventDefault());
+    resetB.addEventListener("click", async () => {
+      if (!cur) return; const el = cur, k = el.dataset.ek;
+      el.innerHTML = el._orig; before = "__reset__"; el.blur();
+    });
+    $("#ed-done").addEventListener("click", () => setOn(false));
+    btn.addEventListener("click", () => setOn(true));
+    (async () => {
+      if (!window.claude || typeof window.claude.use !== "function") return;
+      try {
+        const [d, u] = await Promise.all([claude.use("db"), claude.use("user")]);
+        if (!d) return;
+        db = d;
+        db.collection("edits").onSnapshot(snap => { const m = {}; snap.docs.forEach(x => { m[x.id] = x.data() || {}; }); map = m; apply(); }, () => { });
+        try { can = u ? await u.canEdit() : false; } catch (e) { can = false; }
+        if (can) btn.hidden = false;
+      } catch (e) { }
+    })();
+  })();
 
   show();
 })();

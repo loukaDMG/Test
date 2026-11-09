@@ -416,6 +416,7 @@ figcaption{font-size:14px;color:var(--bone-3);margin-top:12px;font-weight:300}
 .gfmt .arrow{margin-top:auto;align-self:flex-start}
 .tip{margin-top:clamp(36px,4vw,56px);display:grid;grid-template-columns:200px 1fr;gap:12px 40px;padding:clamp(24px,3vw,40px) 0 0;border-top:1px solid var(--ink)}
 .tip p{font:400 clamp(21px,1.8vw,27px)/1.45 var(--serif);color:var(--ink);max-width:56ch}
+@media (min-width:1001px){.gcards[data-cards="plan"]{grid-template-columns:repeat(4,1fr)}}
 @media (max-width:1000px){.gcards{grid-template-columns:1fr 1fr}}
 @media (max-width:640px){.gcards{grid-template-columns:1fr}.tip{grid-template-columns:1fr}}
 
@@ -720,7 +721,7 @@ form{display:grid;gap:28px;min-width:0}
 <div class="page" data-page="la-festive" data-mpage="la-festive"></div>
 
 <!-- ============ OPTIONS ============ -->
-<div class="page" data-page="options" data-title="Options et finitions · le guide pour composer votre cuisine · DMG Concept" data-desc="Format, bardage, plancha ou barbecue, évier, Quooker, réfrigérateur, plan Dekton, store banne, îlot bar, éclairage : le guide des options des cuisines DMG Concept." data-crumb="Options">
+<div class="page" data-page="options" data-title="Options et finitions · le guide pour composer votre cuisine · DMG Concept" data-desc="Format, bardage, plancha ou barbecue, évier, Quooker, réfrigérateur, plan Resitop ou Dekton, store banne, îlot bar, éclairage : le guide des options des cuisines DMG Concept." data-crumb="Options">
   <div class="wrap crumb" data-crumbs></div>
   <div class="wrap phead">
     <p class="lab rv">Options et finitions</p>
@@ -773,9 +774,9 @@ form{display:grid;gap:28px;min-width:0}
   </section>
   <section class="gstep sec light" id="g-plan">
     <div class="wrap">
-      <div class="head"><p class="lab rv">Étape 05 · Plan et rangements</p><h2 class="h2 rv">Le plan <em>et les rangements.</em></h2><p class="lead rv">Un plan de travail fait pour l’extérieur, et des rangements composés autour de vos équipements.</p></div>
+      <div class="head"><p class="lab rv">Étape 05 · Plan et rangements</p><h2 class="h2 rv">Le plan <em>et les rangements.</em></h2><p class="lead rv">De série, un plan de travail en Polyrey Resitop noir&nbsp;; en option, le Dekton. Et des rangements composés autour de vos équipements.</p></div>
       <div class="gcards" data-cards="plan"></div>
-      <aside class="tip rv"><span class="lab">Notre conseil</span><p>Le Dekton ne craint ni le soleil, ni le gel, ni un plat chaud. Pour les façades de meubles, un ton clair éclaire la cuisine, l’anthracite la rend plus graphique.</p></aside>
+      <aside class="tip rv"><span class="lab">Notre conseil</span><p>En option, le Dekton ne craint ni le soleil, ni le gel, ni un plat chaud. Pour les façades de meubles, un ton clair éclaire la cuisine, l’anthracite la rend plus graphique.</p></aside>
     </div>
   </section>
   <section class="gstep sec light" id="g-recevoir">
@@ -1044,7 +1045,8 @@ form{display:grid;gap:28px;min-width:0}
     quooker: ["Robinet Quooker", "Quooker", "Eau froide, chaude, bouillante à 100 °C et pétillante, d’un seul robinet."],
     frigo: ["Réfrigérateur intégré", "", "Sous le plan de travail, derrière une porte ou en porte vitrée fumée avec éclairage LED."],
     froid: ["Réfrigérateur ou cave à vin", "", "Intégrés sous le plan de travail."],
-    dekton: ["Plan de travail Dekton", "Cosentino", "Résiste aux UV, au gel, aux rayures et à la chaleur jusqu’à 300 °C. Teinte au choix."],
+    resitop: ["Plan de travail Resitop noir", "Polyrey · Inclus", "Stratifié compact noir, résistant à l’eau, aux taches et aux rayures.", 1],
+    dekton: ["Plan de travail Dekton", "Cosentino · En option", "À la place du Resitop : résiste aux UV, au gel, aux rayures et à la chaleur jusqu’à 300 °C. Teinte au choix."],
     son: ["Sonorisation intégrée", "Elipson", "Des enceintes noires encastrées au plafond."],
     store: ["Store banne intégré", "Dans la toiture", "L’ombre sur le coin repas, sans pergola ni structure en plus."],
     ilot: ["Îlot bar sur roulettes", "Même bardage", "On y sert l’apéritif face aux invités ; il se range dans la cuisine fermée."],
@@ -1060,19 +1062,19 @@ form{display:grid;gap:28px;min-width:0}
       pts: [["Des lignes simples", "Une architecture sobre, sans détail inutile, qui s’accorde à la maison et au jardin."], ["Dehors, sans aller-retour", "On cuisine, on rince et on garde au frais sur place : la maison reste fermée pendant le repas."], ["Fermée en un geste", "Après le repas, le store descend : la cuisine reste à l’abri jusqu’à la prochaine fois."]],
       sm: "Un format simple ne veut pas dire standard : bardage, teinte des meubles, plan de travail et équipements se choisissent avec vous, comme sur les grands modèles.",
       dims: [["Façade", "2 m"], ["Profondeur", "0,90 m"], ["Hauteur", "<span class='tbd'>à préciser</span>"]],
-      eq: ["plancha55", "evier", "frigo"], side: [["bois", "Bardage bois, intérieur trois plis et crédence noire."], ["c_plancha", "Plancha encastrée, couvercle relevé."]], photos: [] },
+      eq: ["resitop", "plancha55", "evier", "frigo", "dekton"], side: [["bois", "Bardage bois, intérieur trois plis et crédence noire."], ["c_plancha", "Plancha encastrée, couvercle relevé."]], photos: [] },
     harmonie: { name: "Harmonie", size: "3", ph: "pergola", alt: "Harmonie, cuisine en lames bois avec store banne et îlot bar sur roulettes", tag: "Une cuisine ouverte sur la terrasse, avec son store banne et son îlot bar.",
       pull: "La cuisine qui fait de la terrasse une pièce à vivre.",
       pts: [["Une pièce que l’on regarde", "Ouverte et couverte, elle se voit depuis la maison : on la dessine pour qu’elle s’accorde à vos façades et à votre jardin."], ["Ouverte sur la terrasse", "Le store banne prolonge la toiture au-dessus de la table, l’îlot bar garde les invités autour de celui qui cuisine."], ["Rangée en un geste", "L’îlot rentre à l’intérieur, le store de fermeture descend : tout est à l’abri."]],
       sm: "On part du format Harmonie, puis on dessine ensemble l’intérieur : matériaux, rangements, équipements et lumière, selon votre façon de recevoir.",
       dims: [["Façade", "3 m"], ["Intérieur", "2,60 m"], ["Profondeur", "1,66 m"], ["Hauteur", "<span class='tbd'>à préciser</span>"]],
-      eq: ["plancha", "bbq", "friteuse", "gaz", "hotte", "evier", "quooker", "froid", "dekton", "son", "store", "ilot"], side: [["r_ilot", "Store banne déployé et îlot bar sur roulettes."], ["detail", "Friteuse, plancha et évier encastrés."]], photos: [], d3: true },
+      eq: ["plancha", "bbq", "friteuse", "gaz", "hotte", "evier", "quooker", "froid", "resitop", "dekton", "son", "store", "ilot"], side: [["r_ilot", "Store banne déployé et îlot bar sur roulettes."], ["detail", "Friteuse, plancha et évier encastrés."]], photos: [], d3: true },
     "la-festive": { name: "La Festive", size: "5", ph: "f3", pan: "f7", alt: "La Festive : cuisine avec bar intégré, tabourets et pièce attenante", tag: "Une cuisine avec bar et, sous la même toiture, une vraie pièce en plus : sauna, salle de bain ou local piscine.",
       pull: "Plus qu’une cuisine : un lieu pour passer la journée dehors.",
       pts: [["Un bar au cœur de la cuisine", "Le comptoir en lames bois fait face à la terrasse : on cuisine et on discute en même temps."], ["Une pièce à part entière", "Sauna, salle de bain ou local piscine et rangement, fermée, avec sa propre porte, sous la même toiture."], ["Pensée pour recevoir", "Les invités s’installent au bar pendant que la cuisine tourne ; la pièce attenante est à deux pas."]],
       sm: "La pièce attenante, l’agencement de la cuisine et les finitions se dessinent avec vous, pour votre jardin et votre façon de vivre dehors.",
       dims: [["Façade", "5 m"], ["Profondeur", "2,90 m"], ["Hauteur", "<span class='tbd'>à préciser</span>"]],
-      eq: ["bar", "piece", "plancha", "bbq", "friteuse", "gaz", "hotte", "evier", "quooker", "froid", "dekton", "son", "store", "porte", "tv"],
+      eq: ["bar", "piece", "plancha", "bbq", "friteuse", "gaz", "hotte", "evier", "quooker", "froid", "resitop", "dekton", "son", "store", "porte", "tv"],
       side: [["f4", "Le bar et la pièce attenante, au bord de la piscine."], ["f13", "À l’intérieur : le bar côté cuisine, l’évier et la plancha."]],
       photos: [["f5", "Au bord de la piscine, en fin de journée."], ["f3", "Le bar et la pièce attenante, côté jardin."], ["f9", "Livraison : déchargée à la grue en un seul bloc."]] }
   };
@@ -1178,7 +1180,7 @@ form{display:grid;gap:28px;min-width:0}
     ["Eau", "Évier", "Évier, robinet Quooker", "Évier, robinet Quooker"], ["Froid", "Réfrigérateur", "Réfrigérateur ou cave à vin", "Réfrigérateur ou cave à vin"],
     ["Bar", "—", "Îlot sur roulettes", "Bar intégré à la cuisine"], ["Pièce attenante", "—", "—", "Sauna, salle de bain ou local, inclus"], ["Store banne", "—", "Intégré à la toiture", "Intégré à la toiture"],
     ["Confort", "Éclairage intégré", "Éclairage, sonorisation", "Éclairage, sonorisation, téléviseur"], ["Accès latéral", "—", "—", "Porte vitrée"],
-    ["Plan de travail", "Noir", "Dekton possible", "Dekton possible"], ["Bardage", "Au choix", "Au choix", "Au choix"]
+    ["Plan de travail", "Resitop noir · Dekton en option", "Resitop noir · Dekton en option", "Resitop noir · Dekton en option"], ["Bardage", "Au choix", "Au choix", "Au choix"]
   ];
   $("[data-cmp]").innerHTML = `<thead><tr><th scope="col"><span class="lab">Modèle</span></th>${SLUGS.map(s => `<th scope="col"><a class="cmp-ph" href="#${s}"><img src="${IMG[MODELS[s].pan || MODELS[s].ph]}" alt=""></a>${MODELS[s].name}<small>Façade ${MODELS[s].size} m</small></th>`).join("")}</tr></thead><tbody>${CMP.map(r => `<tr><th scope="row">${r[0]}</th>${r.slice(1).map(c => `<td${c === "—" ? ' class="no"' : ""}>${c}</td>`).join("")}</tr>`).join("")}</tbody><tfoot><tr><td></td>${SLUGS.map(s => `<td><a class="arrow" href="#${s}">${MODELS[s].name}${ARR}</a></td>`).join("")}</tr></tfoot>`;
 
@@ -1204,7 +1206,8 @@ form{display:grid;gap:28px;min-width:0}
       ["", "Intégrée", "Cave à vin", "Pour servir les vins à bonne température, directement depuis la cuisine. Elle prend la place du réfrigérateur.", ["Sous le plan de travail"], "hf"]
     ],
     plan: [
-      ["p_dekton", "Cosentino", "Plan de travail Dekton", "Surface ultracompacte faite pour l’extérieur : ni le soleil, ni le gel, ni la chaleur d’un plat ne l’abîment.", ["Résiste à 300 °C, aux UV et aux rayures", "Teinte au choix"], "hf", 1],
+      ["detail", "De série · Polyrey", "Plan de travail Resitop noir", "Le plan de série de nos cuisines&nbsp;: un stratifié compact noir, d’un seul tenant, qui s’accorde à la crédence et aux appareillages noirs.", ["Résistant à l’eau, aux taches et aux rayures", "Inclus sur les trois modèles"], "ehf"],
+      ["p_dekton", "En option · Cosentino", "Plan de travail Dekton", "À la place du Resitop, une surface ultracompacte faite pour l’extérieur : ni le soleil, ni le gel, ni la chaleur d’un plat ne l’abîment.", ["Résiste à 300 °C, aux UV et aux rayures", "Teinte au choix"], "ehf", 1],
       ["c_tiroirs", "Façades de meubles", "Ton clair, effet béton", "Des portes et tiroirs clairs qui éclairent l’intérieur de la cuisine et répondent au bois.", ["Tiroirs et portes composés selon les équipements"], "ehf"],
       ["c_meubles", "Façades de meubles", "Anthracite", "Des façades sombres, dans la continuité du Fundermax, pour une cuisine plus graphique.", ["Poignées inox"], "ehf"]
     ],

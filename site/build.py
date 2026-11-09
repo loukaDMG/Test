@@ -11,7 +11,7 @@ src_dir, out_page, out_full = sys.argv[1:4]
 html = open(os.path.join(src_dir, 'src.html'), encoding='utf-8').read()
 
 def data_uri(name):
-    for ext, mime, sub in (('.webp', 'image/webp', 'w'), ('.jpg', 'image/jpeg', ''), ('.png', 'image/png', '')):
+    for ext, mime, sub in (('.svg', 'image/svg+xml', ''), ('.webp', 'image/webp', 'w'), ('.jpg', 'image/jpeg', ''), ('.png', 'image/png', '')):
         p = os.path.join(src_dir, 'img', sub, name + ext)
         if os.path.exists(p):
             return 'data:%s;base64,%s' % (mime, base64.b64encode(open(p, 'rb').read()).decode())

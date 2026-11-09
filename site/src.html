@@ -172,6 +172,7 @@ h1,h2,h3,h4{margin:0;font-weight:300;text-wrap:balance}
 .band-t .lead{margin-top:24px}
 .band-t .arrow{margin-top:20px}
 
+.smnote{font-size:14px;font-weight:300;opacity:.7;margin-top:16px}
 /* histoire */
 .story-g{display:grid;grid-template-columns:5fr 7fr;gap:clamp(36px,6vw,96px);align-items:start}
 .story-h .lead{margin-top:24px}
@@ -723,6 +724,7 @@ form{display:grid;gap:28px;min-width:0}
     <div class="wrap">
       <div class="head"><p class="lab rv">Comparatif</p><h2 class="h2 rv">Les trois modèles <em>côte à côte.</em></h2><p class="lead rv">Les équipements possibles sur chaque modèle. Tout se précise ensuite au devis.</p></div>
       <div class="cmp-w rv" tabindex="0" role="region" aria-label="Tableau comparatif des trois modèles"><table class="cmp" data-cmp></table></div>
+      <p class="smnote rv">Dimensions indicatives&nbsp;: chaque cuisine est construite selon l’espace disponible chez vous.</p>
       <p class="note rv" style="margin-top:28px"><b>À compléter</b>Ce qui est inclus dans la base et ce qui est en option, pour chaque modèle.</p>
     </div>
   </section>
@@ -745,7 +747,7 @@ form{display:grid;gap:28px;min-width:0}
   <nav class="gnav" aria-label="Étapes du guide"><div class="wrap"><ol><li><a href="#options" data-go="g-format"><i>01</i>Le format</a></li><li><a href="#options" data-go="g-bardage"><i>02</i>Le bardage</a></li><li><a href="#options" data-go="g-cuisson"><i>03</i>La cuisson</a></li><li><a href="#options" data-go="g-eau"><i>04</i>L’eau et le froid</a></li><li><a href="#options" data-go="g-plan"><i>05</i>Plan et rangements</a></li><li><a href="#options" data-go="g-recevoir"><i>06</i>Pour recevoir</a></li></ol></div></nav>
   <section class="gstep sec light" id="g-format">
     <div class="wrap">
-      <div class="head"><p class="lab rv">Étape 01 · Le format</p><h2 class="h2 rv">D’abord, <em>la taille.</em></h2><p class="lead rv">Chaque format a son esprit : choisissez celui qui ressemble à votre jardin et à votre façon de vivre dehors.</p></div>
+      <div class="head"><p class="lab rv">Étape 01 · Le format</p><h2 class="h2 rv">D’abord, <em>la taille.</em></h2><p class="lead rv">Trois formats pour vous repérer, puis la cuisine s’ajuste à votre espace. Choisissez celui qui ressemble à votre jardin et à votre façon de vivre dehors.</p></div>
       <div class="gcards" data-cards="format"></div>
       <aside class="tip rv"><span class="lab">Notre conseil</span><p>Mesurez la place disponible et pensez aux circulations&nbsp;: autour de la cuisine, de la table et de l’îlot. Au rendez-vous, nous vérifions l’implantation avec vous.</p></aside>
     </div>
@@ -924,7 +926,7 @@ form{display:grid;gap:28px;min-width:0}
     <div class="wrap faq">
       <div><p class="lab rv">Questions fréquentes</p><h2 class="h2 rv" style="margin-top:24px">Avant de vous <em>lancer.</em></h2></div>
       <div class="rv">
-        <details class="qa" open><summary>Les cuisines sont-elles faites sur mesure&nbsp;?<i aria-hidden="true"></i></summary><p>Oui. Nous partons d’un des trois formats (2, 3 ou 5&nbsp;m de façade), puis les équipements, les matériaux et les aménagements se choisissent avec vous.</p></details>
+        <details class="qa" open><summary>Les cuisines sont-elles faites sur mesure&nbsp;?<i aria-hidden="true"></i></summary><p>Oui, toutes. Nos trois modèles servent d’exemples&nbsp;: la largeur, la profondeur et la hauteur s’adaptent à l’espace disponible, puis les équipements, les matériaux et les aménagements se choisissent avec vous.</p></details>
         <details class="qa"><summary>Quels sont les délais&nbsp;?<i aria-hidden="true"></i></summary><p>Le délai de fabrication figure sur le devis&nbsp;; il dépend du projet, des équipements et de la saison.</p></details>
         <details class="qa"><summary>Comment se passe la livraison&nbsp;?<i aria-hidden="true"></i></summary><p>Nous livrons partout en France. La cuisine arrive assemblée, en un seul bloc, puis elle est mise en place sur 4 plots béton. Les conditions d’accès sont précisées avec vous lors du devis.</p></details>
         <details class="qa"><summary>L’installation est-elle comprise&nbsp;?<i aria-hidden="true"></i></summary><p>DMG Concept vend des cuisines livrées assemblées. Aucune prestation d’installation ni de raccordement n’est réalisée sur place&nbsp;: l’électricité, l’eau et le gaz sont à faire raccorder séparément par un professionnel.</p></details>
@@ -1182,7 +1184,7 @@ form{display:grid;gap:28px;min-width:0}
         <div class="sp-tx"><p class="lab rv">Le modèle</p><h2 class="rv">${M.name}, <em>en détail.</em></h2><p class="pull rv">${M.pull}</p>
           <ol class="pts3">${M.pts.map((p, i) => `<li class="rv"><i>0${i + 1}</i><div><b>${p[0]}</b><span>${p[1]}</span></div></li>`).join("")}</ol>
           <div class="smb rv"><span class="lab">Sur mesure</span><p>${M.sm}</p></div>
-          <details class="more rv"><summary><span class="o">Voir les caractéristiques ${/^[AEIOUÉÈH]/i.test(M.name) ? "d’" + M.name : "de " + M.name}</span><span class="c">Masquer les caractéristiques</span><i aria-hidden="true"></i></summary><div class="specs one"><dl>${M.dims.concat([["Fermeture", M.size === "2" ? "Store de fermeture devant la cuisine, inclus" : "Volet roulant devant la cuisine, inclus"]], COMMON).map(r => `<div><dt>${r[0]}</dt><dd>${r[1]}</dd></div>`).join("")}</dl></div></details></div>
+          <details class="more rv"><summary><span class="o">Voir les caractéristiques ${/^[AEIOUÉÈH]/i.test(M.name) ? "d’" + M.name : "de " + M.name}</span><span class="c">Masquer les caractéristiques</span><i aria-hidden="true"></i></summary><div class="specs one"><dl>${M.dims.concat([["Fermeture", M.size === "2" ? "Store de fermeture devant la cuisine, inclus" : "Volet roulant devant la cuisine, inclus"]], COMMON).map(r => `<div><dt>${r[0]}</dt><dd>${r[1]}</dd></div>`).join("")}</dl><p class="smnote">Dimensions adaptables à votre espace.</p></div></details></div>
       </section>
       <section class="wrap msec sp rev">
         <figure class="sp-fig rv"><div class="ph r45"><img src="${IMG[M.side[1][0]]}" alt="${M.side[1][1]}"></div><figcaption>${M.side[1][1]}</figcaption></figure>

@@ -686,7 +686,7 @@ form{display:grid;gap:28px;min-width:0}
       <p class="lab rv">La fabrication</p>
       <h2 class="h2 rv">Construite à l’atelier, <em>livrée d’un seul bloc.</em></h2>
       <p class="lead rv">Ossature bois, toiture EPDM, façade Fundermax&nbsp;: des matériaux nobles, choisis pour durer dehors, assemblés avec soin à l’atelier avant de partir.</p>
-      <a class="arrow rv" href="#atelier">Découvrir l’atelier<svg viewBox="0 0 18 10" fill="none" stroke="currentColor" aria-hidden="true"><path d="M0 5h17M13 1l4 4-4 4"/></svg></a>
+      <a class="arrow rv" href="#atelier">Découvrir la maison DMG<svg viewBox="0 0 18 10" fill="none" stroke="currentColor" aria-hidden="true"><path d="M0 5h17M13 1l4 4-4 4"/></svg></a>
     </div>
   </section>
 
@@ -1270,7 +1270,7 @@ form{display:grid;gap:28px;min-width:0}
   $$("[data-steps]").forEach(o => o.innerHTML = STEPS.map((s, i) => `<li class="rv${s[2] ? " key" : ""}"><i>0${i + 1}</i><h3>${s[0]}</h3><p>${s[1]}</p></li>`).join(""));
 
   /* bandeaux d'appel */
-  $$("[data-cta]").forEach(c => c.innerHTML = `<div class="wrap"><p class="lab rv">Demande de devis</p><h2 class="h2 rv">Parlons de <em>votre projet.</em></h2><p class="lead rv">Nous vous rappelons pour en parler, puis nous établissons votre devis.</p><div class="ctas rv"><a class="btn btn-bone" href="#devis">Demander un devis${ARR}</a><a class="btn btn-line" href="#atelier">Visiter l’atelier</a></div><span class="tel rv">07 49 66 12 56</span></div>`);
+  $$("[data-cta]").forEach(c => c.innerHTML = `<div class="wrap"><p class="lab rv">Demande de devis</p><h2 class="h2 rv">Parlons de <em>votre projet.</em></h2><p class="lead rv">Nous vous rappelons pour en parler, puis nous établissons votre devis.</p><div class="ctas rv"><a class="btn btn-bone" href="#devis">Demander un devis${ARR}</a><a class="btn btn-line" href="#atelier">Découvrir la maison DMG</a></div><span class="tel rv">07 49 66 12 56</span></div>`);
 
   /* suivi des 99 points : f fait, v à valider, t à fournir, l mise en ligne, x écarté */
   const SV = [

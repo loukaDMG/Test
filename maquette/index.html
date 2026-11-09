@@ -495,6 +495,11 @@ figcaption{font-size:14px;color:var(--bone-3);margin-top:12px;font-weight:300}
 .card{background:var(--card);padding:clamp(28px,3.4vw,52px);display:flex;flex-direction:column;gap:18px;align-items:flex-start}
 .dark .card{background:var(--night-3)}
 .card h3{font:400 clamp(28px,2.4vw,38px)/1.1 var(--serif)}
+.card{color:var(--ink)}
+.dark .card{color:var(--bone)}
+.card:not(.dark .card) dt{color:var(--ink-3)}
+.card:not(.dark .card) .btn-bone{background:var(--ink);color:var(--card)}
+.card:not(.dark .card) .btn-bone:hover{background:#000}
 .card p{color:var(--ink-2);font-weight:300}
 .dark .card p{color:var(--bone-2)}
 .card dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:8px 24px;font-size:16px}

@@ -147,8 +147,14 @@ h1,h2,h3,h4{margin:0;font-weight:300;text-wrap:balance}
 .fp-n{font:300 clamp(84px,9vw,150px)/.8 var(--serif);letter-spacing:-.03em;font-variant-numeric:lining-nums}
 .fp-n small{font-size:.32em;letter-spacing:0;margin-left:6px;color:var(--bone-2)}
 .fp h3.fp-name{font:300 clamp(30px,2.9vw,48px)/1.05 var(--serif);letter-spacing:-.01em;margin:0}
-.fp-c{position:absolute;inset:0;display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
-.fp-c img{position:relative;inset:auto}
+.fp-c{position:absolute;inset:0}
+.fp-c::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,8,8,.45) 0%,rgba(8,8,8,0) 22%);z-index:1}
+.fp-c img{animation:fpfade 20s infinite both}
+.fp-c img:nth-child(2){animation-delay:5s}.fp-c img:nth-child(3){animation-delay:10s}.fp-c img:nth-child(4){animation-delay:15s}
+@keyframes fpfade{0%{opacity:0}5%{opacity:1}25%{opacity:1}30%{opacity:0}100%{opacity:0}}
+.fp-c img:first-child{animation-name:fpfade1}
+@keyframes fpfade1{0%{opacity:1}25%{opacity:1}30%{opacity:0}95%{opacity:0}100%{opacity:1}}
+@media (prefers-reduced-motion:reduce){.fp-c img{animation:none;opacity:0}.fp-c img:first-child{opacity:1}}
 .fp-d{display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows .9s var(--ease),opacity .6s var(--ease)}
 .fp-d>div{overflow:hidden;min-height:0}
 .fp.on .fp-d{grid-template-rows:1fr;opacity:1;transition-delay:.15s}
@@ -1191,7 +1197,7 @@ form{display:grid;gap:28px;min-width:0}
   const eqLi = k => { const e = E[k]; return `<li${e[3] ? ' class="inc"' : ""}><b>${e[0]}</b>${e[1] ? `<small>${e[1]}</small>` : ""}<span>${e[2]}</span></li>`; };
 
   /* panneaux d'accueil */
-  $("[data-fx]").innerHTML = SLUGS.map((s, i) => { const M = MODELS[s]; return `<a class="fp${i === 1 ? " on" : ""}" href="#${s}"><img src="${IMG[M.pan || M.ph]}" alt="${M.alt}"><div class="fp-in"><div class="fp-top"><span class="lab">0${i + 1}</span><span class="lab">Façade ${M.size} m</span></div><div><h3 class="fp-name">${M.name}</h3><div class="fp-d"><div><p>${M.tag}</p><span class="arrow">Découvrir ${M.name}${ARR}</span></div></div></div></div></a>`; }).join("") + `<a class="fp" href="#sur-mesure"><div class="fp-c"><img src="${IMG.sm_sauna}" alt="Sauna extérieur sous la neige"><img src="${IMG.sm_detente}" alt="Espace détente avec jacuzzi"><img src="${IMG.sm_abri}" alt="Abri de jardin anthracite et bois"></div><div class="fp-in"><div class="fp-top"><span class="lab">04</span><span class="lab">Projet unique</span></div><div><h3 class="fp-name">Sur mesure</h3><div class="fp-d"><div><p>Sauna, espace détente, abri ou bureau de jardin : nous créons aussi des projets uniques.</p><span class="arrow">Découvrir le sur-mesure${ARR}</span></div></div></div></div></a>`;
+  $("[data-fx]").innerHTML = SLUGS.map((s, i) => { const M = MODELS[s]; return `<a class="fp${i === 1 ? " on" : ""}" href="#${s}"><img src="${IMG[M.pan || M.ph]}" alt="${M.alt}"><div class="fp-in"><div class="fp-top"><span class="lab">0${i + 1}</span><span class="lab">Façade ${M.size} m</span></div><div><h3 class="fp-name">${M.name}</h3><div class="fp-d"><div><p>${M.tag}</p><span class="arrow">Découvrir ${M.name}${ARR}</span></div></div></div></div></a>`; }).join("") + `<a class="fp" href="#sur-mesure"><div class="fp-c"><img src="${IMG.sm_sauna}" alt="Sauna extérieur sous la neige"><img src="${IMG.sm_detente}" alt="Espace détente avec jacuzzi" aria-hidden="true"><img src="${IMG.sm_bureau_ext}" alt="Bureau de jardin anthracite et bois" aria-hidden="true"><img src="${IMG.sm_abri}" alt="Abri de jardin anthracite et bois" aria-hidden="true"></div><div class="fp-in"><div class="fp-top"><span class="lab">04</span><span class="lab">Projet unique</span></div><div><h3 class="fp-name">Sur mesure</h3><div class="fp-d"><div><p>Sauna, espace détente, abri ou bureau de jardin : nous créons aussi des projets uniques.</p><span class="arrow">Découvrir le sur-mesure${ARR}</span></div></div></div></div></a>`;
   const fps = $$(".fp");
   fps.forEach(p => { const a = () => fps.forEach(x => x.classList.toggle("on", x === p)); p.addEventListener("mouseenter", a); p.addEventListener("focus", a); });
 

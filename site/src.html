@@ -209,6 +209,9 @@ h1,h2,h3,h4{margin:0;font-weight:300;text-wrap:balance}
 .hist-a img{width:72px;height:72px;border-radius:50%;object-fit:cover;flex:none}
 .hist-a>span:first-of-type{display:grid;gap:8px;flex:1;min-width:220px}
 .hist-a b{font:300 clamp(24px,2.4vw,34px)/1.15 var(--serif)}
+.ph-logo{display:grid;grid-template-columns:1fr auto;align-items:center;gap:clamp(32px,5vw,80px)}
+.ph-logo>img{width:clamp(200px,24vw,380px);height:auto}
+@media (max-width:800px){.ph-logo{grid-template-columns:1fr}.ph-logo>img{width:180px;order:-1}}
 /* histoire */
 .story-h{align-self:stretch;display:flex;flex-direction:column}
 .story-p{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:16px;margin:clamp(32px,4vw,52px) 0 0}
@@ -962,10 +965,13 @@ form{display:grid;gap:28px;min-width:0}
 
 <div class="page" data-page="atelier" data-title="La maison DMG · notre histoire · DMG Concept" data-desc="L’histoire de DMG Concept : des cuisines d’extérieur conçues et assemblées en Haute-Savoie, avec des matériaux choisis pour durer, pour profiter du plaisir d’être ensemble dehors." data-crumb="La maison DMG">
   <div class="wrap crumb" data-crumbs></div>
-  <div class="wrap phead">
+  <div class="wrap phead ph-logo">
+    <div>
     <p class="lab rv">La maison DMG</p>
     <h1 class="h1 rv">Bien construire, <em>pour bien recevoir.</em></h1>
     <p class="lead rv">DMG Concept conçoit et construit en Haute-Savoie des cuisines d’extérieur couvertes.</p>
+    </div>
+    <img class="rv" src="{{logo}}" alt="DMG Concept, l’espace du possible">
   </div>
   <section class="sec light story" style="padding-top:clamp(60px,7vw,110px)">
     <div class="wrap story-g">

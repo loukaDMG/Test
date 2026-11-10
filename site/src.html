@@ -687,7 +687,7 @@ form{display:grid;gap:28px;min-width:0}
     <li><a href="#realisations">Réalisations</a></li>
     <li><a href="#atelier">La maison DMG</a></li>
   </ol>
-  <div><a class="btn btn-bone" href="#devis">Demander un devis</a><span class="lab">07 49 66 12 56 · contact@dmg-concept.com</span></div>
+  <div><a class="btn btn-bone" href="#devis">Demander un devis</a><span class="lab">contact@dmg-concept.com</span></div>
 </div>
 
 <main id="contenu" tabindex="-1">
@@ -852,7 +852,7 @@ form{display:grid;gap:28px;min-width:0}
     </div>
   </section>
   <section class="sec cta-band">
-    <div class="wrap"><p class="lab rv">Votre projet</p><h2 class="h2 rv">Parlons de <em>votre projet.</em></h2><p class="lead rv">Racontez-nous votre idée&nbsp;: nous vous rappelons pour en parler.</p><div class="ctas rv"><a class="btn btn-bone" href="#devis" data-model="Projet sur mesure">Demander un devis<svg width="18" height="10" viewBox="0 0 18 10" fill="none" stroke="currentColor" aria-hidden="true"><path d="M0 5h17M13 1l4 4-4 4"/></svg></a></div><span class="tel rv">07 49 66 12 56</span></div>
+    <div class="wrap"><p class="lab rv">Votre projet</p><h2 class="h2 rv">Parlons de <em>votre projet.</em></h2><p class="lead rv">Racontez-nous votre idée&nbsp;: nous vous rappelons pour en parler.</p><div class="ctas rv"><a class="btn btn-bone" href="#devis" data-model="Projet sur mesure">Demander un devis<svg width="18" height="10" viewBox="0 0 18 10" fill="none" stroke="currentColor" aria-hidden="true"><path d="M0 5h17M13 1l4 4-4 4"/></svg></a></div></div>
   </section>
 </div>
 
@@ -963,7 +963,7 @@ form{display:grid;gap:28px;min-width:0}
     </div>
   </section>
   <section class="sec cta-band">
-    <div class="wrap"><p class="lab rv">Votre livraison</p><h2 class="h2 rv">Chaque terrain <em>est différent.</em></h2><p class="lead rv">Les conditions de livraison se précisent avec vous au moment du devis.</p><div class="ctas rv"><a class="btn btn-bone" href="#devis">Demander un devis<svg width="18" height="10" viewBox="0 0 18 10" fill="none" stroke="currentColor" aria-hidden="true"><path d="M0 5h17M13 1l4 4-4 4"/></svg></a></div><span class="tel rv">07 49 66 12 56</span></div>
+    <div class="wrap"><p class="lab rv">Votre livraison</p><h2 class="h2 rv">Chaque terrain <em>est différent.</em></h2><p class="lead rv">Les conditions de livraison se précisent avec vous au moment du devis.</p><div class="ctas rv"><a class="btn btn-bone" href="#devis">Demander un devis<svg width="18" height="10" viewBox="0 0 18 10" fill="none" stroke="currentColor" aria-hidden="true"><path d="M0 5h17M13 1l4 4-4 4"/></svg></a></div></div>
   </section>
 </div>
 
@@ -1017,7 +1017,6 @@ form{display:grid;gap:28px;min-width:0}
           <li>Nous vous envoyons un devis détaillé, poste par poste.</li>
         </ol>
         <div class="coords rv">
-          <div><span>Téléphone</span><b>07 49 66 12 56</b></div>
           <div><span>E-mail</span><b>contact@dmg-concept.com</b></div>
           <div><span>Atelier</span><b>39 chemin de Grange Neuve, 74570 Fillière</b></div>
         </div>
@@ -1384,7 +1383,7 @@ form{display:grid;gap:28px;min-width:0}
   $$("[data-steps]").forEach(o => o.innerHTML = STEPS.map((s, i) => `<li class="rv${s[2] ? " key" : ""}"><i>0${i + 1}</i><h3>${s[0]}</h3><p>${s[1]}</p></li>`).join(""));
 
   /* bandeaux d'appel */
-  $$("[data-cta]").forEach(c => c.innerHTML = `<div class="wrap"><p class="lab rv">Demande de devis</p><h2 class="h2 rv">Parlons de <em>votre projet.</em></h2><p class="lead rv">Nous vous rappelons pour en parler, puis nous établissons votre devis.</p><div class="ctas rv"><a class="btn btn-bone" href="#devis">Demander un devis${ARR}</a><a class="btn btn-line" href="#atelier">Découvrir la maison DMG</a></div><span class="tel rv">07 49 66 12 56</span></div>`);
+  $$("[data-cta]").forEach(c => c.innerHTML = `<div class="wrap"><p class="lab rv">Demande de devis</p><h2 class="h2 rv">Parlons de <em>votre projet.</em></h2><p class="lead rv">Nous vous rappelons pour en parler, puis nous établissons votre devis.</p><div class="ctas rv"><a class="btn btn-bone" href="#devis">Demander un devis${ARR}</a><a class="btn btn-line" href="#atelier">Découvrir la maison DMG</a></div></div>`);
 
   /* suivi des 99 points : f fait, v à valider, t à fournir, l mise en ligne, x écarté */
   const SV = [

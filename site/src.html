@@ -758,7 +758,7 @@ form{display:grid;gap:28px;min-width:0}
 </div>
 
 <!-- ============ MODÈLES + COMPARATIF ============ -->
-<div class="page light" data-page="modeles" data-title="Les modèles · Harmonie, Évidence, La Festive · DMG Concept" data-desc="Trois cuisines d’extérieur couvertes de 2, 3 et 5 m de façade, à adapter sur mesure. Comparez Harmonie, Évidence et La Festive." data-crumb="Modèles">
+<div class="page light" data-page="modeles" data-title="Les modèles · Harmonie, Évidence, La Festive · DMG Concept" data-desc="Trois cuisines d’extérieur couvertes, composées avec vous. Comparez Harmonie, Évidence et La Festive." data-crumb="Modèles">
   <div class="wrap crumb" data-crumbs></div>
   <div class="wrap phead">
     <p class="lab rv">Les modèles</p>
@@ -1122,7 +1122,7 @@ form{display:grid;gap:28px;min-width:0}
   <div class="wrap">
     <div class="foot-top">
       <div><img src="{{logo}}" alt="DMG Concept, l’espace du possible"><p>Cuisines d’extérieur couvertes, conçues sur mesure et construites en Haute-Savoie.</p></div>
-      <div><h2>Modèles</h2><ul><li><a href="#harmonie">Harmonie · 2 m</a></li><li><a href="#evidence">Évidence · 3 m</a></li><li><a href="#la-festive">La Festive · 5 m</a></li><li><a href="#modeles">Comparatif</a></li><li><a href="#sur-mesure">Sur mesure</a></li><li><a href="#options">Options</a></li></ul></div>
+      <div><h2>Modèles</h2><ul><li><a href="#harmonie">Harmonie</a></li><li><a href="#evidence">Évidence</a></li><li><a href="#la-festive">La Festive</a></li><li><a href="#modeles">Comparatif</a></li><li><a href="#sur-mesure">Sur mesure</a></li><li><a href="#options">Options</a></li></ul></div>
       <div><h2>DMG Concept</h2><ul><li><a href="#livraison">Livraison</a></li><li><a href="#realisations">Réalisations</a></li><li><a href="#atelier">La maison DMG</a></li><li><a href="#devis">Demander un devis</a></li><li><a href="#mentions-legales">Mentions légales</a></li><li><a href="#cgv">CGV</a></li><li><a href="#confidentialite">Confidentialité</a></li></ul></div>
       <div><h2>Contact</h2><ul><li>07 49 66 12 56</li><li>contact@dmg-concept.com</li><li>39 chemin de Grange Neuve<br>74570 Fillière</li><li>Visite sur rendez-vous</li></ul></div>
     </div>
@@ -1198,13 +1198,13 @@ form{display:grid;gap:28px;min-width:0}
   const eqLi = k => { const e = E[k]; return `<li${e[3] ? ' class="inc"' : ""}><b>${e[0]}</b>${e[1] ? `<small>${e[1]}</small>` : ""}<span>${e[2]}</span></li>`; };
 
   /* panneaux d'accueil */
-  $("[data-fx]").innerHTML = SLUGS.map((s, i) => { const M = MODELS[s]; return `<a class="fp${i === 1 ? " on" : ""}" href="#${s}"><img src="${IMG[M.pan || M.ph]}" alt="${M.alt}"><div class="fp-in"><div class="fp-top"><span class="lab">0${i + 1}</span><span class="lab">Façade ${M.size} m</span></div><div><h3 class="fp-name">${M.name}</h3><div class="fp-d"><div><p>${M.tag}</p><span class="arrow">Découvrir ${M.name}${ARR}</span></div></div></div></div></a>`; }).join("") + `<a class="fp" href="#sur-mesure"><div class="fp-c"><img src="${IMG.sm_sauna}" alt="Sauna extérieur sous la neige"><img src="${IMG.sm_detente}" alt="Espace détente avec jacuzzi" aria-hidden="true"><img src="${IMG.sm_bureau_ext}" alt="Bureau de jardin anthracite et bois" aria-hidden="true"><img src="${IMG.sm_abri}" alt="Abri de jardin anthracite et bois" aria-hidden="true"></div><div class="fp-in"><div class="fp-top"><span class="lab">04</span><span class="lab">Projet unique</span></div><div><h3 class="fp-name">Sur mesure</h3><div class="fp-d"><div><p>Une cuisine dessinée pour votre espace, un sauna, un espace détente, un abri ou un bureau de jardin : nous créons des projets uniques.</p><span class="arrow">Découvrir le sur-mesure${ARR}</span></div></div></div></div></a>`;
+  $("[data-fx]").innerHTML = SLUGS.map((s, i) => { const M = MODELS[s]; return `<a class="fp${i === 1 ? " on" : ""}" href="#${s}"><img src="${IMG[M.pan || M.ph]}" alt="${M.alt}"><div class="fp-in"><div class="fp-top"><span class="lab">0${i + 1}</span></div><div><h3 class="fp-name">${M.name}</h3><div class="fp-d"><div><p>${M.tag}</p><span class="arrow">Découvrir ${M.name}${ARR}</span></div></div></div></div></a>`; }).join("") + `<a class="fp" href="#sur-mesure"><div class="fp-c"><img src="${IMG.sm_sauna}" alt="Sauna extérieur sous la neige"><img src="${IMG.sm_detente}" alt="Espace détente avec jacuzzi" aria-hidden="true"><img src="${IMG.sm_bureau_ext}" alt="Bureau de jardin anthracite et bois" aria-hidden="true"><img src="${IMG.sm_abri}" alt="Abri de jardin anthracite et bois" aria-hidden="true"></div><div class="fp-in"><div class="fp-top"><span class="lab">04</span></div><div><h3 class="fp-name">Sur mesure</h3><div class="fp-d"><div><p>Une cuisine dessinée pour votre espace, un sauna, un espace détente, un abri ou un bureau de jardin : nous créons des projets uniques.</p><span class="arrow">Découvrir le sur-mesure${ARR}</span></div></div></div></div></a>`;
   const fps = $$(".fp");
   fps.forEach(p => { const a = () => fps.forEach(x => x.classList.toggle("on", x === p)); p.addEventListener("mouseenter", a); p.addEventListener("focus", a); });
 
   /* pages modèles */
-  const others = (cur) => SLUGS.filter(s => s !== cur).map(s => `<a class="other" href="#${s}"><img src="${IMG[MODELS[s].ph]}" alt=""><span><small>Façade ${MODELS[s].size} m</small>${MODELS[s].name}</span></a>`).join("");
-  $("[data-others='all']").innerHTML = SLUGS.map(s => `<a class="other" href="#${s}" style="aspect-ratio:4/5"><img src="${IMG[MODELS[s].ph]}" alt="${MODELS[s].alt}"><span><small>Façade ${MODELS[s].size} m</small>${MODELS[s].name}</span></a>`).join("");
+  const others = (cur) => SLUGS.filter(s => s !== cur).map(s => `<a class="other" href="#${s}"><img src="${IMG[MODELS[s].ph]}" alt=""><span>${MODELS[s].name}</span></a>`).join("");
+  $("[data-others='all']").innerHTML = SLUGS.map(s => `<a class="other" href="#${s}" style="aspect-ratio:4/5"><img src="${IMG[MODELS[s].ph]}" alt="${MODELS[s].alt}"><span>${MODELS[s].name}</span></a>`).join("");
 
   const FEST = `
     <section class="sec" style="padding-top:0">
@@ -1256,14 +1256,14 @@ form{display:grid;gap:28px;min-width:0}
     </section>`;
   SLUGS.forEach(s => {
     const M = MODELS[s], el = $(`[data-page="${s}"]`);
-    el.dataset.title = `${M.name} · cuisine d’extérieur ${M.size} m sur mesure · DMG Concept`;
-    el.dataset.desc = `${M.name} : cuisine d’extérieur couverte de ${M.size} m de façade, construite sur mesure en Haute-Savoie. ${M.tag}`;
+    el.dataset.title = `${M.name} · cuisine d’extérieur couverte · DMG Concept`;
+    el.dataset.desc = `${M.name} : cuisine d’extérieur couverte, construite en Haute-Savoie. ${M.tag}`;
     el.dataset.crumb = `Modèles>modeles|${M.name}`;
     el.innerHTML = `
     <div class="wrap crumb" data-crumbs></div>
     <div class="wrap mhero">
-      <div><p class="lab rv">Façade ${M.size} m</p><div class="size rv">${M.size}<small>m</small></div><h1 class="h1 rv">${M.name}</h1><p class="lead rv">${M.tag}</p>
-        <div class="ctas rv" style="margin-top:34px"><a class="btn btn-bone" href="#devis" data-model="${M.name} · ${M.size} m">Demander un devis${ARR}</a><a class="btn btn-line" href="#modeles">Comparer</a></div></div>
+      <div><p class="lab rv">Le modèle</p><h1 class="h1 rv">${M.name}</h1><p class="lead rv">${M.tag}</p>
+        <div class="ctas rv" style="margin-top:34px"><a class="btn btn-bone" href="#devis" data-model="${M.name}">Demander un devis${ARR}</a><a class="btn btn-line" href="#modeles">Comparer</a></div></div>
       <figure class="rv"><div class="ph r43"><img src="${IMG[M.ph]}" alt="${M.alt}"></div><figcaption>Réalisation · ${M.name}</figcaption></figure>
     </div>
     ${s === "la-festive" ? FEST : ""}
@@ -1298,7 +1298,7 @@ form{display:grid;gap:28px;min-width:0}
     ["Confort", "Éclairage intégré", "Éclairage, sonorisation", "Éclairage, sonorisation, téléviseur"], ["Accès latéral", "—", "—", "Porte vitrée"],
     ["Plan de travail", "Resitop noir · Dekton en option", "Resitop noir · Dekton en option", "Resitop noir · Dekton en option"], ["Bardage", "Au choix", "Au choix", "Au choix"]
   ];
-  $("[data-cmp]").innerHTML = `<thead><tr><th scope="col"><span class="lab">Modèle</span></th>${SLUGS.map(s => `<th scope="col"><a class="cmp-ph" href="#${s}"><img src="${IMG[MODELS[s].pan || MODELS[s].ph]}" alt=""></a>${MODELS[s].name}<small>Façade ${MODELS[s].size} m</small></th>`).join("")}</tr></thead><tbody>${CMP.map(r => `<tr><th scope="row">${r[0]}</th>${r.slice(1).map(c => `<td${c === "—" ? ' class="no"' : ""}>${c}</td>`).join("")}</tr>`).join("")}</tbody><tfoot><tr><td></td>${SLUGS.map(s => `<td><a class="arrow" href="#${s}">${MODELS[s].name}${ARR}</a></td>`).join("")}</tr></tfoot>`;
+  $("[data-cmp]").innerHTML = `<thead><tr><th scope="col"><span class="lab">Modèle</span></th>${SLUGS.map(s => `<th scope="col"><a class="cmp-ph" href="#${s}"><img src="${IMG[MODELS[s].pan || MODELS[s].ph]}" alt=""></a>${MODELS[s].name}</th>`).join("")}</tr></thead><tbody>${CMP.map(r => `<tr><th scope="row">${r[0]}</th>${r.slice(1).map(c => `<td${c === "—" ? ' class="no"' : ""}>${c}</td>`).join("")}</tr>`).join("")}</tbody><tfoot><tr><td></td>${SLUGS.map(s => `<td><a class="arrow" href="#${s}">${MODELS[s].name}${ARR}</a></td>`).join("")}</tr></tfoot>`;
 
   /* guide des options : cartes illustrées, sans sélection */
   const C = {
@@ -1343,7 +1343,7 @@ form{display:grid;gap:28px;min-width:0}
   };
   const card = c => `<article class="gcard rv"><div class="gimg${c[6] ? " pack" : ""}">${c[0] ? `<img src="${PIC[c[0]]}" alt="${c[2]}" loading="lazy">` : `<span class="gph">${c[2]}</span>`}</div><div class="gtx"><span class="lab">${c[1]}</span><h3>${c[2]}</h3><p>${c[3]}</p><ul>${c[4].map(x => `<li>${x}</li>`).join("")}</ul><span class="gav">${C.av(c[5])}</span></div></article>`;
   Object.entries(GUIDE).forEach(([k, list]) => { const el = $(`[data-cards="${k}"]`); if (el) el.innerHTML = list.map(card).join(""); });
-  $("[data-cards='format']").innerHTML = SLUGS.map(s => { const M = MODELS[s]; return `<a class="gcard gfmt rv" href="#${s}"><div class="gimg"><img src="${IMG[M.ph]}" alt="${M.alt}" loading="lazy"><b>${M.size}<small>m</small></b></div><div class="gtx"><span class="lab">Façade ${M.size} m</span><h3>${M.name}</h3><p>${M.tag}</p><span class="arrow">Voir ${M.name}${ARR}</span></div></a>`; }).join("");
+  $("[data-cards='format']").innerHTML = SLUGS.map(s => { const M = MODELS[s]; return `<a class="gcard gfmt rv" href="#${s}"><div class="gimg"><img src="${IMG[M.ph]}" alt="${M.alt}" loading="lazy"></div><div class="gtx"><h3>${M.name}</h3><p>${M.tag}</p><span class="arrow">Voir ${M.name}${ARR}</span></div></a>`; }).join("");
 
   /* galerie */
   const GAL = [["f3", "La Festive : bar intégré et pièce attenante."], ["r_store", "Store intégré à la toiture, au-dessus du coin repas."], ["f5", "La Festive au bord de la piscine, en fin de journée."], ["f12", "La Festive, version salle de bain."], ["f8", "La Festive, version sauna."], ["petite", "Harmonie, livrée dans un jardin."], ["bois", "Bardage bois, crédence noire."], ["fundermax", "Fundermax anthracite, intérieur bois."], ["interieur", "Équipements encastrés, hotte inox."], ["pergola", "Évidence : store banne et îlot bar."], ["detail", "Friteuse, plancha et évier encastrés."], ["r_jardin", "La Festive : le coin repas à l’ombre du store."], ["ferme", "Fermée : le store descendu devant la cuisine."], ["grue", "Livraison : déchargée en un seul bloc."], ["r_ilot", "Évidence : îlot bar sur roulettes."]];

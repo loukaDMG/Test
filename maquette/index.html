@@ -752,7 +752,7 @@ form{display:grid;gap:28px;min-width:0}
       <div>
         <p class="lab rv">Réalisations</p>
         <h2 class="h2 rv" style="margin-top:24px">Pensée pour un seul jardin&nbsp;: <em>le vôtre.</em></h2>
-        <p class="lead rv">Toutes les photos de ce site montrent des cuisines que nous avons construites et livrées.</p>
+        <p class="lead rv">Toutes les photos de ce site montrent des projets que nous avons construits et livrés.</p>
         <a class="arrow rv" href="#realisations">Voir les réalisations<svg viewBox="0 0 18 10" fill="none" stroke="currentColor" aria-hidden="true"><path d="M0 5h17M13 1l4 4-4 4"/></svg></a>
       </div>
       <figure class="rv"><div class="ph r45"><img data-img="r_bambou" alt="Cuisine DMG Concept en bardage à lames, intérieur bois et meubles anthracite, sur une terrasse au milieu des bambous"></div><figcaption>Bardage à lames, intérieur bois.</figcaption></figure>
@@ -922,7 +922,7 @@ form{display:grid;gap:28px;min-width:0}
   <div class="wrap phead">
     <p class="lab rv">Réalisations</p>
     <h1 class="h1 rv">Nos réalisations, <em>toutes différentes.</em></h1>
-    <p class="lead rv">Chaque photo montre une cuisine que nous avons construite et livrée.</p>
+    <p class="lead rv">Chaque photo montre un projet que nous avons construit et livré.</p>
   </div>
   <div class="wrap"><div class="gal" data-gal></div></div>
   <div class="wrap" style="padding-top:48px"><p class="note rv"><b>À compléter</b>Témoignages clients (avec accord écrit), lieux et études de cas des projets.</p></div>
@@ -10080,7 +10080,7 @@ three/build/three.module.js:
   $("[data-cards='format']").innerHTML = SLUGS.map(s => { const M = MODELS[s]; return `<a class="gcard gfmt rv" href="#${s}"><div class="gimg"><img src="${IMG[M.ph]}" alt="${M.alt}" loading="lazy"></div><div class="gtx"><h3>${M.name}</h3><p>${M.tag}</p><span class="arrow">Voir ${M.name}${ARR}</span></div></a>`; }).join("");
 
   /* galerie */
-  const GAL = [["f3", "La Festive : bar intégré et pièce attenante."], ["r_store", "Store intégré à la toiture, au-dessus du coin repas."], ["f5", "La Festive au bord de la piscine, en fin de journée."], ["f12", "La Festive, version salle de bain."], ["f8", "La Festive, version sauna."], ["petite", "Harmonie, livrée dans un jardin."], ["bois", "Bardage bois, crédence noire."], ["fundermax", "Fundermax anthracite, intérieur bois."], ["interieur", "Équipements encastrés, hotte inox."], ["pergola", "Évidence : store banne et îlot bar."], ["detail", "Friteuse, plancha et évier encastrés."], ["r_jardin", "La Festive : le coin repas à l’ombre du store."], ["ferme", "Fermée : le store descendu devant la cuisine."], ["grue", "Livraison : déchargée en un seul bloc."], ["r_ilot", "Évidence : îlot bar sur roulettes."]];
+  const GAL = [["f3", "La Festive : bar intégré et pièce attenante."], ["r_store", "Store intégré à la toiture, au-dessus du coin repas."], ["f5", "La Festive au bord de la piscine, en fin de journée."], ["f12", "La Festive, version salle de bain."], ["f8", "La Festive, version sauna."], ["petite", "Harmonie, livrée dans un jardin."], ["bois", "Bardage bois, crédence noire."], ["fundermax", "Fundermax anthracite, intérieur bois."], ["interieur", "Équipements encastrés, hotte inox."], ["pergola", "Évidence : store banne et îlot bar."], ["detail", "Friteuse, plancha et évier encastrés."], ["r_jardin", "La Festive : le coin repas à l’ombre du store."], ["ferme", "Fermée : le store descendu devant la cuisine."], ["grue", "Livraison : déchargée en un seul bloc."], ["r_ilot", "Évidence : îlot bar sur roulettes."], ["sm_cuisine", "Sur mesure : cuisine avec four à pizza."], ["sm_rangement", "Sur mesure : cuisine et espace de rangement."], ["sm_detente", "Sur mesure : jacuzzi, sauna et douche."], ["sm_sauna", "Sur mesure : sauna sous la neige."], ["sm_bureau_ext", "Sur mesure : bureau de jardin."], ["sm_bureau_in", "Sur mesure : l’intérieur du bureau de jardin."], ["sm_abri", "Sur mesure : abri de jardin."]];
   $("[data-gal]").innerHTML = GAL.map(g => `<figure class="rv"><div class="ph"><img src="${IMG[g[0]]}" alt="${g[1]}" loading="lazy"></div><figcaption>${g[1]}</figcaption></figure>`).join("");
 
   /* étapes du parcours */

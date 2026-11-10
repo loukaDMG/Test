@@ -195,6 +195,11 @@ h1,h2,h3,h4{margin:0;font-weight:300;text-wrap:balance}
 .sm-office-t p:not(.lab){color:var(--bone-2);font-weight:300;font-size:16px;line-height:1.7;margin-top:16px;max-width:44ch}
 .sm-pair{display:grid;gap:clamp(16px,2vw,24px)}.sm-pair figure{margin:0}.sm-pair figcaption{margin-top:12px;font-size:13px;color:var(--bone-3)}
 @media (max-width:900px){.sm-intro,.sm-grid,.sm-office{grid-template-columns:1fr}.sm-grid .tall{grid-row:auto}.sm-grid .tall .ph{height:auto;min-height:0;aspect-ratio:4/5}.sm-list li{grid-template-columns:1fr;gap:4px}}
+.hist-l{padding-block:clamp(40px,5vw,72px);border-top:1px solid var(--line-d)}
+.hist-a{display:flex;align-items:center;gap:clamp(18px,2.4vw,32px);flex-wrap:wrap;text-decoration:none;color:var(--bone)}
+.hist-a img{width:72px;height:72px;border-radius:50%;object-fit:cover;flex:none}
+.hist-a>span:first-of-type{display:grid;gap:8px;flex:1;min-width:220px}
+.hist-a b{font:300 clamp(24px,2.4vw,34px)/1.15 var(--serif)}
 /* histoire */
 .story-h{align-self:stretch;display:flex;flex-direction:column}
 .story-p{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:16px;margin:clamp(32px,4vw,52px) 0 0}
@@ -709,10 +714,10 @@ form{display:grid;gap:28px;min-width:0}
   <section class="band">
     <div class="band-ph"><img data-img="grue" alt="Une cuisine DMG Concept déchargée à la grue, en un seul bloc, au-dessus d’un jardin"></div>
     <div class="wrap band-t">
-      <p class="lab rv">La fabrication</p>
+      <p class="lab rv">La livraison</p>
       <h2 class="h2 rv">Construite à l’atelier, <em>livrée d’un seul bloc.</em></h2>
       <p class="lead rv">Ossature bois, toiture EPDM, façade Fundermax&nbsp;: des matériaux nobles, choisis pour durer dehors, assemblés avec soin à l’atelier avant de partir.</p>
-      <a class="arrow rv" href="#atelier">Découvrir la maison DMG<svg viewBox="0 0 18 10" fill="none" stroke="currentColor" aria-hidden="true"><path d="M0 5h17M13 1l4 4-4 4"/></svg></a>
+      <a class="arrow rv" href="#livraison">Découvrir la livraison<svg viewBox="0 0 18 10" fill="none" stroke="currentColor" aria-hidden="true"><path d="M0 5h17M13 1l4 4-4 4"/></svg></a>
     </div>
   </section>
 
@@ -738,6 +743,9 @@ form{display:grid;gap:28px;min-width:0}
       </div>
       <figure class="rv"><div class="ph r45"><img data-img="r_bambou" alt="Cuisine DMG Concept en bardage à lames, intérieur bois et meubles anthracite, sur une terrasse au milieu des bambous"></div><figcaption>Bardage à lames, intérieur bois.</figcaption></figure>
     </div>
+  </section>
+  <section class="hist-l">
+    <div class="wrap"><a class="hist-a rv" href="#atelier"><img data-img="adrien" alt="Adrien Métral, président de DMG Concept"><span><small class="lab">Notre histoire</small><b>Une cuisine <em>pour se retrouver.</em></b></span><span class="arrow">Lire notre histoire<svg viewBox="0 0 18 10" fill="none" stroke="currentColor" aria-hidden="true"><path d="M0 5h17M13 1l4 4-4 4"/></svg></span></a></div>
   </section>
   <section class="sec cta-band" data-cta></section>
 </div>

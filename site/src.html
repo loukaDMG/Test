@@ -219,6 +219,9 @@ h1,h2,h3,h4{margin:0;font-weight:300;text-wrap:balance}
 .story-b>div{display:grid;grid-template-columns:160px 1fr;gap:20px;padding-top:24px;border-top:1px solid var(--line-l);min-width:0}
 .story-b p:not(.lab){color:var(--ink-2);font-weight:300;font-size:17px;line-height:1.7;max-width:60ch}
 .story-b .lab{padding-top:4px}
+.steps.vals{grid-template-columns:repeat(4,1fr)}
+@media (max-width:1100px){.steps.vals{grid-template-columns:1fr 1fr;row-gap:40px}.steps.vals li:nth-child(3){padding-left:0;border-left:0}}
+@media (max-width:640px){.steps.vals{grid-template-columns:1fr}}
 .story-q{grid-column:1/-1;margin:clamp(20px,3vw,40px) 0 0;padding-top:clamp(28px,3vw,44px);border-top:1px solid var(--line-l);font:300 italic clamp(23px,2.3vw,34px)/1.4 var(--serif);color:var(--ink);max-width:36em;text-wrap:balance}
 @media (max-width:900px){.story-g{grid-template-columns:1fr}.story-b>div{grid-template-columns:1fr;gap:8px}}
 /* étapes */
@@ -752,7 +755,7 @@ form{display:grid;gap:28px;min-width:0}
     </div>
   </section>
   <section class="hist-l">
-    <div class="wrap"><a class="hist-a rv" href="#atelier"><img data-img="adrien" alt="Adrien Métral, président de DMG Concept"><span><small class="lab">Notre histoire</small><b>Une cuisine <em>pour se retrouver.</em></b></span><span class="arrow">Lire notre histoire<svg viewBox="0 0 18 10" fill="none" stroke="currentColor" aria-hidden="true"><path d="M0 5h17M13 1l4 4-4 4"/></svg></span></a></div>
+    <div class="wrap"><a class="hist-a rv" href="#atelier"><img data-img="adrien" alt="Adrien Métral, président de DMG Concept"><span><small class="lab">Notre histoire</small><b>DMG Concept, <em>l’espace du possible.</em></b></span><span class="arrow">Lire notre histoire<svg viewBox="0 0 18 10" fill="none" stroke="currentColor" aria-hidden="true"><path d="M0 5h17M13 1l4 4-4 4"/></svg></span></a></div>
   </section>
   <section class="sec cta-band" data-cta></section>
 </div>
@@ -957,17 +960,27 @@ form{display:grid;gap:28px;min-width:0}
   <div class="wrap phead">
     <p class="lab rv">La maison DMG</p>
     <h1 class="h1 rv">Bien construire, <em>pour bien recevoir.</em></h1>
-    <p class="lead rv">DMG Concept conçoit et construit en Haute-Savoie des cuisines d’extérieur couvertes. Des lignes sobres, des matériaux choisis pour durer, des équipements pensés pour cuisiner vraiment.</p>
+    <p class="lead rv">DMG Concept conçoit et construit en Haute-Savoie des cuisines d’extérieur couvertes.</p>
   </div>
   <section class="sec light story" style="padding-top:clamp(60px,7vw,110px)">
     <div class="wrap story-g">
-      <div class="story-h"><p class="lab rv">Notre histoire</p><h2 class="h2 rv">Une cuisine <em>pour se retrouver.</em></h2><p class="lead rv">Il y a quelque chose d’unique dans le fait de se retrouver dehors, ensemble, autour d’une table. DMG Concept est née en Haute-Savoie pour faire de ces moments une habitude&nbsp;: une cuisine d’extérieur aussi solide qu’une pièce de la maison, où chaque matériau et chaque détail ont été réfléchis.</p><figure class="story-p rv"><img data-img="adrien" alt="Adrien Métral, président de DMG Concept"><figcaption><b>Adrien Métral</b><span>Président de DMG Concept</span></figcaption></figure></div>
+      <div class="story-h"><p class="lab rv">Depuis 2021</p><h2 class="h2 rv">Notre <em>histoire.</em></h2><p class="lead rv">DMG Concept naît en 2021 d’un projet commun à Adrien, Thierry et Jacques&nbsp;: concevoir des espaces extérieurs pensés en un seul bloc. Chaque cuisine est entièrement réalisée en atelier, puis livrée finie par camion-grue et posée sur plots béton.</p><figure class="story-p rv"><img data-img="adrien" alt="Adrien Métral, président de DMG Concept"><figcaption><b>Adrien Métral</b><span>Président de DMG Concept</span></figcaption></figure></div>
       <div class="story-b">
-        <div class="rv"><p class="lab">Les matériaux</p><p>Nous choisissons chaque matériau pour ce qu’il sera dans dix ans. Ossature bois, toiture EPDM, façades Fundermax, plan Resitop ou Dekton&nbsp;: tout est pensé pour résister à la pluie, au gel et au soleil, et pour vieillir sans se dégrader. Une cuisine qui dure est aussi la plus respectueuse de l’environnement&nbsp;: on la construit une fois, et bien.</p></div>
-        <div class="rv"><p class="lab">Votre projet</p><p>Chaque projet commence par un échange. Nous prenons le temps de comprendre votre façon de recevoir, votre terrasse, votre maison, puis nous composons la cuisine avec vous&nbsp;: format, finitions, couleurs, équipements. Le résultat vous ressemble et trouve naturellement sa place chez vous, sans s’imposer.</p></div>
-        <div class="rv"><p class="lab">Le savoir-faire</p><p>Ce savoir-faire, nous le voulons français. Chaque cuisine est conçue et assemblée dans notre atelier en Haute-Savoie, puis livrée terminée, prête à vivre.</p></div>
+        <div class="rv"><p class="lab">Nos clients</p><p>Dès le premier projet, nos clients nous l’ont montré&nbsp;: ces espaces changent la façon de recevoir et de se retrouver. Ils s’y sentent bien, et c’est cette convivialité et ce bien-être chez soi que nous cherchons à retrouver dans chaque projet.</p></div>
+        <div class="rv"><p class="lab">Aujourd’hui</p><p>Aujourd’hui, notre cœur de métier reste la cuisine d’extérieur, proposée sur trois modèles phares. Notre gamme sur-mesure va plus loin&nbsp;: elle nous permet de concevoir des cuisines d’extérieur selon les envies de chaque client, ainsi que des saunas, des abris de jardin et des bureaux.</p></div>
       </div>
-      <p class="story-q rv">Au fond, nous ne vendons pas seulement une cuisine, mais des moments partagés&nbsp;: l’apéritif qui s’éternise, les amis autour de celui qui cuisine, la famille réunie dehors du printemps à l’automne. Le jardin devient une pièce à vivre.</p>
+      <p class="story-q rv">DMG Concept, l’espace du possible.</p>
+    </div>
+  </section>
+  <section class="sec dark">
+    <div class="wrap">
+      <div class="head"><p class="lab rv">Nos valeurs</p><h2 class="h2 rv">Ce qui <em>nous guide.</em></h2></div>
+      <ol class="steps vals">
+        <li class="rv"><i>01</i><h3>Harmonie</h3><p>Bien-être, confiance et bonne humeur, pour soi comme pour ceux qui partagent votre espace. Une attention au feng shui et à l’ambiance des lieux.</p></li>
+        <li class="rv"><i>02</i><h3>Maîtrise</h3><p>Une construction soignée et durable, pensée jusque dans ses finitions.</p></li>
+        <li class="rv"><i>03</i><h3>Innovation</h3><p>Chaque projet se conçoit sur mesure, selon vos envies.</p></li>
+        <li class="rv"><i>04</i><h3>Convivialité</h3><p>Un lieu où l’on mange bien, où l’on reçoit bien, et où l’ambiance fait le reste.</p></li>
+      </ol>
     </div>
   </section>
 </div>

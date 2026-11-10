@@ -146,7 +146,9 @@ h1,h2,h3,h4{margin:0;font-weight:300;text-wrap:balance}
 .fp-top .lab{color:#CFCAC2}
 .fp-n{font:300 clamp(84px,9vw,150px)/.8 var(--serif);letter-spacing:-.03em;font-variant-numeric:lining-nums}
 .fp-n small{font-size:.32em;letter-spacing:0;margin-left:6px;color:var(--bone-2)}
-.fp h3{font:500 13px/1 var(--sans);letter-spacing:.26em;text-transform:uppercase;margin-top:22px}
+.fp h3.fp-name{font:300 clamp(30px,2.9vw,48px)/1.05 var(--serif);letter-spacing:-.01em;margin:0}
+.fp-c{position:absolute;inset:0;display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.fp-c img{position:relative;inset:auto}
 .fp-d{display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows .9s var(--ease),opacity .6s var(--ease)}
 .fp-d>div{overflow:hidden;min-height:0}
 .fp.on .fp-d{grid-template-rows:1fr;opacity:1;transition-delay:.15s}
@@ -737,7 +739,7 @@ form{display:grid;gap:28px;min-width:0}
 </div>
 
 <!-- ============ MODÈLES + COMPARATIF ============ -->
-<div class="page light" data-page="modeles" data-title="Les modèles · Évidence, Harmonie, La Festive · DMG Concept" data-desc="Trois cuisines d’extérieur couvertes de 2, 3 et 5 m de façade, à adapter sur mesure. Comparez Évidence, Harmonie et La Festive." data-crumb="Modèles">
+<div class="page light" data-page="modeles" data-title="Les modèles · Harmonie, Évidence, La Festive · DMG Concept" data-desc="Trois cuisines d’extérieur couvertes de 2, 3 et 5 m de façade, à adapter sur mesure. Comparez Harmonie, Évidence et La Festive." data-crumb="Modèles">
   <div class="wrap crumb" data-crumbs></div>
   <div class="wrap phead">
     <p class="lab rv">Les modèles</p>
@@ -756,8 +758,8 @@ form{display:grid;gap:28px;min-width:0}
 </div>
 
 <!-- ============ PAGES MODÈLES (remplies par le script) ============ -->
-<div class="page" data-page="evidence" data-mpage="evidence"></div>
 <div class="page" data-page="harmonie" data-mpage="harmonie"></div>
+<div class="page" data-page="evidence" data-mpage="evidence"></div>
 <div class="page" data-page="la-festive" data-mpage="la-festive"></div>
 
 <!-- ============ OPTIONS ============ -->
@@ -876,7 +878,7 @@ form{display:grid;gap:28px;min-width:0}
     <div class="wrap">
       <div class="head"><p class="lab rv">Étape 06 · Pour recevoir</p><h2 class="h2 rv">Pour <em>recevoir.</em></h2><p class="lead rv">Ce qui prolonge la cuisine vers la terrasse et vos invités.</p></div>
       <div class="gcards" data-cards="recevoir"></div>
-      <aside class="tip rv"><span class="lab">Notre conseil</span><p>En option, le store banne ombrage le coin repas sans pergola. L’îlot bar garde les invités autour de celui qui cuisine. Sur Harmonie, l’îlot est sur roulettes&nbsp;; sur La Festive, le bar est intégré à la cuisine. Et pour l’ambiance, la sonorisation Elipson encastrée au plafond accompagne l’apéritif jusqu’au bout de la soirée. La Festive comprend aussi une pièce attenante&nbsp;: sauna, salle de bain, local piscine ou rangement&nbsp;: <a href="#la-festive">voir La Festive</a>.</p></aside>
+      <aside class="tip rv"><span class="lab">Notre conseil</span><p>En option, le store banne ombrage le coin repas sans pergola. L’îlot bar garde les invités autour de celui qui cuisine. Sur Évidence, l’îlot est sur roulettes&nbsp;; sur La Festive, le bar est intégré à la cuisine. Et pour l’ambiance, la sonorisation Elipson encastrée au plafond accompagne l’apéritif jusqu’au bout de la soirée. La Festive comprend aussi une pièce attenante&nbsp;: sauna, salle de bain, local piscine ou rangement&nbsp;: <a href="#la-festive">voir La Festive</a>.</p></aside>
     </div>
   </section>
   <section class="sec cta-band" data-cta></section>
@@ -964,7 +966,7 @@ form{display:grid;gap:28px;min-width:0}
           <div><span>E-mail</span><b>contact@dmg-concept.com</b></div>
           <div><span>Atelier</span><b>39 chemin de Grange Neuve, 74570 Fillière</b></div>
         </div>
-        <figure class="rv" style="margin-top:44px"><div class="ph r43"><img data-img="pergola" alt="Harmonie avec store banne et îlot bar sur roulettes"></div><figcaption>Harmonie, store banne et îlot bar.</figcaption></figure>
+        <figure class="rv" style="margin-top:44px"><div class="ph r43"><img data-img="pergola" alt="Évidence avec store banne et îlot bar sur roulettes"></div><figcaption>Évidence, store banne et îlot bar.</figcaption></figure>
       </div>
       <form id="form" class="rv" novalidate aria-describedby="form-help">
         <p id="form-help" class="lab">Cinq champs, une minute.</p>
@@ -1095,7 +1097,7 @@ form{display:grid;gap:28px;min-width:0}
   <div class="wrap">
     <div class="foot-top">
       <div><img src="{{logo}}" alt="DMG Concept, l’espace du possible"><p>Cuisines d’extérieur couvertes, conçues sur mesure et construites en Haute-Savoie.</p></div>
-      <div><h2>Modèles</h2><ul><li><a href="#evidence">Évidence · 2 m</a></li><li><a href="#harmonie">Harmonie · 3 m</a></li><li><a href="#la-festive">La Festive · 5 m</a></li><li><a href="#modeles">Comparatif</a></li><li><a href="#sur-mesure">Sur mesure</a></li><li><a href="#options">Options</a></li></ul></div>
+      <div><h2>Modèles</h2><ul><li><a href="#harmonie">Harmonie · 2 m</a></li><li><a href="#evidence">Évidence · 3 m</a></li><li><a href="#la-festive">La Festive · 5 m</a></li><li><a href="#modeles">Comparatif</a></li><li><a href="#sur-mesure">Sur mesure</a></li><li><a href="#options">Options</a></li></ul></div>
       <div><h2>DMG Concept</h2><ul><li><a href="#livraison">Livraison</a></li><li><a href="#realisations">Réalisations</a></li><li><a href="#atelier">La maison DMG</a></li><li><a href="#devis">Demander un devis</a></li><li><a href="#mentions-legales">Mentions légales</a></li><li><a href="#cgv">CGV</a></li><li><a href="#confidentialite">Confidentialité</a></li></ul></div>
       <div><h2>Contact</h2><ul><li>07 49 66 12 56</li><li>contact@dmg-concept.com</li><li>39 chemin de Grange Neuve<br>74570 Fillière</li><li>Visite sur rendez-vous</li></ul></div>
     </div>
@@ -1146,16 +1148,16 @@ form{display:grid;gap:28px;min-width:0}
     tv: ["Téléviseur", "", "Pour regarder un match ou un film dehors."]
   };
   const MODELS = {
-    evidence: { name: "Évidence", size: "2", ph: "petite", alt: "Évidence, cuisine d’extérieur DMG Concept", tag: "L’essentiel de la cuisine d’extérieur, dans des lignes simples.",
+    harmonie: { name: "Harmonie", size: "2", ph: "petite", alt: "Harmonie, cuisine d’extérieur DMG Concept", tag: "L’essentiel de la cuisine d’extérieur, dans des lignes simples.",
       pull: "L’essentiel, dessiné avec la même exigence que les grands modèles.",
       pts: [["Des lignes simples", "Une architecture sobre, sans détail inutile, qui s’accorde à la maison et au jardin."], ["Dehors, sans aller-retour", "On cuisine, on rince et on garde au frais sur place : la maison reste fermée pendant le repas."], ["Fermée en un geste", "Après le repas, le store de fermeture descend : la cuisine reste à l’abri jusqu’à la prochaine fois."]],
       sm: "Un format simple ne veut pas dire standard : bardage, teinte des meubles, plan de travail et équipements se choisissent avec vous, comme sur les grands modèles.",
       dims: [["Façade", "2 m"], ["Profondeur", "0,90 m"], ["Hauteur", "2,20 m"]],
       eq: ["resitop", "plancha55", "evier", "frigo", "dekton"], side: [["bois", "Bardage bois, intérieur trois plis et crédence noire."], ["c_plancha", "Plancha encastrée, couvercle relevé."]], photos: [] },
-    harmonie: { name: "Harmonie", size: "3", ph: "pergola", alt: "Harmonie, cuisine en lames bois avec store banne et îlot bar sur roulettes", tag: "Une cuisine ouverte sur la terrasse, avec son store banne et son îlot bar.",
+    evidence: { name: "Évidence", size: "3", ph: "pergola", alt: "Évidence, cuisine en lames bois avec store banne et îlot bar sur roulettes", tag: "Une cuisine ouverte sur la terrasse, avec son store banne et son îlot bar.",
       pull: "La cuisine qui fait de la terrasse une pièce à vivre.",
       pts: [["Une pièce que l’on regarde", "Ouverte et couverte, elle se voit depuis la maison : on la dessine pour qu’elle s’accorde à vos façades et à votre jardin."], ["Ouverte sur la terrasse", "Le store banne prolonge la toiture au-dessus de la table, l’îlot bar garde les invités autour de celui qui cuisine."], ["Rangée en un geste", "L’îlot rentre à l’intérieur, la cuisine se ferme : tout est à l’abri."]],
-      sm: "On part du format Harmonie, puis on dessine ensemble l’intérieur : matériaux, rangements, équipements et lumière, selon votre façon de recevoir.",
+      sm: "On part du format Évidence, puis on dessine ensemble l’intérieur : matériaux, rangements, équipements et lumière, selon votre façon de recevoir.",
       dims: [["Façade", "3 m"], ["Intérieur", "2,60 m"], ["Profondeur", "1,66 m"], ["Hauteur", "2,70 m"]],
       eq: ["plancha", "bbq", "friteuse", "gaz", "hotte", "evier", "quooker", "froid", "resitop", "dekton", "son", "store", "ilot"], side: [["r_ilot", "Store banne déployé et îlot bar sur roulettes."], ["detail", "Friteuse, plancha et évier encastrés."]], photos: [], d3: true },
     "la-festive": { name: "La Festive", size: "5", ph: "f3", pan: "f7", alt: "La Festive : cuisine avec bar intégré, tabourets et pièce attenante", tag: "Une cuisine avec bar et, sous la même toiture, une vraie pièce en plus : sauna, salle de bain ou local piscine.",
@@ -1171,7 +1173,7 @@ form{display:grid;gap:28px;min-width:0}
   const eqLi = k => { const e = E[k]; return `<li${e[3] ? ' class="inc"' : ""}><b>${e[0]}</b>${e[1] ? `<small>${e[1]}</small>` : ""}<span>${e[2]}</span></li>`; };
 
   /* panneaux d'accueil */
-  $("[data-fx]").innerHTML = SLUGS.map((s, i) => { const M = MODELS[s]; return `<a class="fp${i === 1 ? " on" : ""}" href="#${s}"><img src="${IMG[M.pan || M.ph]}" alt="${M.alt}"><div class="fp-in"><div class="fp-top"><span class="lab">0${i + 1}</span><span class="lab">Façade ${M.size} m</span></div><div><div class="fp-n">${M.size}<small>m</small></div><h3>${M.name}</h3><div class="fp-d"><div><p>${M.tag}</p><span class="arrow">Découvrir ${M.name}${ARR}</span></div></div></div></div></a>`; }).join("");
+  $("[data-fx]").innerHTML = SLUGS.map((s, i) => { const M = MODELS[s]; return `<a class="fp${i === 1 ? " on" : ""}" href="#${s}"><img src="${IMG[M.pan || M.ph]}" alt="${M.alt}"><div class="fp-in"><div class="fp-top"><span class="lab">0${i + 1}</span><span class="lab">Façade ${M.size} m</span></div><div><h3 class="fp-name">${M.name}</h3><div class="fp-d"><div><p>${M.tag}</p><span class="arrow">Découvrir ${M.name}${ARR}</span></div></div></div></div></a>`; }).join("") + `<a class="fp" href="#sur-mesure"><div class="fp-c"><img src="${IMG.sm_sauna}" alt="Sauna extérieur sous la neige"><img src="${IMG.sm_detente}" alt="Espace détente avec jacuzzi"><img src="${IMG.sm_abri}" alt="Abri de jardin anthracite et bois"></div><div class="fp-in"><div class="fp-top"><span class="lab">04</span><span class="lab">Projet unique</span></div><div><h3 class="fp-name">Sur mesure</h3><div class="fp-d"><div><p>Sauna, espace détente, abri de jardin : nous créons aussi des projets uniques.</p><span class="arrow">Découvrir le sur-mesure${ARR}</span></div></div></div></div></a>`;
   const fps = $$(".fp");
   fps.forEach(p => { const a = () => fps.forEach(x => x.classList.toggle("on", x === p)); p.addEventListener("mouseenter", a); p.addEventListener("focus", a); });
 
@@ -1254,8 +1256,8 @@ form{display:grid;gap:28px;min-width:0}
           <ul class="eq one rv" style="margin-top:28px;border-top:1px solid var(--line-l)">${M.eq.map(eqLi).join("")}</ul><p class="note rv" style="margin-top:24px"><b>À compléter</b>Ce qui est inclus dans la base de ${M.name} et ce qui est en option.</p></div>
       </section>
     </div>
-    ${M.d3 ? `<section class="sec studio" id="harmonie-3d"><div class="wrap"><div class="head"><p class="lab rv">Vue 3D</p><h2 class="h2 rv">Faites le tour <em>d’Harmonie.</em></h2><p class="lead rv">Avec son îlot bar sur roulettes. Tournez autour, entrez dedans, puis refermez-la : l’îlot rentre à l’intérieur avant que la cuisine se ferme.</p></div>
-      <div class="v3d" id="v3d"><div class="ld" style="background-image:url(${IMG.posterH})"><span>Chargement de la vue 3D</span><i><b></b></i></div><canvas aria-label="Harmonie en 3D avec son îlot bar : faites glisser pour la faire pivoter"></canvas></div>
+    ${M.d3 ? `<section class="sec studio" id="evidence-3d"><div class="wrap"><div class="head"><p class="lab rv">Vue 3D</p><h2 class="h2 rv">Faites le tour <em>d’Évidence.</em></h2><p class="lead rv">Avec son îlot bar sur roulettes. Tournez autour, entrez dedans, puis refermez-la : l’îlot rentre à l’intérieur avant que la cuisine se ferme.</p></div>
+      <div class="v3d" id="v3d"><div class="ld" style="background-image:url(${IMG.posterH})"><span>Chargement de la vue 3D</span><i><b></b></i></div><canvas aria-label="Évidence en 3D avec son îlot bar : faites glisser pour la faire pivoter"></canvas></div>
       <div class="tools"><div class="tb" role="toolbar" aria-label="Animer la cuisine"><button type="button" data-t="auto" aria-pressed="true"><i></i>Rotation</button><button type="button" data-t="enter" aria-pressed="false"><i></i>Entrer dedans</button><button type="button" data-t="doors" aria-pressed="false"><i></i>Ouvrir les portes</button><button type="button" data-t="blind" aria-pressed="false"><i></i>Fermer la cuisine</button></div><span class="hint">Glissez pour tourner autour.</span></div></div></section>` : ""}
     ${M.photos.length ? `<section class="sec" style="padding-bottom:0"><div class="wrap mgal">${M.photos.map(p => `<figure class="rv"><div class="ph"><img src="${IMG[p[0]]}" alt="${p[1]}"></div><figcaption>${p[1]}</figcaption></figure>`).join("")}</div></section>` : ""}
     <section class="sec"><div class="wrap"><div class="head" style="margin-bottom:clamp(36px,4vw,56px)"><p class="lab rv">Les autres modèles</p></div><div class="others rv">${others(s)}</div></div></section>
@@ -1275,7 +1277,7 @@ form{display:grid;gap:28px;min-width:0}
 
   /* guide des options : cartes illustrées, sans sélection */
   const C = {
-    e: "Évidence", h: "Harmonie", f: "La Festive",
+    e: "Harmonie", h: "Évidence", f: "La Festive",
     av: s => s === "ehf" ? "Sur les trois modèles" : "Sur " + s.split("").map(k => C[k]).join(" et "),
   };
   const PIC = IMG;
@@ -1319,7 +1321,7 @@ form{display:grid;gap:28px;min-width:0}
   $("[data-cards='format']").innerHTML = SLUGS.map(s => { const M = MODELS[s]; return `<a class="gcard gfmt rv" href="#${s}"><div class="gimg"><img src="${IMG[M.ph]}" alt="${M.alt}" loading="lazy"><b>${M.size}<small>m</small></b></div><div class="gtx"><span class="lab">Façade ${M.size} m</span><h3>${M.name}</h3><p>${M.tag}</p><span class="arrow">Voir ${M.name}${ARR}</span></div></a>`; }).join("");
 
   /* galerie */
-  const GAL = [["f3", "La Festive : bar intégré et pièce attenante."], ["r_store", "Store intégré à la toiture, au-dessus du coin repas."], ["f5", "La Festive au bord de la piscine, en fin de journée."], ["f12", "La Festive, version salle de bain."], ["f8", "La Festive, version sauna."], ["petite", "Évidence, livrée dans un jardin."], ["bois", "Bardage bois, crédence noire."], ["fundermax", "Fundermax anthracite, intérieur bois."], ["interieur", "Équipements encastrés, hotte inox."], ["pergola", "Harmonie : store banne et îlot bar."], ["detail", "Friteuse, plancha et évier encastrés."], ["r_jardin", "La Festive : le coin repas à l’ombre du store."], ["ferme", "Fermée : le store descendu devant la cuisine."], ["grue", "Livraison : déchargée en un seul bloc."], ["r_ilot", "Harmonie : îlot bar sur roulettes."]];
+  const GAL = [["f3", "La Festive : bar intégré et pièce attenante."], ["r_store", "Store intégré à la toiture, au-dessus du coin repas."], ["f5", "La Festive au bord de la piscine, en fin de journée."], ["f12", "La Festive, version salle de bain."], ["f8", "La Festive, version sauna."], ["petite", "Harmonie, livrée dans un jardin."], ["bois", "Bardage bois, crédence noire."], ["fundermax", "Fundermax anthracite, intérieur bois."], ["interieur", "Équipements encastrés, hotte inox."], ["pergola", "Évidence : store banne et îlot bar."], ["detail", "Friteuse, plancha et évier encastrés."], ["r_jardin", "La Festive : le coin repas à l’ombre du store."], ["ferme", "Fermée : le store descendu devant la cuisine."], ["grue", "Livraison : déchargée en un seul bloc."], ["r_ilot", "Évidence : îlot bar sur roulettes."]];
   $("[data-gal]").innerHTML = GAL.map(g => `<figure class="rv"><div class="ph"><img src="${IMG[g[0]]}" alt="${g[1]}" loading="lazy"></div><figcaption>${g[1]}</figcaption></figure>`).join("");
 
   /* étapes du parcours */
@@ -1331,15 +1333,15 @@ form{display:grid;gap:28px;min-width:0}
 
   /* suivi des 99 points : f fait, v à valider, t à fournir, l mise en ligne, x écarté */
   const SV = [
-    ["Cadrage", [[1, "Objectif principal", "f", "Générer des demandes de devis, sans vente en ligne."], [2, "Objectif secondaire", "f", "Montrer la fabrication, rassurer, faire connaître la marque."], [3, "Public cible", "v", "Particuliers haut de gamme en priorité, avec un encart professionnels (paysagistes, piscinistes, architectes) sur la page Atelier."], [4, "Noms des trois modèles", "v", "Évidence, Harmonie, La Festive : à confirmer."], [5, "Options de chaque modèle", "v", "Reprises de l’ancien site, présentées par modèle : à valider."], [6, "Inclus / en supplément", "t", "À me donner pour chaque modèle."], [7, "Prix affichés ou sur devis", "v", "Sur devis, aucun prix affiché : à confirmer."], [8, "Ton", "v", "Sobre et chaleureux, phrases courtes."], [9, "Concurrents", "x", "Écarté à ta demande."], [10, "Liste des pages", "f", "Accueil, Modèles et comparatif, 3 pages modèles, Options, Réalisations, Atelier, Devis, Mentions légales, CGV, Confidentialité, 404."]]],
-    ["Contenus", [[11, "Photos existantes en haute résolution", "t", "Les photos actuelles viennent de l’ancien site, en définition moyenne."], [12, "Séance photo professionnelle", "t", ""], [13, "Vidéo courte du module", "t", ""], [14, "Photos de l’atelier et de la fabrication", "t", "Emplacement prévu sur la page Atelier."], [15, "Texte de présentation de l’entreprise", "v", "Rédigé à partir de l’ancien site ; ta présentation personnelle reste à écrire."], [16, "Fiche par modèle", "v", "Rédigées. À vérifier : profondeur d’Évidence (0,90 m), inclusions."], [17, "Vérifier chaque donnée", "v", "Les données à confirmer sont soulignées en pointillés dans la maquette."], [18, "Nom exact du bardage", "v", "« Fiberdeck WEO 35 » utilisé partout : à confirmer."], [19, "Textes des réalisations", "t", "Lieux, contexte, études de cas."], [20, "FAQ", "v", "Délais, livraison, installation, garanties, entretien, paiement : rédigée, avec les parties à compléter."], [21, "Médiateur ANM Conso", "v", "Cité en pied de page, dans les mentions et les CGV ; coordonnées à compléter."], [22, "Mentions de garanties exactes", "t", "Garantie DMG Concept à préciser et à faire valider."]]],
+    ["Cadrage", [[1, "Objectif principal", "f", "Générer des demandes de devis, sans vente en ligne."], [2, "Objectif secondaire", "f", "Montrer la fabrication, rassurer, faire connaître la marque."], [3, "Public cible", "v", "Particuliers haut de gamme en priorité, avec un encart professionnels (paysagistes, piscinistes, architectes) sur la page Atelier."], [4, "Noms des trois modèles", "v", "Harmonie, Évidence, La Festive : à confirmer."], [5, "Options de chaque modèle", "v", "Reprises de l’ancien site, présentées par modèle : à valider."], [6, "Inclus / en supplément", "t", "À me donner pour chaque modèle."], [7, "Prix affichés ou sur devis", "v", "Sur devis, aucun prix affiché : à confirmer."], [8, "Ton", "v", "Sobre et chaleureux, phrases courtes."], [9, "Concurrents", "x", "Écarté à ta demande."], [10, "Liste des pages", "f", "Accueil, Modèles et comparatif, 3 pages modèles, Options, Réalisations, Atelier, Devis, Mentions légales, CGV, Confidentialité, 404."]]],
+    ["Contenus", [[11, "Photos existantes en haute résolution", "t", "Les photos actuelles viennent de l’ancien site, en définition moyenne."], [12, "Séance photo professionnelle", "t", ""], [13, "Vidéo courte du module", "t", ""], [14, "Photos de l’atelier et de la fabrication", "t", "Emplacement prévu sur la page Atelier."], [15, "Texte de présentation de l’entreprise", "v", "Rédigé à partir de l’ancien site ; ta présentation personnelle reste à écrire."], [16, "Fiche par modèle", "v", "Rédigées. À vérifier : profondeur d’Harmonie (0,90 m), inclusions."], [17, "Vérifier chaque donnée", "v", "Les données à confirmer sont soulignées en pointillés dans la maquette."], [18, "Nom exact du bardage", "v", "« Fiberdeck WEO 35 » utilisé partout : à confirmer."], [19, "Textes des réalisations", "t", "Lieux, contexte, études de cas."], [20, "FAQ", "v", "Délais, livraison, installation, garanties, entretien, paiement : rédigée, avec les parties à compléter."], [21, "Médiateur ANM Conso", "v", "Cité en pied de page, dans les mentions et les CGV ; coordonnées à compléter."], [22, "Mentions de garanties exactes", "t", "Garantie DMG Concept à préciser et à faire valider."]]],
     ["Identité visuelle", [[23, "Palette", "f", "Anthracite, crème, bois en accent, neutres chauds."], [24, "Polices", "f", "Cormorant Garamond (titres) et Jost (texte)."], [25, "Hiérarchie typographique", "f", ""], [26, "Style des boutons", "f", "Pilules, survol et focus visibles."], [27, "Style des images", "v", "Cadrages et légendes homogènes ; traitement uniforme possible avec la séance photo."], [28, "Espacements constants", "f", ""], [29, "Logo clair, foncé et vectoriel", "f", "Redessiné en vectoriel (SVG et PDF), en blanc et en noir."], [30, "Favicon et image de partage", "f", "Créées à partir du logo et de la photo de nuit."]]],
     ["Structure", [[31, "Cinq entrées de menu maximum", "f", "Modèles, Options, Réalisations, L’atelier + bouton devis."], [32, "Bouton devis permanent", "f", ""], [33, "Accueil direct", "f", "Promesse, photo forte, les trois modèles, appel à l’action."], [34, "Une page par modèle", "f", ""], [35, "Comparatif trois colonnes", "f", "Sur la page Modèles."], [36, "Page options", "f", "Guide en 6 étapes, avec photos, conseils et nuancier de bardage, sans sélection à cocher."], [37, "Page réalisations", "f", ""], [38, "Page atelier", "f", ""], [39, "Formulaire court", "f", "Cinq champs."], [40, "Page 404", "f", ""], [41, "Fil d’Ariane", "f", ""], [42, "Liens internes", "f", ""]]],
     ["Parcours", [[43, "Parcours étape par étape", "f", "Découverte, contact, choix, devis, validation, fabrication, livraison."], [44, "Schéma des étapes", "f", "Sur l’accueil et l’atelier."], [45, "Le contact précède le devis", "f", ""], [46, "Champs utiles seulement", "f", ""], [47, "Accusé de réception automatique", "l", "Nécessite l’envoi réel du formulaire."], [48, "Qui répond et sous quel délai", "t", ""], [49, "Panier et paiement", "x", "Sans objet : pas de vente en ligne."], [50, "Vente sans installation sur place", "v", "Écrit dans la FAQ, les mentions et les CGV : formulation à valider."]]],
     ["Juridique", [[51, "Mentions légales", "v", "Rédigées ; SIRET, capital, RCS, TVA et hébergeur à compléter."], [52, "CGV", "v", "Trame rédigée, à faire valider par ton conseil."], [53, "Politique de confidentialité", "v", ""], [54, "Bannière cookies", "l", "Inutile tant qu’il n’y a pas de mesure d’audience ; à ajouter avec elle."], [55, "Médiateur sur le site et les devis", "v", "Sur le site : fait. Sur les devis : à ajouter de ton côté."], [56, "Droit de rétractation", "v", "Dans les CGV, avec l’exception des biens personnalisés."], [57, "Obligations légales de vente", "t", "Validation juridique."], [58, "Protection des données", "f", "Page Confidentialité."]]],
     ["Qualité perçue", [[59, "Marges généreuses", "f", ""], [60, "Peu de polices et de couleurs", "f", ""], [61, "Photos de grande qualité", "t", "Dépend de la séance photo."], [62, "Animations discrètes", "f", "Apparitions en fondu."], [63, "Pas de pop-ups", "f", ""], [64, "Micro-interactions", "f", ""], [65, "Textes courts, sans superlatifs", "f", ""], [66, "Gros plans de fabrication", "t", "Photos à fournir."]]],
     ["Confiance", [[67, "Éléments de confiance", "v", "Fabriqué en Haute-Savoie, médiateur, contact direct : faits ; garanties à préciser."], [68, "Témoignages clients", "t", "Avec accord écrit."], [69, "Fondateur avec photo", "x", "Retiré à ta demande."], [70, "Téléphone et e-mail visibles", "f", ""], [71, "Adresse et accès", "v", "Adresse et lien d’itinéraire ; carte intégrée à la mise en ligne."], [72, "Rendez-vous au showroom", "v", "Sur rendez-vous, sans horaires."]]],
-    ["Mobile", [[73, "Test portrait et paysage", "f", ""], [74, "Boutons assez grands", "f", "44 px minimum."], [75, "Menu mobile simple", "f", ""], [76, "Chargement en 4G", "v", "Photos en WebP ; en ligne, la 3D se chargera seulement sur la page Harmonie."], [77, "Texte de 16 px minimum", "f", "17 px pour le corps de texte."]]],
+    ["Mobile", [[73, "Test portrait et paysage", "f", ""], [74, "Boutons assez grands", "f", "44 px minimum."], [75, "Menu mobile simple", "f", ""], [76, "Chargement en 4G", "v", "Photos en WebP ; en ligne, la 3D se chargera seulement sur la page Évidence."], [77, "Texte de 16 px minimum", "f", "17 px pour le corps de texte."]]],
     ["Technique", [[78, "Hébergement HTTPS", "l", ""], [79, "Images compressées (WebP)", "f", ""], [80, "Peu de scripts tiers", "f", "Aucun script tiers à part les polices."], [81, "PageSpeed Insights", "l", ""], [82, "Cache navigateur", "l", ""], [83, "Tests navigateurs", "l", "Chrome, Safari, Firefox, Edge."]]],
     ["Accessibilité", [[84, "Contraste 4,5:1", "f", ""], [85, "Textes alternatifs", "f", ""], [86, "Navigation au clavier", "f", "Lien d’évitement et focus visible."], [87, "Un seul H1 par page", "f", ""], [88, "Libellés de formulaire", "f", ""]]],
     ["Référencement", [[89, "Mots-clés", "v", "Cuisine d’extérieur sur mesure, cuisine extérieure couverte, Haute-Savoie : à valider."], [90, "Titre et description par page", "f", ""], [91, "Google Search Console", "l", ""], [92, "Google Business Profile", "l", "Adresse fournie ; visite sur rendez-vous."], [93, "Données structurées", "f", "Fiche entreprise (LocalBusiness)."], [94, "sitemap.xml et robots.txt", "v", "Préparés dans le dépôt, à publier avec le site."], [95, "Liens partenaires et médias", "l", ""]]],
@@ -1373,7 +1375,7 @@ form{display:grid;gap:28px;min-width:0}
     document.title = page.dataset.title || "DMG Concept";
     if (metaD) metaD.setAttribute("content", page.dataset.desc || "");
     $$("[data-crumbs]", page).forEach(c => c.innerHTML = crumbs(page));
-    const sect = { evidence: "modeles", harmonie: "modeles", "la-festive": "modeles" }[page.dataset.page] || page.dataset.page;
+    const sect = { harmonie: "modeles", evidence: "modeles", "la-festive": "modeles" }[page.dataset.page] || page.dataset.page;
     $$("[data-nav]").forEach(a => { if (a.dataset.nav === sect) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
     setMenu(false);
     scrollTo(0, 0);
@@ -1382,7 +1384,7 @@ form{display:grid;gap:28px;min-width:0}
     requestAnimationFrame(() => setTimeout(() => root.classList.add("ready"), 60));
     reveal(page);
     if (page.dataset.page === "options") buildSlats();
-    if (page.dataset.page === "harmonie") watch3d();
+    if (page.dataset.page === "evidence") watch3d();
     onScroll(); spy();
   };
   addEventListener("hashchange", show);
@@ -1440,7 +1442,7 @@ form{display:grid;gap:28px;min-width:0}
     $("#wall-d").textContent = k === "fundermax" ? "gris anthracite" : k === "mixte" ? "Fundermax et lames " + NAMES[wood] : "Fiberdeck WEO 35";
   }));
 
-  /* ---------- Vue 3D Harmonie avec îlot bar ---------- */
+  /* ---------- Vue 3D Évidence avec îlot bar ---------- */
   let api = null, started = false, o3 = null;
   const st = { auto: !still, enter: false, doors: false, blind: false };
   function watch3d() {
@@ -1448,16 +1450,16 @@ form{display:grid;gap:28px;min-width:0}
     if (started) { dispatchEvent(new Event("resize")); return; }
     if (!o3) {
       box.addEventListener("wheel", e => e.stopPropagation(), { capture: true });
-      $$("#harmonie-3d [data-t]").forEach(b => b.addEventListener("click", () => tool(b.dataset.t)));
+      $$("#evidence-3d [data-t]").forEach(b => b.addEventListener("click", () => tool(b.dataset.t)));
       o3 = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { o3.disconnect(); start3d(box); } }, { rootMargin: "400px 0px" });
     }
     o3.observe(box);
   }
-  const sync = () => $$("#harmonie-3d [data-t]").forEach(b => b.setAttribute("aria-pressed", String(!!st[b.dataset.t])));
+  const sync = () => $$("#evidence-3d [data-t]").forEach(b => b.setAttribute("aria-pressed", String(!!st[b.dataset.t])));
   function start3d(box) {
     if (started) return; started = true;
     const ld = $(".ld", box), bar = $("b", ld), canvas = $("canvas", box);
-    const fail = m => { $("span", ld).textContent = m; const i = $("i", ld); if (i) i.remove(); $$("#harmonie-3d [data-t]").forEach(b => b.disabled = true); };
+    const fail = m => { $("span", ld).textContent = m; const i = $("i", ld); if (i) i.remove(); $$("#evidence-3d [data-t]").forEach(b => b.disabled = true); };
     let gl = false; try { const c = document.createElement("canvas"); gl = !!(c.getContext("webgl2") || c.getContext("webgl")); } catch (e) { }
     if (!window.DMG3D || !window.DMG3D.mountH || !window.TX || !gl) return fail("La vue 3D n’est pas disponible sur cet appareil.");
     try { api = window.DMG3D.mountH(canvas, { pine: TX.pine, pineNor: TX.pineNor, pineRough: TX.pineRough, slat: TX.slat, slatNor: TX.slatNor, envRgb: TX.envRgb, envM: TX.envM, weo: TX.weo }); }

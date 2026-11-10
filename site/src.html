@@ -190,7 +190,11 @@ h1,h2,h3,h4{margin:0;font-weight:300;text-wrap:balance}
 .sm-grid h3{font:400 clamp(24px,2vw,30px)/1.15 var(--serif);margin-top:8px}
 .sm-grid figcaption p{color:var(--bone-2);font-weight:300;font-size:15.5px;margin-top:8px;max-width:48ch}
 .sm-more{margin-top:clamp(40px,5vw,64px);padding-top:28px;border-top:1px solid var(--line-d);font:300 italic clamp(21px,1.8vw,26px)/1.45 var(--serif);color:var(--bone-2);max-width:40em}
-@media (max-width:900px){.sm-intro,.sm-grid{grid-template-columns:1fr}.sm-grid .tall{grid-row:auto}.sm-grid .tall .ph{height:auto;min-height:0;aspect-ratio:4/5}.sm-list li{grid-template-columns:1fr;gap:4px}}
+.sm-office{display:grid;grid-template-columns:7fr 5fr;gap:clamp(24px,4vw,64px);align-items:center;margin-top:clamp(36px,4vw,56px);padding-top:clamp(36px,4vw,56px);border-top:1px solid var(--line-d)}
+.sm-office-t h3{font:400 clamp(28px,2.6vw,40px)/1.15 var(--serif);margin-top:12px;text-wrap:balance}
+.sm-office-t p:not(.lab){color:var(--bone-2);font-weight:300;font-size:16px;line-height:1.7;margin-top:16px;max-width:44ch}
+.sm-pair{display:grid;gap:clamp(16px,2vw,24px)}.sm-pair figure{margin:0}.sm-pair figcaption{margin-top:12px;font-size:13px;color:var(--bone-3)}
+@media (max-width:900px){.sm-intro,.sm-grid,.sm-office{grid-template-columns:1fr}.sm-grid .tall{grid-row:auto}.sm-grid .tall .ph{height:auto;min-height:0;aspect-ratio:4/5}.sm-list li{grid-template-columns:1fr;gap:4px}}
 /* histoire */
 .story-h{align-self:stretch;display:flex;flex-direction:column}
 .story-p{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:16px;margin:clamp(32px,4vw,52px) 0 0}
@@ -763,23 +767,37 @@ form{display:grid;gap:28px;min-width:0}
 <div class="page" data-page="la-festive" data-mpage="la-festive"></div>
 
 <!-- ============ OPTIONS ============ -->
-<div class="page" data-page="sur-mesure" data-title="Sur mesure · cuisines, saunas et abris de jardin · DMG Concept" data-desc="DMG Concept crée aussi sur mesure : cuisines d’extérieur dessinées pour votre espace, saunas, abris de jardin et espaces détente, construits en Haute-Savoie." data-crumb="Sur mesure">
+<div class="page" data-page="sur-mesure" data-title="Sur mesure · saunas, bureaux, abris de jardin et cuisines · DMG Concept" data-desc="DMG Concept crée sur mesure : saunas, espaces détente, abris et bureaux de jardin, cuisines d’extérieur, construits en Haute-Savoie." data-crumb="Sur mesure">
   <div class="wrap crumb" data-crumbs></div>
   <div class="wrap phead">
     <p class="lab rv">Sur mesure</p>
     <h1 class="h1 rv">Votre projet, <em>dessiné avec vous.</em></h1>
-    <p class="lead rv">Quand aucun de nos formats ne correspond, nous créons avec vous un projet unique&nbsp;: une cuisine d’extérieur pensée pour votre espace, ou une autre construction pour votre jardin.</p>
+    <p class="lead rv">Sauna, espace détente, abri ou bureau de jardin&nbsp;: nous créons avec vous des projets uniques, construits avec le même soin que nos cuisines.</p>
   </div>
   <section class="band">
-    <div class="band-ph"><img data-img="sm_cuisine" alt="Cuisine d’extérieur sur mesure : four à pizza, meubles noirs, plafond et crédence en bois"></div>
-    <div class="wrap band-t"><p class="lab rv">Une cuisine sur mesure</p><h2 class="h2 rv">Pensée pour vous, <em>construite pour durer.</em></h2></div>
+    <div class="band-ph"><img data-img="sm_bureau_ext" alt="Bureau de jardin anthracite et bois, avec grande baie vitrée"></div>
+    <div class="wrap band-t"><p class="lab rv">Nos créations</p><h2 class="h2 rv">Le même savoir-faire, <em>pour tout le jardin.</em></h2></div>
   </section>
   <section class="sec" style="padding-top:clamp(60px,7vw,110px)">
+    <div class="wrap">
+      <div class="sm-grid" style="margin-top:0">
+        <figure class="tall rv"><div class="ph"><img data-img="sm_sauna" alt="Sauna extérieur bardé de bois sous la neige, montagnes en arrière-plan"></div><figcaption><p class="lab">Sauna</p><h3>Un sauna, même sous la neige.</h3><p>Un sauna extérieur, pensé pour l’hiver en montagne.</p></figcaption></figure>
+        <figure class="rv"><div class="ph r32"><img data-img="sm_detente" alt="Espace détente avec jacuzzi abrité et pièce sauna et douche"></div><figcaption><p class="lab">Espace détente</p><h3>Jacuzzi, sauna et douche.</h3><p>Un jacuzzi à l’abri, et à côté, une pièce avec sauna et douche.</p></figcaption></figure>
+        <figure class="rv"><div class="ph r32"><img data-img="sm_abri" alt="Abri de jardin anthracite avec bardage bois, porte et fenêtre"></div><figcaption><p class="lab">Abri de jardin</p><h3>Un abri qui s’accorde à la maison.</h3><p>Pour ranger outils, vélos ou mobilier, avec des lignes aussi sobres que nos cuisines.</p></figcaption></figure>
+      </div>
+      <div class="sm-office">
+        <div class="ph r43 rv"><img data-img="sm_bureau_in" alt="Intérieur d’un bureau de jardin : bureau en bois, rangements sur mesure, parquet"></div>
+        <div class="sm-office-t rv"><p class="lab">Bureau de jardin</p><h3>Travailler au calme, <em>à quelques pas de la maison.</em></h3><p>Un vrai bureau au fond du jardin, lumineux et aménagé sur mesure&nbsp;: plan de travail, rangements, coin café.</p></div>
+      </div>
+      <p class="sm-more rv">Pool house, local technique&nbsp;: vous avez une autre idée&nbsp;? Parlons-en.</p>
+    </div>
+  </section>
+  <section class="sec" style="padding-top:0">
     <div class="wrap sm-intro">
       <div>
-        <p class="lab rv">Votre cuisine</p>
+        <p class="lab rv">Et bien sûr, la cuisine</p>
         <h2 class="h2 rv">Une cuisine <em>qui n’existe nulle part ailleurs.</em></h2>
-        <p class="t rv">Dimensions, implantation, équipements, matériaux&nbsp;: nous partons de votre terrain et de votre façon de recevoir pour dessiner une cuisine unique. Elle est construite dans notre atelier, avec la même exigence que nos modèles.</p>
+        <p class="t rv">Quand aucun de nos trois modèles ne correspond, nous dessinons votre cuisine à partir de votre terrain et de votre façon de recevoir. Elle est construite dans notre atelier, avec la même exigence que nos modèles.</p>
         <ul class="sm-list rv">
           <li><b>Dimensions</b><span>Selon la place dont vous disposez</span></li>
           <li><b>Implantation</b><span>Cuisine seule, ou avec un espace de rangement attenant</span></li>
@@ -787,18 +805,10 @@ form{display:grid;gap:28px;min-width:0}
           <li><b>Finitions</b><span>Façades, bardage et couleurs au choix</span></li>
         </ul>
       </div>
-      <figure class="sp-fig rv"><div class="ph r43"><img data-img="sm_rangement" alt="Cuisine d’extérieur avec un espace de rangement bardé de bois à sa droite"></div><figcaption>Une cuisine et son espace de rangement, sous la même toiture.</figcaption></figure>
-    </div>
-  </section>
-  <section class="sec" style="padding-top:0">
-    <div class="wrap">
-      <div class="head"><p class="lab rv">Au-delà de la cuisine</p><h2 class="h2 rv">Le même savoir-faire, <em>pour tout le jardin.</em></h2><p class="lead rv">Construits avec les mêmes matériaux et le même soin que nos cuisines.</p></div>
-      <div class="sm-grid">
-        <figure class="tall rv"><div class="ph"><img data-img="sm_sauna" alt="Sauna extérieur bardé de bois sous la neige, montagnes en arrière-plan"></div><figcaption><p class="lab">Sauna</p><h3>Un sauna, même sous la neige.</h3><p>Un sauna extérieur, pensé pour l’hiver en montagne.</p></figcaption></figure>
-        <figure class="rv"><div class="ph r32"><img data-img="sm_detente" alt="Espace détente avec jacuzzi abrité et pièce sauna et douche"></div><figcaption><p class="lab">Espace détente</p><h3>Jacuzzi, sauna et douche.</h3><p>Un jacuzzi à l’abri, et à côté, une pièce avec sauna et douche.</p></figcaption></figure>
-        <figure class="rv"><div class="ph r32"><img data-img="sm_abri" alt="Abri de jardin anthracite avec bardage bois, porte et fenêtre"></div><figcaption><p class="lab">Abri de jardin</p><h3>Un abri qui s’accorde à la maison.</h3><p>Pour ranger outils, vélos ou mobilier, avec des lignes aussi sobres que nos cuisines.</p></figcaption></figure>
+      <div class="sm-pair">
+        <figure class="rv"><div class="ph r43"><img data-img="sm_cuisine" alt="Cuisine d’extérieur sur mesure : four à pizza, meubles noirs, plafond et crédence en bois"></div></figure>
+        <figure class="rv"><div class="ph r43"><img data-img="sm_rangement" alt="Cuisine d’extérieur avec un espace de rangement bardé de bois à sa droite"></div><figcaption>Une cuisine et son espace de rangement, sous la même toiture.</figcaption></figure>
       </div>
-      <p class="sm-more rv">Bureau de jardin, pool house, local technique&nbsp;: vous avez une autre idée&nbsp;? Parlons-en.</p>
     </div>
   </section>
   <section class="sec light">
@@ -1119,7 +1129,7 @@ form{display:grid;gap:28px;min-width:0}
   root.classList.add("js");
   const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const ARR = '<svg viewBox="0 0 18 10" fill="none" stroke="currentColor" aria-hidden="true"><path d="M0 5h17M13 1l4 4-4 4"/></svg>';
-  const IMG = { petite: "{{petite}}", pergola: "{{pergola}}", r_jardin: "{{r_jardin}}", r_ilot: "{{r_ilot}}", bois: "{{bois}}", interieur: "{{interieur}}", detail: "{{detail}}", fundermax: "{{fundermax}}", ferme: "{{ferme}}", r_store: "{{r_store}}", grue: "{{grue}}", posterH: "{{posterH}}", c_plancha: "{{c_plancha}}", p_planchafeu: "{{p_planchafeu}}", p_bbq: "{{p_bbq}}", c_friteuse: "{{c_friteuse}}", p_tv: "{{p_tv}}", c_cave: "{{c_cave}}", r_bambou: "{{r_bambou}}", c_resitop: "{{c_resitop}}", p_gaz: "{{p_gaz}}", c_hotte: "{{c_hotte}}", c_evier: "{{c_evier}}", p_robinet: "{{p_robinet}}", c_frigo: "{{c_frigo}}", p_dekton: "{{p_dekton}}", c_tiroirs: "{{c_tiroirs}}", c_meubles: "{{c_meubles}}", c_store: "{{c_store}}", c_ilot: "{{c_ilot}}", p_son: "{{p_son}}", c_spots: "{{c_spots}}", c_credence: "{{c_credence}}", c_ferme: "{{c_ferme}}", sm_sauna: "{{sm_sauna}}", sm_rangement: "{{sm_rangement}}", sm_cuisine: "{{sm_cuisine}}", sm_abri: "{{sm_abri}}", sm_detente: "{{sm_detente}}", adrien: "{{adrien}}", f2: "{{f2}}", f3: "{{f3}}", f4: "{{f4}}", f5: "{{f5}}", f6: "{{f6}}", f7: "{{f7}}", f8: "{{f8}}", f9: "{{f9}}", f10: "{{f10}}", f11: "{{f11}}", f12: "{{f12}}", f13: "{{f13}}" };
+  const IMG = { petite: "{{petite}}", pergola: "{{pergola}}", r_jardin: "{{r_jardin}}", r_ilot: "{{r_ilot}}", bois: "{{bois}}", interieur: "{{interieur}}", detail: "{{detail}}", fundermax: "{{fundermax}}", ferme: "{{ferme}}", r_store: "{{r_store}}", grue: "{{grue}}", posterH: "{{posterH}}", c_plancha: "{{c_plancha}}", p_planchafeu: "{{p_planchafeu}}", p_bbq: "{{p_bbq}}", c_friteuse: "{{c_friteuse}}", p_tv: "{{p_tv}}", c_cave: "{{c_cave}}", r_bambou: "{{r_bambou}}", c_resitop: "{{c_resitop}}", p_gaz: "{{p_gaz}}", c_hotte: "{{c_hotte}}", c_evier: "{{c_evier}}", p_robinet: "{{p_robinet}}", c_frigo: "{{c_frigo}}", p_dekton: "{{p_dekton}}", c_tiroirs: "{{c_tiroirs}}", c_meubles: "{{c_meubles}}", c_store: "{{c_store}}", c_ilot: "{{c_ilot}}", p_son: "{{p_son}}", c_spots: "{{c_spots}}", c_credence: "{{c_credence}}", c_ferme: "{{c_ferme}}", sm_sauna: "{{sm_sauna}}", sm_rangement: "{{sm_rangement}}", sm_cuisine: "{{sm_cuisine}}", sm_abri: "{{sm_abri}}", sm_detente: "{{sm_detente}}", sm_bureau_in: "{{sm_bureau_in}}", sm_bureau_ext: "{{sm_bureau_ext}}", adrien: "{{adrien}}", f2: "{{f2}}", f3: "{{f3}}", f4: "{{f4}}", f5: "{{f5}}", f6: "{{f6}}", f7: "{{f7}}", f8: "{{f8}}", f9: "{{f9}}", f10: "{{f10}}", f11: "{{f11}}", f12: "{{f12}}", f13: "{{f13}}" };
 
   $$("img[data-img]").forEach(i => i.src = IMG[i.dataset.img]);
 
@@ -1173,7 +1183,7 @@ form{display:grid;gap:28px;min-width:0}
   const eqLi = k => { const e = E[k]; return `<li${e[3] ? ' class="inc"' : ""}><b>${e[0]}</b>${e[1] ? `<small>${e[1]}</small>` : ""}<span>${e[2]}</span></li>`; };
 
   /* panneaux d'accueil */
-  $("[data-fx]").innerHTML = SLUGS.map((s, i) => { const M = MODELS[s]; return `<a class="fp${i === 1 ? " on" : ""}" href="#${s}"><img src="${IMG[M.pan || M.ph]}" alt="${M.alt}"><div class="fp-in"><div class="fp-top"><span class="lab">0${i + 1}</span><span class="lab">Façade ${M.size} m</span></div><div><h3 class="fp-name">${M.name}</h3><div class="fp-d"><div><p>${M.tag}</p><span class="arrow">Découvrir ${M.name}${ARR}</span></div></div></div></div></a>`; }).join("") + `<a class="fp" href="#sur-mesure"><div class="fp-c"><img src="${IMG.sm_sauna}" alt="Sauna extérieur sous la neige"><img src="${IMG.sm_detente}" alt="Espace détente avec jacuzzi"><img src="${IMG.sm_abri}" alt="Abri de jardin anthracite et bois"></div><div class="fp-in"><div class="fp-top"><span class="lab">04</span><span class="lab">Projet unique</span></div><div><h3 class="fp-name">Sur mesure</h3><div class="fp-d"><div><p>Sauna, espace détente, abri de jardin : nous créons aussi des projets uniques.</p><span class="arrow">Découvrir le sur-mesure${ARR}</span></div></div></div></div></a>`;
+  $("[data-fx]").innerHTML = SLUGS.map((s, i) => { const M = MODELS[s]; return `<a class="fp${i === 1 ? " on" : ""}" href="#${s}"><img src="${IMG[M.pan || M.ph]}" alt="${M.alt}"><div class="fp-in"><div class="fp-top"><span class="lab">0${i + 1}</span><span class="lab">Façade ${M.size} m</span></div><div><h3 class="fp-name">${M.name}</h3><div class="fp-d"><div><p>${M.tag}</p><span class="arrow">Découvrir ${M.name}${ARR}</span></div></div></div></div></a>`; }).join("") + `<a class="fp" href="#sur-mesure"><div class="fp-c"><img src="${IMG.sm_sauna}" alt="Sauna extérieur sous la neige"><img src="${IMG.sm_detente}" alt="Espace détente avec jacuzzi"><img src="${IMG.sm_abri}" alt="Abri de jardin anthracite et bois"></div><div class="fp-in"><div class="fp-top"><span class="lab">04</span><span class="lab">Projet unique</span></div><div><h3 class="fp-name">Sur mesure</h3><div class="fp-d"><div><p>Sauna, espace détente, abri ou bureau de jardin : nous créons aussi des projets uniques.</p><span class="arrow">Découvrir le sur-mesure${ARR}</span></div></div></div></div></a>`;
   const fps = $$(".fp");
   fps.forEach(p => { const a = () => fps.forEach(x => x.classList.toggle("on", x === p)); p.addEventListener("mouseenter", a); p.addEventListener("focus", a); });
 

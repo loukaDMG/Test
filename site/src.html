@@ -78,7 +78,8 @@ h1,h2,h3,h4{margin:0;font-weight:300;text-wrap:balance}
 .hdr{position:fixed;inset:0 0 auto 0;z-index:60;padding-top:env(safe-area-inset-top,0px);transition:background .6s var(--ease),border-color .6s var(--ease),transform .6s var(--ease);border-bottom:1px solid transparent}
 .hdr .wrap{height:84px;display:flex;align-items:center;justify-content:space-between;gap:24px}
 .hdr .logo img{height:44px;width:auto}
-.hdr nav{display:flex;align-items:center;gap:clamp(20px,2.6vw,42px)}
+.hdr nav{display:flex;align-items:center;gap:clamp(20px,2.2vw,40px)}
+.hdr nav a{white-space:nowrap}
 .hdr nav a:not(.btn){font:500 12px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;text-decoration:none;color:var(--bone-2);padding:10px 0;transition:color .3s;position:relative}
 .hdr nav a:not(.btn):hover,.hdr nav a[aria-current="page"]{color:var(--bone)}
 .hdr nav a[aria-current="page"]::after{content:"";position:absolute;left:0;right:0;bottom:2px;height:1px;background:currentColor}
@@ -95,7 +96,7 @@ h1,h2,h3,h4{margin:0;font-weight:300;text-wrap:balance}
 .mnav .lab{display:block;margin-top:22px}
 .menu-open .mnav{opacity:1;visibility:visible}
 .menu-open .hdr{background:transparent;border-bottom-color:transparent;transform:none}
-@media (max-width:1020px){.hdr nav{display:none}.menu-b{display:block}.hdr .logo img{height:38px}}
+@media (max-width:1300px){.hdr nav{display:none}.menu-b{display:block}.hdr .logo img{height:38px}}
 .hdr-cta-m{display:none}
 @media (max-width:1020px){.hdr-cta-m{display:inline-flex;min-height:42px!important;padding:0 16px!important;font-size:10.5px!important;letter-spacing:.16em!important;margin-left:auto}}
 @media (max-width:420px){.hdr-cta-m{display:none}}
@@ -173,6 +174,21 @@ h1,h2,h3,h4{margin:0;font-weight:300;text-wrap:balance}
 .band-t .arrow{margin-top:20px}
 
 .smnote{font-size:14px;font-weight:300;opacity:.7;margin-top:16px}
+/* sur mesure */
+.sm-intro{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(36px,6vw,96px);align-items:center}
+.sm-intro p.t{color:var(--bone-2);font-weight:300;font-size:17px;line-height:1.75;max-width:52ch;margin-top:24px}
+.sm-list{list-style:none;margin:32px 0 0;padding:0;border-top:1px solid var(--line-d)}
+.sm-list li{display:grid;grid-template-columns:150px 1fr;gap:16px;padding:16px 0;border-bottom:1px solid var(--line-d);font-weight:300;color:var(--bone-2)}
+.sm-list b{font:500 11px/1.9 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--bone-3)}
+.sm-grid{display:grid;grid-template-columns:5fr 7fr;gap:clamp(20px,2.4vw,36px);margin-top:clamp(48px,6vw,84px)}
+.sm-grid figure{margin:0;min-width:0}
+.sm-grid .tall{grid-row:span 2}
+.sm-grid .tall .ph{height:calc(100% - 132px);min-height:420px}
+.sm-grid figcaption{padding-top:20px}
+.sm-grid h3{font:400 clamp(24px,2vw,30px)/1.15 var(--serif);margin-top:8px}
+.sm-grid figcaption p{color:var(--bone-2);font-weight:300;font-size:15.5px;margin-top:8px;max-width:48ch}
+.sm-more{margin-top:clamp(40px,5vw,64px);padding-top:28px;border-top:1px solid var(--line-d);font:300 italic clamp(21px,1.8vw,26px)/1.45 var(--serif);color:var(--bone-2);max-width:40em}
+@media (max-width:900px){.sm-intro,.sm-grid{grid-template-columns:1fr}.sm-grid .tall{grid-row:auto}.sm-grid .tall .ph{height:auto;min-height:0;aspect-ratio:4/5}.sm-list li{grid-template-columns:1fr;gap:4px}}
 /* histoire */
 .story-h{align-self:stretch;display:flex;flex-direction:column}
 .story-p{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:16px;margin:clamp(32px,4vw,52px) 0 0}
@@ -618,6 +634,7 @@ form{display:grid;gap:28px;min-width:0}
     <a class="logo" href="#accueil" aria-label="DMG Concept, accueil"><img src="{{logo}}" alt="DMG Concept"></a>
     <nav aria-label="Navigation principale">
       <a href="#modeles" data-nav="modeles">Modèles</a>
+      <a href="#sur-mesure" data-nav="sur-mesure">Sur mesure</a>
       <a href="#options" data-nav="options">Options</a>
       <a href="#livraison" data-nav="livraison">Livraison</a>
       <a href="#realisations" data-nav="realisations">Réalisations</a>
@@ -632,6 +649,7 @@ form{display:grid;gap:28px;min-width:0}
   <ol>
     <li><a href="#accueil">Accueil</a></li>
     <li><a href="#modeles">Modèles</a></li>
+    <li><a href="#sur-mesure">Sur mesure</a></li>
     <li><a href="#options">Options</a></li>
     <li><a href="#livraison">Livraison</a></li>
     <li><a href="#realisations">Réalisations</a></li>
@@ -666,10 +684,10 @@ form{display:grid;gap:28px;min-width:0}
       <div class="head">
         <p class="lab rv">Les modèles</p>
         <h2 class="h2 rv">Trois tailles, <em>pour commencer.</em></h2>
-        <p class="lead rv">Trois formats éprouvés, que nous réalisons souvent et qui conviennent à la plupart des terrasses. Et parce que chaque espace est différent, nous construisons aussi sur mesure, selon la place dont vous disposez.</p>
+        <p class="lead rv">Trois formats éprouvés, aux dimensions définies, qui conviennent à la plupart des terrasses. Équipements, matériaux et finitions se composent ensuite avec vous.</p>
       </div>
       <div class="fx rv" data-fx></div>
-      <div class="under rv"><p>Trois bases de travail, pas des modèles figés&nbsp;: chaque cuisine est ensuite construite autour de votre projet.</p><a class="arrow" href="#modeles">Comparer les trois modèles<svg viewBox="0 0 18 10" fill="none" stroke="currentColor" aria-hidden="true"><path d="M0 5h17M13 1l4 4-4 4"/></svg></a></div>
+      <div class="under rv"><p>Un projet qui sort de ces formats&nbsp;? <a href="#sur-mesure">Nous créons aussi sur mesure.</a></p><a class="arrow" href="#modeles">Comparer les trois modèles<svg viewBox="0 0 18 10" fill="none" stroke="currentColor" aria-hidden="true"><path d="M0 5h17M13 1l4 4-4 4"/></svg></a></div>
     </div>
   </section>
 
@@ -723,15 +741,14 @@ form{display:grid;gap:28px;min-width:0}
   <div class="wrap crumb" data-crumbs></div>
   <div class="wrap phead">
     <p class="lab rv">Les modèles</p>
-    <h1 class="h1 rv">Trois formats, <em>une base sur mesure.</em></h1>
-    <p class="lead rv">Nos trois modèles sont des points de départ. Chaque cuisine est ensuite construite aux dimensions de votre espace, avec la même structure et les mêmes matériaux&nbsp;; les équipements se composent avec vous.</p>
+    <h1 class="h1 rv">Trois formats, <em>composés avec vous.</em></h1>
+    <p class="lead rv">Trois formats aux dimensions définies, avec la même structure et les mêmes matériaux. Équipements, matériaux et finitions se composent avec vous.</p>
   </div>
   <div class="wrap"><div class="others" data-others="all" style="grid-template-columns:repeat(3,1fr)"></div></div>
   <section class="sec" style="padding-top:clamp(80px,9vw,140px)">
     <div class="wrap">
       <div class="head"><p class="lab rv">Comparatif</p><h2 class="h2 rv">Les trois modèles <em>côte à côte.</em></h2><p class="lead rv">Les équipements possibles sur chaque modèle. Tout se précise ensuite au devis.</p></div>
       <div class="cmp-w rv" tabindex="0" role="region" aria-label="Tableau comparatif des trois modèles"><table class="cmp" data-cmp></table></div>
-      <p class="smnote rv">Dimensions indicatives&nbsp;: chaque cuisine est construite selon l’espace disponible chez vous.</p>
       <p class="note rv" style="margin-top:28px"><b>À compléter</b>Ce qui est inclus dans la base et ce qui est en option, pour chaque modèle.</p>
     </div>
   </section>
@@ -744,6 +761,59 @@ form{display:grid;gap:28px;min-width:0}
 <div class="page" data-page="la-festive" data-mpage="la-festive"></div>
 
 <!-- ============ OPTIONS ============ -->
+<div class="page" data-page="sur-mesure" data-title="Sur mesure · cuisines, saunas et abris de jardin · DMG Concept" data-desc="DMG Concept crée aussi sur mesure : cuisines d’extérieur dessinées pour votre espace, saunas, abris de jardin et espaces détente, construits en Haute-Savoie." data-crumb="Sur mesure">
+  <div class="wrap crumb" data-crumbs></div>
+  <div class="wrap phead">
+    <p class="lab rv">Sur mesure</p>
+    <h1 class="h1 rv">Votre projet, <em>dessiné avec vous.</em></h1>
+    <p class="lead rv">Quand aucun de nos formats ne correspond, nous créons avec vous un projet unique&nbsp;: une cuisine d’extérieur pensée pour votre espace, ou une autre construction pour votre jardin.</p>
+  </div>
+  <section class="band">
+    <div class="band-ph"><img data-img="sm_cuisine" alt="Cuisine d’extérieur sur mesure : four à pizza, meubles noirs, plafond et crédence en bois"></div>
+    <div class="wrap band-t"><p class="lab rv">Une cuisine sur mesure</p><h2 class="h2 rv">Pensée pour vous, <em>construite pour durer.</em></h2></div>
+  </section>
+  <section class="sec" style="padding-top:clamp(60px,7vw,110px)">
+    <div class="wrap sm-intro">
+      <div>
+        <p class="lab rv">Votre cuisine</p>
+        <h2 class="h2 rv">Une cuisine <em>qui n’existe nulle part ailleurs.</em></h2>
+        <p class="t rv">Dimensions, implantation, équipements, matériaux&nbsp;: nous partons de votre terrain et de votre façon de recevoir pour dessiner une cuisine unique. Elle est construite dans notre atelier, avec la même exigence que nos modèles.</p>
+        <ul class="sm-list rv">
+          <li><b>Dimensions</b><span>Selon la place dont vous disposez</span></li>
+          <li><b>Implantation</b><span>Cuisine seule, ou avec un espace de rangement attenant</span></li>
+          <li><b>Équipements</b><span>Four à pizza, plancha, évier, réfrigérateur, selon vos envies</span></li>
+          <li><b>Finitions</b><span>Façades, bardage et couleurs au choix</span></li>
+        </ul>
+      </div>
+      <figure class="sp-fig rv"><div class="ph r43"><img data-img="sm_rangement" alt="Cuisine d’extérieur avec un espace de rangement bardé de bois à sa droite"></div><figcaption>Une cuisine et son espace de rangement, sous la même toiture.</figcaption></figure>
+    </div>
+  </section>
+  <section class="sec" style="padding-top:0">
+    <div class="wrap">
+      <div class="head"><p class="lab rv">Au-delà de la cuisine</p><h2 class="h2 rv">Le même savoir-faire, <em>pour tout le jardin.</em></h2><p class="lead rv">Construits avec les mêmes matériaux et le même soin que nos cuisines.</p></div>
+      <div class="sm-grid">
+        <figure class="tall rv"><div class="ph"><img data-img="sm_sauna" alt="Sauna extérieur bardé de bois sous la neige, montagnes en arrière-plan"></div><figcaption><p class="lab">Sauna</p><h3>Un sauna, même sous la neige.</h3><p>Un sauna extérieur, pensé pour l’hiver en montagne.</p></figcaption></figure>
+        <figure class="rv"><div class="ph r32"><img data-img="sm_detente" alt="Espace détente avec jacuzzi abrité et pièce sauna et douche"></div><figcaption><p class="lab">Espace détente</p><h3>Jacuzzi, sauna et douche.</h3><p>Un jacuzzi à l’abri, et à côté, une pièce avec sauna et douche.</p></figcaption></figure>
+        <figure class="rv"><div class="ph r32"><img data-img="sm_abri" alt="Abri de jardin anthracite avec bardage bois, porte et fenêtre"></div><figcaption><p class="lab">Abri de jardin</p><h3>Un abri qui s’accorde à la maison.</h3><p>Pour ranger outils, vélos ou mobilier, avec des lignes aussi sobres que nos cuisines.</p></figcaption></figure>
+      </div>
+      <p class="sm-more rv">Bureau de jardin, pool house, local technique&nbsp;: vous avez une autre idée&nbsp;? Parlons-en.</p>
+    </div>
+  </section>
+  <section class="sec light">
+    <div class="wrap">
+      <div class="head"><p class="lab rv">Comment ça se passe</p><h2 class="h2 rv">De l’idée <em>à votre jardin.</em></h2></div>
+      <ol class="steps" style="grid-template-columns:repeat(3,1fr)">
+        <li class="rv"><i>01</i><h3>L’échange</h3><p>Vous nous parlez de votre projet, de votre terrain et de vos envies.</p></li>
+        <li class="rv"><i>02</i><h3>La conception</h3><p>Nous dessinons le projet avec vous, jusqu’au devis.</p></li>
+        <li class="rv"><i>03</i><h3>La fabrication</h3><p>Il est construit dans notre atelier en Haute-Savoie, puis livré.</p></li>
+      </ol>
+    </div>
+  </section>
+  <section class="sec cta-band">
+    <div class="wrap"><p class="lab rv">Votre projet</p><h2 class="h2 rv">Parlons de <em>votre projet.</em></h2><p class="lead rv">Racontez-nous votre idée&nbsp;: nous vous rappelons pour en parler.</p><div class="ctas rv"><a class="btn btn-bone" href="#devis" data-model="Projet sur mesure">Demander un devis<svg width="18" height="10" viewBox="0 0 18 10" fill="none" stroke="currentColor" aria-hidden="true"><path d="M0 5h17M13 1l4 4-4 4"/></svg></a></div><span class="tel rv">07 49 66 12 56</span></div>
+  </section>
+</div>
+
 <div class="page" data-page="options" data-title="Options et finitions · le guide pour composer votre cuisine · DMG Concept" data-desc="Format, bardage, plancha ou barbecue, évier, Quooker, réfrigérateur, plan Resitop ou Dekton, store banne, îlot bar, éclairage : le guide des options des cuisines DMG Concept." data-crumb="Options">
   <div class="wrap crumb" data-crumbs></div>
   <div class="wrap phead">
@@ -754,7 +824,7 @@ form{display:grid;gap:28px;min-width:0}
   <nav class="gnav" aria-label="Étapes du guide"><div class="wrap"><ol><li><a href="#options" data-go="g-format"><i>01</i>Le format</a></li><li><a href="#options" data-go="g-bardage"><i>02</i>Le bardage</a></li><li><a href="#options" data-go="g-cuisson"><i>03</i>La cuisson</a></li><li><a href="#options" data-go="g-eau"><i>04</i>L’eau et le froid</a></li><li><a href="#options" data-go="g-plan"><i>05</i>Plan et rangements</a></li><li><a href="#options" data-go="g-recevoir"><i>06</i>Pour recevoir</a></li></ol></div></nav>
   <section class="gstep sec light" id="g-format">
     <div class="wrap">
-      <div class="head"><p class="lab rv">Étape 01 · Le format</p><h2 class="h2 rv">D’abord, <em>la taille.</em></h2><p class="lead rv">Trois formats pour vous repérer, puis la cuisine s’ajuste à votre espace. Choisissez celui qui ressemble à votre jardin et à votre façon de vivre dehors.</p></div>
+      <div class="head"><p class="lab rv">Étape 01 · Le format</p><h2 class="h2 rv">D’abord, <em>la taille.</em></h2><p class="lead rv">Chaque format a son esprit : choisissez celui qui ressemble à votre jardin et à votre façon de vivre dehors.</p></div>
       <div class="gcards" data-cards="format"></div>
       <aside class="tip rv"><span class="lab">Notre conseil</span><p>Mesurez la place disponible et pensez aux circulations&nbsp;: autour de la cuisine, de la table et de l’îlot. Au rendez-vous, nous vérifions l’implantation avec vous.</p></aside>
     </div>
@@ -918,7 +988,7 @@ form{display:grid;gap:28px;min-width:0}
     <div class="wrap faq">
       <div><p class="lab rv">Questions fréquentes</p><h2 class="h2 rv" style="margin-top:24px">Avant de vous <em>lancer.</em></h2></div>
       <div class="rv">
-        <details class="qa" open><summary>Les cuisines sont-elles faites sur mesure&nbsp;?<i aria-hidden="true"></i></summary><p>Oui, toutes. Nos trois modèles servent d’exemples&nbsp;: la largeur, la profondeur et la hauteur s’adaptent à l’espace disponible, puis les équipements, les matériaux et les aménagements se choisissent avec vous.</p></details>
+        <details class="qa" open><summary>Les cuisines sont-elles faites sur mesure&nbsp;?<i aria-hidden="true"></i></summary><p>Nos trois modèles ont des dimensions définies&nbsp;; leurs équipements, leurs matériaux et leurs aménagements se choisissent avec vous. Pour un projet différent, nous créons aussi des cuisines entièrement <a href="#sur-mesure">sur mesure</a>.</p></details>
         <details class="qa"><summary>Quels sont les délais&nbsp;?<i aria-hidden="true"></i></summary><p>Le délai de fabrication figure sur le devis&nbsp;; il dépend du projet, des équipements et de la saison.</p></details>
         <details class="qa"><summary>Comment se passe la livraison&nbsp;?<i aria-hidden="true"></i></summary><p>Nous livrons partout en France. La cuisine arrive assemblée, en un seul bloc, puis elle est mise en place sur 4 plots béton. Les conditions d’accès sont précisées avec vous lors du devis.</p></details>
         <details class="qa"><summary>L’installation est-elle comprise&nbsp;?<i aria-hidden="true"></i></summary><p>DMG Concept vend des cuisines livrées assemblées. Aucune prestation d’installation ni de raccordement n’est réalisée sur place&nbsp;: l’électricité, l’eau et le gaz sont à faire raccorder séparément par un professionnel.</p></details>
@@ -1025,7 +1095,7 @@ form{display:grid;gap:28px;min-width:0}
   <div class="wrap">
     <div class="foot-top">
       <div><img src="{{logo}}" alt="DMG Concept, l’espace du possible"><p>Cuisines d’extérieur couvertes, conçues sur mesure et construites en Haute-Savoie.</p></div>
-      <div><h2>Modèles</h2><ul><li><a href="#evidence">Évidence · 2 m</a></li><li><a href="#harmonie">Harmonie · 3 m</a></li><li><a href="#la-festive">La Festive · 5 m</a></li><li><a href="#modeles">Comparatif</a></li><li><a href="#options">Options</a></li></ul></div>
+      <div><h2>Modèles</h2><ul><li><a href="#evidence">Évidence · 2 m</a></li><li><a href="#harmonie">Harmonie · 3 m</a></li><li><a href="#la-festive">La Festive · 5 m</a></li><li><a href="#modeles">Comparatif</a></li><li><a href="#sur-mesure">Sur mesure</a></li><li><a href="#options">Options</a></li></ul></div>
       <div><h2>DMG Concept</h2><ul><li><a href="#livraison">Livraison</a></li><li><a href="#realisations">Réalisations</a></li><li><a href="#atelier">La maison DMG</a></li><li><a href="#devis">Demander un devis</a></li><li><a href="#mentions-legales">Mentions légales</a></li><li><a href="#cgv">CGV</a></li><li><a href="#confidentialite">Confidentialité</a></li></ul></div>
       <div><h2>Contact</h2><ul><li>07 49 66 12 56</li><li>contact@dmg-concept.com</li><li>39 chemin de Grange Neuve<br>74570 Fillière</li><li>Visite sur rendez-vous</li></ul></div>
     </div>
@@ -1047,7 +1117,7 @@ form{display:grid;gap:28px;min-width:0}
   root.classList.add("js");
   const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const ARR = '<svg viewBox="0 0 18 10" fill="none" stroke="currentColor" aria-hidden="true"><path d="M0 5h17M13 1l4 4-4 4"/></svg>';
-  const IMG = { petite: "{{petite}}", pergola: "{{pergola}}", r_jardin: "{{r_jardin}}", r_ilot: "{{r_ilot}}", bois: "{{bois}}", interieur: "{{interieur}}", detail: "{{detail}}", fundermax: "{{fundermax}}", ferme: "{{ferme}}", r_store: "{{r_store}}", grue: "{{grue}}", posterH: "{{posterH}}", c_plancha: "{{c_plancha}}", p_planchafeu: "{{p_planchafeu}}", p_bbq: "{{p_bbq}}", c_friteuse: "{{c_friteuse}}", p_tv: "{{p_tv}}", c_cave: "{{c_cave}}", r_bambou: "{{r_bambou}}", c_resitop: "{{c_resitop}}", p_gaz: "{{p_gaz}}", c_hotte: "{{c_hotte}}", c_evier: "{{c_evier}}", p_robinet: "{{p_robinet}}", c_frigo: "{{c_frigo}}", p_dekton: "{{p_dekton}}", c_tiroirs: "{{c_tiroirs}}", c_meubles: "{{c_meubles}}", c_store: "{{c_store}}", c_ilot: "{{c_ilot}}", p_son: "{{p_son}}", c_spots: "{{c_spots}}", c_credence: "{{c_credence}}", c_ferme: "{{c_ferme}}", adrien: "{{adrien}}", f2: "{{f2}}", f3: "{{f3}}", f4: "{{f4}}", f5: "{{f5}}", f6: "{{f6}}", f7: "{{f7}}", f8: "{{f8}}", f9: "{{f9}}", f10: "{{f10}}", f11: "{{f11}}", f12: "{{f12}}", f13: "{{f13}}" };
+  const IMG = { petite: "{{petite}}", pergola: "{{pergola}}", r_jardin: "{{r_jardin}}", r_ilot: "{{r_ilot}}", bois: "{{bois}}", interieur: "{{interieur}}", detail: "{{detail}}", fundermax: "{{fundermax}}", ferme: "{{ferme}}", r_store: "{{r_store}}", grue: "{{grue}}", posterH: "{{posterH}}", c_plancha: "{{c_plancha}}", p_planchafeu: "{{p_planchafeu}}", p_bbq: "{{p_bbq}}", c_friteuse: "{{c_friteuse}}", p_tv: "{{p_tv}}", c_cave: "{{c_cave}}", r_bambou: "{{r_bambou}}", c_resitop: "{{c_resitop}}", p_gaz: "{{p_gaz}}", c_hotte: "{{c_hotte}}", c_evier: "{{c_evier}}", p_robinet: "{{p_robinet}}", c_frigo: "{{c_frigo}}", p_dekton: "{{p_dekton}}", c_tiroirs: "{{c_tiroirs}}", c_meubles: "{{c_meubles}}", c_store: "{{c_store}}", c_ilot: "{{c_ilot}}", p_son: "{{p_son}}", c_spots: "{{c_spots}}", c_credence: "{{c_credence}}", c_ferme: "{{c_ferme}}", sm_sauna: "{{sm_sauna}}", sm_rangement: "{{sm_rangement}}", sm_cuisine: "{{sm_cuisine}}", sm_abri: "{{sm_abri}}", sm_detente: "{{sm_detente}}", adrien: "{{adrien}}", f2: "{{f2}}", f3: "{{f3}}", f4: "{{f4}}", f5: "{{f5}}", f6: "{{f6}}", f7: "{{f7}}", f8: "{{f8}}", f9: "{{f9}}", f10: "{{f10}}", f11: "{{f11}}", f12: "{{f12}}", f13: "{{f13}}" };
 
   $$("img[data-img]").forEach(i => i.src = IMG[i.dataset.img]);
 
@@ -1176,7 +1246,7 @@ form{display:grid;gap:28px;min-width:0}
         <div class="sp-tx"><p class="lab rv">Le modèle</p><h2 class="rv">${M.name}, <em>en détail.</em></h2><p class="pull rv">${M.pull}</p>
           <ol class="pts3">${M.pts.map((p, i) => `<li class="rv"><i>0${i + 1}</i><div><b>${p[0]}</b><span>${p[1]}</span></div></li>`).join("")}</ol>
           <div class="smb rv"><span class="lab">Sur mesure</span><p>${M.sm}</p></div>
-          <details class="more rv"><summary><span class="o">Voir les caractéristiques ${/^[AEIOUÉÈH]/i.test(M.name) ? "d’" + M.name : "de " + M.name}</span><span class="c">Masquer les caractéristiques</span><i aria-hidden="true"></i></summary><div class="specs one"><dl>${M.dims.concat([["Fermeture", M.size === "2" ? "Store de fermeture devant la cuisine, inclus" : "Volet roulant devant la cuisine, inclus"]], COMMON).map(r => `<div><dt>${r[0]}</dt><dd>${r[1]}</dd></div>`).join("")}</dl><p class="smnote">Dimensions adaptables à votre espace.</p></div></details></div>
+          <details class="more rv"><summary><span class="o">Voir les caractéristiques ${/^[AEIOUÉÈH]/i.test(M.name) ? "d’" + M.name : "de " + M.name}</span><span class="c">Masquer les caractéristiques</span><i aria-hidden="true"></i></summary><div class="specs one"><dl>${M.dims.concat([["Fermeture", M.size === "2" ? "Store de fermeture devant la cuisine, inclus" : "Volet roulant devant la cuisine, inclus"]], COMMON).map(r => `<div><dt>${r[0]}</dt><dd>${r[1]}</dd></div>`).join("")}</dl></div></details></div>
       </section>
       <section class="wrap msec sp rev">
         <figure class="sp-fig rv"><div class="ph r45"><img src="${IMG[M.side[1][0]]}" alt="${M.side[1][1]}"></div><figcaption>${M.side[1][1]}</figcaption></figure>

@@ -231,7 +231,9 @@ h1,h2,h3,h4{margin:0;font-weight:300;text-wrap:balance}
 .steps.vals{grid-template-columns:repeat(4,1fr)}
 @media (max-width:1100px){.steps.vals{grid-template-columns:1fr 1fr;row-gap:40px}.steps.vals li:nth-child(3){padding-left:0;border-left:0}}
 @media (max-width:640px){.steps.vals{grid-template-columns:1fr}}
-.story-tag{margin-top:18px;font:300 italic clamp(20px,1.7vw,24px)/1.4 var(--serif);color:var(--ink)}
+.story-tag{flex:1;display:flex;flex-direction:column;justify-content:center;margin:clamp(32px,4vw,52px) 0 0;font:300 clamp(40px,4.4vw,72px)/1.04 var(--serif);letter-spacing:-.01em;color:var(--ink)}
+.story-tag em{font-style:italic;color:var(--ink-2)}
+@media (max-width:900px){.story-tag{margin:28px 0 8px;font-size:clamp(34px,9vw,48px)}}
 .story-q{grid-column:1/-1;margin:clamp(20px,3vw,40px) 0 0;padding-top:clamp(28px,3vw,44px);border-top:1px solid var(--line-l);display:grid;grid-template-columns:auto 1fr;gap:clamp(20px,3vw,44px);align-items:start}
 .story-q>img{width:clamp(72px,7vw,104px);height:clamp(72px,7vw,104px);border-radius:50%;object-fit:cover;margin-top:6px}
 .story-q>div{min-width:0}
@@ -985,7 +987,7 @@ form{display:grid;gap:28px;min-width:0}
   </div>
   <section class="sec light story" style="padding-top:clamp(60px,7vw,110px)">
     <div class="wrap story-g">
-      <div class="story-h"><p class="lab rv">Notre histoire</p><h2 class="h2 rv">Une cuisine <em>pour se retrouver.</em></h2><p class="lead rv">DMG Concept naît en 2021 d’un projet commun à Adrien, Thierry et Jacques&nbsp;: concevoir des espaces extérieurs pensés en un seul bloc. Chaque cuisine est entièrement réalisée en atelier, puis livrée finie par camion-grue et posée sur plots béton.</p><p class="story-tag rv">DMG Concept, l’espace du possible.</p></div>
+      <div class="story-h"><p class="lab rv">Notre histoire</p><h2 class="h2 rv">Une cuisine <em>pour se retrouver.</em></h2><p class="lead rv">DMG Concept naît en 2021 d’un projet commun à Adrien, Thierry et Jacques&nbsp;: concevoir des espaces extérieurs pensés en un seul bloc. Chaque cuisine est entièrement réalisée en atelier, puis livrée finie par camion-grue et posée sur plots béton.</p><p class="story-tag rv"><span>DMG Concept,</span><em>l’espace du possible.</em></p></div>
       <div class="story-b">
         <div class="rv"><p class="lab">Nos clients</p><p>Dès le premier projet, nos clients nous l’ont montré&nbsp;: ces espaces changent la façon de recevoir et de se retrouver. Ils s’y sentent bien, et c’est cette convivialité et ce bien-être chez soi que nous cherchons à retrouver dans chaque projet.</p></div>
         <div class="rv"><p class="lab">Aujourd’hui</p><p>Aujourd’hui, notre cœur de métier reste la cuisine d’extérieur, proposée sur trois modèles phares. Notre gamme sur-mesure va plus loin&nbsp;: elle nous permet de concevoir des cuisines d’extérieur selon les envies de chaque client, ainsi que des saunas, des abris de jardin et des bureaux.</p></div>

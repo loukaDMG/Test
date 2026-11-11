@@ -232,7 +232,14 @@ h1,h2,h3,h4{margin:0;font-weight:300;text-wrap:balance}
 @media (max-width:1100px){.steps.vals{grid-template-columns:1fr 1fr;row-gap:40px}.steps.vals li:nth-child(3){padding-left:0;border-left:0}}
 @media (max-width:640px){.steps.vals{grid-template-columns:1fr}}
 .story-tag{margin-top:18px;font:300 italic clamp(20px,1.7vw,24px)/1.4 var(--serif);color:var(--ink)}
-.story-q{grid-column:1/-1;margin:clamp(20px,3vw,40px) 0 0;padding-top:clamp(28px,3vw,44px);border-top:1px solid var(--line-l);font:300 italic clamp(23px,2.3vw,34px)/1.4 var(--serif);color:var(--ink);max-width:36em;text-wrap:balance}
+.story-q{grid-column:1/-1;margin:clamp(20px,3vw,40px) 0 0;padding-top:clamp(28px,3vw,44px);border-top:1px solid var(--line-l);display:grid;grid-template-columns:auto 1fr;gap:clamp(20px,3vw,44px);align-items:start}
+.story-q>img{width:clamp(72px,7vw,104px);height:clamp(72px,7vw,104px);border-radius:50%;object-fit:cover;margin-top:6px}
+.story-q>div{min-width:0}
+.story-q blockquote{margin:0;font:300 italic clamp(23px,2.3vw,34px)/1.4 var(--serif);color:var(--ink);max-width:36em;text-wrap:balance}
+.story-q figcaption{margin-top:22px;display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px}
+.story-q figcaption b{font:400 21px/1.2 var(--serif);color:var(--ink)}
+.story-q figcaption span{font:500 11px/1.4 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3)}
+@media (max-width:640px){.story-q{grid-template-columns:1fr}.story-q>img{width:76px;height:76px;margin-top:0}}
 @media (max-width:900px){.story-g{grid-template-columns:1fr}.story-b>div{grid-template-columns:1fr;gap:8px}}
 /* étapes */
 .steps{list-style:none;margin:clamp(56px,7vw,100px) 0 0;padding:0;display:grid;grid-template-columns:repeat(7,1fr);border-top:1px solid var(--line-l)}
@@ -978,14 +985,14 @@ form{display:grid;gap:28px;min-width:0}
   </div>
   <section class="sec light story" style="padding-top:clamp(60px,7vw,110px)">
     <div class="wrap story-g">
-      <div class="story-h"><p class="lab rv">Notre histoire</p><h2 class="h2 rv">Une cuisine <em>pour se retrouver.</em></h2><p class="lead rv">DMG Concept naît en 2021 d’un projet commun à Adrien, Thierry et Jacques&nbsp;: concevoir des espaces extérieurs pensés en un seul bloc. Chaque cuisine est entièrement réalisée en atelier, puis livrée finie par camion-grue et posée sur plots béton.</p><p class="story-tag rv">DMG Concept, l’espace du possible.</p><figure class="story-p rv"><img data-img="adrien" alt="Adrien Métral, président de DMG Concept"><figcaption><b>Adrien Métral</b><span>Président de DMG Concept</span></figcaption></figure></div>
+      <div class="story-h"><p class="lab rv">Notre histoire</p><h2 class="h2 rv">Une cuisine <em>pour se retrouver.</em></h2><p class="lead rv">DMG Concept naît en 2021 d’un projet commun à Adrien, Thierry et Jacques&nbsp;: concevoir des espaces extérieurs pensés en un seul bloc. Chaque cuisine est entièrement réalisée en atelier, puis livrée finie par camion-grue et posée sur plots béton.</p><p class="story-tag rv">DMG Concept, l’espace du possible.</p></div>
       <div class="story-b">
         <div class="rv"><p class="lab">Nos clients</p><p>Dès le premier projet, nos clients nous l’ont montré&nbsp;: ces espaces changent la façon de recevoir et de se retrouver. Ils s’y sentent bien, et c’est cette convivialité et ce bien-être chez soi que nous cherchons à retrouver dans chaque projet.</p></div>
         <div class="rv"><p class="lab">Aujourd’hui</p><p>Aujourd’hui, notre cœur de métier reste la cuisine d’extérieur, proposée sur trois modèles phares. Notre gamme sur-mesure va plus loin&nbsp;: elle nous permet de concevoir des cuisines d’extérieur selon les envies de chaque client, ainsi que des saunas, des abris de jardin et des bureaux.</p></div>
         <div class="rv"><p class="lab">Votre projet</p><p>Chaque projet commence par un échange. Nous prenons le temps de comprendre votre façon de recevoir, votre terrasse, votre maison, puis nous composons la cuisine avec vous&nbsp;: format, finitions, couleurs, équipements. Le résultat vous ressemble et trouve naturellement sa place chez vous, sans s’imposer.</p></div>
         <div class="rv"><p class="lab">Le savoir-faire</p><p>Ce savoir-faire, nous le voulons français. Chaque cuisine est conçue et assemblée dans notre atelier en Haute-Savoie, puis livrée terminée, prête à vivre.</p></div>
       </div>
-      <p class="story-q rv">Au fond, nous ne vendons pas seulement une cuisine, mais des moments partagés&nbsp;: l’apéritif qui s’éternise, les amis autour de celui qui cuisine, la famille réunie dehors du printemps à l’automne. Le jardin devient une pièce à vivre.</p>
+      <figure class="story-q rv"><img data-img="adrien" alt="Adrien Métral, président de DMG Concept"><div><blockquote><p>Au fond, nous ne vendons pas seulement une cuisine, mais des moments partagés&nbsp;: l’apéritif qui s’éternise, les amis autour de celui qui cuisine, la famille réunie dehors du printemps à l’automne. Le jardin devient une pièce à vivre.</p></blockquote><figcaption><b>Adrien Métral</b><span>Président de DMG Concept</span></figcaption></div></figure>
     </div>
   </section>
   <section class="sec dark">

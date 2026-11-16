@@ -23,11 +23,11 @@ L'envoi du jeudi soir laisse aux clients le week-end pour s'en occuper.
 ## 2. Objet et préheader
 
 **Objets (à tester en A/B dans HubSpot) :**
-- A : `❄️ Votre cuisine extérieure est-elle prête pour le gel ?`
+- A : `❄️ Votre cuisine d'extérieur, prête pour l'hiver ?`
 - B : `{{ contact.firstname }}, 5 minutes pour protéger votre robinet cet hiver`
 - C : `Gel : le bon réflexe pour votre cuisine d'été`
 
-**Préheader :** `5 minutes aujourd'hui pour éviter un robinet éclaté au printemps.`
+**Préheader :** `Cinq minutes aujourd'hui pour éviter un robinet éclaté au printemps.`
 (Il est déjà intégré dans le HTML. Dans HubSpot, mettez le même texte dans le champ « Texte d'aperçu ».)
 
 **Expéditeur :** DMG Concept, réponse à `contact@dmg-concept.com`
@@ -39,14 +39,14 @@ L'envoi du jeudi soir laisse aux clients le week-end pour s'en occuper.
 ```
 Bonjour [Prénom],
 
-Le froid s'installe en Haute-Savoie. Si ce n'est pas déjà fait, prenez 5 minutes pour mettre le robinet de votre cuisine extérieure hors gel.
+Le froid s'installe en Haute-Savoie. Si ce n'est pas déjà fait, prenez cinq minutes pour mettre le robinet de votre cuisine hors gel. Voici comment faire.
 
 Pourquoi ? L'eau restée dans les tuyaux gèle et gonfle d'environ 9 %. Elle peut fendre le robinet, le flexible ou la canalisation, et la fuite n'apparaît souvent qu'au printemps, quand on rouvre l'eau.
 
-LE PAS-À-PAS EN 5 ÉTAPES
+LE PAS-À-PAS : CINQ GESTES, CINQ MINUTES
 
 1. Coupez l'arrivée d'eau
-Fermez la vanne qui alimente votre cuisine extérieure (garage, cave, local technique ou regard au sol).
+Fermez la vanne qui alimente votre cuisine d'extérieur (garage, cave, local technique ou regard au sol).
 
 2. Videz la canalisation
 Ouvrez en grand le robinet de la cuisine, côté eau froide et eau chaude si vous en avez. Si votre vanne a une petite purge, ouvrez-la aussi. Laissez couler jusqu'à ce que plus rien ne sorte.
@@ -62,15 +62,15 @@ Chauffe-eau : coupez d'abord le courant, puis vidangez-le. Réfrigérateur : dé
 
 Astuce : prenez la vanne en photo une fois fermée. Au printemps, vous la retrouverez tout de suite.
 
-UNE QUESTION ?
-Un doute sur l'emplacement de la vanne ou sur une étape ? N'hésitez pas à nous contacter, nous vous répondrons avec plaisir.
+UNE QUESTION ? NOUS RESTONS À VOTRE ÉCOUTE.
+Un doute sur l'emplacement de la vanne ou sur une étape ? Écrivez-nous ou appelez-nous, nous vous répondrons avec plaisir.
 07 49 66 12 56 · contact@dmg-concept.com
 
-Et au printemps ? Fermez la purge et le robinet, revissez le siphon, puis rouvrez la vanne doucement en vérifiant qu'il n'y a pas de fuite. On vous enverra un petit rappel le moment venu.
+Et au printemps ? Fermez la purge et le robinet, revissez le siphon, puis rouvrez la vanne doucement en vérifiant qu'il n'y a pas de fuite. Nous vous enverrons un petit rappel le moment venu.
 
 Bel hiver à vous,
 L'équipe DMG Concept
-58, impasse des roseaux, 74570 Evires, Filière
+39 chemin de Grange Neuve, 74570 Fillière
 ```
 
 ---
@@ -156,6 +156,7 @@ L'équipe DMG Concept
 
 ## 8. À vérifier avant l'envoi dans HubSpot
 
+- [ ] **Images :** importer les 3 fichiers du dossier `images/` (logo, photo de la cuisine fermée, photo de l'évier) dans le gestionnaire de fichiers HubSpot, puis remplacer chaque `src="images/…"` par l'adresse donnée par HubSpot
 - [ ] **Liste :** ne garder que les clients équipés d'une cuisine extérieure DMG
 - [ ] **Prénom :** remplacer `[Prénom]` par `{{ contact.firstname }}`
 - [ ] **Désinscription :** dans le pied de page, remplacer `href="#"` par `href="{{ unsubscribe_link }}"`. Si vous recréez l'e-mail dans l'éditeur glisser-déposer de HubSpot, le lien est ajouté automatiquement.

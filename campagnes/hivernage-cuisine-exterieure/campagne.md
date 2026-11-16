@@ -1,8 +1,9 @@
 # Campagne « Hors gel » : cuisines extérieures DMG Concept
 
 **Cible :** tous les clients équipés d'une cuisine extérieure DMG
-**Objectif :** éviter les robinets et canalisations éclatés cet hiver, garder le lien avec les clients et proposer une intervention à ceux qui préfèrent ne pas le faire eux-mêmes
-**Canaux :** e-mail (principal), SMS de rappel, post réseaux sociaux (en option)
+**Objectif :** informer les clients des bons gestes pour protéger le robinet de leur cuisine extérieure du gel
+**Outil d'envoi :** HubSpot
+**Canaux :** e-mail (principal), SMS de rappel et post réseaux sociaux (en option)
 
 ---
 
@@ -10,10 +11,10 @@
 
 | Quand | Quoi | À qui |
 |---|---|---|
-| **Jeudi 19 nov., vers 18 h** | E-mail principal (`email-hivernage.html`) | Tous les clients avec une cuisine extérieure |
-| **Jeudi 26 nov.** | E-mail de relance (section 4) | Ceux qui n'ont pas ouvert le premier |
-| **Avant la 1re grosse vague de froid** | SMS (section 5) | Tous, ou seulement ceux qui n'ont pas réagi |
-| **Mi-mars 2027** | E-mail « remise en eau » (section 7) | Les mêmes clients |
+| **Jour J, un jeudi vers 18 h** | E-mail principal (`email-hivernage.html`) | Tous les clients avec une cuisine extérieure |
+| **J + 7** | E-mail de relance (section 4) | Ceux qui n'ont pas ouvert le premier |
+| **Avant une grosse vague de froid** | SMS (section 5) | Tous, en option |
+| **Mi-mars** | E-mail « remise en eau » (section 7) | Les mêmes clients |
 
 L'envoi du jeudi soir laisse aux clients le week-end pour s'en occuper.
 
@@ -21,13 +22,13 @@ L'envoi du jeudi soir laisse aux clients le week-end pour s'en occuper.
 
 ## 2. Objet et préheader
 
-**Objets (à tester en A/B si votre outil le permet) :**
+**Objets (à tester en A/B dans HubSpot) :**
 - A : `❄️ Votre cuisine extérieure est-elle prête pour le gel ?`
-- B : `[Prénom], 5 minutes pour protéger votre robinet cet hiver`
+- B : `{{ contact.firstname }}, 5 minutes pour protéger votre robinet cet hiver`
 - C : `Gel : le bon réflexe pour votre cuisine d'été`
 
 **Préheader :** `5 minutes aujourd'hui pour éviter un robinet éclaté au printemps.`
-(Il est déjà intégré dans le HTML. Si votre outil a un champ « préheader », mettez-y le même texte.)
+(Il est déjà intégré dans le HTML. Dans HubSpot, mettez le même texte dans le champ « Texte d'aperçu ».)
 
 **Expéditeur :** DMG Concept, réponse à `contact@dmg-concept.com`
 
@@ -35,12 +36,10 @@ L'envoi du jeudi soir laisse aux clients le week-end pour s'en occuper.
 
 ## 3. Version texte brut de l'e-mail principal
 
-> À coller dans le champ « version texte » de votre outil d'envoi, ou à envoyer tel quel depuis votre messagerie.
-
 ```
 Bonjour [Prénom],
 
-Les premières gelées arrivent en Haute-Savoie. Avant qu'elles ne s'installent, prenez 5 minutes pour mettre le robinet de votre cuisine extérieure hors gel.
+Le froid s'installe en Haute-Savoie. Si ce n'est pas déjà fait, prenez 5 minutes pour mettre le robinet de votre cuisine extérieure hors gel.
 
 Pourquoi ? L'eau restée dans les tuyaux gèle et gonfle d'environ 9 %. Elle peut fendre le robinet, le flexible ou la canalisation, et la fuite n'apparaît souvent qu'au printemps, quand on rouvre l'eau.
 
@@ -63,8 +62,8 @@ Chauffe-eau : coupez d'abord le courant, puis vidangez-le. Réfrigérateur : dé
 
 Astuce : prenez la vanne en photo une fois fermée. Au printemps, vous la retrouverez tout de suite.
 
-UN DOUTE ? ON S'EN OCCUPE.
-Vous ne trouvez pas la vanne ou vous préférez qu'on le fasse pour vous ? Appelez-nous : on vous guide par téléphone, ou on passe mettre votre cuisine hors gel.
+UNE QUESTION ?
+Un doute sur l'emplacement de la vanne ou sur une étape ? N'hésitez pas à nous contacter, nous vous répondrons avec plaisir.
 07 49 66 12 56 · contact@dmg-concept.com
 
 Et au printemps ? Fermez la purge et le robinet, revissez le siphon, puis rouvrez la vanne doucement en vérifiant qu'il n'y a pas de fuite. On vous enverra un petit rappel le moment venu.
@@ -76,7 +75,7 @@ L'équipe DMG Concept
 
 ---
 
-## 4. E-mail de relance (J+7, non-ouvreurs)
+## 4. E-mail de relance (J + 7, non-ouvreurs)
 
 **Objet :** `Avant le grand froid : avez-vous coupé l'eau de votre cuisine d'été ?`
 
@@ -93,7 +92,7 @@ En bref :
 
 C'est fait en 5 minutes, et ça évite une mauvaise surprise au printemps.
 
-Besoin d'un coup de main ? Appelez-nous au 07 49 66 12 56 : on vous guide, ou on passe le faire.
+Une question ? Contactez-nous au 07 49 66 12 56 ou à contact@dmg-concept.com.
 
 L'équipe DMG Concept
 ```
@@ -103,7 +102,7 @@ L'équipe DMG Concept
 ## 5. SMS de rappel (moins de 160 caractères)
 
 ```
-DMG Concept : gel annoncé ! Pensez à couper l'eau et vider le robinet de votre cuisine extérieure. Besoin d'aide ? 07 49 66 12 56. STOP au [n° STOP]
+DMG Concept : gel annoncé ! Pensez à couper l'eau et vider le robinet de votre cuisine extérieure. Une question ? 07 49 66 12 56. STOP au [n° STOP]
 ```
 
 > La mention STOP est obligatoire pour un SMS commercial. Votre outil d'envoi SMS fournit le numéro.
@@ -123,7 +122,7 @@ L'eau qui reste dans les tuyaux gèle, gonfle… et peut faire éclater robinet 
 4️⃣ Videz le siphon sous l'évier
 5️⃣ Débranchez frigo et tuyau d'arrosage
 
-Un doute ? Écrivez-nous en message privé, on vous aide 🌲
+Une question ? Écrivez-nous en message privé 🌲
 
 #cuisineexterieure #cuisinedete #hivernage #gel #hautesavoie #annecy #jardin #DMGConcept
 ```
@@ -132,7 +131,7 @@ Visuel conseillé : une photo d'une de vos cuisines extérieures sous le givre o
 
 ---
 
-## 7. E-mail « remise en eau » (à envoyer mi-mars 2027)
+## 7. E-mail « remise en eau » (à envoyer mi-mars)
 
 **Objet :** `🌱 C'est le printemps : on remet l'eau dans votre cuisine extérieure ?`
 
@@ -147,7 +146,7 @@ Les beaux jours reviennent : il est temps de remettre votre cuisine extérieure 
 4. Regardez sous l'évier et le long des tuyaux : aucune goutte ne doit apparaître.
 5. Rebranchez le réfrigérateur et, si vous en avez un, remplissez le chauffe-eau avant de remettre le courant.
 
-Une fuite, un robinet qui goutte ? Appelez-nous au 07 49 66 12 56, on passe vérifier.
+Une question ? Contactez-nous au 07 49 66 12 56 ou à contact@dmg-concept.com.
 
 Belle saison à vous,
 L'équipe DMG Concept
@@ -155,10 +154,10 @@ L'équipe DMG Concept
 
 ---
 
-## 8. À vérifier avant l'envoi
+## 8. À vérifier avant l'envoi dans HubSpot
 
 - [ ] **Liste :** ne garder que les clients équipés d'une cuisine extérieure DMG
-- [ ] **Prénom :** remplacer `[Prénom]` par la balise de votre outil (Brevo : `{{ contact.PRENOM }}`, Mailchimp : `*|FNAME|*`, HubSpot : `{{ contact.firstname }}`)
-- [ ] **Désinscription :** remplacer le lien `href="#"` du pied de page par la balise de désinscription de votre outil (souvent ajoutée automatiquement)
-- [ ] **Offre :** si vous voulez afficher un tarif ou une intervention offerte, l'ajouter dans le bloc vert « Un doute ? On s'en occupe. »
+- [ ] **Prénom :** remplacer `[Prénom]` par `{{ contact.firstname }}`
+- [ ] **Désinscription :** dans le pied de page, remplacer `href="#"` par `href="{{ unsubscribe_link }}"`. Si vous recréez l'e-mail dans l'éditeur glisser-déposer de HubSpot, le lien est ajouté automatiquement.
+- [ ] **Texte d'introduction :** relire la première phrase selon la date d'envoi et la météo du moment
 - [ ] **Test :** s'envoyer l'e-mail sur Gmail et sur un téléphone, puis cliquer sur le bouton téléphone et sur « Nous écrire »
